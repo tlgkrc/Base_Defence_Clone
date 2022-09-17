@@ -15,11 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 5683289660978700496, guid: 3da688b423e393b42a61cfb3f37037d2, type: 3}
-    - {fileID: 2259054976737053762, guid: 06d608be05e2ebd458aa5c5958591bad, type: 3}
-    - {fileID: 7579554448316418221, guid: 6f83f3d827a5dff45b78bdc5155f3512, type: 3}
-    - {fileID: 2259054976737053762, guid: 63908aa2facabc64a88fe38974dc0695, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,11 +23,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: poolDatas
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MyApproach.PoolTypes, Assembly-CSharp],[MyApproach.PoolData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[Enums.PoolTypes, Assembly-CSharp],[MyApproach.PoolData,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[MyApproach.PoolTypes,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Enums.PoolTypes,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -55,8 +51,8 @@ MonoBehaviour:
       Entry: 7
       Data: 2|MyApproach.PoolData, Assembly-CSharp
     - Name: PoolGameObject
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: minNumber
       Entry: 3
       Data: 17
@@ -64,8 +60,8 @@ MonoBehaviour:
       Entry: 3
       Data: 310
     - Name: insTransform
-      Entry: 10
-      Data: 1
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -82,8 +78,8 @@ MonoBehaviour:
       Entry: 7
       Data: 3|MyApproach.PoolData, Assembly-CSharp
     - Name: PoolGameObject
-      Entry: 10
-      Data: 2
+      Entry: 6
+      Data: 
     - Name: minNumber
       Entry: 3
       Data: 18
@@ -91,8 +87,8 @@ MonoBehaviour:
       Entry: 3
       Data: 233
     - Name: insTransform
-      Entry: 10
-      Data: 3
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
