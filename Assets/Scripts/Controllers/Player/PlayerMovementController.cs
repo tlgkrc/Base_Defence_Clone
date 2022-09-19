@@ -10,8 +10,7 @@ namespace Controllers
         #region Self Variables
         
         #region Serialized Variables
-
-        //[SerializeField] private PlayerManager manager;
+        
         [SerializeField] private new Rigidbody rigidbody;
         
         #endregion
@@ -19,11 +18,9 @@ namespace Controllers
         #region Private Variables
         
         private PlayerMovementData _movementData;
-        private bool _isReadyToMove, _isReadyToPlay, _isOnDronePool = false;
-        private float _inputValue;
+        private bool _isReadyToMove, _isReadyToPlay = false;
         private float _inputValueX;
         private float _inputValueZ;
-        private Vector2 _clampValues;
 
         #endregion
         
@@ -31,7 +28,6 @@ namespace Controllers
 
         public void SetMovementData(PlayerMovementData dataMovementData)
         {
-            dataMovementData.ForwardSpeed = dataMovementData.RunSpeed;
             _movementData = dataMovementData;
         }
 
@@ -40,7 +36,7 @@ namespace Controllers
             _isReadyToMove = true;
         }
 
-        public void DeactiveMovement()
+        public void DisableMovement()
         {
             _isReadyToMove = false;
         }
@@ -59,41 +55,22 @@ namespace Controllers
         
         private void FixedUpdate()
         {
-            if (_isReadyToPlay)
+            if (!_isReadyToPlay) return;
+            if (_isReadyToMove)
             {
-                if (_isOnDronePool)
-                {
-                    OnlySideways();
-                }
-                else if (_isReadyToMove)
-                {
-                    Move();
-                }
-                else
-                {
-                    StopPlayer();
-                }
+                IdleMove();
             }
             else
+            {
                 Stop();
-        }
-
-        private void Move()
-        {
-            IdleMove();
-        }
-
-        private void StopPlayer()
-        {
-            Stop();
-
+            }
         }
 
         private void IdleMove()
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValueX * _movementData.ForwardSpeed, velocity.y,
-                _inputValueZ*_movementData.ForwardSpeed);
+            velocity = new Vector3(_inputValueX * _movementData.Speed, velocity.y,
+                _inputValueZ*_movementData.Speed);
             rigidbody.velocity = velocity;
 
             var position1 = rigidbody.position;
@@ -110,30 +87,10 @@ namespace Controllers
             
         }
 
-        private void StopSideways()
-        {
-            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _movementData.ForwardSpeed);
-        }
-
         private void Stop()
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
-        }
-        private void OnlySideways()
-        {
-            var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValue * _movementData.SidewaysSpeed, velocity.y,
-                0);
-            rigidbody.velocity = velocity;
-
-            Vector3 position;
-            position = new Vector3(
-                Mathf.Clamp(rigidbody.position.x, _clampValues.x,
-                    _clampValues.y),
-                (position = rigidbody.position).y,
-                position.z);
-            rigidbody.position = position;
         }
 
         public void OnReset()

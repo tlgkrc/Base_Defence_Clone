@@ -40,11 +40,11 @@ namespace Managers
         
         private void Awake()
         {
-            Data = GetInputData();
+            // Data = GetInputData();
             Init();
         }
 
-        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
+        // private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
         private void Init()
         {
@@ -55,6 +55,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            isReadyForTouch = true;
             SubscribeEvents();
         }
 
@@ -62,7 +63,6 @@ namespace Managers
         {
             InputSignals.Instance.onEnableInput += OnEnableInput;
             InputSignals.Instance.onDisableInput += OnDisableInput;
-            CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onNextLevel += OnNextLevel;
         }
@@ -71,7 +71,6 @@ namespace Managers
         {
             InputSignals.Instance.onEnableInput -= OnEnableInput;
             InputSignals.Instance.onDisableInput -= OnDisableInput;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             LevelSignals.Instance.onNextLevel += OnNextLevel;
         }
@@ -85,18 +84,13 @@ namespace Managers
 
         private void Update()
         {
-            if (!isReadyForTouch) return;
+            if (Input.GetMouseButton(0))
             {
-                if (Input.GetMouseButtonUp(0) && _queryPointerOverUIElementCommand.Execute())
-                { 
-                    MouseButtonUp();
-                }
-        
-                if (Input.GetMouseButtonDown(0) && !_queryPointerOverUIElementCommand.Execute())
-                {
-                    MouseButtonDown();
-                }
-                JoystickInput();
+                MouseButtonDown();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                MouseButtonUp();   
             }
         }
 
@@ -112,22 +106,16 @@ namespace Managers
             isReadyForTouch = false;
         }
         
-        private void OnPlay()
-        {
-            isReadyForTouch = true;
-        }
         
         
         private void OnReset()
         {
-            _isTouching = false;
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;
         }
 
         private void OnNextLevel() 
         {
-            _isTouching = false;
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;
         }
@@ -138,13 +126,12 @@ namespace Managers
 
         private void MouseButtonUp()
         {
-            _isTouching = false;
+            _moveVector = Vector3.zero;
             InputSignals.Instance.onInputReleased?.Invoke();
         }
 
         private void MouseButtonDown()
         {
-            _isTouching = true;
             InputSignals.Instance.onInputTaken?.Invoke();
             if (!isFirstTimeTouchTaken)
             {
@@ -152,13 +139,14 @@ namespace Managers
                 InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
             }
             _mousePosition = Input.mousePosition;
+            JoystickInput();
         }
         
         private void JoystickInput()
         {
             _moveVector.x = floatingJoystick.Horizontal;
             _moveVector.z = floatingJoystick.Vertical;
-                        
+
             InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
             {
                 ValueX = _moveVector.x,

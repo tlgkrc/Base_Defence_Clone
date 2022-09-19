@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Controllers.Player;
+using Enums;
 using Keys;
 using Managers;
 using UnityEngine;
@@ -21,14 +22,13 @@ namespace Controllers
 
         public void SetAnimState(CollectableAnimStates animState)
         {
-            animator.SetTrigger(animState.ToString());
+            //animator.SetTrigger(animState.ToString());
         }
 
         public void SetSpeedVariable(IdleInputParams inputParams)
         {
             float speedX = Mathf.Abs(inputParams.ValueX);
             float speedZ = Mathf.Abs(inputParams.ValueZ);
-            animator.SetFloat("Speed", (speedX + speedZ) / 2);
         }
     }
 }

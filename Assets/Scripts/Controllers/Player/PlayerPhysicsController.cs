@@ -1,13 +1,7 @@
-using System;
-using System.Collections;
-using Signals;
-using UnityEngine;
 using Managers;
-using Enums;
-using UnityEditor.VersionControl;
-using Task = System.Threading.Tasks.Task;
+using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerPhysicsController : MonoBehaviour
     {
@@ -16,8 +10,6 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private ParticleSystem particle;
-        [SerializeField] private ParticleSystem currentParticle;
 
         #endregion
 

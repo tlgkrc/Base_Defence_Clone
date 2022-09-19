@@ -12,13 +12,7 @@ namespace Data.ValueObject
     [Serializable]
     public class PlayerMovementData
     {
-        public float ForwardSpeed;
-        public float SidewaysSpeed;
-        public float JumpDistance;
-        public float JumpDuration;
+        public float Speed;
         public float IdleRotateSpeed;
-        public float RotateBorder;
-        public float CrouchSpeed;
-        public float RunSpeed;
     }
 }

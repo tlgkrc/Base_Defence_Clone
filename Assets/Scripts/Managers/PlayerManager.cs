@@ -36,19 +36,11 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-            Init();
-            SetStackPosition();
             SendPlayerDataToControllers();
             animationController.SetAnimState(CollectableAnimStates.Idle);
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
-        
-        private void Init()
-        {
-            var transform1 = transform;
-            _rb = GetComponent<Rigidbody>();//???????
-        }
 
         private void GetReferences()
         {
@@ -64,6 +56,8 @@ namespace Managers
 
         private void OnEnable()
         {
+            movementController.IsReadyToPlay(true);
+            animationController.SetAnimState(CollectableAnimStates.Run);
             SubscribeEvents();
         }
 
@@ -72,7 +66,6 @@ namespace Managers
             InputSignals.Instance.onInputTaken += OnActivateMovement;
             InputSignals.Instance.onInputReleased += OnDeactiveMovement;
             InputSignals.Instance.onJoystickDragged += OnSetIdleInputValues;
-            CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
@@ -84,7 +77,6 @@ namespace Managers
             InputSignals.Instance.onInputTaken -= OnActivateMovement;
             InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
             InputSignals.Instance.onJoystickDragged -= OnSetIdleInputValues;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
@@ -108,7 +100,7 @@ namespace Managers
 
         private void OnDeactiveMovement()
         {
-            movementController.DeactiveMovement();
+            movementController.DisableMovement();
         }
 
         private void OnSetIdleInputValues(IdleInputParams inputParams)
@@ -120,18 +112,11 @@ namespace Managers
         #endregion
 
         #region Others
-
-        private void OnPlay()
-        {
-            SetStackPosition();
-            movementController.IsReadyToPlay(true);
-            animationController.SetAnimState(CollectableAnimStates.Run);
-        }
+        
 
         private void OnLevelSuccessful()
         {
-            movementController.IsReadyToPlay(false);
-            animationController.SetAnimState(CollectableAnimStates.Idle);
+            
         }
         
         private void OnLevelFailed()
@@ -142,7 +127,6 @@ namespace Managers
         {
             gameObject.SetActive(true);
             movementController.OnReset();
-            SetStackPosition();
         }
 
         #endregion
@@ -150,18 +134,11 @@ namespace Managers
         #endregion
 
         #region Methods
-
-        private void SetStackPosition()
-        {
-            StackSignals.Instance.onPlayerGameObject?.Invoke(gameObject);
-        }
-
+        
         private void SetAnim(CollectableAnimStates animState)
         {
             animationController.SetAnimState(animState);
         }
-        
-
         #endregion
     }
 }
