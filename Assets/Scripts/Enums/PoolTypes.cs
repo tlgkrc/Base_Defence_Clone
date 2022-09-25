@@ -2,7 +2,11 @@
 {
     public enum PoolTypes
     {
-        PoolableObject,
-        PoolableObject2
+        Gem,
+        Enemy,
+        Bullet,
+        Hostage,
+        Miner,
+        MoneyWorker
     }
 }
