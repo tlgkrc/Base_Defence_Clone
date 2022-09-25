@@ -1,6 +1,8 @@
 using Data.ValueObject;
 using DG.Tweening;
+using Enums;
 using Keys;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -12,6 +14,7 @@ namespace Controllers
         #region Serialized Variables
         
         [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private PlayerManager manager;
         
         #endregion
         
@@ -59,6 +62,7 @@ namespace Controllers
             if (_isReadyToMove)
             {
                 IdleMove();
+
             }
             else
             {

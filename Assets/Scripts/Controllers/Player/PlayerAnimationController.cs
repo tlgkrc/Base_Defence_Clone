@@ -1,10 +1,9 @@
-﻿using Controllers.Player;
-using Enums;
+﻿using Enums;
 using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerAnimationController : MonoBehaviour
     {
@@ -20,9 +19,9 @@ namespace Controllers
 
         #endregion
 
-        public void SetAnimState(CollectableAnimStates animState)
+        public void SetAnimState(PlayerAnimStates animState)
         {
-            //animator.SetTrigger(animState.ToString());
+            animator.SetTrigger(animState.ToString());
         }
 
         public void SetSpeedVariable(IdleInputParams inputParams)

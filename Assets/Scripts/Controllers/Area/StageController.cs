@@ -7,8 +7,9 @@ namespace Controllers.Area
         public void UpdateStageArea(GameObject gameObject)
         {
             var siblingIndex = gameObject.transform.GetSiblingIndex();
-            gameObject.transform.parent.GetChild(siblingIndex).gameObject.SetActive(false);
-            gameObject.transform.parent.GetChild(siblingIndex+1).gameObject.SetActive(true);
+            var parent = gameObject.transform.parent;
+            parent.GetChild(siblingIndex).gameObject.SetActive(false);
+            parent.GetChild(siblingIndex+1).gameObject.SetActive(true);
             
         }
     }

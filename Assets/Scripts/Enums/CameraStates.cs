@@ -2,9 +2,6 @@
 {
     public enum CameraStates
     {
-        InitializeCam,
-        RunnerCam,
-        IdleStartCam,
-        IdleCam
+        LevelCam
     }
 }

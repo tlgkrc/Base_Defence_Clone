@@ -1,6 +1,7 @@
 using Commands;
 using UnityEngine;
 using Controllers;
+using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
@@ -37,7 +38,6 @@ namespace Managers
         {
             GetReferences();
             SendPlayerDataToControllers();
-            animationController.SetAnimState(CollectableAnimStates.Idle);
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -57,7 +57,6 @@ namespace Managers
         private void OnEnable()
         {
             movementController.IsReadyToPlay(true);
-            animationController.SetAnimState(CollectableAnimStates.Run);
             SubscribeEvents();
         }
 
@@ -135,7 +134,7 @@ namespace Managers
 
         #region Methods
         
-        private void SetAnim(CollectableAnimStates animState)
+        private void SetAnim(PlayerAnimStates animState)
         {
             animationController.SetAnimState(animState);
         }

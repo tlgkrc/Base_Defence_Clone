@@ -14,7 +14,7 @@ public class CollectableManager : MonoBehaviour
     #endregion
     #region SerializeField Variables
 
-    [SerializeField] private CollectableAnimStates initialAnimState;
+    [SerializeField] private ZombieAnimStates initialAnimState;
     #endregion
     #region Private Variables
     

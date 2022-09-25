@@ -12,10 +12,10 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
-        [SerializeField] private List<GameObject> panels;
-        [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private TextMeshPro scoreTMP;
-        [SerializeField] private TextMeshProUGUI idleScoreText;
+
+        [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private TextMeshProUGUI gemText;
 
         #endregion
 
@@ -75,47 +75,42 @@ namespace Managers
 
         private void OnOpenPanel(UIPanels panelParam)
         {
-            _uiPanelController.OpenPanel(panelParam , panels);
+            //_uiPanelController.OpenPanel(panelParam , panels);
         }
 
         private void OnClosePanel(UIPanels panelParam)
         {
-            _uiPanelController.ClosePanel(panelParam , panels);
+            //_uiPanelController.ClosePanel(panelParam , panels);
         }
         
         private void OnSetScoreText(int value)
         {
-            scoreTMP.text = (value.ToString());
-            idleScoreText.text = (value.ToString());
+            
         }
 
         private void OnSetLevelText(int value)
         {
-            levelText.text = "Level " + (value + 1);
+            
         }
 
         #endregion
 
         #region Buttons
 
-        public void Play()
+        public void Settings()
         {
-            CoreGameSignals.Instance.onPlay?.Invoke();
-        }
-        
-        
-        public void NextLevel()
-        {
-            LevelSignals.Instance.onNextLevel?.Invoke();
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-        }
-
-        public void Claim()
-        {
+            var isOpen = settingsPanel.activeInHierarchy;
+            if (isOpen)
+            {
+                settingsPanel.SetActive(false);
+            }
+            else
+            {
+                settingsPanel.SetActive(true);
+            }
             
         }
-        
-        
+
         #endregion
     }
 }
