@@ -13,7 +13,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> StageAreaList = new List<GameObject>();
-        [SerializeField] private StageController stageController;
+        [SerializeField] private Stage stage;
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Managers
 
         private void OnUpdateStageArea(GameObject gO)
         {
-            stageController.UpdateStageArea(gO);
+            stage.UpdateStageArea(gO);
         }
     }
 }

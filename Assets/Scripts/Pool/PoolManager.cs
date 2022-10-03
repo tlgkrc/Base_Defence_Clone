@@ -9,19 +9,17 @@ namespace Pool
 {
     public class PoolManager : MonoSingleton <PoolManager>
     {
-        // private static ObjectPoolManager _instance;
-        // public static ObjectPoolManager Instance
-        // {
-        //     get
-        //     {
-        //         if (_instance == null) _instance = new ObjectPoolManager();
-        //         return _instance;
-        //     }
-        // }
+
+        #region Self Variables
+
+        #region Private Variables
 
         private readonly Dictionary<string, AbstractObjectPool> _pools;
 
-        
+        #endregion
+
+        #endregion
+
         public PoolManager()
         {
             _pools = new Dictionary<string, AbstractObjectPool>();

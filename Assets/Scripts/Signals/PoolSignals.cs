@@ -8,9 +8,7 @@ namespace Signals
 {
     public class PoolSignals: MonoSingleton<PoolSignals>
     {
-        public Func<string,Transform,GameObject> onGetPoolObject = delegate(string type, Transform transform1)
-        {
-            return default; };
+        public Func<string,Transform,GameObject> onGetPoolObject = (type, transform1) => default;
         public UnityAction<string,GameObject> onReleasePoolObject = delegate {  };
     }
 }

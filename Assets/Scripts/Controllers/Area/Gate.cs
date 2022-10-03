@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controllers.Area
 {
-    public class GateController : MonoBehaviour
+    public class Gate : MonoBehaviour
     {
         #region Self Variables
 

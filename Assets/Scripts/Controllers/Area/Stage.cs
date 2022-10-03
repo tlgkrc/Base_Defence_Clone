@@ -2,7 +2,7 @@
 
 namespace Controllers.Area
 {
-    public class StageController : MonoBehaviour
+    public class Stage : MonoBehaviour
     {
         public void UpdateStageArea(GameObject gameObject)
         {

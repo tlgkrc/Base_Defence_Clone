@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Controllers.Area
 {
     
-    public class SpriteController : MonoBehaviour
+    public class Sprite : MonoBehaviour
     {
         #region Self Variables
 
