@@ -1,4 +1,6 @@
-﻿namespace AI.States.Miner
+﻿using UnityEngine;
+
+namespace AI.States.Miner
 {
     public class HarvestGem: IAIStates
     {
@@ -18,7 +20,7 @@
         }
         public void Tick()
         {
-            //setactive objectpooled gem
+            
         }
 
         public void OnEnter()

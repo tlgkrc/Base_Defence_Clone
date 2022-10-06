@@ -26,7 +26,6 @@ namespace AI.States.Miner
 
         public void Tick()
         {
-            Debug.Log("returnStock");
             _agent.SetDestination(_gemStockTransform.position);
         }
 

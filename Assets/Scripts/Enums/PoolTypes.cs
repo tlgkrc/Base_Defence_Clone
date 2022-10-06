@@ -2,7 +2,7 @@
 {
     public enum PoolTypes
     {
-        Gem,
+        Diamond,
         Enemy,
         Bullet,
         Hostage,

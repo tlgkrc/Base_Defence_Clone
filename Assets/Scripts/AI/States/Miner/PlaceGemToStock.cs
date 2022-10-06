@@ -1,4 +1,6 @@
-﻿namespace AI.States.Miner
+﻿using Signals;
+
+namespace AI.States.Miner
 {
     public class PlaceGemToStock: IAIStates
     {
@@ -18,7 +20,7 @@
         }
         public void Tick()
         {
-            
+            StackSignals.Instance.onAddStack?.Invoke();
         }
 
         public void OnEnter()

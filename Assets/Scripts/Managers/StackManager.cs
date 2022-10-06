@@ -1,182 +1,152 @@
 using System;
 using System.Collections.Generic;
-using Controllers;
-using UnityEngine;
-using Signals;
 using Data.UnityObject;
 using Data.ValueObject;
-using Commands;
 using DG.Tweening;
-using Enums;
+using Interfaces;
+using Signals;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
-    public class StackManager : MonoBehaviour
+    public class StackManager : MonoBehaviour,IStack
     {
         #region Self Variables
-        
+
         #region Public Variables
-        public List<GameObject> CollectableStack = new List<GameObject>();
-        public List<GameObject> UnstackList = new List<GameObject>();
-        public ItemAddOnStackCommand ItemAddOnStack;
 
         #endregion
 
-        #region Seralized Veriables
-        [SerializeField] private GameObject levelHolder;
-        [SerializeField] private GameObject collectable;
+        #region Serialized Variables
+
+        [SerializeField] private GameObject stackGameObject;
+        [SerializeField] private Transform stackMesh;
+
         #endregion
 
         #region Private Variables
 
-        private StackData _stackData;
-        private StackMoveController _stackMoveController;
-        private ItemRemoveOnStackCommand _itemRemoveOnStackCommand;
-        private InitialzeStackCommand _initialzeStackCommand;
-        private GameObject _playerGameObject;
-        private Transform _poolTriggerTransform;
-
-        private bool _isPlayerOnDronePool = false;
-        private Vector3 _direction;
+        [ShowInInspector]private List<GameObject> _stackList = new List<GameObject>();
+        [ShowInInspector] private StackGOData _stackGoData;
+        private Vector3 _stackStartPosition;
+        private Vector3 _stackPos;
+        private Vector3 _localPos,_localScale;
 
         #endregion
+
         #endregion
-        
+
         private void Awake()
         {
-            _stackData = GetStackData();
-            Init();
-        }
-        
-        private StackData GetStackData() => Resources.Load<CD_Stack>("Data/CD_StackData").StackData;
-        
-        private void Init()
-        {
-            _stackMoveController = new StackMoveController();
-            _stackMoveController.InisializedController(_stackData);
-            ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
-            _itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
-            _initialzeStackCommand = new InitialzeStackCommand(collectable, this);
+            GetReferences();
+            CalculateStaticStackStartPos();
         }
 
-        #region Event Subscription
+        private void GetReferences()
+        {
+            _stackGoData = GetStackData();
+            _localScale = stackMesh.localScale;
+            _localPos = transform.position;
+        }
+
+        private StackGOData GetStackData()
+        {
+            return Resources.Load<CD_StackData>("Data/CD_StackData").Datas.StackDatas[stackGameObject];
+        }
+
+        #region Subscription Events
+
         private void OnEnable()
         {
-            SubscribeEvent();
-            _initialzeStackCommand.Execute(_stackData.InitialStackItem);
+            SubscribeEvents();
         }
 
-        private void SubscribeEvent()
+        private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onReset += OnReset;
-            StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
-            StackSignals.Instance.onInteractionObstacle += _itemRemoveOnStackCommand.Execute;
-            StackSignals.Instance.onPlayerGameObject += OnSetPlayer;
-            StackSignals.Instance.onGetCurrentScore += OnGetStackCount;
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            StackSignals.Instance.onAddStack += OnAddStack;
+            StackSignals.Instance.onClearStack += OnClearStack;
         }
-        private void UnSubscribeEvent()
+
+        private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onReset -= OnReset;
-            StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
-            StackSignals.Instance.onInteractionObstacle -= _itemRemoveOnStackCommand.Execute;
-            StackSignals.Instance.onPlayerGameObject -= OnSetPlayer;
-            StackSignals.Instance.onGetCurrentScore -= OnGetStackCount;
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            StackSignals.Instance.onAddStack -= OnAddStack;
+            StackSignals.Instance.onClearStack += OnClearStack;
         }
+
         private void OnDisable()
         {
-            UnSubscribeEvent();
+            UnsubscribeEvents();
         }
+
         #endregion
 
-        private void Start()
+        private void OnAddStack()
         {
-            ScoreSignals.Instance.onSetScore?.Invoke(CollectableStack.Count);
-        }
-        
-        private void Update()
-        {
-            if (_isPlayerOnDronePool)StackMove(true);
-            else StackMove();
+            Add();
         }
 
-        private void OnSetPlayer(GameObject player)
+        private void OnClearStack(Transform playerTransform)
         {
-            _playerGameObject = player;
-        }
-        
-        private void StackMove(bool isOnDronePool=false)
-        {
-             if (gameObject.transform.childCount > 0)
-             {
-                _stackMoveController.StackItemsMoveOrigin(_playerGameObject.transform.position, CollectableStack,isOnDronePool);
-             }
-        }
-        
-        private void OnInteractionWithCollectable(GameObject collectableGameObject)
-        {
-            ItemAddOnStack.Execute(collectableGameObject);
-            collectableGameObject.tag = "Collected";
+            Clear(playerTransform);
         }
 
-        private void OnPlayerCollideWithDronePool(Transform poolTriggerTransform)
+        public void Add()
         {
-            _poolTriggerTransform = poolTriggerTransform;
-            _isPlayerOnDronePool = true;
-            CollectableStack[0].transform.DOMoveZ(CollectableStack[0].transform.position.z + 5, 1f);
-        }
-        
-
-        private void OnReset()
-        {
-            foreach (Transform childs in transform)
+            var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
+            if (_stackGoData.IsDynamic)
             {
-                Destroy(childs.gameObject);
-            }
-            CollectableStack.Clear();
-            _initialzeStackCommand.Execute(_stackData.InitialStackItem);
-        }
-
-        private void OnStackToUnstack(GameObject collectable)//command olabilir
-        {
-            UnstackList.Add(collectable);
-            collectable.transform.SetParent(levelHolder.transform);
-            CollectableStack.Remove(collectable);
-            CollectableStack.TrimExcess();
-        }
-        
-        
-        
-        
-        private int OnGetStackCount()
-        {
-            return CollectableStack.Count;
-        }
-
-        private void OnLevelSuccessful()
-        {
-            var lastCollectable = CollectableStack[CollectableStack.Count - 1];
-            var itemDuration = 1;
-            foreach (var item in CollectableStack)
-            {
-                item.transform.SetParent(levelHolder.transform);
-                item.transform.DOMove(_playerGameObject.transform.position, .1f*itemDuration).OnComplete(()=>
-                {
-                    if (lastCollectable.Equals(item))
-                    {
-                        StackSignals.Instance.onLastCollectableAddedToPlayer?.Invoke(true);
-                    }
-                    item.SetActive(false);
-                    StackSignals.Instance.onSetPlayerScale?.Invoke(.1f);
-
-                  
-                });
-                itemDuration += 1;
                 
             }
-            CollectableStack.Clear();
-            CollectableStack.TrimExcess();
+            else // Adding to plane base stack
+            {
+                _stackPos.x += (_stackList.Count % (_stackGoData.GridX*_stackGoData.GridZ)) % _stackGoData.GridX * (_localScale.x * 10) / _stackGoData.GridX;
+                _stackPos.z += (_stackList.Count % (_stackGoData.GridX *_stackGoData.GridZ)) / _stackGoData.GridZ * (_localScale.z * 10) / _stackGoData.GridZ;
+                _stackPos.y += _stackList.Count / (_stackGoData.GridX * _stackGoData.GridZ) * _stackGoData.LevelOffset;
+
+                _stackList.Add(go);
+                go.transform.localPosition = _stackPos;
+            }
+            _stackPos = _stackStartPosition;
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear(Transform pTransform)
+        {
+            if (!_stackGoData.IsDynamic)
+            {
+                foreach (var gO in _stackList)
+                {
+                    ClearAnim(gO, pTransform);
+                }
+            }
+            _stackList.Clear();
+            //StackCount will be send to scoremanager
+        }
+
+        private void CalculateStaticStackStartPos()
+        {
+            _stackStartPosition.x = _localPos.x -
+                                    (_localScale.x * 10) / _stackGoData.GridX;
+            _stackStartPosition.z = _localPos.z -
+                               (_localScale.z * 10) / _stackGoData.GridZ;
+            _stackStartPosition.y = _stackGoData.StartHeight;
+            _stackPos = _stackStartPosition;
+        }
+
+        private void ClearAnim(GameObject gO,Transform playerTransform)
+        {
+            var position = transform.position;
+            var newVec = new Vector3(position.x + Random.Range(5, 10),
+                position.y + Random.Range(5, 10), position.z + Random.Range(5, 10));
+            gO.transform.DOMove(newVec, 0.5f).SetEase(Ease.InOutBack).OnComplete(() =>
+                gO.transform.DOMove(playerTransform.position, .5f));
+            gO.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InElastic);
         }
     }
 }

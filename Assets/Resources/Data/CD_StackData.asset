@@ -9,15 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b91a03bfa3ca849b0756d3d9179155, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d258ad8afc544d381376a93eddc7892, type: 3}
   m_Name: CD_StackData
   m_EditorClassIdentifier: 
-  StackData:
-    CollectableOffsetInStack: 1
-    LerpSpeed_x: 0.15
-    LerpSpeed_y: 0.2
-    LerpSpeed_z: 0.8
-    ShackAnimDuraction: 0.06
-    ShackScaleValue: 1.1
-    InitialStackItem: 5
-    DistanceFormPlayer: -1
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  Datas:
+    StackDatas:
+      m_Keys:
+      - {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06, type: 3}
+      m_Values:
+      - IsDynamic: 0
+        LevelOffset: 0.25
+        StartHeight: 0.25
+        GridX: 3
+        GridZ: 3
+        maxCount: 7
+        StockPile: {fileID: 0}

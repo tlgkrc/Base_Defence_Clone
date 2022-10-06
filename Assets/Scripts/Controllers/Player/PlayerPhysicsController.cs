@@ -1,4 +1,5 @@
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -17,7 +18,10 @@ namespace Controllers.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            if (other.CompareTag("MineStack"))
+            {
+                StackSignals.Instance.onClearStack?.Invoke(transform);
+            }
         }
     }
 }

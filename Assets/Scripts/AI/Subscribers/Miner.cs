@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using AI.States;
 using AI.States.Miner;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,6 +29,8 @@ namespace AI.Subscribers
         #region Private Variables
 
         private AIStateMachine _aiStateMachine;
+        private float _harvestTime = 2.5f;
+        private float _passedTime;
 
         #endregion
 
@@ -55,7 +56,7 @@ namespace AI.Subscribers
             
             At(search,moveToSelected,HasTarget());
             At(moveToSelected,dig,ReachedResource());
-            At(dig,harvest,StockIsFull());
+            At(dig,harvest,TimeIsPassed());
             At(harvest, returnToGemStock, StockIsFull());
             At(returnToGemStock, placeGemInStockPile, ReachedStockPile());
             At(placeGemInStockPile, search, DeliveredGem());
@@ -66,6 +67,16 @@ namespace AI.Subscribers
             Func<bool> HasTarget() =>()=> Target != null;
             Func<bool> ReachedResource() => () =>
                 Target != null && Vector3.Distance(transform.position, Target.transform.position)<1.1f;
+            Func<bool> TimeIsPassed() => () =>
+            {
+                _passedTime += Time.deltaTime;
+                if (_passedTime >= _harvestTime )
+                {
+                    _passedTime = 0;
+                    return true;
+                }
+                return false;
+            };
             Func<bool> StockIsFull() => () => true;
             Func<bool> ReachedStockPile() => () =>
                 gemStock != null && Vector3.Distance(transform.position, gemStock.transform.position) < 1f;
