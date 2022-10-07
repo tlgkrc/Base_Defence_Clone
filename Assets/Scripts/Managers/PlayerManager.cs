@@ -24,6 +24,7 @@ namespace Managers
 
         [Space] [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
 
         #endregion
 

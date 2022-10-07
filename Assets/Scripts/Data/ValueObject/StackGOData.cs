@@ -17,6 +17,5 @@ namespace Data.ValueObject
         [HorizontalGroup("Grid")] 
         public int GridZ;
         public int maxCount;
-        [ShowIf("IsDynamic", true)] public Transform StockPile;
     }
 }

@@ -142,11 +142,11 @@ namespace Managers
         private void ClearAnim(GameObject gO,Transform playerTransform)
         {
             var position = transform.position;
-            var newVec = new Vector3(position.x + Random.Range(5, 10),
-                position.y + Random.Range(5, 10), position.z + Random.Range(5, 10));
-            gO.transform.DOMove(newVec, 0.5f).SetEase(Ease.InOutBack).OnComplete(() =>
-                gO.transform.DOMove(playerTransform.position, .5f));
-            gO.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InElastic);
+            var newVec = new Vector3(position.x + Random.Range(2, 4),
+                position.y + Random.Range(2, 4), position.z + Random.Range(2, 4));
+            gO.transform.DOMove(newVec, 1f).SetEase(Ease.InOutBack).OnComplete(() =>
+                gO.transform.DOMove(playerTransform.position + new Vector3(0,2,0), 1f));
+            gO.transform.DOScale(Vector3.zero, 2f).SetEase(Ease.InElastic).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
         }
     }
 }

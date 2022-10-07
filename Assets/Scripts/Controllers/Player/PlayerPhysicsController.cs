@@ -22,6 +22,10 @@ namespace Controllers.Player
             {
                 StackSignals.Instance.onClearStack?.Invoke(transform);
             }
+            else if (other.CompareTag("Hostage"))
+            {
+                StackSignals.Instance.onAddStack?.Invoke();
+            }
         }
     }
 }

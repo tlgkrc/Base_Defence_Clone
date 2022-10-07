@@ -4628,7 +4628,7 @@ GameObject:
   - component: {fileID: 576477267400706006}
   m_Layer: 0
   m_Name: Physic
-  m_TagString: Untagged
+  m_TagString: MineStack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7716,6 +7716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackGameObject: {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06,
     type: 3}
+  stackMesh: {fileID: 576477268326649832}
 --- !u!1 &576477268306661044
 GameObject:
   m_ObjectHideFlags: 0
