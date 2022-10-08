@@ -27,15 +27,23 @@ MonoBehaviour:
       - {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06, type: 3}
       - {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
       m_Values:
-      - IsDynamic: 0
+      - StackType: 0
+        IsDynamic: 0
         LevelOffset: 0.25
         StartHeight: 0.25
         GridX: 3
         GridZ: 3
         maxCount: 7
-      - IsDynamic: 0
+        LerpX: 0
+        LerpZ: 0
+        DistanceFromPlayer: 0
+      - StackType: 2
+        IsDynamic: 0
         LevelOffset: 0
         StartHeight: 0
         GridX: 0
         GridZ: 0
         maxCount: 0
+        LerpX: 0
+        LerpZ: 0
+        DistanceFromPlayer: 0

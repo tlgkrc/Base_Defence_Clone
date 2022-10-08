@@ -12,6 +12,8 @@ namespace Signals
     {
         public UnityAction onAddStack = delegate {  };
         public UnityAction<Transform> onClearStack = delegate {  };
+        public UnityAction<GameObject> onAddHostageToStack = delegate {  };
+        public UnityAction<GameObject> onPlayerGameObject = delegate { };
         public UnityAction<bool> onLastCollectableAddedToPlayer = delegate {  };
         public Func<int> onGetCurrentScore = delegate { return 1; };
 

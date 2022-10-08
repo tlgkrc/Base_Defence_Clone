@@ -1,4 +1,3 @@
-using Commands;
 using UnityEngine;
 using Controllers;
 using Controllers.Player;
@@ -95,6 +94,7 @@ namespace Managers
 
         private void OnActivateMovement()
         {
+            SetStackPosition();
             movementController.EnableMovement();
         }
 
@@ -112,7 +112,6 @@ namespace Managers
         #endregion
 
         #region Others
-        
 
         private void OnLevelSuccessful()
         {
@@ -138,6 +137,11 @@ namespace Managers
         private void SetAnim(PlayerAnimStates animState)
         {
             animationController.SetAnimState(animState);
+        }
+
+        private void SetStackPosition()
+        {
+            StackSignals.Instance.onPlayerGameObject?.Invoke(gameObject);
         }
         #endregion
     }

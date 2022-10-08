@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
+using Enums;
 using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
@@ -99,7 +100,7 @@ namespace Managers
             {
                 
             }
-            else // Adding to plane base stack
+            else// Adding to plane base stack
             {
                 _stackPos.x += (_stackList.Count % (_stackGoData.GridX*_stackGoData.GridZ)) % _stackGoData.GridX * (_localScale.x * 10) / _stackGoData.GridX;
                 _stackPos.z += (_stackList.Count % (_stackGoData.GridX *_stackGoData.GridZ)) / _stackGoData.GridZ * (_localScale.z * 10) / _stackGoData.GridZ;

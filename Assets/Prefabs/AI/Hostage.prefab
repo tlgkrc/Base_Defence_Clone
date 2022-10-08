@@ -1169,6 +1169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3313133194509964456}
+  - component: {fileID: 315196836279490851}
   m_Layer: 0
   m_Name: Anim
   m_TagString: Untagged
@@ -1191,6 +1192,19 @@ Transform:
   m_Father: {fileID: 3313133195488298880}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315196836279490851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313133194509964457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9933c88e2e2548b3a86854ea03f0eb71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
 --- !u!1 &3313133194860985772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1215,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3313133194860985763}
   - component: {fileID: 3313133194860985773}
+  - component: {fileID: 3027100358641203457}
+  - component: {fileID: 3942460182430102016}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Hostage
@@ -1231,12 +1247,41 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3313133194860985772}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.32246947
   m_Height: 2.3353639
   m_Direction: 1
   m_Center: {x: -1.2245506e-10, y: 1.1385734, z: 0.014374495}
+--- !u!114 &3027100358641203457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313133194860985772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fac37ee3832462ba15608cd11e14047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 8723527532225019429}
+--- !u!54 &3942460182430102016
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313133194860985772}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3313133195488298881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3313133195488298880}
+  - component: {fileID: 8723527532225019429}
   m_Layer: 0
   m_Name: Hostage
   m_TagString: Untagged
@@ -1260,8 +1306,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3313133195488298881}
-  m_LocalRotation: {x: -0, y: 0.9974061, z: -0, w: -0.0719793}
-  m_LocalPosition: {x: -4.7371984, y: 0, z: 38.924206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1270,7 +1316,20 @@ Transform:
   - {fileID: 3313133194509964456}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 188.255, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8723527532225019429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313133195488298881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48c3cd35877498788ca5323965a4062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animController: {fileID: 315196836279490851}
 --- !u!1 &3387449044299186057
 GameObject:
   m_ObjectHideFlags: 0

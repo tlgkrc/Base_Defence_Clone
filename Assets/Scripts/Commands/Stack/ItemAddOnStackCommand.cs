@@ -5,40 +5,41 @@ using Signals;
 
 namespace Commands
 {
-    // public class ItemAddOnStackCommand
-    // {
-    //     #region Self Variables
-    //     #region Private Variables
-    //     private List<GameObject> _collectableStack;
-    //     private Transform _transform;
-    //     private StackData _stackData;
-    //     #endregion
-    //     #endregion
-    //     
-    //     public ItemAddOnStackCommand(ref List<GameObject> collectableStack,Transform transform,StackData stackData)
-    //     {
-    //         _collectableStack = collectableStack;
-    //         _transform = transform;
-    //         _stackData = stackData;
-    //     }
-    //     
-    //     public void Execute(GameObject _collectableGameObject)
-    //     {
-    //         if (_collectableStack.Count == 0)
-    //         {
-    //             _collectableStack.Add(_collectableGameObject);
-    //             _collectableGameObject.transform.SetParent(_transform);
-    //             _collectableGameObject.transform.localPosition = Vector3.zero;
-    //         }
-    //         else
-    //         {
-    //             _collectableGameObject.transform.SetParent(_transform);
-    //             Vector3 newPos = _collectableStack[_collectableStack.Count - 1].transform.localPosition;
-    //             newPos.z -= _stackData.CollectableOffsetInStack;
-    //             _collectableGameObject.transform.localPosition = newPos;
-    //             _collectableStack.Add(_collectableGameObject);
-    //         }
-    //         ScoreSignals.Instance.onSetScore?.Invoke(_collectableStack.Count);
-    //     }
-    // }
+    public class ItemAddOnStackCommand
+    {
+        #region Self Variables
+        #region Private Variables
+        private List<GameObject> _hostageStack;
+        private Transform _transform;
+        private HostageStackData _hostageStackData;
+        #endregion
+        #endregion
+        
+        public ItemAddOnStackCommand(ref List<GameObject> hostageStack,Transform transform,HostageStackData hostageStackData)
+        {
+            _hostageStack = hostageStack;
+            _transform = transform;
+            _hostageStackData = hostageStackData;
+        }
+        
+        public void Execute(GameObject hostageGO)
+        {
+            if (_hostageStack.Count == 0)
+            {
+                _hostageStack.Add(hostageGO);
+                hostageGO.transform.SetParent(_transform);
+                hostageGO.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                hostageGO.transform.SetParent(_transform);
+                Vector3 newPos = _hostageStack[_hostageStack.Count - 1].transform.localPosition;
+                newPos.z -= _hostageStackData.HostageOffsetInStack;
+                hostageGO.transform.localPosition = newPos;
+                _hostageStack.Add(hostageGO);
+            }
+            hostageGO.transform.LookAt(_transform);
+           
+        }
+    }
 }

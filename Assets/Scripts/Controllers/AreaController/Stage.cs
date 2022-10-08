@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Controllers.Area
+namespace Controllers.AreaController
 {
     public class Stage : MonoBehaviour
     {

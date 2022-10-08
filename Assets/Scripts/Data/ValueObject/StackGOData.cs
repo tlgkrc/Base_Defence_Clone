@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

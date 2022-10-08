@@ -8,6 +8,8 @@ TagManager:
   - Miner
   - MineStack
   - Hostage
+  - MoneyWorker
+  - MineCounter
   layers:
   - Default
   - TransparentFX
