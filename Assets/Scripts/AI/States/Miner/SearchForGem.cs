@@ -37,7 +37,7 @@ namespace AI.States.Miner
             
         }
 
-        public Transform ChooseOfSuitMine(List<Transform> mineTransforms)
+        private Transform ChooseOfSuitMine(List<Transform> mineTransforms)
         {
             var index = Random.Range(0, mineTransforms.Count);
             var target = mineTransforms[index];

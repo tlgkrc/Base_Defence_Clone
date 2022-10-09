@@ -9,22 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb8f9ff31cf49a9ac998b8eddaae550, type: 3}
+  m_Script: {fileID: 11500000, guid: e9642151d4fb46b8bd6ff54ee8ad610e, type: 3}
   m_Name: CD_EnemyData
   m_EditorClassIdentifier: 
-  EnemyDatas:
-    Datas:
-      m_Keys:
-      - {fileID: 3423191550280231325, guid: 6c19579784ad866498b08a1c3c9b9a6a, type: 3}
-      - {fileID: 3912348058426526480, guid: dfff24309655d3f41a8ceeb0f12d09f7, type: 3}
-      - {fileID: 6588549954850117363, guid: 4b75219e40bf0884fb2eb81bad79879c, type: 3}
+  Data:
+    EnemyDatas:
+      m_Keys: 000000000100000002000000
       m_Values:
+      - Damage: 2
+        Speed: 2
+        IncreasedSpeed: 3
       - Damage: 3
         Speed: 3
-        IncreasedSpeed: 3
+        IncreasedSpeed: 4
       - Damage: 4
         Speed: 4
-        IncreasedSpeed: 4
-      - Damage: 5
-        Speed: 5
         IncreasedSpeed: 5

@@ -9,7 +9,7 @@ namespace AI.States.Miner
 
         #region Public Variables
 
-        public float TimeStuck;
+        
 
         #endregion
 
@@ -18,6 +18,7 @@ namespace AI.States.Miner
         private readonly Subscribers.Miner _miner;
         private readonly NavMeshAgent _agent;
         private Vector3 _lastPosition;
+        private float _timeStuck;
 
         #endregion
 
@@ -32,14 +33,14 @@ namespace AI.States.Miner
         {
             if (Vector3.Distance(_miner.transform.position,_lastPosition)<=1f)
             {
-                TimeStuck += Time.time;
+                _timeStuck += Time.time;
             }
             _lastPosition = _miner.transform.position;
         }
 
         public void OnEnter()
         {
-            TimeStuck = 0f;
+            _timeStuck = 0f;
             _agent.SetDestination(_miner.Target.transform.position);
         }
 

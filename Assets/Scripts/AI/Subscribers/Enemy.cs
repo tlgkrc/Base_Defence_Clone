@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,20 +13,19 @@ namespace AI.Subscribers
 
         #region Public Variables
         
-        
+        public Transform BaseTarget { get; set; }
 
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject enemyGameObject;
+        [SerializeField] private EnemyTypes enemyType;
 
         #endregion
 
         #region Private Variables
 
         [ShowInInspector] private EnemyGOData _enemyGoData;
-
         #endregion
 
         #endregion
@@ -35,9 +35,11 @@ namespace AI.Subscribers
             _enemyGoData = GetEnemyData();
         }
 
-        private EnemyGOData GetEnemyData() =>
-            Resources.Load<CD_EnemyData>("Data/CD_EnemyData").EnemyDatas.Datas[enemyGameObject];
-        
-        
+        private EnemyGOData GetEnemyData()
+        {
+            return Resources.Load<CD_EnemyData>("Data/CD_EnemyData").Data.EnemyDatas[enemyType];
+        }
+            
+
     }
 }
