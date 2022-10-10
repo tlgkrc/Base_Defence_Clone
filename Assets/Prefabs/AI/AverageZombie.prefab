@@ -425,6 +425,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3555301669865887481}
+  - component: {fileID: 5959014975026336874}
+  - component: {fileID: 7495454190881156514}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Untagged
@@ -447,6 +449,32 @@ Transform:
   m_Father: {fileID: 3625793016170406670}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5959014975026336874
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110687112517937708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7495454190881156514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110687112517937708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecbb114b09dc497c8a32f2ed168164da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 7190674984224999653}
 --- !u!1 &2125274407775679586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,6 +2638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3625793016170406670}
   - component: {fileID: 7190674984224999653}
+  - component: {fileID: 6848568486147965240}
   m_Layer: 0
   m_Name: AverageZombie
   m_TagString: Untagged
@@ -2648,6 +2677,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
+  baseTargetTransforms: []
+--- !u!195 &6848568486147965240
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075997300724291277}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &9134845578412941300
 GameObject:
   m_ObjectHideFlags: 0

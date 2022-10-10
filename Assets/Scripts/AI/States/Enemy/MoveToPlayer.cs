@@ -1,4 +1,7 @@
-﻿namespace AI.States.Enemy
+﻿using Data.ValueObject;
+using UnityEngine.AI;
+
+namespace AI.States.Enemy
 {
     public class MoveToPlayer: IAIStates
     {
@@ -13,29 +16,33 @@
         #region Private Variables
 
         private Subscribers.Enemy _enemy;
+        private NavMeshAgent _agent;
+        private EnemyGOData _enemyGoData;
 
         #endregion
 
         #endregion
 
-        public MoveToPlayer(Subscribers.Enemy enemy)
+        public MoveToPlayer(Subscribers.Enemy enemy,NavMeshAgent agent,EnemyGOData enemyGoData)
         {
             _enemy = enemy;
+            _agent = agent;
+            _enemyGoData = enemyGoData;
         }
 
         public void Tick()
         {
-            throw new System.NotImplementedException();
+            _agent.SetDestination(_enemy.Target.position);
         }
 
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            _agent.speed = _enemyGoData.IncreasedSpeed;
         }
 
         public void OnExit()
         {
-            throw new System.NotImplementedException();
+            _agent.speed = _enemyGoData.Speed;
         }
     }
 }

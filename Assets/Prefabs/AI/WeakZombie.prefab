@@ -361,6 +361,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4286772871975275868}
   - component: {fileID: 7589697213719819219}
+  - component: {fileID: 2031650027}
+  - component: {fileID: 2031650028}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Untagged
@@ -392,11 +394,37 @@ CapsuleCollider:
   m_GameObject: {fileID: 1878997515582360083}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.41533
   m_Height: 1.819438
   m_Direction: 1
   m_Center: {x: -0.004864663, y: 0.92746806, z: 0.028969228}
+--- !u!135 &2031650027
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878997515582360083}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2031650028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878997515582360083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecbb114b09dc497c8a32f2ed168164da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 1353275738157137690}
 --- !u!1 &1984669471172334615
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782497439920271302}
+  - component: {fileID: 283375221}
   - component: {fileID: 1353275738157137690}
   m_Layer: 0
   m_Name: WeakZombie
@@ -847,6 +876,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &283375221
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046326001356071337}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1353275738157137690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,6 +911,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
+  baseTargetTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3057635535536135702
 GameObject:
   m_ObjectHideFlags: 0

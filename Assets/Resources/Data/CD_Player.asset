@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
-      Speed: 2
+      Speed: 4.5
       IdleRotateSpeed: 720

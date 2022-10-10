@@ -1,8 +1,7 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Controllers.Area
+namespace Controllers.AreaController
 {
     public class Gate : MonoBehaviour
     {

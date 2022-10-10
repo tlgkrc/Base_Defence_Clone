@@ -1,29 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace AI.States.Enemy
 {
-    public class SearchForTargetPoint: IAIStates
+    public class SearchForBaseTarget: IAIStates
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        
-
-        #endregion
-
         #region Private Variables
 
-        private Subscribers.Enemy _enemy;
-        private List<Transform> _targetTransforms;
+        private readonly Subscribers.Enemy _enemy;
+        private readonly List<Transform> _targetTransforms;
 
         #endregion
 
         #endregion
 
-        public SearchForTargetPoint(Subscribers.Enemy enemy,List<Transform> targetTransforms)
+        public SearchForBaseTarget(Subscribers.Enemy enemy,List<Transform> targetTransforms)
         {
             _enemy = enemy;
             _targetTransforms = targetTransforms;
@@ -31,17 +24,17 @@ namespace AI.States.Enemy
 
         public void Tick()
         {
-           _enemy.BaseTarget =  ChooseBaseTarget(_targetTransforms);
+            _enemy.Target =  ChooseBaseTarget(_targetTransforms);
         }
 
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnExit()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         private Transform ChooseBaseTarget(List<Transform> transforms)

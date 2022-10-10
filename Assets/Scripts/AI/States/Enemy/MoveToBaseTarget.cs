@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data.ValueObject;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.Enemy
@@ -15,8 +16,9 @@ namespace AI.States.Enemy
 
         #region Private Variables
 
-        private Subscribers.Enemy _enemy;
-        private NavMeshAgent _agent;
+        private readonly Subscribers.Enemy _enemy;
+        private readonly NavMeshAgent _agent;
+        private readonly EnemyGOData _enemyGoData;
         private float _timeStuck;
         private Vector3 _lastPosition;
 
@@ -24,10 +26,11 @@ namespace AI.States.Enemy
 
         #endregion
 
-        public MoveToBaseTarget(Subscribers.Enemy enemy,NavMeshAgent agent)
+        public MoveToBaseTarget(Subscribers.Enemy enemy,NavMeshAgent agent,EnemyGOData enemyGoData)
         {
             _enemy = enemy;
             _agent = agent;
+            _enemyGoData = enemyGoData;
         }
 
         public void Tick()
@@ -42,7 +45,8 @@ namespace AI.States.Enemy
         public void OnEnter()
         {
             _timeStuck = 0;
-            _agent.SetDestination(_enemy.BaseTarget.transform.position);
+            _agent.speed = _enemyGoData.Speed;
+            _agent.SetDestination(_enemy.Target.position);
         }
 
         public void OnExit()
