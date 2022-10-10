@@ -74,30 +74,6 @@ namespace AI.Subscribers
         {
             return Resources.Load<CD_EnemyData>("Data/CD_EnemyData").Data.EnemyDatas[enemyType];
         }
-        
-        #region Event Subscription
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            
-        }
-
-        private void UnsubscribeEvents()
-        {
-            
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        #endregion
 
         private void Update()
         {

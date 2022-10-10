@@ -98,7 +98,11 @@ namespace Managers
             var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
             if (_stackGoData.IsDynamic)
             {
-                
+                //stack elements will be located with data.
+
+                _stackList.Add(go);
+                go.transform.parent = transform;
+                go.transform.localPosition = _stackPos;
             }
             else// Adding to plane base stack
             {
@@ -108,6 +112,7 @@ namespace Managers
 
                 _stackList.Add(go);
                 go.transform.localPosition = _stackPos;
+                
             }
             _stackPos = _stackStartPosition;
         }
@@ -149,5 +154,6 @@ namespace Managers
                 gO.transform.DOMove(playerTransform.position + new Vector3(0,2,0), 1f));
             gO.transform.DOScale(Vector3.zero, 2f).SetEase(Ease.InElastic).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
         }
+        
     }
 }

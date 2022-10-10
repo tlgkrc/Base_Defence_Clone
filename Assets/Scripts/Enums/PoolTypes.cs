@@ -5,6 +5,7 @@
         Diamond,
         Enemy,
         Bullet,
+        Money,
         Hostage,
         Miner,
         MoneyWorker

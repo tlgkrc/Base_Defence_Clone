@@ -26,6 +26,10 @@ namespace Controllers.Player
             {
                 StackSignals.Instance.onAddStack?.Invoke();
             }
+            else if(other.CompareTag("Money"))
+            {
+                StackSignals.Instance.onAddStack?.Invoke();
+            }
         }
     }
 }

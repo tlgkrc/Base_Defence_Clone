@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CD_Pool
   m_EditorClassIdentifier: 
   PoolTypeDatas:
-    m_Keys: 040000000000000003000000
+    m_Keys: 050000000000000003000000
     m_Values:
     - ObjectLimit: 8
       PooledGameObject: {fileID: 5900488627936279742, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
@@ -21,6 +21,6 @@ MonoBehaviour:
     - ObjectLimit: 20
       PooledGameObject: {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06,
         type: 3}
-    - ObjectLimit: 30
-      PooledGameObject: {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d,
+    - ObjectLimit: 50
+      PooledGameObject: {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e,
         type: 3}

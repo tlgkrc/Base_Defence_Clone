@@ -10,15 +10,16 @@ TagManager:
   - Hostage
   - MoneyWorker
   - MineCounter
+  - Money
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - DangerZone
+  - Enemy
   - 
   - 
   - 

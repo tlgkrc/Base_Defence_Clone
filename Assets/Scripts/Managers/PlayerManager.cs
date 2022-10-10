@@ -63,22 +63,24 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputTaken += OnActivateMovement;
-            InputSignals.Instance.onInputReleased += OnDeactiveMovement;
+            InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged += OnSetIdleInputValues;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
+            BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
 
         }
 
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
+            InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged -= OnSetIdleInputValues;
             CoreGameSignals.Instance.onReset -= OnReset;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+            BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
         }
 
         private void OnDisable()
@@ -98,7 +100,7 @@ namespace Managers
             movementController.EnableMovement();
         }
 
-        private void OnDeactiveMovement()
+        private void OnDeactivateMovement()
         {
             movementController.DisableMovement();
         }
@@ -107,6 +109,11 @@ namespace Managers
         {
             movementController.UpdateIdleInputValue(inputParams);
             animationController.SetSpeedVariable(inputParams);
+        }
+
+        private void OnPlayerInBase(bool inBase)
+        {
+            SetPlayerLayer(inBase);
         }
 
         #endregion
@@ -142,6 +149,20 @@ namespace Managers
         private void SetStackPosition()
         {
             StackSignals.Instance.onPlayerGameObject?.Invoke(gameObject);
+        }
+
+        private void SetPlayerLayer(bool inBase)
+        {
+            if (inBase)
+            {
+                var playerLayer = LayerMask.NameToLayer("Player");
+                playerPhysicsController.gameObject.layer = playerLayer;
+            }
+            else
+            {
+                var playerLayer = LayerMask.NameToLayer("DangerZone");
+                playerPhysicsController.gameObject.layer = playerLayer;
+            }
         }
         #endregion
     }

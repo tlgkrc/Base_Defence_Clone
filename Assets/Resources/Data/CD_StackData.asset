@@ -25,25 +25,17 @@ MonoBehaviour:
     StackDatas:
       m_Keys:
       - {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06, type: 3}
-      - {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
+      - {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e, type: 3}
       m_Values:
-      - StackType: 0
-        IsDynamic: 0
+      - IsDynamic: 0
         LevelOffset: 0.25
         StartHeight: 0.25
         GridX: 3
         GridZ: 3
         maxCount: 7
-        LerpX: 0
-        LerpZ: 0
-        DistanceFromPlayer: 0
-      - StackType: 2
-        IsDynamic: 0
-        LevelOffset: 0
+      - IsDynamic: 1
+        LevelOffset: 0.25
         StartHeight: 0
-        GridX: 0
-        GridZ: 0
-        maxCount: 0
-        LerpX: 0
-        LerpZ: 0
-        DistanceFromPlayer: 0
+        GridX: 1
+        GridZ: 4
+        maxCount: 6
