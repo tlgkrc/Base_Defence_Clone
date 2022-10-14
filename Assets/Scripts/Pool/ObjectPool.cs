@@ -1,6 +1,4 @@
-﻿using Abstracts;
-
-namespace Pool
+﻿namespace Pool
 {
     using System;
     using System.Collections.Generic;

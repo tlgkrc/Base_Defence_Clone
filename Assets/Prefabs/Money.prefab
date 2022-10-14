@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8450345979196608501}
   m_Layer: 0
   m_Name: Physic
-  m_TagString: Untagged
+  m_TagString: Money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2476084925674128555}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dfba045b3ed90af40b0c96865f8ecf93, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -88,7 +88,7 @@ Transform:
   m_GameObject: {fileID: 4317633247426787647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6730230609013022513}
@@ -208,5 +208,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6110216, y: 0.8031153, z: 1.0611022}
-  m_Center: {x: -0.006789148, y: -0.0033945143, z: 0.010183811}
+  m_Size: {x: 1.4260626, y: 0.62387115, z: 1}
+  m_Center: {x: -0.00026520342, y: -0.009918473, z: 0.010183826}

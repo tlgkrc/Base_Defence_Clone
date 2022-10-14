@@ -11,6 +11,7 @@ TagManager:
   - MoneyWorker
   - MineCounter
   - Money
+  - CollectedMoney
   layers:
   - Default
   - TransparentFX

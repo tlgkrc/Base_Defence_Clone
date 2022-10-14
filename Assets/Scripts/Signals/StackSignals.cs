@@ -10,7 +10,7 @@ namespace Signals
 {
     public class StackSignals: MonoSingleton<StackSignals>
     {
-        public UnityAction onAddStack = delegate {  };
+        public UnityAction<int> onAddStack = delegate {  };
         public UnityAction<Transform> onClearStack = delegate {  };
         public UnityAction<GameObject> onAddHostageToStack = delegate {  };
         public UnityAction<GameObject> onPlayerGameObject = delegate { };

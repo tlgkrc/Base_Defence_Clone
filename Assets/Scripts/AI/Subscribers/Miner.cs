@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AI.States;
 using AI.States.Miner;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -99,6 +100,11 @@ namespace AI.Subscribers
         public void DropCollectedGem()
         {
             //put to stack ,but before that instantiate a stack 
+        }
+
+        public void AddGemToStock()
+        {
+            StackSignals.Instance.onAddStack?.Invoke(gemStock.GetInstanceID());
         }
     }
 }

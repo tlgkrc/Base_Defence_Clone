@@ -20,7 +20,7 @@ namespace AI.States.Miner
         }
         public void Tick()
         {
-            StackSignals.Instance.onAddStack?.Invoke();
+            _miner.AddGemToStock();
         }
 
         public void OnEnter()

@@ -1,4 +1,4 @@
-﻿namespace Abstracts
+﻿namespace Pool
 {
     public abstract class AbstractObjectPool
     {

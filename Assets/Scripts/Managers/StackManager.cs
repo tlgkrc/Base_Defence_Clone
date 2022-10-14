@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
-using Enums;
+using Helpers;
 using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
@@ -34,6 +34,7 @@ namespace Managers
         private Vector3 _stackStartPosition;
         private Vector3 _stackPos;
         private Vector3 _localPos,_localScale;
+        private GridSystem _gridSystem;
 
         #endregion
 
@@ -43,6 +44,8 @@ namespace Managers
         {
             GetReferences();
             CalculateStaticStackStartPos();
+            _gridSystem = new GridSystem(transform, _stackGoData.maxCount, _stackGoData.Offset, _stackGoData.Grid_1,
+                _stackGoData.Grid_2, _stackGoData.BaseAxis);
         }
 
         private void GetReferences()
@@ -83,9 +86,12 @@ namespace Managers
 
         #endregion
 
-        private void OnAddStack()
+        private void OnAddStack(int managerId)
         {
-            Add();
+            if (transform.parent.GetInstanceID() == managerId )
+            {
+                Add();
+            }
         }
 
         private void OnClearStack(Transform playerTransform)
@@ -98,17 +104,19 @@ namespace Managers
             var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
             if (_stackGoData.IsDynamic)
             {
-                //stack elements will be located with data.
 
                 _stackList.Add(go);
+                go.GetComponent<Rigidbody>().isKinematic = true;
+                go.GetComponent<Rigidbody>().useGravity = false;
                 go.transform.parent = transform;
-                go.transform.localPosition = _stackPos;
+                go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
+                go.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
             }
             else// Adding to plane base stack
             {
-                _stackPos.x += (_stackList.Count % (_stackGoData.GridX*_stackGoData.GridZ)) % _stackGoData.GridX * (_localScale.x * 10) / _stackGoData.GridX;
-                _stackPos.z += (_stackList.Count % (_stackGoData.GridX *_stackGoData.GridZ)) / _stackGoData.GridZ * (_localScale.z * 10) / _stackGoData.GridZ;
-                _stackPos.y += _stackList.Count / (_stackGoData.GridX * _stackGoData.GridZ) * _stackGoData.LevelOffset;
+                _stackPos.x += (_stackList.Count % (_stackGoData.Grid_1*_stackGoData.Grid_2)) % _stackGoData.Grid_1 * (_localScale.x * 10) / _stackGoData.Grid_1;
+                _stackPos.z += (_stackList.Count % (_stackGoData.Grid_1 *_stackGoData.Grid_2)) / _stackGoData.Grid_2 * (_localScale.z * 10) / _stackGoData.Grid_2;
+                _stackPos.y += _stackList.Count / (_stackGoData.Grid_1 * _stackGoData.Grid_2) * _stackGoData.Offset.y;
 
                 _stackList.Add(go);
                 go.transform.localPosition = _stackPos;
@@ -138,9 +146,9 @@ namespace Managers
         private void CalculateStaticStackStartPos()
         {
             _stackStartPosition.x = _localPos.x -
-                                    (_localScale.x * 10) / _stackGoData.GridX;
+                                    (_localScale.x * 10) / _stackGoData.Grid_1;
             _stackStartPosition.z = _localPos.z -
-                               (_localScale.z * 10) / _stackGoData.GridZ;
+                               (_localScale.z * 10) / _stackGoData.Grid_2;
             _stackStartPosition.y = _stackGoData.StartHeight;
             _stackPos = _stackStartPosition;
         }

@@ -28,14 +28,16 @@ MonoBehaviour:
       - {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e, type: 3}
       m_Values:
       - IsDynamic: 0
-        LevelOffset: 0.25
+        Offset: {x: 0, y: 0, z: 0}
         StartHeight: 0.25
-        GridX: 3
-        GridZ: 3
+        Grid_1: 3
+        Grid_2: 3
         maxCount: 7
+        BaseAxis: 0
       - IsDynamic: 1
-        LevelOffset: 0.25
+        Offset: {x: 0.5, y: 0.4, z: -1}
         StartHeight: 0
-        GridX: 1
-        GridZ: 4
-        maxCount: 6
+        Grid_1: 1
+        Grid_2: 5
+        maxCount: 8
+        BaseAxis: 1

@@ -11,6 +11,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
+        [SerializeField] private StackManager stackManager;
 
         #endregion
 
@@ -24,11 +25,12 @@ namespace Controllers.Player
             }
             else if (other.CompareTag("Hostage"))
             {
-                StackSignals.Instance.onAddStack?.Invoke();
+                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
             }
             else if(other.CompareTag("Money"))
             {
-                StackSignals.Instance.onAddStack?.Invoke();
+                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
+                
             }
         }
     }
