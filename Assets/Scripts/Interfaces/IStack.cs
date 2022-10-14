@@ -6,6 +6,6 @@ namespace Interfaces
     {
         void Add();
         void Remove();
-        void Clear(Transform transform);
+        void ClearStaticStack(Transform transform);
     }
 }

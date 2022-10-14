@@ -11,7 +11,8 @@ namespace Signals
     public class StackSignals: MonoSingleton<StackSignals>
     {
         public UnityAction<int> onAddStack = delegate {  };
-        public UnityAction<Transform> onClearStack = delegate {  };
+        public UnityAction<Transform> onClearStaticStack = delegate {  };
+        public UnityAction onClearDynamicStack = delegate {  };
         public UnityAction<GameObject> onAddHostageToStack = delegate {  };
         public UnityAction<GameObject> onPlayerGameObject = delegate { };
         public UnityAction<bool> onLastCollectableAddedToPlayer = delegate {  };

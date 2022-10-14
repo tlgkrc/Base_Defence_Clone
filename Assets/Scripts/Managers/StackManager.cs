@@ -70,13 +70,15 @@ namespace Managers
         private void SubscribeEvents()
         {
             StackSignals.Instance.onAddStack += OnAddStack;
-            StackSignals.Instance.onClearStack += OnClearStack;
+            StackSignals.Instance.onClearStaticStack += OnClearStaticStack;
+            StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onAddStack -= OnAddStack;
-            StackSignals.Instance.onClearStack += OnClearStack;
+            StackSignals.Instance.onClearStaticStack -= OnClearStaticStack;
+            StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
         }
 
         private void OnDisable()
@@ -94,9 +96,14 @@ namespace Managers
             }
         }
 
-        private void OnClearStack(Transform playerTransform)
+        private void OnClearStaticStack(Transform playerTransform)
         {
-            Clear(playerTransform);
+            ClearStaticStack(playerTransform);
+        }
+
+        private void OnClearDynamicStack()
+        {
+
         }
 
         public void Add()
@@ -108,9 +115,11 @@ namespace Managers
                 _stackList.Add(go);
                 go.GetComponent<Rigidbody>().isKinematic = true;
                 go.GetComponent<Rigidbody>().useGravity = false;
+                go.transform.GetChild(1).tag = "Untagged";
                 go.transform.parent = transform;
-                go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
-                go.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+                //go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
+                DynamicStackAddingAnimation(go,go.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
+                //go.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
             }
             else// Adding to plane base stack
             {
@@ -130,15 +139,12 @@ namespace Managers
             throw new NotImplementedException();
         }
 
-        public void Clear(Transform pTransform)
+        public void ClearStaticStack(Transform pTransform)
         {
-            if (!_stackGoData.IsDynamic)
+            foreach (var gO in _stackList) 
             {
-                foreach (var gO in _stackList)
-                {
-                    ClearAnim(gO, pTransform);
-                }
-            }
+                    ClearStackAnimation(gO, pTransform);
+            } 
             _stackList.Clear();
             //StackCount will be send to scoremanager
         }
@@ -153,7 +159,8 @@ namespace Managers
             _stackPos = _stackStartPosition;
         }
 
-        private void ClearAnim(GameObject gO,Transform playerTransform)
+        //here add async for player last pos
+        private void ClearStackAnimation(GameObject gO,Transform playerTransform)
         {
             var position = transform.position;
             var newVec = new Vector3(position.x + Random.Range(2, 4),
@@ -161,6 +168,28 @@ namespace Managers
             gO.transform.DOMove(newVec, 1f).SetEase(Ease.InOutBack).OnComplete(() =>
                 gO.transform.DOMove(playerTransform.position + new Vector3(0,2,0), 1f));
             gO.transform.DOScale(Vector3.zero, 2f).SetEase(Ease.InElastic).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
+        }
+
+        private void DynamicStackAddingAnimation(GameObject stackElement,Vector3 startPos ,Vector3 endPos)
+        {
+            var randomPos = new Vector3(Random.Range(0, 3f) + endPos.x,
+                Random.Range(0, 3f) + endPos.y, Random.Range(0, 3f) + endPos.z);
+            var randomRotate = new Vector3(Random.Range(30, 300), Random.Range(30, 300), Random.Range(30, 300));
+            stackElement.transform.DOLocalMove(randomPos, .2f).OnComplete(() => 
+                stackElement.transform.DOLocalMove(endPos,.2f));
+            stackElement.transform.DOLocalRotate(randomRotate, .3f).OnComplete(() => 
+                stackElement.transform.DOLocalRotate(Vector3.zero,.1f));
+        }
+
+        private void ClearDynamicStack()
+        {
+            for (int i = _stackList.Count; i >= 0; i--)
+            {
+                if (_stackList.Count >=5)
+                {
+                    //_stackList[i].
+                }
+            }
         }
         
     }

@@ -21,7 +21,7 @@ namespace Controllers.Player
         {
             if (other.CompareTag("MineStack"))
             {
-                StackSignals.Instance.onClearStack?.Invoke(transform);
+                StackSignals.Instance.onClearStaticStack?.Invoke(transform);
             }
             else if (other.CompareTag("Hostage"))
             {
@@ -30,7 +30,10 @@ namespace Controllers.Player
             else if(other.CompareTag("Money"))
             {
                 StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
-                
+            }
+            else if (other.CompareTag("GameController") && stackManager.transform.childCount > 0)
+            {
+                StackSignals.Instance.onClearDynamicStack?.Invoke();
             }
         }
     }

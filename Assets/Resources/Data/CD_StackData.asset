@@ -35,7 +35,7 @@ MonoBehaviour:
         maxCount: 7
         BaseAxis: 0
       - IsDynamic: 1
-        Offset: {x: 0.5, y: 0.4, z: -1}
+        Offset: {x: 0.4, y: 0.4, z: -0.4}
         StartHeight: 0
         Grid_1: 1
         Grid_2: 5
