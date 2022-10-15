@@ -101,9 +101,13 @@ namespace Managers
             ClearStaticStack(playerTransform);
         }
 
-        private void OnClearDynamicStack()
+        private void OnClearDynamicStack(int managerId)
         {
-
+            if (transform.parent.GetInstanceID() == managerId)
+            {
+                 ClearDynamicStack();
+            }
+           
         }
 
         public void Add()
@@ -183,13 +187,28 @@ namespace Managers
 
         private void ClearDynamicStack()
         {
-            for (int i = _stackList.Count; i >= 0; i--)
+           
+            for (int i = _stackList.Count-1; i >= 0; i--)
             {
-                if (_stackList.Count >=5)
+                var increaseVec3 = new Vector3(Random.Range(-2, 2), Random.Range(1, 3), Random.Range(-2, 2));
+                if (i >=5)
                 {
-                    //_stackList[i].
+                    var i1 = i;
+                    _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .5f)
+                        .SetEase(Ease.InSine).OnComplete(() =>
+                            _stackList[i1].transform.DOLocalMove(Vector3.zero, .5f).SetEase(Ease.InOutSine)).
+                        OnComplete(() => PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,_stackList[i1]));
+                }
+                else
+                {
+                    var i1 = i;
+                    _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .2f)
+                        .SetEase(Ease.InSine).OnComplete(() =>
+                            _stackList[i1].transform.DOLocalMove(Vector3.zero, .2f).SetEase(Ease.InOutSine).
+                                OnComplete(() => PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,_stackList[i1])));
                 }
             }
+            _stackList.TrimExcess();
         }
         
     }

@@ -31,9 +31,9 @@ namespace Controllers.Player
             {
                 StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
             }
-            else if (other.CompareTag("GameController") && stackManager.transform.childCount > 0)
+            else if (other.CompareTag("Gate") && stackManager.transform.childCount > 0)
             {
-                StackSignals.Instance.onClearDynamicStack?.Invoke();
+                StackSignals.Instance.onClearDynamicStack?.Invoke(manager.transform.GetInstanceID());
             }
         }
     }

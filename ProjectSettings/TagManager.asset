@@ -12,6 +12,7 @@ TagManager:
   - MineCounter
   - Money
   - CollectedMoney
+  - Gate
   layers:
   - Default
   - TransparentFX
