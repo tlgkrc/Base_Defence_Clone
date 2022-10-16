@@ -9,8 +9,8 @@ namespace AI.States.Miner
 
         #region PrivateVariables
 
-        private Subscribers.Miner _miner;
-        private NavMeshAgent _agent;
+        private readonly Subscribers.Miner _miner;
+        private readonly NavMeshAgent _agent;
         private readonly Transform _gemStockTransform;
 
         #endregion

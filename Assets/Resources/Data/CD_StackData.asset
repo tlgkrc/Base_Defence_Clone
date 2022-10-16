@@ -26,6 +26,7 @@ MonoBehaviour:
       m_Keys:
       - {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06, type: 3}
       - {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e, type: 3}
+      - {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9, type: 3}
       m_Values:
       - IsDynamic: 0
         Offset: {x: 0, y: 0, z: 0}
@@ -41,3 +42,10 @@ MonoBehaviour:
         Grid_2: 5
         maxCount: 8
         BaseAxis: 1
+      - IsDynamic: 1
+        Offset: {x: 0.4, y: 0.4, z: -0.4}
+        StartHeight: 0
+        Grid_1: 1
+        Grid_2: 5
+        maxCount: 0
+        BaseAxis: 0

@@ -64,7 +64,6 @@ namespace AI.Subscribers
 
             _aiStateMachine.SetState(search);
 
-
             Func<bool> HasTarget() =>()=> Target != null;
             Func<bool> ReachedResource() => () =>
                 Target != null && Vector3.Distance(transform.position, Target.transform.position)<1.1f;
