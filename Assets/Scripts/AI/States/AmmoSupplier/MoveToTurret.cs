@@ -1,4 +1,5 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace AI.States.AmmoSupplier
 {
@@ -10,6 +11,8 @@ namespace AI.States.AmmoSupplier
 
         private Subscribers.AmmoSupplier _ammoSupplier;
         private NavMeshAgent _navMeshAgent;
+        private Vector3 _lastPosition;
+        private float _timeStuck;
 
         #endregion
 
@@ -23,17 +26,22 @@ namespace AI.States.AmmoSupplier
 
         public void Tick()
         {
-            _navMeshAgent.SetDestination(_ammoSupplier.Target.position);
+            if (Vector3.Distance(_ammoSupplier.transform.position,_lastPosition)<=1f)
+            {
+                _timeStuck += Time.time;
+            }
+            _lastPosition = _ammoSupplier.transform.position;
         }
 
         public void OnEnter()
         {
-            
+            _timeStuck = 0f;
+            _navMeshAgent.SetDestination(_ammoSupplier.Target.transform.position);
         }
 
         public void OnExit()
         {
-            
+
         }
     }
 }

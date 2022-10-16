@@ -4,6 +4,7 @@ using AI.States;
 using AI.States.AmmoSupplier;
 using Data;
 using Data.UnityObject;
+using Data.ValueObject;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +25,7 @@ namespace AI.Subscribers
         
         [SerializeField] private List<Transform> turretTransforms;
         [SerializeField] private Transform ammoDepot;
+        [SerializeField] private StackManager stackManager;
 
         #endregion
 
@@ -47,15 +49,17 @@ namespace AI.Subscribers
             var searchForEmptyTurret = new SearchForEmptyTurret(this,turretTransforms);
             var moveToTurret = new MoveToTurret(this,navMeshAgent);
 
-            At(moveAmmoDepot, searchForEmptyTurret, HasTarget());
+            At(moveAmmoDepot, searchForEmptyTurret, StackIsEmpty());
             At(searchForEmptyTurret,moveToTurret,StackIsFull());
             At(moveToTurret,moveAmmoDepot,HasAmmoDelivered());
             
             _aiStateMachine.SetState(moveAmmoDepot);
 
-            Func<bool> HasTarget() => () => true;
-            Func<bool> StackIsFull() => () => true;
-            Func<bool> HasAmmoDelivered() => () => true;
+            Func<bool> StackIsEmpty() => () => stackManager.transform.childCount <= 0
+                                               && Vector3.Distance(transform.position,ammoDepot.position)<=2f;
+            Func<bool> StackIsFull() => () => _ammoSupplierData.MaxStackCount == stackManager.transform.childCount;
+            Func<bool> HasAmmoDelivered() => () => Vector3.Distance(transform.position,Target.transform.position)<=1.2f 
+            && stackManager.transform.childCount <=0;
         }
         
         private void At(IAIStates to, IAIStates from, Func<bool> condition)

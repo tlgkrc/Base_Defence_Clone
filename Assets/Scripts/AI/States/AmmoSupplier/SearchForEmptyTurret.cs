@@ -29,7 +29,7 @@ namespace AI.States.AmmoSupplier
 
         public void OnEnter()
         {
-            
+            Debug.Log("searching");
         }
 
         public void OnExit()

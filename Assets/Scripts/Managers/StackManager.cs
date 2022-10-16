@@ -210,6 +210,5 @@ namespace Managers
             }
             _stackList.TrimExcess();
         }
-        
     }
 }

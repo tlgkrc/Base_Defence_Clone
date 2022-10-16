@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data.ValueObject;
+using UnityEngine;
 
 namespace Data.UnityObject
 {

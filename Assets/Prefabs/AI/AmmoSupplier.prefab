@@ -1405,8 +1405,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea877282fc4dfc999cb7f1248b0fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackManager: {fileID: 0}
-  turretTransforms: []
+  turretTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  ammoDepot: {fileID: 0}
 --- !u!1 &3722278622972082728
 GameObject:
   m_ObjectHideFlags: 0

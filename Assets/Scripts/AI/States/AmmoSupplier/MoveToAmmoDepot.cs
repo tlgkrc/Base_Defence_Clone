@@ -9,9 +9,9 @@ namespace AI.States.AmmoSupplier
 
         #region Private Variables
 
-        private Subscribers.AmmoSupplier _ammoSupplier;
-        private NavMeshAgent _navMeshAgent;
-        private Transform _ammoDepotTransform;
+        private readonly Subscribers.AmmoSupplier _ammoSupplier;
+        private readonly NavMeshAgent _navMeshAgent;
+        private readonly Transform _ammoDepotTransform;
 
         #endregion
 
