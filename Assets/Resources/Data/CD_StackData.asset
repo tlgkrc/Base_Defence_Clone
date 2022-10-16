@@ -47,5 +47,5 @@ MonoBehaviour:
         StartHeight: 0
         Grid_1: 1
         Grid_2: 5
-        maxCount: 0
-        BaseAxis: 0
+        maxCount: 8
+        BaseAxis: 1

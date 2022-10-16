@@ -8,6 +8,7 @@
         Money,
         Hostage,
         Miner,
-        MoneyWorker
+        MoneyWorker,
+        BulletBox
     }
 }

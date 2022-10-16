@@ -9,8 +9,8 @@ namespace AI.States.AmmoSupplier
 
         #region Private Variables
 
-        private Subscribers.AmmoSupplier _ammoSupplier;
-        private NavMeshAgent _navMeshAgent;
+        private readonly Subscribers.AmmoSupplier _ammoSupplier;
+        private readonly NavMeshAgent _navMeshAgent;
         private Vector3 _lastPosition;
         private float _timeStuck;
 
@@ -41,7 +41,7 @@ namespace AI.States.AmmoSupplier
 
         public void OnExit()
         {
-
+            
         }
     }
 }

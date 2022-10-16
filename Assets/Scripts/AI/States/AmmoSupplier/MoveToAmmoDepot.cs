@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Signals;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.AmmoSupplier
@@ -12,6 +13,7 @@ namespace AI.States.AmmoSupplier
         private readonly Subscribers.AmmoSupplier _ammoSupplier;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Transform _ammoDepotTransform;
+
 
         #endregion
 
@@ -27,6 +29,7 @@ namespace AI.States.AmmoSupplier
         public void Tick()
         {
             _navMeshAgent.SetDestination(_ammoDepotTransform.position);
+
         }
 
         public void OnEnter()

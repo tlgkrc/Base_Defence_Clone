@@ -25,6 +25,7 @@ namespace AI.States.AmmoSupplier
         public void Tick()
         {
             _ammoSupplier.Target = ChooseOfSuitMine();
+            _ammoSupplier.TakeAmmoBoxes();
         }
 
         public void OnEnter()
@@ -39,6 +40,7 @@ namespace AI.States.AmmoSupplier
         private Transform ChooseOfSuitMine()
         {
             var index = Random.Range(0, _ammoStockTransforms.Count);
+            _ammoSupplier.TargetIndex = index;
             var target = _ammoStockTransforms[index];
             return target;
         } 

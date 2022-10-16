@@ -29,7 +29,7 @@ namespace Managers
 
         #region Private Variables
 
-        [ShowInInspector]private List<GameObject> _stackList = new List<GameObject>();
+        [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
         [ShowInInspector] private StackGOData _stackGoData;
         private Vector3 _stackStartPosition;
         private Vector3 _stackPos;
@@ -72,6 +72,7 @@ namespace Managers
             StackSignals.Instance.onAddStack += OnAddStack;
             StackSignals.Instance.onClearStaticStack += OnClearStaticStack;
             StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
+            StackSignals.Instance.onTransferBetweenStacks += OnTransferBetweenStacks;
         }
 
         private void UnsubscribeEvents()
@@ -79,6 +80,7 @@ namespace Managers
             StackSignals.Instance.onAddStack -= OnAddStack;
             StackSignals.Instance.onClearStaticStack -= OnClearStaticStack;
             StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
+            StackSignals.Instance.onTransferBetweenStacks -= OnTransferBetweenStacks;
         }
 
         private void OnDisable()
@@ -110,6 +112,11 @@ namespace Managers
            
         }
 
+        private void OnTransferBetweenStacks(StackManager from,StackManager to)
+        {
+            TransferBetweenStacks(from ,to);
+        }
+
         public void Add()
         {
             var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
@@ -117,13 +124,14 @@ namespace Managers
             {
 
                 _stackList.Add(go);
-                go.GetComponent<Rigidbody>().isKinematic = true;
-                go.GetComponent<Rigidbody>().useGravity = false;
+                if (go.name == "Money")
+                {
+                    go.GetComponent<Rigidbody>().isKinematic = true;
+                    go.GetComponent<Rigidbody>().useGravity = false;
+                }
                 go.transform.GetChild(1).tag = "Untagged";
                 go.transform.parent = transform;
-                //go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
                 DynamicStackAddingAnimation(go,go.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
-                //go.transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
             }
             else// Adding to plane base stack
             {
@@ -150,7 +158,6 @@ namespace Managers
                     ClearStackAnimation(gO, pTransform);
             } 
             _stackList.Clear();
-            //StackCount will be send to scoremanager
         }
 
         private void CalculateStaticStackStartPos()
@@ -162,8 +169,7 @@ namespace Managers
             _stackStartPosition.y = _stackGoData.StartHeight;
             _stackPos = _stackStartPosition;
         }
-
-        //here add async for player last pos
+        
         private void ClearStackAnimation(GameObject gO,Transform playerTransform)
         {
             var position = transform.position;
@@ -209,6 +215,18 @@ namespace Managers
                 }
             }
             _stackList.TrimExcess();
+        }
+
+        private void TransferBetweenStacks(StackManager from,StackManager to)
+        {
+            foreach (var element in from._stackList)
+            {
+                element.transform.SetParent(to.transform);
+                from._stackList.Remove(element);
+                to._stackList.Add(element);
+                element.transform.DOMove(to._gridSystem.NextPoint(to._stackList.Count),.5f);
+            }
+            from._stackList.TrimExcess();
         }
     }
 }
