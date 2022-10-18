@@ -953,6 +953,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 61560169, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
+      propertyPath: stackType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1382703563, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
+      propertyPath: stackType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 86109346993369083, guid: 432560c230ff32347a9a518f4bb3db3a,
+        type: 3}
+      propertyPath: stackType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 576477267360722020, guid: 432560c230ff32347a9a518f4bb3db3a,
         type: 3}
       propertyPath: m_RootOrder
@@ -3424,6 +3437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmmoSupplier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639456391707047951, guid: 8236cf8e1c6384646b4d6d5efcb6f48a,
+        type: 3}
+      propertyPath: stackType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8236cf8e1c6384646b4d6d5efcb6f48a, type: 3}

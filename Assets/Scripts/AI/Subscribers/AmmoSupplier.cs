@@ -94,7 +94,7 @@ namespace AI.Subscribers
         public void DeliverAmmo(int index)
         {
             StackSignals.Instance.onTransferBetweenStacks?.
-                Invoke(stackManager,turretAmmoTransforms[index].GetComponent<StackManager>());
+                Invoke(transform.GetInstanceID(),stackManager,turretAmmoTransforms[index].GetComponent<StackManager>());
         }
     }
 }

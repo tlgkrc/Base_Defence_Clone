@@ -5,6 +5,6 @@
         Money,
         Diamond,
         AmmoBox,
-        AmmoBoxStatic,
+        AmmoBoxStatic
     }
 }

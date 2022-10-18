@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
+using Enums;
 using Helpers;
 using Interfaces;
 using Signals;
@@ -24,6 +25,7 @@ namespace Managers
 
         [SerializeField] private GameObject stackGameObject;
         [SerializeField] private Transform stackMesh;
+        [SerializeField] private StackTypes stackType;
 
         #endregion
 
@@ -44,7 +46,7 @@ namespace Managers
         {
             GetReferences();
             CalculateStaticStackStartPos();
-            _gridSystem = new GridSystem(transform, _stackGoData.maxCount, _stackGoData.Offset, _stackGoData.Grid_1,
+            _gridSystem = new GridSystem(transform, _stackGoData.MaxCount, _stackGoData.Offset, _stackGoData.Grid_1,
                 _stackGoData.Grid_2, _stackGoData.BaseAxis);
         }
 
@@ -57,7 +59,7 @@ namespace Managers
 
         private StackGOData GetStackData()
         {
-            return Resources.Load<CD_StackData>("Data/CD_StackData").Datas.StackDatas[stackGameObject];
+            return Resources.Load<CD_StackData>("Data/CD_StackData").Datas.StackDatas[stackType];
         }
 
         #region Subscription Events
@@ -112,9 +114,13 @@ namespace Managers
            
         }
 
-        private void OnTransferBetweenStacks(StackManager from,StackManager to)
+        private void OnTransferBetweenStacks(int managerId,StackManager from,StackManager to)
         {
-            TransferBetweenStacks(from ,to);
+            if (managerId == transform.parent.GetInstanceID())
+            {
+                 TransferBetweenStacks(from ,to);
+            }
+           
         }
 
         public void Add()
@@ -128,8 +134,8 @@ namespace Managers
                 {
                     go.GetComponent<Rigidbody>().isKinematic = true;
                     go.GetComponent<Rigidbody>().useGravity = false;
+                    go.transform.GetChild(1).tag = "Untagged";
                 }
-                go.transform.GetChild(1).tag = "Untagged";
                 go.transform.parent = transform;
                 DynamicStackAddingAnimation(go,go.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
             }
@@ -196,10 +202,11 @@ namespace Managers
            
             for (int i = _stackList.Count-1; i >= 0; i--)
             {
+                var i1 = i;
                 var increaseVec3 = new Vector3(Random.Range(-2, 2), Random.Range(1, 3), Random.Range(-2, 2));
                 if (i >=5)
                 {
-                    var i1 = i;
+                    
                     _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .5f)
                         .SetEase(Ease.InSine).OnComplete(() =>
                             _stackList[i1].transform.DOLocalMove(Vector3.zero, .5f).SetEase(Ease.InOutSine)).
@@ -207,7 +214,6 @@ namespace Managers
                 }
                 else
                 {
-                    var i1 = i;
                     _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .2f)
                         .SetEase(Ease.InSine).OnComplete(() =>
                             _stackList[i1].transform.DOLocalMove(Vector3.zero, .2f).SetEase(Ease.InOutSine).
@@ -222,11 +228,11 @@ namespace Managers
             foreach (var element in from._stackList)
             {
                 element.transform.SetParent(to.transform);
-                from._stackList.Remove(element);
                 to._stackList.Add(element);
                 element.transform.DOMove(to._gridSystem.NextPoint(to._stackList.Count),.5f);
+                element.transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
             }
-            from._stackList.TrimExcess();
+            from._stackList.Clear();
         }
     }
 }

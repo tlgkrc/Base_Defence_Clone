@@ -18,7 +18,8 @@ namespace Data.ValueObject
         public int Grid_1;
         [HorizontalGroup("Grid")] 
         public int Grid_2;
-        public int maxCount;
+        public int MaxCount;
         public BaseAxis BaseAxis;
+        public GameObject StackGameObject;
     }
 }
