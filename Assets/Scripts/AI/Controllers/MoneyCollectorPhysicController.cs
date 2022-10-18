@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using AI.Subscribers;
+using Enums;
 using UnityEngine;
 
 namespace AI.Controllers
@@ -14,7 +16,8 @@ namespace AI.Controllers
         #endregion
 
         #region Serialized Variables
-        
+
+        [SerializeField] private MoneyCollector moneyCollector;
 
         #endregion
 
@@ -27,7 +30,10 @@ namespace AI.Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            if (other.CompareTag(StackTypes.Money.ToString()))
+            {
+                //doSomething
+            }
         }
     }
 }
