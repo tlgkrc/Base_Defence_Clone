@@ -953,19 +953,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 61560169, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
-      propertyPath: stackType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382703563, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
-      propertyPath: stackType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 86109346993369083, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: stackType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 576477267360722020, guid: 432560c230ff32347a9a518f4bb3db3a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1529,11 +1516,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4910551444354228067, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8b7e4d9e42a472d42b5345f2bc0cb75d, type: 2}
     - target: {fileID: 5900488627936279737, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
         type: 3}
       propertyPath: gemStock
@@ -3356,6 +3338,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd5af41cd2e8d3541a77279b2cbbf3c8, type: 3}
+--- !u!1001 &6508088905587192861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541953, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_Name
+      value: MoneyCollector
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e15bc64166b46984bba534d63425b291, type: 3}
 --- !u!1001 &6639456391707047949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3437,11 +3488,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmmoSupplier
-      objectReference: {fileID: 0}
-    - target: {fileID: 6639456391707047951, guid: 8236cf8e1c6384646b4d6d5efcb6f48a,
-        type: 3}
-      propertyPath: stackType
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8236cf8e1c6384646b4d6d5efcb6f48a, type: 3}

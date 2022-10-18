@@ -60,17 +60,17 @@ namespace Helpers
 
             if (_baseAxis == BaseAxis.XZ)
             {
-                var startPositionZ = _initializeTransform.position.z - _offset.z / 2 * (_grid2 - 1);
+                var startPositionZ = _initializeTransform.localPosition.z - _offset.z / 2 * (_grid2 - 1);
                 for (int i = 0; i < grid3 ; i++)
                 {
-                    pos.y = _initializeTransform.position.y + i * _offset.y;
+                    pos.y = _initializeTransform.localPosition.y + i * _offset.y;
                     for (int j = 0; j < _grid2; j++)
                     {
                         pos.z = startPositionZ + j * _offset.z;
 
                         for (int k = 0; k < _grid1; k++)
                         {
-                            var startPositionX = _initializeTransform.position.x -_offset.x / 2 * (_grid1 - 1);
+                            var startPositionX = _initializeTransform.localPosition.x -_offset.x / 2 * (_grid1 - 1);
                             pos.x = startPositionX + k * _offset.x;
 
                             gridPoints.Add(pos);

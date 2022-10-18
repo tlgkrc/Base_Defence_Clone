@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
@@ -35,7 +36,6 @@ namespace Managers
         [ShowInInspector] private StackGOData _stackGoData;
         private Vector3 _stackStartPosition;
         private Vector3 _stackPos;
-        private Vector3 _localPos,_localScale;
         private GridSystem _gridSystem;
 
         #endregion
@@ -45,7 +45,10 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-            CalculateStaticStackStartPos();
+        }
+
+        private void Start()
+        {
             _gridSystem = new GridSystem(transform, _stackGoData.MaxCount, _stackGoData.Offset, _stackGoData.Grid_1,
                 _stackGoData.Grid_2, _stackGoData.BaseAxis);
         }
@@ -53,8 +56,6 @@ namespace Managers
         private void GetReferences()
         {
             _stackGoData = GetStackData();
-            _localScale = stackMesh.localScale;
-            _localPos = transform.position;
         }
 
         private StackGOData GetStackData()
@@ -126,30 +127,22 @@ namespace Managers
         public void Add()
         {
             var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
+            _stackList.Add(go);
+            go.transform.parent = transform;
             if (_stackGoData.IsDynamic)
             {
-
-                _stackList.Add(go);
                 if (go.name == "Money")
                 {
                     go.GetComponent<Rigidbody>().isKinematic = true;
                     go.GetComponent<Rigidbody>().useGravity = false;
                     go.transform.GetChild(1).tag = "Untagged";
                 }
-                go.transform.parent = transform;
                 DynamicStackAddingAnimation(go,go.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
             }
             else// Adding to plane base stack
             {
-                _stackPos.x += (_stackList.Count % (_stackGoData.Grid_1*_stackGoData.Grid_2)) % _stackGoData.Grid_1 * (_localScale.x * 10) / _stackGoData.Grid_1;
-                _stackPos.z += (_stackList.Count % (_stackGoData.Grid_1 *_stackGoData.Grid_2)) / _stackGoData.Grid_2 * (_localScale.z * 10) / _stackGoData.Grid_2;
-                _stackPos.y += _stackList.Count / (_stackGoData.Grid_1 * _stackGoData.Grid_2) * _stackGoData.Offset.y;
-
-                _stackList.Add(go);
-                go.transform.localPosition = _stackPos;
-                
+                go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
             }
-            _stackPos = _stackStartPosition;
         }
 
         public void Remove()
@@ -166,16 +159,6 @@ namespace Managers
             _stackList.Clear();
         }
 
-        private void CalculateStaticStackStartPos()
-        {
-            _stackStartPosition.x = _localPos.x -
-                                    (_localScale.x * 10) / _stackGoData.Grid_1;
-            _stackStartPosition.z = _localPos.z -
-                               (_localScale.z * 10) / _stackGoData.Grid_2;
-            _stackStartPosition.y = _stackGoData.StartHeight;
-            _stackPos = _stackStartPosition;
-        }
-        
         private void ClearStackAnimation(GameObject gO,Transform playerTransform)
         {
             var position = transform.position;
@@ -225,12 +208,20 @@ namespace Managers
 
         private void TransferBetweenStacks(StackManager from,StackManager to)
         {
-            foreach (var element in from._stackList)
+            // foreach (var element in from._stackList)
+            // {
+            //     element.transform.SetParent(to.transform);
+            //     to._stackList.Add(element);
+            //     element.transform.DOLocalMove(to._gridSystem.NextPoint(to._stackList.Count),.5f);
+            //     element.transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
+            // }
+            for (var i = from._stackList.Count-1 ; i >= 0; i--)
             {
-                element.transform.SetParent(to.transform);
-                to._stackList.Add(element);
-                element.transform.DOMove(to._gridSystem.NextPoint(to._stackList.Count),.5f);
-                element.transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
+                from._stackList[i].transform.SetParent(to.transform);
+                to._stackList.Add(_stackList[i]);
+                _stackList[i].transform.DOLocalMove(to._gridSystem.NextPoint(to._stackList.Count), .5f);
+                _stackList[i].transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
+                 
             }
             from._stackList.Clear();
         }

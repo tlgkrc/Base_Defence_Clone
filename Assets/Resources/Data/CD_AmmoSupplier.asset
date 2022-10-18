@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoSupplierData:
     SupplierSpeed: 2
-    MaxStackCount: 8
+    MaxStackCount: 9
