@@ -1,34 +1,34 @@
-﻿namespace AI.States.MoneyCollector
+﻿using UnityEngine;
+
+namespace AI.States.MoneyCollector
 {
-    public class SearchClosestMoney: IAIStates
+    public class DeliverMoney: IAIStates
     {
         #region Self Variables
 
         #region Private Variables
 
         private readonly Subscribers.MoneyCollector _moneyCollector;
-
+        
         #endregion
 
         #endregion
 
-        public SearchClosestMoney(Subscribers.MoneyCollector moneyCollector)
+        public DeliverMoney(Subscribers.MoneyCollector moneyCollector)
         {
             _moneyCollector = moneyCollector;
         }
         public void Tick()
         {
-            _moneyCollector.SearchMoney();
+            _moneyCollector.DeliverMoney();
         }
 
         public void OnEnter()
         {
-            _moneyCollector.Target = null;
         }
 
         public void OnExit()
         {
-            _moneyCollector.ResetRadius();
         }
     }
 }

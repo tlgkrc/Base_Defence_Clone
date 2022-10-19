@@ -26,12 +26,12 @@ MonoBehaviour:
       m_Keys: 00000000010000000200000003000000
       m_Values:
       - IsDynamic: 1
-        Offset: {x: 0.4, y: 0.4, z: -0.4}
+        Offset: {x: 0.4, y: 0.4, z: -0.3}
         StartHeight: 0.25
-        Grid_1: 3
-        Grid_2: 3
+        Grid_1: 1
+        Grid_2: 5
         MaxCount: 8
-        BaseAxis: 2
+        BaseAxis: 1
         StackGameObject: {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e,
           type: 3}
       - IsDynamic: 0

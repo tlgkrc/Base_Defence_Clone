@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3841572654955608370}
   - component: {fileID: 2446382178824038376}
   - component: {fileID: 8450345979196608501}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Physic
   m_TagString: Money
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2092628189394396452}
   - component: {fileID: 7307068961434525726}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7694767758132744340}
   - component: {fileID: 5561305383763534942}
   - component: {fileID: 1689543091271712666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace AI.Controllers
 {
+    [RequireComponent(typeof(CapsuleCollider))]
     public class MoneyCollectorPhysicController : MonoBehaviour
     {
         #region Self Variables
@@ -18,6 +19,7 @@ namespace AI.Controllers
         #region Serialized Variables
 
         [SerializeField] private MoneyCollector moneyCollector;
+        [SerializeField] private CapsuleCollider capsuleCollider;
 
         #endregion
 
@@ -32,8 +34,26 @@ namespace AI.Controllers
         {
             if (other.CompareTag(StackTypes.Money.ToString()))
             {
-                //doSomething
+                moneyCollector.Target = other.transform.parent;
             }
         }
+        
+        public void IncreaseColliderRadius()
+        {
+            if (capsuleCollider.radius<=50f)
+            {
+                capsuleCollider.radius += 2f;
+            }
+            else
+            {
+                ResetColliderRadius();
+            }
+        }
+
+        public void ResetColliderRadius()
+        {
+            capsuleCollider.radius = .5f;
+        }
+        
     }
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace AI.States.MoneyCollector
 {
-    public class MoveToTargetMoney: IAIStates
+    public class MoveToBase: IAIStates
     {
         #region Self Variables
 
@@ -15,7 +16,7 @@ namespace AI.States.MoneyCollector
 
         #endregion
 
-        public MoveToTargetMoney(Subscribers.MoneyCollector moneyCollector,NavMeshAgent navMeshAgent)
+        public MoveToBase(Subscribers.MoneyCollector moneyCollector,NavMeshAgent navMeshAgent)
         {
             _moneyCollector = moneyCollector;
             _navMeshAgent = navMeshAgent;
@@ -26,8 +27,8 @@ namespace AI.States.MoneyCollector
 
         public void OnEnter()
         {
+            _moneyCollector.SetTargetTransformToBase();
             _navMeshAgent.SetDestination(_moneyCollector.Target.position);
-            _moneyCollector.CollectorInBase = false;
         }
 
         public void OnExit()

@@ -103,7 +103,8 @@ namespace AI.Subscribers
 
         public void AddGemToStock()
         {
-            StackSignals.Instance.onAddStack?.Invoke(gemStock.GetInstanceID());
+            var gO = PoolSignals.Instance.onGetPoolObject(gem.name, transform);
+            StackSignals.Instance.onAddStack?.Invoke(gemStock.GetInstanceID(),gO);
         }
     }
 }

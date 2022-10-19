@@ -4,6 +4,7 @@ using AI.States;
 using AI.States.AmmoSupplier;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using Managers;
 using Signals;
 using Unity.VisualScripting;
@@ -86,7 +87,8 @@ namespace AI.Subscribers
         {
             for (int i = 0; i < _ammoSupplierData.MaxStackCount; i++)
             {
-                StackSignals.Instance.onAddStack?.Invoke(transform.GetInstanceID());
+                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.BulletBox.ToString(), this.transform);;
+                StackSignals.Instance.onAddStack?.Invoke(transform.GetInstanceID(),gO);
             }
         }
 

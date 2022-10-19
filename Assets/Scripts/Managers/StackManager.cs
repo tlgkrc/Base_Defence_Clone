@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
@@ -41,6 +40,7 @@ namespace Managers
         #endregion
 
         #endregion
+        //max count override secenegi olcak override edilecek ise seviye ustune eklenicek
 
         private void Awake()
         {
@@ -93,11 +93,11 @@ namespace Managers
 
         #endregion
 
-        private void OnAddStack(int managerId)
+        private void OnAddStack(int managerId,GameObject gameObject)
         {
             if (transform.parent.GetInstanceID() == managerId )
             {
-                Add();
+                Add(gameObject);
             }
         }
 
@@ -108,11 +108,11 @@ namespace Managers
 
         private void OnClearDynamicStack(int managerId)
         {
+            Debug.Log(managerId +"---" + transform.parent.GetInstanceID() );
             if (transform.parent.GetInstanceID() == managerId)
             {
                  ClearDynamicStack();
             }
-           
         }
 
         private void OnTransferBetweenStacks(int managerId,StackManager from,StackManager to)
@@ -124,24 +124,23 @@ namespace Managers
            
         }
 
-        public void Add()
+        public void Add(GameObject gO)
         {
-            var go =PoolSignals.Instance.onGetPoolObject(stackGameObject.name, this.transform);
-            _stackList.Add(go);
-            go.transform.parent = transform;
+            _stackList.Add(gO);
+            gO.transform.parent = transform;
             if (_stackGoData.IsDynamic)
             {
-                if (go.name == "Money")
+                if (stackType == StackTypes.Money)
                 {
-                    go.GetComponent<Rigidbody>().isKinematic = true;
-                    go.GetComponent<Rigidbody>().useGravity = false;
-                    go.transform.GetChild(1).tag = "Untagged";
+                    gO.GetComponent<Rigidbody>().isKinematic = true;
+                    gO.GetComponent<Rigidbody>().useGravity = false;
+                    gO.transform.GetChild(1).tag = "Untagged";
                 }
-                DynamicStackAddingAnimation(go,go.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
+                DynamicStackAddingAnimation(gO,gO.transform.localPosition,_gridSystem.NextPoint(_stackList.Count));
             }
-            else// Adding to plane base stack
+            else
             {
-                go.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
+                gO.transform.localPosition = _gridSystem.NextPoint(_stackList.Count);
             }
         }
 
@@ -168,18 +167,7 @@ namespace Managers
                 gO.transform.DOMove(playerTransform.position + new Vector3(0,2,0), 1f));
             gO.transform.DOScale(Vector3.zero, 2f).SetEase(Ease.InElastic).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
         }
-
-        private void DynamicStackAddingAnimation(GameObject stackElement,Vector3 startPos ,Vector3 endPos)
-        {
-            var randomPos = new Vector3(Random.Range(0, 3f) + endPos.x,
-                Random.Range(0, 3f) + endPos.y, Random.Range(0, 3f) + endPos.z);
-            var randomRotate = new Vector3(Random.Range(30, 300), Random.Range(30, 300), Random.Range(30, 300));
-            stackElement.transform.DOLocalMove(randomPos, .2f).OnComplete(() => 
-                stackElement.transform.DOLocalMove(endPos,.2f));
-            stackElement.transform.DOLocalRotate(randomRotate, .3f).OnComplete(() => 
-                stackElement.transform.DOLocalRotate(Vector3.zero,.1f));
-        }
-
+        
         private void ClearDynamicStack()
         {
            
@@ -189,7 +177,6 @@ namespace Managers
                 var increaseVec3 = new Vector3(Random.Range(-2, 2), Random.Range(1, 3), Random.Range(-2, 2));
                 if (i >=5)
                 {
-                    
                     _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .5f)
                         .SetEase(Ease.InSine).OnComplete(() =>
                             _stackList[i1].transform.DOLocalMove(Vector3.zero, .5f).SetEase(Ease.InOutSine)).
@@ -206,15 +193,19 @@ namespace Managers
             _stackList.TrimExcess();
         }
 
+        private void DynamicStackAddingAnimation(GameObject stackElement,Vector3 startPos ,Vector3 endPos)
+        {
+            var randomPos = new Vector3(Random.Range(0, 3f) + endPos.x,
+                Random.Range(0, 3f) + endPos.y, Random.Range(0, 3f) + endPos.z);
+            var randomRotate = new Vector3(Random.Range(30, 300), Random.Range(30, 300), Random.Range(30, 300));
+            stackElement.transform.DOLocalMove(randomPos, .2f).OnComplete(() => 
+                stackElement.transform.DOLocalMove(endPos,.2f));
+            stackElement.transform.DOLocalRotate(randomRotate, .3f).OnComplete(() => 
+                stackElement.transform.DOLocalRotate(Vector3.zero,.1f));
+        }
+
         private void TransferBetweenStacks(StackManager from,StackManager to)
         {
-            // foreach (var element in from._stackList)
-            // {
-            //     element.transform.SetParent(to.transform);
-            //     to._stackList.Add(element);
-            //     element.transform.DOLocalMove(to._gridSystem.NextPoint(to._stackList.Count),.5f);
-            //     element.transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
-            // }
             for (var i = from._stackList.Count-1 ; i >= 0; i--)
             {
                 from._stackList[i].transform.SetParent(to.transform);

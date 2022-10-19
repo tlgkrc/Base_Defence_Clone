@@ -1,4 +1,6 @@
-﻿namespace AI.States.MoneyCollector
+﻿using Signals;
+
+namespace AI.States.MoneyCollector
 {
     public class TakeMoney: IAIStates
     {
@@ -6,7 +8,7 @@
 
         #region Private Variables
 
-        private Subscribers.MoneyCollector _moneyCollector;
+        private readonly Subscribers.MoneyCollector _moneyCollector;
 
         #endregion
 
@@ -18,17 +20,15 @@
         }
         public void Tick()
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            _moneyCollector.TakeMoneyToStack();
         }
 
         public void OnExit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

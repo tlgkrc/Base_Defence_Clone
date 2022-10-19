@@ -910,42 +910,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716501524}
   m_CullTransparentMesh: 1
---- !u!1 &752154420 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 563670067371912646, guid: ce0489ec216f2374d8d647c62f2c8511,
-    type: 3}
-  m_PrefabInstance: {fileID: 563670068266263983}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &752154424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752154420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: -1923039037
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 1
-  m_NavMeshData: {fileID: 23800000, guid: 2e0e1889cce6ce44d9b45c45e5cf1e93, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1001 &765219517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,6 +1064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hostage
       objectReference: {fileID: 0}
+    - target: {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
 --- !u!1 &808263709
@@ -1239,6 +1208,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808263709}
   m_CullTransparentMesh: 1
+--- !u!4 &821358532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 576477267360722020, guid: 432560c230ff32347a9a518f4bb3db3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 765219517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &866971750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1305,6 +1280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hostage (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
@@ -1545,6 +1525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Miner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900488627936279742, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5900488627936279743, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
         type: 3}
@@ -2020,6 +2005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hostage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313133195488298881, guid: 3b3f97dec146382479aa5e5fdfd2a45d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
@@ -2940,16 +2930,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 352948432, guid: ce0489ec216f2374d8d647c62f2c8511, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 3d6bbff6f3dba594190f898d0b769eb6,
-        type: 2}
-    - target: {fileID: 1438566507, guid: ce0489ec216f2374d8d647c62f2c8511, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 5bb2007f05c4dee4991570e99bdd89fc,
-        type: 2}
     - target: {fileID: 563670068098832037, guid: ce0489ec216f2374d8d647c62f2c8511,
         type: 3}
       propertyPath: m_RootOrder
@@ -3009,11 +2989,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Environment
-      objectReference: {fileID: 0}
-    - target: {fileID: 563670068581781769, guid: ce0489ec216f2374d8d647c62f2c8511,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce0489ec216f2374d8d647c62f2c8511, type: 3}
@@ -3163,6 +3138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeakZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 3046326001356071337, guid: 6c19579784ad866498b08a1c3c9b9a6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c19579784ad866498b08a1c3c9b9a6a, type: 3}
 --- !u!1001 &5851361122240191101
@@ -3242,6 +3222,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 8498111991066722241, guid: 4b75219e40bf0884fb2eb81bad79879c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b75219e40bf0884fb2eb81bad79879c, type: 3}
 --- !u!1001 &5900488628478886740
@@ -3280,6 +3265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Miner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900488627936279742, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5900488627936279743, guid: fd5af41cd2e8d3541a77279b2cbbf3c8,
         type: 3}
@@ -3363,7 +3353,7 @@ PrefabInstance:
     - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 32.3
       objectReference: {fileID: 0}
     - target: {fileID: 2344048493254541952, guid: e15bc64166b46984bba534d63425b291,
         type: 3}
@@ -3405,6 +3395,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyCollector
       objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541955, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: baseTransform
+      value: 
+      objectReference: {fileID: 821358532}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e15bc64166b46984bba534d63425b291, type: 3}
 --- !u!1001 &6639456391707047949
@@ -3489,6 +3484,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoSupplier
       objectReference: {fileID: 0}
+    - target: {fileID: 3722278622528733189, guid: 8236cf8e1c6384646b4d6d5efcb6f48a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8236cf8e1c6384646b4d6d5efcb6f48a, type: 3}
 --- !u!1001 &7895676639734456655
@@ -3567,6 +3567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AverageZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 9075997300724291277, guid: dfff24309655d3f41a8ceeb0f12d09f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfff24309655d3f41a8ceeb0f12d09f7, type: 3}

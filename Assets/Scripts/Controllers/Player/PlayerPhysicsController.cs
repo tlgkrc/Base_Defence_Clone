@@ -19,17 +19,18 @@ namespace Controllers.Player
 
         private void OnTriggerEnter(Collider other)
         {
+            var gO = other.transform.parent.gameObject;
             if (other.CompareTag("MineStack"))
             {
                 StackSignals.Instance.onClearStaticStack?.Invoke(transform);
             }
             else if (other.CompareTag("Hostage"))
             {
-                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
+                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID(),gO);
             }
             else if(other.CompareTag("Money"))
             {
-                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID());
+                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID(),gO);
             }
             else if (other.CompareTag("Gate") && stackManager.transform.childCount > 0)
             {
