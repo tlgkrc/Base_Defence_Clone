@@ -25,6 +25,7 @@ namespace AI.Subscribers
 
         [SerializeField] private EnemyTypes enemyType;
         [SerializeField] private List<Transform> baseTargetTransforms = new List<Transform>();
+        [SerializeField] private Animator animator;
 
         #endregion
 
@@ -43,10 +44,10 @@ namespace AI.Subscribers
             _aiStateMachine = new AIStateMachine();
             var navMeshAgent = GetComponent<NavMeshAgent>();
 
-            var searchBaseTarget = new SearchForBaseTarget(this, baseTargetTransforms);
-            var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData);
-            var attackToWall = new AttackToWall();
-            var moveToPlayer = new MoveToPlayer(this,navMeshAgent,_enemyGoData);
+            var searchBaseTarget = new SearchForBaseTarget(this, baseTargetTransforms,animator);
+            var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData,animator);
+            var attackToWall = new AttackToWall(this,animator);
+            var moveToPlayer = new MoveToPlayer(this,navMeshAgent,_enemyGoData,animator);
             
             At(searchBaseTarget,moveToBaseTarget,HasTarget());
             At(moveToBaseTarget,attackToWall,ReachedBaseTarget());

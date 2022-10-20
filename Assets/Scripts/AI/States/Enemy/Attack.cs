@@ -1,31 +1,30 @@
-﻿namespace AI.States.Enemy
+﻿using UnityEditor.Animations;
+using UnityEngine;
+
+namespace AI.States.Enemy
 {
     public class Attack: IAIStates
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        
-
-        #endregion
-
         #region Private Variables
 
         private Subscribers.Enemy _enemy;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public Attack(Subscribers.Enemy enemy)
+        public Attack(Subscribers.Enemy enemy,Animator animator)
         {
             _enemy = enemy;
+            _animator = animator;
         }
 
         public void Tick()
         {
-
+            
         }
 
         public void OnEnter()

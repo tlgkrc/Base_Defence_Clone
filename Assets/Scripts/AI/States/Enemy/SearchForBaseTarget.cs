@@ -11,15 +11,17 @@ namespace AI.States.Enemy
 
         private readonly Subscribers.Enemy _enemy;
         private readonly List<Transform> _targetTransforms;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public SearchForBaseTarget(Subscribers.Enemy enemy,List<Transform> targetTransforms)
+        public SearchForBaseTarget(Subscribers.Enemy enemy,List<Transform> targetTransforms,Animator animator)
         {
             _enemy = enemy;
             _targetTransforms = targetTransforms;
+            _animator = animator;
         }
 
         public void Tick()
@@ -29,7 +31,8 @@ namespace AI.States.Enemy
 
         public void OnEnter()
         {
-            
+            _animator.SetBool("IsStop",true);
+            _animator.SetBool("IsClosePlayer",false);
         }
 
         public void OnExit()

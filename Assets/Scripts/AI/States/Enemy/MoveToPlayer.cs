@@ -1,4 +1,5 @@
 ﻿using Data.ValueObject;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.Enemy
@@ -15,19 +16,21 @@ namespace AI.States.Enemy
 
         #region Private Variables
 
-        private Subscribers.Enemy _enemy;
-        private NavMeshAgent _agent;
-        private EnemyGOData _enemyGoData;
+        private readonly Subscribers.Enemy _enemy;
+        private readonly NavMeshAgent _agent;
+        private readonly EnemyGOData _enemyGoData;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public MoveToPlayer(Subscribers.Enemy enemy,NavMeshAgent agent,EnemyGOData enemyGoData)
+        public MoveToPlayer(Subscribers.Enemy enemy, NavMeshAgent agent, EnemyGOData enemyGoData, Animator animator)
         {
             _enemy = enemy;
             _agent = agent;
             _enemyGoData = enemyGoData;
+            _animator = animator;
         }
 
         public void Tick()
@@ -38,6 +41,7 @@ namespace AI.States.Enemy
         public void OnEnter()
         {
             _agent.speed = _enemyGoData.IncreasedSpeed;
+            _animator.SetBool("IsClosePlayer" ,true);
         }
 
         public void OnExit()

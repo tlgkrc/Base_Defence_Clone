@@ -21,16 +21,18 @@ namespace AI.States.Enemy
         private readonly EnemyGOData _enemyGoData;
         private float _timeStuck;
         private Vector3 _lastPosition;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public MoveToBaseTarget(Subscribers.Enemy enemy,NavMeshAgent agent,EnemyGOData enemyGoData)
+        public MoveToBaseTarget(Subscribers.Enemy enemy,NavMeshAgent agent,EnemyGOData enemyGoData,Animator animator)
         {
             _enemy = enemy;
             _agent = agent;
             _enemyGoData = enemyGoData;
+            _animator = animator;
         }
 
         public void Tick()
@@ -47,6 +49,7 @@ namespace AI.States.Enemy
             _timeStuck = 0;
             _agent.speed = _enemyGoData.Speed;
             _agent.SetDestination(_enemy.Target.position);
+            _animator.SetBool("IsStop" , false);
         }
 
         public void OnExit()

@@ -2231,6 +2231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6507740677092557796}
+  - component: {fileID: 345258923411662256}
   m_Layer: 7
   m_Name: Anim
   m_TagString: Untagged
@@ -2253,6 +2254,26 @@ Transform:
   m_Father: {fileID: 3625793016170406670}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &345258923411662256
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904986551360611921}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 4f818f1622f6d3447bc505d0f4b266b2, type: 3}
+  m_Controller: {fileID: 9100000, guid: c6704b6ec2b79d14fbca66c300cc3163, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7976521297620149502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,7 +2604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510666329815133875}
-  - component: {fileID: 2376732080022222025}
   m_Layer: 7
   m_Name: Character_56
   m_TagString: Untagged
@@ -2608,26 +2628,6 @@ Transform:
   m_Father: {fileID: 9144085465077701170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2376732080022222025
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9029758226399392777}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4f818f1622f6d3447bc505d0f4b266b2, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9075997300724291277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,6 +2680,7 @@ MonoBehaviour:
   baseTargetTransforms:
   - {fileID: 0}
   - {fileID: 0}
+  animator: {fileID: 345258923411662256}
 --- !u!195 &6848568486147965240
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -849,8 +849,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782497439920271302}
-  - component: {fileID: 283375221}
   - component: {fileID: 1353275738157137690}
+  - component: {fileID: 283375221}
   m_Layer: 7
   m_Name: WeakZombie
   m_TagString: Untagged
@@ -876,6 +876,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1353275738157137690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046326001356071337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc663fb05034c0d9d4c73a12bf2ec72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  baseTargetTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  animator: {fileID: 8132906727855142855}
 --- !u!195 &283375221
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -898,22 +915,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1353275738157137690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046326001356071337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc663fb05034c0d9d4c73a12bf2ec72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 0
-  baseTargetTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &3057635535536135702
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41142766275235093}
+  - component: {fileID: 8132906727855142855}
   m_Layer: 7
   m_Name: Anim
   m_TagString: Untagged
@@ -976,6 +978,26 @@ Transform:
   m_Father: {fileID: 782497439920271302}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8132906727855142855
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3099931246317927941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dd58d1c904018bf40b65b7b3c7877007, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3330042698420770588
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,7 +2503,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8853706494723531295}
-  - component: {fileID: 3188130659062085733}
   m_Layer: 7
   m_Name: Character_09
   m_TagString: Untagged
@@ -2506,26 +2527,6 @@ Transform:
   m_Father: {fileID: 8756607511912557497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3188130659062085733
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8184588126235195557}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4dfe0569899c5ed4a82b6c9a9902b254, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8197052065335585991
 GameObject:
   m_ObjectHideFlags: 0
