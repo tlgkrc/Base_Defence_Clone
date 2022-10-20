@@ -1,4 +1,5 @@
 ﻿using Data.ValueObject;
+using Enums;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,7 +20,7 @@ namespace AI.States.Enemy
         private readonly Subscribers.Enemy _enemy;
         private readonly NavMeshAgent _agent;
         private readonly EnemyGOData _enemyGoData;
-        private Animator _animator;
+        private readonly Animator _animator;
 
         #endregion
 
@@ -41,7 +42,8 @@ namespace AI.States.Enemy
         public void OnEnter()
         {
             _agent.speed = _enemyGoData.IncreasedSpeed;
-            _animator.SetBool("IsClosePlayer" ,true);
+            _animator.SetTrigger(EnemyAnimTypes.Run.ToString());
+
         }
 
         public void OnExit()

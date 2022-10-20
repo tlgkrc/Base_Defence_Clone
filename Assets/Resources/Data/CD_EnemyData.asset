@@ -16,12 +16,12 @@ MonoBehaviour:
     EnemyDatas:
       m_Keys: 000000000100000002000000
       m_Values:
+      - Damage: 1
+        Speed: 1
+        IncreasedSpeed: 1.5
       - Damage: 2
-        Speed: 2
-        IncreasedSpeed: 3
+        Speed: 1.25
+        IncreasedSpeed: 1.75
       - Damage: 3
-        Speed: 3
-        IncreasedSpeed: 4
-      - Damage: 4
-        Speed: 4
-        IncreasedSpeed: 5
+        Speed: 1.5
+        IncreasedSpeed: 2

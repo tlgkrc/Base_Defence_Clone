@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 namespace AI.States.Enemy
 {
@@ -16,6 +17,7 @@ namespace AI.States.Enemy
 
         private Subscribers.Enemy _enemy;
         private readonly Animator _animator;
+        private static readonly int Stop = Animator.StringToHash("Stop");
 
         #endregion
 
@@ -34,7 +36,7 @@ namespace AI.States.Enemy
 
         public void OnEnter()
         {
-            _animator.SetBool("IsStop",true);
+            
         }
 
         public void OnExit()

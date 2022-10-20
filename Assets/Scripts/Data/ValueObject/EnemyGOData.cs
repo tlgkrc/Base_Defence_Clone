@@ -7,7 +7,7 @@ namespace Data.ValueObject
     public class EnemyGOData
     {
         public int Damage;
-        public int Speed;
-        public int IncreasedSpeed;
+        public float Speed;
+        public float IncreasedSpeed;
     }
 }

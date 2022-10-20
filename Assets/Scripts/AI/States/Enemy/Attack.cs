@@ -1,4 +1,5 @@
-﻿using UnityEditor.Animations;
+﻿using Enums;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace AI.States.Enemy
@@ -10,7 +11,7 @@ namespace AI.States.Enemy
         #region Private Variables
 
         private Subscribers.Enemy _enemy;
-        private Animator _animator;
+        private readonly Animator _animator;
 
         #endregion
 
@@ -29,7 +30,7 @@ namespace AI.States.Enemy
 
         public void OnEnter()
         {
-            
+            _animator.SetTrigger(EnemyAnimTypes.Attack.ToString());
         }
 
         public void OnExit()

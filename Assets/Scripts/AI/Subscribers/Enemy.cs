@@ -61,8 +61,6 @@ namespace AI.Subscribers
             Func<bool> ReachedBaseTarget() => () => 
                 Target != null && Vector3.Distance(transform.position, Target.position) <= 1f;
             Func<bool> EnemyInRange() => () => _playerInRange;
-
-
         }
 
         private void At(IAIStates to, IAIStates from, Func<bool> condition)
@@ -85,7 +83,5 @@ namespace AI.Subscribers
         {
             _playerInRange = playerInRange;
         }
-
-       
     }
 }

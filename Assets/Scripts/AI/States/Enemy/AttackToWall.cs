@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 namespace AI.States.Enemy
 {
@@ -28,7 +29,7 @@ namespace AI.States.Enemy
 
         public void OnEnter()
         {
-            _animator.SetBool("IsAttacking",true);
+            _animator.SetTrigger(EnemyAnimTypes.Attack.ToString());
         }
 
         public void OnExit()

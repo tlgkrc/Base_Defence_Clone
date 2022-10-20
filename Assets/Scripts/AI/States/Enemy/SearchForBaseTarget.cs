@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
 namespace AI.States.Enemy
@@ -11,7 +12,7 @@ namespace AI.States.Enemy
 
         private readonly Subscribers.Enemy _enemy;
         private readonly List<Transform> _targetTransforms;
-        private Animator _animator;
+        private readonly Animator _animator;
 
         #endregion
 
@@ -31,8 +32,6 @@ namespace AI.States.Enemy
 
         public void OnEnter()
         {
-            _animator.SetBool("IsStop",true);
-            _animator.SetBool("IsClosePlayer",false);
         }
 
         public void OnExit()
