@@ -18,6 +18,12 @@ namespace Controllers.Player
 
         #endregion
 
+        #region Private Variables
+
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
+        #endregion
+
         #endregion
 
         public void SetAnimState(PlayerAnimStates animState)
@@ -27,8 +33,14 @@ namespace Controllers.Player
 
         public void SetSpeedVariable(IdleInputParams inputParams)
         {
-            float speedX = Mathf.Abs(inputParams.ValueX);
-            float speedZ = Mathf.Abs(inputParams.ValueZ);
+            var animVector = new Vector2(inputParams.ValueX, inputParams.ValueZ);
+            var animSpeed = animVector.magnitude;
+            animator.speed = animSpeed;
+        }
+
+        public void ResetAnimSpeed()
+        {
+            animator.speed = 1;
         }
     }
 }

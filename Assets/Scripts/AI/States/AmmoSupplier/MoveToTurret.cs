@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums.Animations;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.AmmoSupplier
@@ -13,15 +14,17 @@ namespace AI.States.AmmoSupplier
         private readonly NavMeshAgent _navMeshAgent;
         private Vector3 _lastPosition;
         private float _timeStuck;
+        private readonly Animator _animator;
 
         #endregion
 
         #endregion
 
-        public MoveToTurret(Subscribers.AmmoSupplier ammoSupplier, NavMeshAgent navMeshAgent)
+        public MoveToTurret(Subscribers.AmmoSupplier ammoSupplier, NavMeshAgent navMeshAgent,Animator animator)
         {
             _ammoSupplier = ammoSupplier;
             _navMeshAgent = navMeshAgent;
+            _animator = animator;
         }
 
         public void Tick()
@@ -37,6 +40,7 @@ namespace AI.States.AmmoSupplier
         {
             _timeStuck = 0f;
             _navMeshAgent.SetDestination(_ammoSupplier.Target.transform.position);
+            _animator.SetTrigger(AmmoWorkerAnimStates.Walk.ToString());
         }
 
         public void OnExit()

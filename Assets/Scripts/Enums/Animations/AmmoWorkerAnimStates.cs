@@ -1,9 +1,8 @@
 ﻿namespace Enums.Animations
 {
-    public enum ZombieAnimStates
+    public enum AmmoWorkerAnimStates
     {
         Idle,
         Walk,
-        Attack,
     }
 }

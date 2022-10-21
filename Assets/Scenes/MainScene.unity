@@ -1069,6 +1069,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8723527532225019429, guid: 3b3f97dec146382479aa5e5fdfd2a45d,
+        type: 3}
+      propertyPath: animController
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3f97dec146382479aa5e5fdfd2a45d, type: 3}
 --- !u!1 &808263709
@@ -3232,6 +3237,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8247410386123984769, guid: 6a618bf1589c53d4bbec6c8605cdacc0,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b3dac17f703f9d94a9d3eb5515ac2dee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a618bf1589c53d4bbec6c8605cdacc0, type: 3}
 --- !u!1001 &5092075286862564229
@@ -3478,6 +3488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MoneyCollector
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344048493254541953, guid: e15bc64166b46984bba534d63425b291,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2344048493254541955, guid: e15bc64166b46984bba534d63425b291,
         type: 3}

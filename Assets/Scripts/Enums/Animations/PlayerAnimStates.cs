@@ -4,7 +4,6 @@
     {
         Idle,
         Walk,
-        WalkWithGun,
         TurretShooter,
         Die
     }

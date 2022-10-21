@@ -1,11 +1,9 @@
 using Data.ValueObject;
-using DG.Tweening;
-using Enums;
 using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerMovementController : MonoBehaviour
     {
@@ -62,7 +60,6 @@ namespace Controllers
             if (_isReadyToMove)
             {
                 IdleMove();
-
             }
             else
             {
@@ -88,7 +85,6 @@ namespace Controllers
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation,
                                 _movementData.IdleRotateSpeed*Time.fixedDeltaTime);
             }
-            
         }
 
         private void Stop()

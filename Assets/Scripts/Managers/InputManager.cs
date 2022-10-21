@@ -29,9 +29,9 @@ namespace Managers
         #region Private Variables
 
         private bool _isTouching;
-        private float _currentVelocity; //ref type
-        private Vector2? _mousePosition; //ref type
-        private Vector3 _moveVector; //ref type
+        private float _currentVelocity; 
+        private Vector2? _mousePosition; 
+        private Vector3 _moveVector; 
         private QueryPointerOverUIElementCommand _queryPointerOverUIElementCommand;
 
         #endregion
@@ -40,12 +40,9 @@ namespace Managers
         
         private void Awake()
         {
-            // Data = GetInputData();
             Init();
         }
-
-        // private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
-
+        
         private void Init()
         {
             _queryPointerOverUIElementCommand = new QueryPointerOverUIElementCommand();
@@ -84,6 +81,10 @@ namespace Managers
 
         private void Update()
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                InputSignals.Instance.onInputTaken?.Invoke();
+            }
             if (Input.GetMouseButton(0))
             {
                 MouseButtonDown();
@@ -105,9 +106,7 @@ namespace Managers
         {
             isReadyForTouch = false;
         }
-        
-        
-        
+
         private void OnReset()
         {
             isReadyForTouch = false;
@@ -132,7 +131,7 @@ namespace Managers
 
         private void MouseButtonDown()
         {
-            InputSignals.Instance.onInputTaken?.Invoke();
+            //InputSignals.Instance.onInputTaken?.Invoke();
             if (!isFirstTimeTouchTaken)
             {
                 isFirstTimeTouchTaken = true;

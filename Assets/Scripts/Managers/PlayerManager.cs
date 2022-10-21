@@ -31,7 +31,7 @@ namespace Managers
         #region Private Variables
         
         private Rigidbody _rb;
-
+        
         #endregion
         #endregion
 
@@ -99,11 +99,14 @@ namespace Managers
         {
             SetStackPosition();
             movementController.EnableMovement();
+            animationController.SetAnimState(PlayerAnimStates.Walk);
         }
 
         private void OnDeactivateMovement()
         {
             movementController.DisableMovement();
+            animationController.SetAnimState(PlayerAnimStates.Idle); 
+            animationController.ResetAnimSpeed();
         }
 
         private void OnSetIdleInputValues(IdleInputParams inputParams)

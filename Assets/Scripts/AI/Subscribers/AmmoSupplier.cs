@@ -29,6 +29,7 @@ namespace AI.Subscribers
         [SerializeField] private List<Transform> turretAmmoTransforms;
         [SerializeField] private Transform ammoDepot;
         [SerializeField] private StackManager stackManager;
+        [SerializeField] private Animator animator;
 
         #endregion
 
@@ -48,9 +49,9 @@ namespace AI.Subscribers
             var navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshAgent.speed = _ammoSupplierData.SupplierSpeed;
             
-            var moveAmmoDepot = new MoveToAmmoDepot(this,navMeshAgent,ammoDepot);
-            var searchForEmptyTurret = new SearchForEmptyTurret(this,turretAmmoTransforms);
-            var moveToTurret = new MoveToTurret(this,navMeshAgent);
+            var moveAmmoDepot = new MoveToAmmoDepot(this,navMeshAgent,ammoDepot,animator);
+            var searchForEmptyTurret = new SearchForEmptyTurret(this,turretAmmoTransforms,animator);
+            var moveToTurret = new MoveToTurret(this,navMeshAgent,animator);
             var deliverAmmo = new DeliverAmmoBoxes(this);
 
             At(moveAmmoDepot, searchForEmptyTurret, StackIsEmpty());

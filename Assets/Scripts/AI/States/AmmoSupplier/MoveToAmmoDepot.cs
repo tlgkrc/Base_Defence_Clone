@@ -1,4 +1,5 @@
-﻿using Signals;
+﻿using Enums.Animations;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,17 +14,19 @@ namespace AI.States.AmmoSupplier
         private readonly Subscribers.AmmoSupplier _ammoSupplier;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Transform _ammoDepotTransform;
+        private readonly Animator _animator;
 
 
         #endregion
 
         #endregion
 
-        public MoveToAmmoDepot(Subscribers.AmmoSupplier ammoSupplier,NavMeshAgent navMeshAgent,Transform ammoDepotTransform)
+        public MoveToAmmoDepot(Subscribers.AmmoSupplier ammoSupplier,NavMeshAgent navMeshAgent,Transform ammoDepotTransform,Animator animator)
         {
             _ammoSupplier = ammoSupplier;
             _navMeshAgent = navMeshAgent;
             _ammoDepotTransform = ammoDepotTransform;
+            _animator = animator;
         }
 
         public void Tick()
@@ -34,7 +37,7 @@ namespace AI.States.AmmoSupplier
 
         public void OnEnter()
         {
-            
+            _animator.SetTrigger(AmmoWorkerAnimStates.Walk.ToString());
         }
 
         public void OnExit()

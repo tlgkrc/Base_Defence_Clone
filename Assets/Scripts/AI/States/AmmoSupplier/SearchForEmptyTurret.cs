@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Enums.Animations;
 using UnityEngine;
 
 namespace AI.States.AmmoSupplier
@@ -11,15 +12,17 @@ namespace AI.States.AmmoSupplier
 
         private readonly Subscribers.AmmoSupplier _ammoSupplier;
         private readonly List<Transform> _ammoStockTransforms;
+        private readonly Animator _animator;
 
         #endregion
 
         #endregion
 
-        public SearchForEmptyTurret(Subscribers.AmmoSupplier ammoSupplier,List<Transform> ammoStockTransforms)
+        public SearchForEmptyTurret(Subscribers.AmmoSupplier ammoSupplier,List<Transform> ammoStockTransforms,Animator animator)
         {
             _ammoSupplier = ammoSupplier;
             _ammoStockTransforms = ammoStockTransforms;
+            _animator = animator;
         }
 
         public void Tick()
@@ -30,7 +33,7 @@ namespace AI.States.AmmoSupplier
 
         public void OnEnter()
         {
-            Debug.Log("searching");
+            _animator.SetTrigger(AmmoWorkerAnimStates.Idle.ToString());
         }
 
         public void OnExit()

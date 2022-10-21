@@ -15,7 +15,6 @@ namespace AI.Subscribers
 
         #region Serialized Variables
 
-        [SerializeField] private HostageAnimController animController;
 
         #endregion
 
