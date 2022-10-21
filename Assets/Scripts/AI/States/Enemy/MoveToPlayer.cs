@@ -43,7 +43,6 @@ namespace AI.States.Enemy
         {
             _agent.speed = _enemyGoData.IncreasedSpeed;
             _animator.SetTrigger(EnemyAnimTypes.Run.ToString());
-
         }
 
         public void OnExit()
