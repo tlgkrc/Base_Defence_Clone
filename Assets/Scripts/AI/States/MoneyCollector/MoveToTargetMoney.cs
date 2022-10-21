@@ -1,4 +1,6 @@
-﻿using UnityEngine.AI;
+﻿using Enums.Animations;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace AI.States.MoneyCollector
 {
@@ -10,15 +12,17 @@ namespace AI.States.MoneyCollector
 
         private readonly Subscribers.MoneyCollector _moneyCollector;
         private readonly NavMeshAgent _navMeshAgent;
+        private readonly Animator _animator;
 
         #endregion
 
         #endregion
 
-        public MoveToTargetMoney(Subscribers.MoneyCollector moneyCollector,NavMeshAgent navMeshAgent)
+        public MoveToTargetMoney(Subscribers.MoneyCollector moneyCollector,NavMeshAgent navMeshAgent,Animator animator)
         {
             _moneyCollector = moneyCollector;
             _navMeshAgent = navMeshAgent;
+            _animator = animator;
         }
         public void Tick()
         {
@@ -28,6 +32,7 @@ namespace AI.States.MoneyCollector
         {
             _navMeshAgent.SetDestination(_moneyCollector.Target.position);
             _moneyCollector.CollectorInBase = false;
+            _animator.SetTrigger(MoneyWorkerAnimTypes.Walk.ToString());
         }
 
         public void OnExit()

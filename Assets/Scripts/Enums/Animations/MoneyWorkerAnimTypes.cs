@@ -1,6 +1,6 @@
 ﻿namespace Enums.Animations
 {
-    public enum MoneyWorkerAnimStates
+    public enum MoneyWorkerAnimTypes
     {
         Idle,
         Walk

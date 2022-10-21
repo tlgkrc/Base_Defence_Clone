@@ -28,6 +28,7 @@ namespace AI.Subscribers
         [SerializeField] private MoneyCollectorPhysicController physicController;
         [SerializeField] private StackManager stackManager;
         [SerializeField] private Transform baseTransform;
+        [SerializeField] private Animator animator;
 
         #endregion
 
@@ -48,8 +49,8 @@ namespace AI.Subscribers
             var navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshAgent.speed = _moneyCollectorData.Speed;
             
-            var searchMoney = new SearchClosestMoney(this);
-            var moveToMoney = new MoveToTargetMoney(this,navMeshAgent);
+            var searchMoney = new SearchClosestMoney(this,animator);
+            var moveToMoney = new MoveToTargetMoney(this,navMeshAgent,animator);
             var takeMoney = new TakeMoney(this);
             var moveBase = new MoveToBase(this,navMeshAgent);
             var deliverMoney = new DeliverMoney(this);

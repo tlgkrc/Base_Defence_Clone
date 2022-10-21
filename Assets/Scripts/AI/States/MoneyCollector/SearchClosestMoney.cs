@@ -1,4 +1,7 @@
-﻿namespace AI.States.MoneyCollector
+﻿using Enums.Animations;
+using UnityEngine;
+
+namespace AI.States.MoneyCollector
 {
     public class SearchClosestMoney: IAIStates
     {
@@ -7,14 +10,16 @@
         #region Private Variables
 
         private readonly Subscribers.MoneyCollector _moneyCollector;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public SearchClosestMoney(Subscribers.MoneyCollector moneyCollector)
+        public SearchClosestMoney(Subscribers.MoneyCollector moneyCollector,Animator animator)
         {
             _moneyCollector = moneyCollector;
+            _animator = animator;
         }
         public void Tick()
         {
@@ -24,6 +29,7 @@
         public void OnEnter()
         {
             _moneyCollector.Target = null;
+            _animator.SetTrigger(MoneyWorkerAnimTypes.Idle.ToString());
         }
 
         public void OnExit()
