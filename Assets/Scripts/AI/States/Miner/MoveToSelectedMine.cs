@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums.Animations;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.Miner
@@ -17,17 +18,21 @@ namespace AI.States.Miner
 
         private readonly Subscribers.Miner _miner;
         private readonly NavMeshAgent _agent;
+        private readonly NavMeshObstacle _navMeshObstacle;
         private Vector3 _lastPosition;
         private float _timeStuck;
+        private readonly Animator _animator;
 
         #endregion
 
         #endregion
 
-        public MoveToSelectedMine(Subscribers.Miner miner,NavMeshAgent agent)
+        public MoveToSelectedMine(Subscribers.Miner miner,NavMeshAgent agent,Animator animator,NavMeshObstacle navMeshObstacle)
         {
             _miner = miner;
             _agent = agent;
+            _animator = animator;
+            _navMeshObstacle = navMeshObstacle;
         }
         public void Tick()
         {
@@ -42,11 +47,14 @@ namespace AI.States.Miner
         {
             _timeStuck = 0f;
             _agent.SetDestination(_miner.Target.transform.position);
+            _animator.SetTrigger(GemWorkerAnimTypes.Walk.ToString());
         }
 
         public void OnExit()
         {
-            
+            _agent.enabled = false;
+            _navMeshObstacle.enabled = true;
+            _miner.HoldPickAxe(true);
         }
     }
 }

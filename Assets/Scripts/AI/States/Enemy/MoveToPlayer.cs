@@ -1,5 +1,5 @@
 ﻿using Data.ValueObject;
-using Enums;
+using Enums.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 

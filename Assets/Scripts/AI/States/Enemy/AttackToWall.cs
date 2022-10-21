@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Enums.Animations;
 using UnityEngine;
 
 namespace AI.States.Enemy

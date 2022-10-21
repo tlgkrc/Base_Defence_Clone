@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Enums;
+using Enums.Animations;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.States.Miner
@@ -12,16 +14,18 @@ namespace AI.States.Miner
         private readonly Subscribers.Miner _miner;
         private readonly NavMeshAgent _agent;
         private readonly Transform _gemStockTransform;
+        private readonly Animator _animator;
 
         #endregion
 
         #endregion
 
-        public ReturnToGemStock(Subscribers.Miner miner,Transform gemStock,NavMeshAgent agent)
+        public ReturnToGemStock(Subscribers.Miner miner,Transform gemStock,NavMeshAgent agent,Animator animator)
         {
             _miner = miner;
             _agent = agent;
             _gemStockTransform = gemStock;
+            _animator = animator;
         }
 
         public void Tick()
@@ -31,12 +35,12 @@ namespace AI.States.Miner
 
         public void OnEnter()
         {
-            
+            _animator.SetTrigger(GemWorkerAnimTypes.CarryingWalk.ToString());
         }
 
         public void OnExit()
         {
-            _miner.DropCollectedGem();
+            _miner.HoldGem(false);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace Enums.Animations
 {
     public enum MoneyWorkerAnimStates
     {

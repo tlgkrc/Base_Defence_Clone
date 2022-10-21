@@ -4,6 +4,7 @@ using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Enums.Animations;
 using Keys;
 using Signals;
 

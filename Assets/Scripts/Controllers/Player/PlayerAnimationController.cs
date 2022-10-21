@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Enums.Animations;
 using Keys;
 using Managers;
 using UnityEngine;

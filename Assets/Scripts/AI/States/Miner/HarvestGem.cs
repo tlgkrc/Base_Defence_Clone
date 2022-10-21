@@ -8,7 +8,7 @@ namespace AI.States.Miner
 
         #region Private Variables
 
-        private Subscribers.Miner _miner;
+        private readonly Subscribers.Miner _miner;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace AI.States.Miner
 
         public void OnEnter()
         {
-            
+            _miner.HoldGem(true);
         }
 
         public void OnExit()

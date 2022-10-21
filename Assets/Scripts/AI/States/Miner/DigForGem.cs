@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Enums.Animations;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace AI.States.Miner
 {
@@ -10,14 +12,19 @@ namespace AI.States.Miner
 
         private readonly Subscribers.Miner _miner;
         private float _nextTakeResourcesTime;
-        
+        private readonly Animator _animator;
+        private readonly NavMeshAgent _navMeshAgent;
+        private readonly NavMeshObstacle _navMeshObstacle;
 
         #endregion
 
         #endregion
-        public DigForGem(Subscribers.Miner miner)
+        public DigForGem(Subscribers.Miner miner,Animator animator,NavMeshAgent navMeshAgent,NavMeshObstacle navMeshObstacle)
         {
             _miner = miner;
+            _animator = animator;
+            _navMeshAgent = navMeshAgent;
+            _navMeshObstacle = navMeshObstacle;
         }
         public void Tick()
         {
@@ -26,19 +33,20 @@ namespace AI.States.Miner
                 if (_nextTakeResourcesTime <=Time.time)
                 {
                     _nextTakeResourcesTime = Time.time ;
-                    _miner.TakeFromMine();
                 }
             }
         }
 
         public void OnEnter()
         {
-            //set miner animation as digging
+            _animator.SetTrigger(GemWorkerAnimTypes.Dig.ToString());
         }
 
         public void OnExit()
         {
-            
+            _miner.HoldPickAxe(false);
+            _navMeshObstacle.enabled = false;
+            _navMeshAgent.enabled = true;
         }
     }
 }

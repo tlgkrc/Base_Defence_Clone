@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Enums;
 using UnityEngine;
 
 namespace AI.States.Enemy
