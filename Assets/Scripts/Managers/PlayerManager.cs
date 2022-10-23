@@ -25,6 +25,7 @@ namespace Managers
         [Space] [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] private Vector3 offset;
 
         #endregion
 
@@ -70,7 +71,7 @@ namespace Managers
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
-
+            BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
         }
 
         private void UnsubscribeEvents()
@@ -82,6 +83,7 @@ namespace Managers
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
+            BaseSignals.Instance.onSetPlayerTransformAtTurret -= OnSetPlayerTransformAtTurret;
         }
 
         private void OnDisable()
@@ -120,6 +122,11 @@ namespace Managers
             SetPlayerLayer(inBase);
         }
 
+        private void OnSetPlayerTransformAtTurret(TurretTransformParams turretTransformParams)
+        {
+            movementController.UpdateTurretTransformParams(turretTransformParams);
+        }
+
         #endregion
 
         #region Others
@@ -144,15 +151,24 @@ namespace Managers
         #endregion
 
         #region Methods
-        
-        private void SetAnim(PlayerAnimStates animState)
-        {
-            animationController.SetAnimState(animState);
-        }
 
         private void SetStackPosition()
         {
             StackSignals.Instance.onPlayerGameObject?.Invoke(gameObject);
+        }
+
+        public void PlayerAtTurret(Transform turretTransform)
+        {
+            animationController.SetAnimState(PlayerAnimStates.Hold);
+            movementController.DisableMovement();
+            movementController.EnableTurretMovement(true);
+        }
+
+        public void ReleaseFromTurret()
+        {
+            animationController.SetAnimState(PlayerAnimStates.Walk);
+            movementController.EnableMovement();
+            movementController.EnableTurretMovement(false);
         }
 
         private void SetPlayerLayer(bool inBase)
@@ -168,6 +184,7 @@ namespace Managers
                 playerPhysicsController.gameObject.layer = playerLayer;
             }
         }
+        
         #endregion
     }
 }

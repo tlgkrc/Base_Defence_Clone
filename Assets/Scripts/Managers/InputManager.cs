@@ -62,6 +62,7 @@ namespace Managers
             InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onNextLevel += OnNextLevel;
+            BaseSignals.Instance.onSetTurretRotation += OnSetTurretRotation;
         }
 
         private void UnsubscribeEvents()
@@ -70,6 +71,8 @@ namespace Managers
             InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onReset -= OnReset;
             LevelSignals.Instance.onNextLevel += OnNextLevel;
+            BaseSignals.Instance.onSetTurretRotation -= OnSetTurretRotation;
+
         }
 
         private void OnDisable()
@@ -151,6 +154,11 @@ namespace Managers
                 ValueX = _moveVector.x,
                 ValueZ = _moveVector.z
             });
+        }
+
+        private float OnSetTurretRotation()
+        {
+            return floatingJoystick.Horizontal;
         }
 
         #endregion

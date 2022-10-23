@@ -11189,6 +11189,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4140640846976322791, guid: e2a76a4a93099394d84d8755d965e923,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4140640846976322794, guid: e2a76a4a93099394d84d8755d965e923,
         type: 3}
       propertyPath: m_DynamicOccludee

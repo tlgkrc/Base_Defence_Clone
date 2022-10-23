@@ -60,6 +60,7 @@ MonoBehaviour:
   stackGameObject: {fileID: 4317633247426787647, guid: f001fa960ca1a23438feb5ef5c63bd8e,
     type: 3}
   stackMesh: {fileID: 7407725309558776181}
+  stackType: 0
 --- !u!1 &69844957822849465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1263,7 @@ Animator:
   m_GameObject: {fileID: 3449559903675617089}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b689aabdd9657344da0f1a8225637288, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3dac17f703f9d94a9d3eb5515ac2dee, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1732,6 +1733,7 @@ MonoBehaviour:
   movementController: {fileID: 8416739440041911429}
   animationController: {fileID: 5051939765897779403}
   playerPhysicsController: {fileID: 5051939766209999947}
+  offset: {x: 0, y: 0, z: 1}
 --- !u!114 &8416739440041911429
 MonoBehaviour:
   m_ObjectHideFlags: 0

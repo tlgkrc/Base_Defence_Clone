@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -35,6 +36,20 @@ namespace Controllers.Player
             else if (other.CompareTag("Gate") && stackManager.transform.childCount > 0)
             {
                 StackSignals.Instance.onClearDynamicStack?.Invoke(manager.transform.GetInstanceID());
+            }
+            else if(other.CompareTag("Turret"))
+            {
+                BaseSignals.Instance.onSetTurretShooter?.Invoke(other.gameObject,true);
+                manager.PlayerAtTurret(other.transform);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Turret"))
+            {
+                BaseSignals.Instance.onReleasePlayer?.Invoke();
+                manager.ReleaseFromTurret();
             }
         }
     }

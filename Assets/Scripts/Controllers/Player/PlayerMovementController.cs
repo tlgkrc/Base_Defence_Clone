@@ -19,9 +19,11 @@ namespace Controllers.Player
         #region Private Variables
         
         private PlayerMovementData _movementData;
-        private bool _isReadyToMove, _isReadyToPlay = false;
+        private bool _isReadyToMove, _isReadyToPlay, _isAtTurret = false;
         private float _inputValueX;
         private float _inputValueZ;
+        private Vector3 _turretPos;
+        private Quaternion _turretRotation;
 
         #endregion
         
@@ -42,17 +44,28 @@ namespace Controllers.Player
             _isReadyToMove = false;
         }
 
+        public void EnableTurretMovement(bool isAtTurret)
+        {
+            _isAtTurret = isAtTurret;
+        }
+
         public void UpdateIdleInputValue(IdleInputParams inputParams)
         {
             _inputValueX = inputParams.ValueX;
             _inputValueZ = inputParams.ValueZ;
         }
-        
+
+        public void UpdateTurretTransformParams(TurretTransformParams transformParams)
+        {
+            _turretPos = transformParams.Position;
+            _turretRotation = transformParams.Quaternion;
+        }
 
         public void IsReadyToPlay(bool state)
         {
             _isReadyToPlay = state;
         }
+        
         
         private void FixedUpdate()
         {
@@ -63,7 +76,15 @@ namespace Controllers.Player
             }
             else
             {
-                Stop();
+                if (_isAtTurret)
+                {
+                    MoveAtTurret();
+                }
+                else
+                {
+                    Stop();
+                }
+               
             }
         }
 
@@ -78,7 +99,7 @@ namespace Controllers.Player
             var position = new Vector3(position1.x, position1.y, position1.z);
             position1 = position;
             rigidbody.position = position1;
-            
+
             if (velocity != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(velocity, Vector3.up);
@@ -87,9 +108,15 @@ namespace Controllers.Player
             }
         }
 
+        private void MoveAtTurret()
+        {
+            transform.position = _turretPos;
+            transform.rotation = _turretRotation;
+        }
+
         private void Stop()
         {
-            rigidbody.velocity = Vector3.zero;
+            rigidbody.velocity = Vector3.zero; 
             rigidbody.angularVelocity = Vector3.zero;
         }
 

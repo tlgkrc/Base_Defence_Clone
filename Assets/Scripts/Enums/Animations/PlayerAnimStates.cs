@@ -4,7 +4,7 @@
     {
         Idle,
         Walk,
-        TurretShooter,
+        Hold,
         Die
     }
 }

@@ -11,14 +11,14 @@ Material:
   m_Shader: {fileID: 4800000, guid: 317e3d3b84bf0a741a3e867e27dfa7bb, type: 3}
   m_ValidKeywords:
   - _MK_OUTLINE_HULL_CLIP
-  - _MK_OUTLINE_NOISE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     IGNOREPROJECTOR: False
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -75,7 +75,7 @@ Material:
     - _DissolveAmount: 0.5
     - _DissolveBorderSize: 0.25
     - _DissolveMapScale: 1
-    - _Initialized: 0
+    - _Initialized: 1
     - _InputTab: 1
     - _OptionsTab: 1
     - _Outline: 3
@@ -83,8 +83,8 @@ Material:
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 5
-    - _OutlineTab: 0
+    - _OutlineSize: 20
+    - _OutlineTab: 1
     - _RenderFace: 2
     - _RenderPriority: 0
     - _Saturation: 1
