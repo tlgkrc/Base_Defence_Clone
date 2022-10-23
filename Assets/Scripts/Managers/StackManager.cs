@@ -76,6 +76,7 @@ namespace Managers
             StackSignals.Instance.onClearStaticStack += OnClearStaticStack;
             StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks += OnTransferBetweenStacks;
+            StackSignals.Instance.onRemoveLastElement += OnRemoveLastElement;
         }
 
         private void UnsubscribeEvents()
@@ -84,6 +85,7 @@ namespace Managers
             StackSignals.Instance.onClearStaticStack -= OnClearStaticStack;
             StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks -= OnTransferBetweenStacks;
+            StackSignals.Instance.onRemoveLastElement -= OnRemoveLastElement;
         }
 
         private void OnDisable()
@@ -122,6 +124,17 @@ namespace Managers
                  TransferBetweenStacks(from ,to);
             }
            
+        }
+
+        private void OnRemoveLastElement(int id,string nameOfGameObject)
+        {
+            if (transform.GetInstanceID() == id)
+            {
+                PoolSignals.Instance.onReleasePoolObject?.Invoke(nameOfGameObject,_stackList[^1].gameObject ); 
+                _stackList.Remove(_stackList[^1].gameObject);
+                _stackList.TrimExcess();
+            }
+            
         }
 
         public void Add(GameObject gO)

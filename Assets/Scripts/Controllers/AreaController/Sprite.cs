@@ -60,7 +60,7 @@ namespace Controllers.AreaController
                 case "Weapon":
                     break;
                 case "TurretShooter" :
-                    //BaseSignals.Instance.onSetTurretShooter?.Invoke();
+                    BaseSignals.Instance.onOpenTurretWorker?.Invoke();
                     break;
                 default:
                     Debug.Log("You forgot a section!!!");

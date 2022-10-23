@@ -25,5 +25,6 @@ namespace Controllers.Turret
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Bullet.ToString(),manager.gameObject);
             }
         }
+        
     }
 }

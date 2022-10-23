@@ -14,9 +14,15 @@ namespace Managers
         #endregion
 
         #endregion
-        private void Awake()
+
+        private void BulletMove()
         {
-            rigidbody.AddForce(Vector3.forward*2,ForceMode.Impulse);
+            rigidbody.AddRelativeForce(Vector3.forward*5,ForceMode.Force);
+        }
+
+        private void FixedUpdate()
+        {
+            BulletMove();
         }
     }
 }

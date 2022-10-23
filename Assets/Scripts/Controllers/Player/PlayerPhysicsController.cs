@@ -39,8 +39,8 @@ namespace Controllers.Player
             }
             else if(other.CompareTag("Turret"))
             {
-                BaseSignals.Instance.onSetTurretShooter?.Invoke(other.gameObject,true);
                 manager.PlayerAtTurret(other.transform);
+                BaseSignals.Instance.onSetPlayerToTurretShooter?.Invoke();
             }
         }
 

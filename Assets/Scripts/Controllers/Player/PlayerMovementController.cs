@@ -110,8 +110,9 @@ namespace Controllers.Player
 
         private void MoveAtTurret()
         {
-            transform.position = _turretPos;
-            transform.rotation = _turretRotation;
+            var transform1 = transform;
+            transform1.position = _turretPos;
+            transform1.rotation = _turretRotation;
         }
 
         private void Stop()

@@ -10,9 +10,10 @@ namespace Signals
     {
         public UnityAction<GameObject> onUpdateStageArea = delegate {  };
         public UnityAction<bool> onPlayerInBase = delegate{  };
-        public  UnityAction<GameObject,bool> onSetTurretShooter = delegate {  };
+        public  UnityAction onSetPlayerToTurretShooter = delegate {  };
         public UnityAction onReleasePlayer = delegate {  };
         public Func<float> onSetTurretRotation = delegate { return 0; };
         public UnityAction<TurretTransformParams> onSetPlayerTransformAtTurret = delegate {  };
+        public UnityAction onOpenTurretWorker = delegate {  };
     }
 }

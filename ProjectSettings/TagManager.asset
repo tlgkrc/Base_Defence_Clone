@@ -16,6 +16,7 @@ TagManager:
   - Ammo
   - Turret
   - Enemy
+  - TurretShooter
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - Enemy
   - MoneyCollector
   - Money
-  - 
-  - 
+  - EnemyRadiusCheck
+  - TurretBullet
   - 
   - 
   - 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AI.Controllers
 {
     [RequireComponent(typeof(Collider))]
-    public class EnemyPhysicController : MonoBehaviour
+    public class EnemyRangeController : MonoBehaviour
     {
         #region Self Variables
 

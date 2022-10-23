@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Keys;
 using Signals;
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace Managers
 {
@@ -22,6 +23,7 @@ namespace Managers
         [SerializeField] private Transform barrel;
         [SerializeField] private StackManager stackManager;
         [SerializeField] private Transform shooterTransform;
+        [SerializeField] private GameObject turretWorker;
         
         #endregion
 
@@ -32,6 +34,8 @@ namespace Managers
         private List<GameObject> _hitList = new List<GameObject>();
         private const string Bullet = "Bullet";
         private int _bulletCount;
+        private float _shootTime;
+        private int _shootingCount;
 
         #endregion
         #endregion
@@ -50,14 +54,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onSetTurretShooter += OnSetTurretShooter;
+            BaseSignals.Instance.onSetPlayerToTurretShooter += OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer += OnReleasePlayer;
+            BaseSignals.Instance.onOpenTurretWorker += OnOpenTurretWorker;
+            StackSignals.Instance.onDeliverAmmoBox += OnCountAmmo;
         }
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onSetTurretShooter -= OnSetTurretShooter;
+            BaseSignals.Instance.onSetPlayerToTurretShooter -= OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer -= OnReleasePlayer;
+            BaseSignals.Instance.onOpenTurretWorker -= OnOpenTurretWorker;
+            StackSignals.Instance.onDeliverAmmoBox -= OnCountAmmo;
         }
 
         private void OnDisable()
@@ -76,28 +84,42 @@ namespace Managers
             }
         }
         
-        private void OnSetTurretShooter(GameObject gameObject , bool isPlayer)
+        private void OnSetPlayerTurretShooter()
         {
             _hasShooter = true;
-            _shooterIsPlayer = isPlayer;
+            _shooterIsPlayer = true;
+        }
+
+        private void OnOpenTurretWorker()
+        {
+            _hasShooter = true;
+            _shooterIsPlayer = false;
+            turretWorker.SetActive(true);
         }
 
         private void OnReleasePlayer()
         {
             _hasShooter = false;
+            _shooterIsPlayer = false;
+        }
+
+        private void OnCountAmmo(int id)
+        {
+            if (stackManager.transform.GetInstanceID() == id)
+            {
+                _bulletCount = stackManager.transform.childCount*4;
+            }
         }
 
         private void Shoot()
         {
-            _bulletCount = stackManager.transform.childCount*4;
             if (_bulletCount<=0)
             {
                 return;
             }
-            var gO = PoolSignals.Instance.onGetPoolObject(Bullet, muzzle);
             
             SetTurretRotate();
-
+            AutoShoot();
         }
 
         private void SetTurretRotate()
@@ -121,10 +143,33 @@ namespace Managers
             }
         }
 
-        public void AddEnemyToHitList(GameObject gameObject)
+        public void AddEnemyToHitList(GameObject gO)
         {
-            _hitList.Add(gameObject);
+            _hitList.Add(gO);
         }
-        
+
+        public void RemoveEnemyFromHitList(GameObject gO)
+        {
+            _hitList.Remove(gO);
+            _hitList.TrimExcess();
+        }
+
+        private void AutoShoot()
+        {
+            _shootTime += Time.deltaTime;
+            while (_shootTime >= 2f)
+            {
+                var gO = PoolSignals.Instance.onGetPoolObject(Bullet, muzzle);
+                gO.transform.localRotation = transform.rotation;
+                _shootTime = 0;
+                _shootingCount += 1;
+                _bulletCount--;
+                if (_shootingCount == 4)
+                {
+                   StackSignals.Instance.onRemoveLastElement?.Invoke(stackManager.transform.GetInstanceID(),Bullet);
+                   _shootingCount = 0;
+                }
+            }
+        }
     }
 }

@@ -166,4 +166,4 @@ NavMeshProjectSettings:
   - Miner
   - Enemy
   - MoneyCollector
-  - AmmoSupplier
+  - TurretWorker

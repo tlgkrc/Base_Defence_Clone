@@ -23,5 +23,13 @@ namespace Controllers.Turret
                 turretManager.AddEnemyToHitList(other.transform.parent.gameObject);
             }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                turretManager.RemoveEnemyFromHitList(other.transform.parent.gameObject);
+            }
+        }
     }
 }
