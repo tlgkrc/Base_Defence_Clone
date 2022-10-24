@@ -9,5 +9,6 @@ namespace Data.ValueObject
         public int Damage;
         public float Speed;
         public float IncreasedSpeed;
+        public int Health;
     }
 }

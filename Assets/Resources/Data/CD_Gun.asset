@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86129a380dbb4e00acd64bfa977feab0, type: 3}
+  m_Name: CD_Gun
+  m_EditorClassIdentifier: 
+  GunData:
+    GunDatas:
+      m_Keys: 00000000010000000200000003000000
+      m_Values:
+      - Gun: {fileID: 7220370505452237156, guid: 53b53700781739a46a93477b69595a13,
+          type: 3}
+        Damage: 2
+        BulletLifeTime: 3
+        BulletSpeed: 5
+      - Gun: {fileID: 7627351992653666579, guid: aca9d7b3d03374b44a5dbac12dbacf0c,
+          type: 3}
+        Damage: 0
+        BulletLifeTime: 0
+        BulletSpeed: 0
+      - Gun: {fileID: 7742643625144672335, guid: 2f5374abd9838ff4eb5cb14a6e313ed8,
+          type: 3}
+        Damage: 0
+        BulletLifeTime: 0
+        BulletSpeed: 0
+      - Gun: {fileID: 7742643625144672335, guid: 2f5374abd9838ff4eb5cb14a6e313ed8,
+          type: 3}
+        Damage: 0
+        BulletLifeTime: 0
+        BulletSpeed: 0
