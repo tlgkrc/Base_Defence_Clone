@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -41,6 +42,7 @@ namespace Controllers.Player
             {
                 manager.PlayerAtTurret(other.transform);
                 BaseSignals.Instance.onSetPlayerToTurretShooter?.Invoke();
+                CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.TurretCam);
             }
         }
 
@@ -49,6 +51,7 @@ namespace Controllers.Player
             if (other.CompareTag("Turret"))
             {
                 BaseSignals.Instance.onReleasePlayer?.Invoke();
+                CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.LevelCam);
                 manager.ReleaseFromTurret();
             }
         }

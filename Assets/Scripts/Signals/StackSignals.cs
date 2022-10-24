@@ -17,7 +17,7 @@ namespace Signals
         public UnityAction<GameObject> onAddHostageToStack = delegate {  };
         public UnityAction<GameObject> onPlayerGameObject = delegate { };
         public UnityAction<int,StackManager,StackManager> onTransferBetweenStacks = delegate {  };
-        public UnityAction<int> onDeliverAmmoBox = delegate{  };
+        public UnityAction<int,int> onDeliverAmmoBox = delegate{  };
         public UnityAction<int,string> onRemoveLastElement =delegate {  };
         public UnityAction<bool> onLastCollectableAddedToPlayer = delegate {  };
         public Func<int> onGetCurrentScore = delegate { return 1; };

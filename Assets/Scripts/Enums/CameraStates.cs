@@ -2,6 +2,7 @@
 {
     public enum CameraStates
     {
-        LevelCam
+        LevelCam,
+        TurretCam
     }
 }

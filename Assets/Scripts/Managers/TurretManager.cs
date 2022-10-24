@@ -4,6 +4,8 @@ using Keys;
 using Signals;
 using UnityEngine;
 using System.Threading.Tasks;
+using Controllers.Turret;
+using Enums;
 
 namespace Managers
 {
@@ -24,6 +26,7 @@ namespace Managers
         [SerializeField] private StackManager stackManager;
         [SerializeField] private Transform shooterTransform;
         [SerializeField] private GameObject turretWorker;
+        [SerializeField] private TurretPhysicController physicController;
         
         #endregion
 
@@ -32,7 +35,6 @@ namespace Managers
         private bool _hasShooter;
         private bool _shooterIsPlayer;
         private List<GameObject> _hitList = new List<GameObject>();
-        private const string Bullet = "Bullet";
         private int _bulletCount;
         private float _shootTime;
         private int _shootingCount;
@@ -80,7 +82,6 @@ namespace Managers
             if (_hasShooter)
             {
                 Shoot();
-
             }
         }
         
@@ -95,6 +96,7 @@ namespace Managers
             _hasShooter = true;
             _shooterIsPlayer = false;
             turretWorker.SetActive(true);
+            physicController.CloseCollider();
         }
 
         private void OnReleasePlayer()
@@ -103,22 +105,22 @@ namespace Managers
             _shooterIsPlayer = false;
         }
 
-        private void OnCountAmmo(int id)
+        private void OnCountAmmo(int id,int amount)
         {
             if (stackManager.transform.GetInstanceID() == id)
             {
-                _bulletCount = stackManager.transform.childCount*4;
+                _bulletCount += amount*4;
             }
         }
 
         private void Shoot()
         {
+            Debug.Log(_bulletCount);
+            SetTurretRotate();
             if (_bulletCount<=0)
             {
                 return;
             }
-            
-            SetTurretRotate();
             AutoShoot();
         }
 
@@ -157,16 +159,16 @@ namespace Managers
         private void AutoShoot()
         {
             _shootTime += Time.deltaTime;
-            while (_shootTime >= 2f)
+            while (_shootTime >= .2f)
             {
-                var gO = PoolSignals.Instance.onGetPoolObject(Bullet, muzzle);
-                gO.transform.localRotation = transform.rotation;
                 _shootTime = 0;
                 _shootingCount += 1;
                 _bulletCount--;
+                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.Bullet.ToString(), muzzle);
+                gO.transform.localRotation = transform.rotation;
                 if (_shootingCount == 4)
                 {
-                   StackSignals.Instance.onRemoveLastElement?.Invoke(stackManager.transform.GetInstanceID(),Bullet);
+                   StackSignals.Instance.onRemoveLastElement?.Invoke(stackManager.transform.GetInstanceID(),PoolTypes.BulletBox.ToString());
                    _shootingCount = 0;
                 }
             }

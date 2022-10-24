@@ -5,7 +5,7 @@ namespace Interfaces
     public interface IStack
     {
         void Add(GameObject gameObject);
-        void Remove();
+        void Remove(string name);
         void ClearStaticStack(Transform transform);
     }
 }

@@ -44,6 +44,7 @@ namespace Controllers.AreaController
                 else
                 {
                     SendBaseSignals(tag);
+                    transform.parent.gameObject.SetActive(false);
                 }
             }
         }

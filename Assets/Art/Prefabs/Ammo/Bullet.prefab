@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4049943409455547035}
+  physicController: {fileID: 3405311573294176844}
 --- !u!54 &4049943409455547035
 Rigidbody:
   m_ObjectHideFlags: 0

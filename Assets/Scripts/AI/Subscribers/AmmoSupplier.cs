@@ -97,7 +97,8 @@ namespace AI.Subscribers
         {
             StackSignals.Instance.onTransferBetweenStacks?.
                 Invoke(transform.GetInstanceID(),stackManager,turretAmmoTransforms[index].GetComponent<StackManager>());
-            StackSignals.Instance.onDeliverAmmoBox?.Invoke(turretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID());
+            StackSignals.Instance.onDeliverAmmoBox?.
+                Invoke(turretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
         }
     }
 }

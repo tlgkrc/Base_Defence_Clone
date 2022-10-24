@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using Enums;
 using Signals;
@@ -12,15 +11,6 @@ namespace Managers
 
         #region Public Variables
         
-        public CameraStates CameraStateController
-        {
-            get => _cameraStateValue;
-            set
-            {
-                _cameraStateValue = value;
-                SetCameraStates();
-            }
-        }
         
         #endregion
         #region Serialized Variables
@@ -32,7 +22,7 @@ namespace Managers
         #region Private Variables
         
         private Vector3 _initialPosition;
-        private CameraStates _cameraStateValue = CameraStates.LevelCam;
+        private CameraStates _cameraState = CameraStates.LevelCam;
         private Animator _camAnimator;
         
         #endregion
@@ -64,12 +54,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-
+            CoreGameSignals.Instance.onSetCameraState += OnSetCameraState;
         }
 
         private void UnsubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onSetCameraState -= OnSetCameraState;
         }
 
         private void OnDisable()
@@ -81,12 +71,22 @@ namespace Managers
         
         private void SetCameraStates()
         {
-            if (CameraStateController == CameraStates.LevelCam)
+            if (_cameraState == CameraStates.LevelCam)
             {
-                _camAnimator.Play(CameraStateController.ToString());
+                _camAnimator.Play(CameraStates.LevelCam.ToString());
+            }
+            else if (_cameraState == CameraStates.TurretCam)
+            {
+                _camAnimator.Play(CameraStates.TurretCam.ToString());
             }
         }
 
+        private void OnSetCameraState(CameraStates cameraState)
+        {
+            _cameraState = cameraState;
+            SetCameraStates();
+        }
+        
         private void OnSetCameraTarget()
         {
             var playerManager = FindObjectOfType<PlayerManager>().transform;
@@ -95,7 +95,7 @@ namespace Managers
      
         private void OnReset()
         {
-            CameraStateController = CameraStates.LevelCam;
+            _cameraState = CameraStates.LevelCam;
             levelCamera.Follow = null; 
             levelCamera.LookAt = null;
             levelCamera = transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();

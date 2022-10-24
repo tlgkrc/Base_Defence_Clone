@@ -22,9 +22,12 @@ namespace Controllers.Turret
         {
             if (other.CompareTag("Enemy"))
             {
+                manager.ResetBullet();
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Bullet.ToString(),manager.gameObject);
             }
         }
+
+        
         
     }
 }

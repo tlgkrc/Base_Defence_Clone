@@ -124,7 +124,11 @@ namespace Managers
 
         private void OnSetPlayerTransformAtTurret(TurretTransformParams turretTransformParams)
         {
-            movementController.UpdateTurretTransformParams(turretTransformParams);
+            if (turretTransformParams.Position != Vector3.zero)
+            {
+                movementController.UpdateTurretTransformParams(turretTransformParams);
+            }
+            
         }
 
         #endregion

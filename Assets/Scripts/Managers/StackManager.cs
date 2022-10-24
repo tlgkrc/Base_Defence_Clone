@@ -130,11 +130,8 @@ namespace Managers
         {
             if (transform.GetInstanceID() == id)
             {
-                PoolSignals.Instance.onReleasePoolObject?.Invoke(nameOfGameObject,_stackList[^1].gameObject ); 
-                _stackList.Remove(_stackList[^1].gameObject);
-                _stackList.TrimExcess();
+                Remove(nameOfGameObject);
             }
-            
         }
 
         public void Add(GameObject gO)
@@ -157,9 +154,12 @@ namespace Managers
             }
         }
 
-        public void Remove()
+        public void Remove(string nameOfGameObject)
         {
-            throw new NotImplementedException();
+            var lastGo = _stackList[^1];
+            _stackList.Remove(lastGo);
+            _stackList.TrimExcess();
+            PoolSignals.Instance.onReleasePoolObject?.Invoke(nameOfGameObject,lastGo); 
         }
 
         public void ClearStaticStack(Transform pTransform)
