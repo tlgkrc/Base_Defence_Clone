@@ -19,7 +19,7 @@ namespace Controllers.AreaController
         {
             if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
             {
-                gate.transform.DORotate(_endValue, .2f, RotateMode.WorldAxisAdd);
+                gate.transform.DORotate(_endValue, 1f, RotateMode.WorldAxisAdd).SetEase(Ease.OutElastic);
             }
         }
 
@@ -27,7 +27,7 @@ namespace Controllers.AreaController
         {
             if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
             {
-                gate.transform.DORotate(-_endValue,  .2f, RotateMode.WorldAxisAdd);
+                gate.transform.DORotate(-_endValue,  1f, RotateMode.WorldAxisAdd).SetEase(Ease.InCirc);
             }
         }
     }
