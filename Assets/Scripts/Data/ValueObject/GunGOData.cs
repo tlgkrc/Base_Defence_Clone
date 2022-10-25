@@ -7,6 +7,7 @@ namespace Data.ValueObject
     public class GunGOData
     {
         public GameObject Gun;
+        public int Cost;
         public int Damage;
         public float BulletLifeTime;
         public int BulletSpeed;

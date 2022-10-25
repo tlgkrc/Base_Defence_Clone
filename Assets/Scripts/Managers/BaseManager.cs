@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Controllers.AreaController;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -12,8 +13,8 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private List<GameObject> StageAreaList = new List<GameObject>();
-        [SerializeField] private Stage stage;
+        [SerializeField] private RoomManager roomManager;
+        [SerializeField] private TextMeshPro baseText;
 
         #endregion
 
@@ -52,7 +53,7 @@ namespace Managers
 
         private void OnUpdateStageArea(GameObject gO)
         {
-            stage.UpdateStageArea(gO);
+           // stage.UpdateStageArea(gO);
         }
     }
 }

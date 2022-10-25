@@ -1384,7 +1384,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretAmmoTransforms:
   - {fileID: 0}
-  - {fileID: 0}
   ammoDepot: {fileID: 0}
   stackManager: {fileID: 6639456391707047951}
   animator: {fileID: 9196947939171236636}
@@ -1396,7 +1395,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3722278622528733189}
   m_Enabled: 1
-  m_AgentTypeID: -1923039037
+  m_AgentTypeID: -902729914
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
