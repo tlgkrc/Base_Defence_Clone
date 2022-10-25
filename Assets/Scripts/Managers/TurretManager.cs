@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Keys;
 using Signals;
 using UnityEngine;
-using System.Threading.Tasks;
 using Controllers.Turret;
+using Data.UnityObject;
+using Data.ValueObject.Base;
 using Enums;
+using Enums.Animations;
+using TMPro;
 
 namespace Managers
 {
@@ -22,11 +24,12 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private Transform muzzle;
-        [SerializeField] private Transform barrel;
         [SerializeField] private StackManager stackManager;
         [SerializeField] private Transform shooterTransform;
         [SerializeField] private GameObject turretWorker;
         [SerializeField] private TurretPhysicController physicController;
+        [SerializeField] private RoomNames roomName;
+        [SerializeField] private TextMeshPro costTurretAI;
         
         #endregion
 
@@ -38,6 +41,7 @@ namespace Managers
         private int _bulletCount;
         private float _shootTime;
         private int _shootingCount;
+        private TurretGOData _turretData;
 
         #endregion
         #endregion
@@ -45,8 +49,20 @@ namespace Managers
         private void Awake()
         {
             _hasShooter = false;
+            _turretData = GetTurretData();
+            GetReferences();
         }
-        
+
+        private TurretGOData GetTurretData()
+        {
+            return Resources.Load<CD_TurretData>("Game/CD_TurretData").TurretData.TurretsData[roomName];
+        }
+
+        private void GetReferences()
+        {
+            SetTurretCostText(_turretData.TurretSoldierCost);
+        }
+
         #region Event Subscription
 
         private void OnEnable()
@@ -115,7 +131,6 @@ namespace Managers
 
         private void Shoot()
         {
-            Debug.Log(_bulletCount);
             SetTurretRotate();
             if (_bulletCount<=0)
             {
@@ -129,7 +144,7 @@ namespace Managers
             if (_shooterIsPlayer)
             {
                 var rotationX = BaseSignals.Instance.onSetTurretRotation?.Invoke();
-                var newVec =new Vector3(0, 45, 0) * rotationX ;
+                var newVec =_turretData.RotationBorderOffset * rotationX ;
                 if (newVec == null) return;
                 Transform transform1;
                 (transform1 = transform).rotation = Quaternion.Euler((Vector3)newVec);
@@ -159,7 +174,7 @@ namespace Managers
         private void AutoShoot()
         {
             _shootTime += Time.deltaTime;
-            while (_shootTime >= .2f)
+            while (_shootTime >= _turretData.ShootingDelay)
             {
                 _shootTime = 0;
                 _shootingCount += 1;
@@ -172,6 +187,11 @@ namespace Managers
                    _shootingCount = 0;
                 }
             }
+        }
+
+        private void SetTurretCostText(int cost)
+        {
+            costTurretAI.text = "<sprite index=0>" + cost.ToString();
         }
     }
 }

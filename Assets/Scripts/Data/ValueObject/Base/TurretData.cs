@@ -1,13 +1,12 @@
 ﻿using System;
+using Enums.Animations;
+using UnityEngine.Rendering;
 
 namespace Data.ValueObject.Base
 {
     [Serializable]
     public class TurretData
     {
-        public int TurretCost;
-        public bool TurretCostisPaid;
-        public int TurretSoldierCost;
-        public bool TurretSoldierCostPaid;
+        public SerializedDictionary<RoomNames, TurretGOData> TurretsData;
     }
 }

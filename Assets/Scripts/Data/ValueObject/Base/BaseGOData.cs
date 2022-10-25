@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums.Animations;
 using UnityEngine.Rendering;
 
 namespace Data.ValueObject.Base
@@ -7,6 +8,6 @@ namespace Data.ValueObject.Base
     public class BaseGOData
     {
         public MineData MineData;
-        public SerializedDictionary<string, RoomData> RoomsData;
+        public SerializedDictionary<RoomNames, RoomData> RoomsData;
     }
 }

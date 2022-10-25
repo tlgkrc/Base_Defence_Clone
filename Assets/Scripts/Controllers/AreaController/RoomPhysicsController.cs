@@ -1,15 +1,18 @@
-﻿using Signals;
+﻿using System;
+using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.AreaController
 {
     
-    public class Sprite : MonoBehaviour
+    public class RoomPhysicsController : MonoBehaviour
     {
         #region Self Variables
 
         #region Serialized Variables
 
+        [SerializeField] private RoomManager roomManager;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private int speed;
 
@@ -43,30 +46,31 @@ namespace Controllers.AreaController
                 }
                 else
                 {
-                    SendBaseSignals(tag);
                     transform.parent.gameObject.SetActive(false);
                 }
             }
         }
 
-        private void SendBaseSignals(string sectionTag)
+        private void OnTriggerEnter(Collider other)
         {
-            switch (sectionTag)
+            if (other.CompareTag("Player"))
             {
-                case "StageArea":
-                    BaseSignals.Instance.onUpdateStageArea?.Invoke(transform.parent.transform.parent.gameObject);
-                    break;
-                case "StageTurret":
-                    break;
-                case "Weapon":
-                    break;
-                case "TurretShooter" :
-                    BaseSignals.Instance.onOpenTurretWorker?.Invoke();
-                    break;
-                default:
-                    Debug.Log("You forgot a section!!!");
-                    break;
+                roomManager.BuyRoom();
             }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+               roomManager.StopBuying();
+            }
+        }
+
+        public void SetRadialVisual(int moneyToPay,int costOfRoom)
+        {
+            float newValue = (float)moneyToPay / costOfRoom;
+            _material.SetFloat(Arc2,newValue);
         }
     }
 }

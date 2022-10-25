@@ -6,7 +6,7 @@ namespace Data.ValueObject.Base
     public class RoomData
     {
         public int Cost;
-        public bool isPaid;
-        public TurretData TurretData;
+        public int PaidAmount;
+        public float BuyDelay;
     }
 }

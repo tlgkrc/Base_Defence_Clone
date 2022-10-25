@@ -18,21 +18,11 @@ MonoBehaviour:
         Cost: 500
         MaxMiner: 12
       RoomsData:
-        m_Keys:
-        - RoomLeft1
-        - RoomRight1
+        m_Keys: 0000000001000000
         m_Values:
         - Cost: 500
-          isPaid: 0
-          TurretData:
-            TurretCost: 300
-            TurretCostisPaid: 0
-            TurretSoldierCost: 200
-            TurretSoldierCostPaid: 0
-        - Cost: 500
-          isPaid: 0
-          TurretData:
-            TurretCost: 300
-            TurretCostisPaid: 0
-            TurretSoldierCost: 200
-            TurretSoldierCostPaid: 0
+          PaidAmount: 0
+          BuyDelay: 0.2
+        - Cost: 400
+          PaidAmount: 0
+          BuyDelay: 0.2

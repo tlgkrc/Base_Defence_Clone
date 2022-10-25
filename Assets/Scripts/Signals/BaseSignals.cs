@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.ValueObject.Base;
 using Extentions;
 using Keys;
 using UnityEngine;
