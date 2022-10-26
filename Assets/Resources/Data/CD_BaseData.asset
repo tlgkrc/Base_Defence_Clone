@@ -12,17 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e448749517fe4eba9cc94a30a3add68c, type: 3}
   m_Name: CD_BaseData
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   BaseData:
     BaseGoData:
       MineData:
         Cost: 500
-        MaxMiner: 12
+        MaxMiner: 8
       RoomsData:
         m_Keys: 0000000001000000
         m_Values:
         - Cost: 500
           PaidAmount: 0
-          BuyDelay: 0.2
-        - Cost: 400
-          PaidAmount: 0
-          BuyDelay: 0.2
+          BuyDelay: 0.05
+        - Cost: 150
+          PaidAmount: 150
+          BuyDelay: 0.05

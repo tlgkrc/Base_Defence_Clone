@@ -7,6 +7,6 @@ namespace Data.ValueObject.Base
     [Serializable]
     public class TurretData
     {
-        public SerializedDictionary<RoomNames, TurretGOData> TurretsData;
+        public SerializedDictionary<int, TurretGOData> TurretsData;
     }
 }

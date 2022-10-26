@@ -171,7 +171,7 @@ Material:
     - _GlossyReflections: 1
     - _IndirectIntensity: 1
     - _IndirectIntensityOutline: 0
-    - _Initialized: 0
+    - _Initialized: 1
     - _InputTab: 1
     - _MatCapMaskChannel: 0
     - _MatCapType: 0

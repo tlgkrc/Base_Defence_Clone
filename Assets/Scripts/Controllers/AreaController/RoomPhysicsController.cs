@@ -1,6 +1,4 @@
-﻿using System;
-using Managers;
-using Signals;
+﻿using Managers;
 using UnityEngine;
 
 namespace Controllers.AreaController
@@ -14,7 +12,6 @@ namespace Controllers.AreaController
 
         [SerializeField] private RoomManager roomManager;
         [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private int speed;
 
         #endregion
 
@@ -38,16 +35,16 @@ namespace Controllers.AreaController
         {
             if (other.CompareTag("Player"))
             {
-                _value += Time.time * speed;
-                _currenValue = (int)(360 - _value);
-                if (_currenValue > 0)
-                {
-                    _material.SetFloat(Arc2, _currenValue);
-                }
-                else
-                {
-                    transform.parent.gameObject.SetActive(false);
-                }
+                // _value += Time.time * speed;
+                // _currenValue = (int)(360 - _value);
+                // if (_currenValue > 0)
+                // {
+                //     _material.SetFloat(Arc2, _currenValue);
+                // }
+                // else
+                // {
+                //     transform.parent.gameObject.SetActive(false);
+                // }
             }
         }
 
@@ -69,7 +66,7 @@ namespace Controllers.AreaController
 
         public void SetRadialVisual(int moneyToPay,int costOfRoom)
         {
-            float newValue = (float)moneyToPay / costOfRoom;
+            float newValue = (float)((moneyToPay / costOfRoom)*360);
             _material.SetFloat(Arc2,newValue);
         }
     }

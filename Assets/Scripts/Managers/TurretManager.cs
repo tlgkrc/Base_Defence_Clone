@@ -28,7 +28,7 @@ namespace Managers
         [SerializeField] private Transform shooterTransform;
         [SerializeField] private GameObject turretWorker;
         [SerializeField] private TurretPhysicController physicController;
-        [SerializeField] private RoomNames roomName;
+        [SerializeField] private int id;
         [SerializeField] private TextMeshPro costTurretAI;
         
         #endregion
@@ -41,7 +41,7 @@ namespace Managers
         private int _bulletCount;
         private float _shootTime;
         private int _shootingCount;
-        private TurretGOData _turretData;
+        private TurretGOData _turretGOData;
 
         #endregion
         #endregion
@@ -49,18 +49,18 @@ namespace Managers
         private void Awake()
         {
             _hasShooter = false;
-            _turretData = GetTurretData();
+            _turretGOData = GetTurretData();
             GetReferences();
         }
 
         private TurretGOData GetTurretData()
         {
-            return Resources.Load<CD_TurretData>("Game/CD_TurretData").TurretData.TurretsData[roomName];
+            return Resources.Load<CD_TurretData>("Data/CD_TurretData").TurretData.TurretsData[id];
         }
 
         private void GetReferences()
         {
-            SetTurretCostText(_turretData.TurretSoldierCost);
+            SetTurretCostText(_turretGOData.TurretSoldierCost);
         }
 
         #region Event Subscription
@@ -144,7 +144,7 @@ namespace Managers
             if (_shooterIsPlayer)
             {
                 var rotationX = BaseSignals.Instance.onSetTurretRotation?.Invoke();
-                var newVec =_turretData.RotationBorderOffset * rotationX ;
+                var newVec =_turretGOData.RotationBorderOffset * rotationX ;
                 if (newVec == null) return;
                 Transform transform1;
                 (transform1 = transform).rotation = Quaternion.Euler((Vector3)newVec);
@@ -174,7 +174,7 @@ namespace Managers
         private void AutoShoot()
         {
             _shootTime += Time.deltaTime;
-            while (_shootTime >= _turretData.ShootingDelay)
+            while (_shootTime >= _turretGOData.ShootingDelay)
             {
                 _shootTime = 0;
                 _shootingCount += 1;
