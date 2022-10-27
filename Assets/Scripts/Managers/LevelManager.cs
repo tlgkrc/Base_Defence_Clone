@@ -3,6 +3,8 @@ using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Commands;
+using Commands.Level;
+
 namespace Managers
 {
     public class LevelManager : MonoBehaviour
@@ -47,7 +49,6 @@ namespace Managers
         private int GetLevelCount()
         {
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
-           
         }
 
         #region Event Subscription
@@ -112,8 +113,8 @@ namespace Managers
 
         private void SetLevelText()
         {
-            
-            UISignals.Instance.onSetLevelText?.Invoke(_levelID);
+
+            BaseSignals.Instance.onSetBaseLevelText?.Invoke(_levelID);
 
         }
         private void OnInitializeLevel()

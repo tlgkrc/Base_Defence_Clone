@@ -73,7 +73,14 @@ namespace AI.Subscribers
         {
             _aiStateMachine.AddTransition(to, from, condition);
         }
-        
+
+        private void Start()
+        {
+            turretAmmoTransforms = BaseSignals.Instance.onSetAmmoStockTransforms?.Invoke();
+            ammoDepot = BaseSignals.Instance.onSetAmmoDepotTransform?.Invoke();
+
+        }
+
         private AmmoSupplierData GetAmmoSupplierData()
         {
             return Resources.Load<CD_AmmoSupplier>("Data/CD_AmmoSupplier").AmmoSupplierData;

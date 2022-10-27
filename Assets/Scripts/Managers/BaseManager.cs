@@ -13,14 +13,18 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private RoomManager roomManager;
         [SerializeField] private TextMeshPro baseText;
+        [SerializeField] private List<Transform> mineTransforms = new List<Transform>();
+        [SerializeField] private Transform gemStockTransform;
+        [SerializeField] private List<Transform> ammoStockTransforms;
+        [SerializeField] private Transform ammoDepotTransform;
 
         #endregion
 
         #region Private Variables
 
         private List<int> _currentStages;//will be saved for each stageArea
+        private const string Base = "BASE ";
 
         #endregion
 
@@ -35,12 +39,22 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onUpdateStageArea += OnUpdateStageArea;
+            BaseSignals.Instance.onSetBaseLevelText += OnSetBaseLevelText;
+            BaseSignals.Instance.onSetMineTransforms += OnSetMineTransforms;
+            BaseSignals.Instance.onSetGemStock += OnSetGemStockTransform;
+            BaseSignals.Instance.onSetAmmoStockTransforms += OnSetAmmoStockTransforms;
+            BaseSignals.Instance.onSetAmmoDepotTransform += OnSetAmmoDepotTransforms;
         }
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onUpdateStageArea -= OnUpdateStageArea;
+            BaseSignals.Instance.onSetBaseLevelText -= OnSetBaseLevelText;
+            BaseSignals.Instance.onSetMineTransforms -= OnSetMineTransforms;
+            BaseSignals.Instance.onSetGemStock -= OnSetGemStockTransform;
+            BaseSignals.Instance.onSetAmmoStockTransforms -= OnSetAmmoStockTransforms;
+            BaseSignals.Instance.onSetAmmoDepotTransform -= OnSetAmmoDepotTransforms;
+
+
         }
 
         private void OnDisable()
@@ -49,11 +63,30 @@ namespace Managers
         }
 
         #endregion
-        
 
-        private void OnUpdateStageArea(GameObject gO)
+        private void OnSetBaseLevelText(int levelId)
         {
-           // stage.UpdateStageArea(gO);
+            baseText.text = Base + (levelId +1 ).ToString();
+        }
+
+        private List<Transform> OnSetMineTransforms()
+        {
+            return mineTransforms;
+        }
+
+        private Transform OnSetGemStockTransform()
+        {
+            return gemStockTransform;
+        }
+        
+        private List<Transform> OnSetAmmoStockTransforms()
+        {
+            return ammoStockTransforms;
+        }
+
+        private Transform OnSetAmmoDepotTransforms()
+        {
+            return ammoDepotTransform;
         }
     }
 }
