@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6049378192198010347}
   - component: {fileID: 5789247979946804593}
-  - component: {fileID: 1716118153482126966}
+  - component: {fileID: 2564181233667726766}
   m_Layer: 0
   m_Name: Physic
   m_TagString: TurretShooter
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5014944, y: 2.5399225, z: 1.6606932}
   m_Center: {x: -0.0867672, y: 1.0711786, z: 0.0071673393}
---- !u!114 &1716118153482126966
+--- !u!114 &2564181233667726766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,11 +55,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 61118099316883931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf14e38058374dc39cfbcb1ab86dd989, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a97bb8de5314f1aa286ec8edfe3d4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCollider: {fileID: 9143435115241669566}
   spriteRenderer: {fileID: 3005216897797278440}
-  speed: 1
+  turretManager: {fileID: 2560986159691984874}
 --- !u!1 &841987520992970167
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,16 +777,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: GatalingBL
       objectReference: {fileID: 0}
+    - target: {fileID: 4239434420246843909, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+        type: 3}
+      propertyPath: turretManager
+      value: 
+      objectReference: {fileID: 2560986159691984874}
+    - target: {fileID: 4239434420246843909, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+        type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 3005216897797278440}
+    - target: {fileID: 4239434420703035874, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+        type: 3}
+      propertyPath: costTurretAI
+      value: 
+      objectReference: {fileID: 8353970935170744247}
     - target: {fileID: 4239434420703035874, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
         type: 3}
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 4239434418997272531}
+    - target: {fileID: 4239434420703035874, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+        type: 3}
+      propertyPath: physicController
+      value: 
+      objectReference: {fileID: 2564181233667726766}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e6a4454ed3a491408957a2dd4baf0a8, type: 3}
 --- !u!4 &2238749164663585713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 454492975025214905, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1828193662160367112}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2560986159691984874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4239434420703035874, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1828193662160367112}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190322920594470844dc8210fe8b184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &9143435115241669566 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 7474583090533264822, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
     type: 3}
   m_PrefabInstance: {fileID: 1828193662160367112}
   m_PrefabAsset: {fileID: 0}
@@ -864,3 +903,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9050663887451763262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8353970935170744247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1041790117293755785, guid: e42516b930ca5e74c8203073c27d2841,
+    type: 3}
+  m_PrefabInstance: {fileID: 9050663887451763262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -29,9 +29,9 @@ MonoBehaviour:
       RoomsData:
         m_Keys: 0000000001000000
         m_Values:
-        - Cost: 500
+        - Cost: 250
           PaidAmount: 0
           BuyDelay: 0.05
         - Cost: 150
-          PaidAmount: 150
+          PaidAmount: 0
           BuyDelay: 0.05

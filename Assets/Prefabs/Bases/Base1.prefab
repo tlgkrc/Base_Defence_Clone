@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &576477266680776725
 Transform:
   m_ObjectHideFlags: 0
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomCostTMP: {fileID: 4992498723151767188}
-  roomName: 1
+  roomName: 0
   roomPhysicsController: {fileID: 261058903}
   openedArea: {fileID: 576477267295183860}
   closedArea: {fileID: 3995526531881535726}
@@ -2015,7 +2015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &576477267295183861
 Transform:
   m_ObjectHideFlags: 0
@@ -3708,7 +3708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomManager: {fileID: 7216952406325578102}
   spriteRenderer: {fileID: 576477267646855066}
-  speed: 0
 --- !u!1 &576477268007526404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,7 +4231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomManager: {fileID: 3218121580002225420}
   spriteRenderer: {fileID: 576477266750771652}
-  speed: 0
 --- !u!1 &576477268248637911
 GameObject:
   m_ObjectHideFlags: 0
@@ -5871,7 +5869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087137713019181570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.913}
+  m_LocalPosition: {x: -0, y: 0, z: 4.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9552,10 +9550,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 576477267386796597}
     m_Modifications:
+    - target: {fileID: 1744552125841648033, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2982350078083317454, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
       propertyPath: m_Name
       value: CostPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562468262067091879, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8740775431253629544, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
@@ -10458,10 +10466,20 @@ PrefabInstance:
       propertyPath: costTurretAI
       value: 
       objectReference: {fileID: 5276595237278774541}
+    - target: {fileID: 5542247617680378777, guid: a4f49ca1dd9b8f945982f204fa79e414,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6801577419074756682, guid: a4f49ca1dd9b8f945982f204fa79e414,
         type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327231456402807711, guid: a4f49ca1dd9b8f945982f204fa79e414,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9202480554884431554, guid: a4f49ca1dd9b8f945982f204fa79e414,
         type: 3}
@@ -10824,10 +10842,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 576477266599465640}
     m_Modifications:
+    - target: {fileID: 1041790117293755785, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744552125841648033, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2982350078083317454, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
       propertyPath: m_Name
       value: CostPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562468262067091879, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8740775431253629544, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
@@ -11137,10 +11170,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 576477268273927651}
     m_Modifications:
+    - target: {fileID: 1744552125841648033, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2982350078083317454, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
       propertyPath: m_Name
       value: CostPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562468262067091879, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8740775431253629544, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}

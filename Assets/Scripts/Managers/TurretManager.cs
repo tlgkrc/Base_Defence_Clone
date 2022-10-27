@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -6,7 +7,6 @@ using Controllers.Turret;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
-using Enums.Animations;
 using TMPro;
 
 namespace Managers
@@ -42,6 +42,8 @@ namespace Managers
         private float _shootTime;
         private int _shootingCount;
         private TurretGOData _turretGOData;
+        private bool _isOnArea;
+        private int _moneyToPay;
 
         #endregion
         #endregion
@@ -113,6 +115,7 @@ namespace Managers
             _shooterIsPlayer = false;
             turretWorker.SetActive(true);
             physicController.CloseCollider();
+            physicController.transform.parent.gameObject.SetActive(false);
         }
 
         private void OnReleasePlayer()
@@ -156,7 +159,10 @@ namespace Managers
             }
             else
             {
-                transform.LookAt(_hitList[0].transform.position);
+                if (_hitList.Count != 0)
+                {
+                    transform.LookAt(_hitList[0].transform.position);
+                }
             }
         }
 
@@ -191,7 +197,41 @@ namespace Managers
 
         private void SetTurretCostText(int cost)
         {
-            costTurretAI.text = "<sprite index=0>" + cost.ToString();
+            costTurretAI.text = cost.ToString();
+        }
+
+        public void BuyTurretWorker()
+        {
+            _isOnArea = true;
+            StartCoroutine(Buy());
+        }
+
+        public void StopBuying()
+        {
+            StopCoroutine(Buy());
+            _isOnArea = false;
+        }
+        
+        private IEnumerator Buy()
+        {
+            while (_isOnArea)
+            {
+                _moneyToPay = _turretGOData.TurretSoldierCost - _turretGOData.TurretSoldierCostPaid;
+                physicController.SetRadialVisual(_turretGOData.TurretSoldierCostPaid,_turretGOData.TurretSoldierCost);
+                SetRoomMoney(_moneyToPay);
+                if(_moneyToPay == 0)
+                {
+                    OnOpenTurretWorker();
+                    yield break;
+                }
+                _turretGOData.TurretSoldierCostPaid++;
+                yield return new WaitForSeconds(_turretGOData.BuyDelay);
+            }
+        }
+
+        private void SetRoomMoney(int money)
+        {
+            costTurretAI.text = money.ToString();
         }
     }
 }

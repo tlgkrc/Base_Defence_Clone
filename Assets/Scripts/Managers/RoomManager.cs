@@ -103,6 +103,7 @@ namespace Managers
                 }
                 _roomData.PaidAmount++;
                 SetRoomMoney(_moneyToPay);
+                roomPhysicsController.SetRadialVisual(_roomData.PaidAmount, _roomData.Cost);
                 yield return new WaitForSeconds(_roomData.BuyDelay);
             }
             
@@ -116,7 +117,7 @@ namespace Managers
 
         private void SetRoomMoney(int money)
         {
-            roomCostTMP.text = "<sprite index=0>" + money;
+            roomCostTMP.text = money.ToString();
         }
     }
 }

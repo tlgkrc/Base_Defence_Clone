@@ -31,23 +31,6 @@ namespace Controllers.AreaController
             _material = spriteRenderer.material;
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                // _value += Time.time * speed;
-                // _currenValue = (int)(360 - _value);
-                // if (_currenValue > 0)
-                // {
-                //     _material.SetFloat(Arc2, _currenValue);
-                // }
-                // else
-                // {
-                //     transform.parent.gameObject.SetActive(false);
-                // }
-            }
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -64,10 +47,10 @@ namespace Controllers.AreaController
             }
         }
 
-        public void SetRadialVisual(int moneyToPay,int costOfRoom)
+        public void SetRadialVisual(int paidAmount,int costOfRoom)
         {
-            float newValue = (float)((moneyToPay / costOfRoom)*360);
-            _material.SetFloat(Arc2,newValue);
+            _value = (1-(paidAmount/costOfRoom)) * 360;
+            _material.SetFloat(Arc2,_value);
         }
     }
 }

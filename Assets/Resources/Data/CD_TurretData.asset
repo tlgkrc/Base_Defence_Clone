@@ -12,25 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e108729aa4d48ffbd876ae386ad3e6a, type: 3}
   m_Name: CD_TurretData
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   TurretData:
     TurretsData:
       m_Keys: 000000000100000002000000
       m_Values:
-      - TurretCost: 200
-        TurretCostisPaid: 0
-        TurretSoldierCost: 250
+      - TurretSoldierCost: 250
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0
-      - TurretCost: 250
-        TurretCostisPaid: 0
-        TurretSoldierCost: 200
+        ShootingDelay: 1
+        BuyDelay: 0.05
+      - TurretSoldierCost: 200
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0
-      - TurretCost: 300
-        TurretCostisPaid: 0
-        TurretSoldierCost: 250
+        ShootingDelay: 1
+        BuyDelay: 0.05
+      - TurretSoldierCost: 250
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0
+        ShootingDelay: 1
+        BuyDelay: 0.05

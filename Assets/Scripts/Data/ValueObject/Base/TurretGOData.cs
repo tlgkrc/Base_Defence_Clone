@@ -7,8 +7,9 @@ namespace Data.ValueObject.Base
     public class TurretGOData
     {
         public int TurretSoldierCost;
-        public bool TurretSoldierCostPaid;
+        public int TurretSoldierCostPaid;
         public Vector3 RotationBorderOffset;
         public float ShootingDelay;
+        public float BuyDelay;
     }
 }
