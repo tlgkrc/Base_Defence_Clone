@@ -17,6 +17,10 @@ TagManager:
   - Turret
   - Enemy
   - TurretShooter
+  - AmmoDepot
+  - AmmoStack
+  - BuyMWorker
+  - BuyAWorker
   layers:
   - Default
   - TransparentFX

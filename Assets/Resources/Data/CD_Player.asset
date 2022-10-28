@@ -16,3 +16,4 @@ MonoBehaviour:
     MovementData:
       Speed: 4.5
       IdleRotateSpeed: 720
+    MaxStackCount: 8

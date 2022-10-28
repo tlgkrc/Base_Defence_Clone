@@ -15,7 +15,7 @@ namespace Managers
 
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private TextMeshProUGUI moneyText;
-        [SerializeField] private TextMeshProUGUI gemText;
+        [SerializeField] private TextMeshProUGUI diamondText;
 
         #endregion
 
@@ -41,22 +41,14 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnPlay;
-            UISignals.Instance.onOpenPanel += OnOpenPanel;
-            UISignals.Instance.onClosePanel += OnClosePanel;
-            UISignals.Instance.onSetLevelText += OnSetLevelText;
-            UISignals.Instance.onSetScoreText += OnSetScoreText;
-
+            UISignals.Instance.onSetMoneyText += OnSetMoneyText;
+            UISignals.Instance.onSetDiamondText += OnSetDiamondText;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-            UISignals.Instance.onOpenPanel -= OnOpenPanel;
-            UISignals.Instance.onClosePanel -= OnClosePanel;
-            UISignals.Instance.onSetLevelText -= OnSetLevelText;
-            UISignals.Instance.onSetScoreText -= OnSetScoreText;
-
+            UISignals.Instance.onSetMoneyText -= OnSetMoneyText;
+            UISignals.Instance.onSetDiamondText -= OnSetDiamondText;
         }
 
         private void OnDisable()
@@ -65,37 +57,6 @@ namespace Managers
         }
 
         #endregion
-
-        #region Event Methods
-
-        private void OnPlay()
-        {
-            
-        }
-
-        private void OnOpenPanel(UIPanels panelParam)
-        {
-            //_uiPanelController.OpenPanel(panelParam , panels);
-        }
-
-        private void OnClosePanel(UIPanels panelParam)
-        {
-            //_uiPanelController.ClosePanel(panelParam , panels);
-        }
-        
-        private void OnSetScoreText(int value)
-        {
-            
-        }
-
-        private void OnSetLevelText(int value)
-        {
-            
-        }
-
-        #endregion
-
-        #region Buttons
 
         public void Settings()
         {
@@ -108,9 +69,17 @@ namespace Managers
             {
                 settingsPanel.SetActive(true);
             }
-            
         }
 
-        #endregion
+        private void OnSetMoneyText(int totalMoney)
+        {
+            moneyText.text = totalMoney.ToString();
+        }
+
+        private void OnSetDiamondText(int totalDiamond)
+        {
+            diamondText.text = totalDiamond.ToString();
+        }
+
     }
 }

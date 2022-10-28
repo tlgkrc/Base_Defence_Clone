@@ -23,8 +23,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-
-        private List<int> _currentStages;//will be saved for each stageArea
+        
         private const string Base = "BASE ";
 
         #endregion

@@ -10,7 +10,7 @@ namespace Signals
     public class BaseSignals : MonoSingleton<BaseSignals>
     {
         public UnityAction<bool> onPlayerInBase = delegate{  };
-        public  UnityAction onSetPlayerToTurretShooter = delegate {  };
+        public  UnityAction<int> onSetPlayerToTurretShooter = delegate {  };
         public UnityAction onReleasePlayer = delegate {  };
         public Func<float> onSetTurretRotation = () => 0;
         public UnityAction<TurretTransformParams> onSetPlayerTransformAtTurret = delegate {  };

@@ -9,8 +9,8 @@ namespace Signals
     {
         public UnityAction<int> onSetScore = delegate { };
         public UnityAction<int> onGetScore =delegate {  };
-        public UnityAction<int> onUpdateScore = delegate {  };
-        public UnityAction<int> onSetTotalScore = delegate { };
+        public UnityAction<int> onUpdateMoneyScore = delegate {  };
+        public UnityAction<int> onUpdateDiamonScore = delegate { };
         public UnityAction onSendFinalScore = delegate { };
         public UnityAction<bool> onVisibleScore = delegate {  };
         public UnityAction<GameObject> onSetLeadPosition = delegate {  };

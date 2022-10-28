@@ -7,6 +7,7 @@ namespace Data.ValueObject
     public class PlayerData
     {
         public PlayerMovementData MovementData;
+        public int MaxStackCount;
     }
 
     [Serializable]
@@ -14,5 +15,6 @@ namespace Data.ValueObject
     {
         public float Speed;
         public float IdleRotateSpeed;
+        
     }
 }

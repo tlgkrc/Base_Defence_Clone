@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -18,6 +17,8 @@ namespace Managers
 
         [SerializeField] private List<Transform> hostagePlaceTransforms;
         [SerializeField] private List<Transform> enemyCreateTransforms;
+        [SerializeField] private Transform buyAmmoWorkerTransform;
+        [SerializeField] private Transform buyMoneyWorkerTransform;
 
         #endregion
 

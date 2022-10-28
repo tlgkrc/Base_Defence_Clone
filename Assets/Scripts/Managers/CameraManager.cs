@@ -16,6 +16,7 @@ namespace Managers
         #region Serialized Variables
         
         [SerializeField]private CinemachineVirtualCamera levelCamera;
+        [SerializeField] private CinemachineVirtualCamera turretCamera;
 
         #endregion
 
@@ -55,11 +56,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSetCameraState += OnSetCameraState;
+            CoreGameSignals.Instance.onSetCameraAtTurret += OnSetCameraAtTurret;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onSetCameraState -= OnSetCameraState;
+            CoreGameSignals.Instance.onSetCameraAtTurret -= OnSetCameraAtTurret;
+
         }
 
         private void OnDisable()
@@ -99,6 +103,12 @@ namespace Managers
             levelCamera.Follow = null; 
             levelCamera.LookAt = null;
             levelCamera = transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
+        }
+
+        private void OnSetCameraAtTurret(Transform playerTransform)
+        {
+            var newVec = playerTransform.position + Vector3.back * 5f + Vector3.up * 4f;
+            turretCamera.transform.position = newVec;
         }
     }
 }

@@ -40,7 +40,6 @@ namespace Managers
         #endregion
 
         #endregion
-        //max count override secenegi olcak override edilecek ise seviye ustune eklenicek
 
         private void Awake()
         {
@@ -77,6 +76,7 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks += OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement += OnRemoveLastElement;
+            StackSignals.Instance.onAddAmmoBoxToPlayer += OnAddAmmoBoxToPlayer;
         }
 
         private void UnsubscribeEvents()
@@ -86,6 +86,7 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks -= OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement -= OnRemoveLastElement;
+            StackSignals.Instance.onAddAmmoBoxToPlayer -= OnAddAmmoBoxToPlayer;
         }
 
         private void OnDisable()
@@ -110,7 +111,6 @@ namespace Managers
 
         private void OnClearDynamicStack(int managerId)
         {
-            Debug.Log(managerId +"---" + transform.parent.GetInstanceID() );
             if (transform.parent.GetInstanceID() == managerId)
             {
                  ClearDynamicStack();
@@ -119,7 +119,7 @@ namespace Managers
 
         private void OnTransferBetweenStacks(int managerId,StackManager from,StackManager to)
         {
-            if (managerId == transform.parent.GetInstanceID())
+            if (managerId == to.GetInstanceID())
             {
                  TransferBetweenStacks(from ,to);
             }
@@ -164,10 +164,12 @@ namespace Managers
 
         public void ClearStaticStack(Transform pTransform)
         {
+            ScoreSignals.Instance.onUpdateDiamonScore?.Invoke(_stackList.Count);
             foreach (var gO in _stackList) 
             {
                 ClearStackAnimation(gO, pTransform);
-            } 
+            }
+            
             _stackList.Clear();
         }
 
@@ -228,6 +230,24 @@ namespace Managers
                  
             }
             from._stackList.Clear();
+        }
+
+        private void OnAddAmmoBoxToPlayer(int id)
+        {
+            if (id == transform.parent.GetInstanceID() && stackType == StackTypes.AmmoBox)
+            {
+                var maxStackCount = StackSignals.Instance.onGetMaxPlayerStackCount?.Invoke();
+                for (int i = 0; i < maxStackCount; i++)
+                {
+                    var bulletBox =
+                        PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.BulletBox.ToString(), transform);
+                    if (bulletBox == null) continue;
+                    _stackList.Add(bulletBox);
+                    bulletBox.transform.parent = transform;
+                    DynamicStackAddingAnimation(bulletBox, bulletBox.transform.localPosition,
+                        _gridSystem.NextPoint(_stackList.Count));
+                }
+            }
         }
     }
 }

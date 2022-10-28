@@ -61,7 +61,6 @@ namespace Managers
             InputSignals.Instance.onEnableInput += OnEnableInput;
             InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onReset += OnReset;
-            LevelSignals.Instance.onNextLevel += OnNextLevel;
             BaseSignals.Instance.onSetTurretRotation += OnSetTurretRotation;
         }
 
@@ -70,7 +69,6 @@ namespace Managers
             InputSignals.Instance.onEnableInput -= OnEnableInput;
             InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onReset -= OnReset;
-            LevelSignals.Instance.onNextLevel += OnNextLevel;
             BaseSignals.Instance.onSetTurretRotation -= OnSetTurretRotation;
 
         }

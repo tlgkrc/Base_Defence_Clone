@@ -103,10 +103,13 @@ namespace Managers
             }
         }
         
-        private void OnSetPlayerTurretShooter()
+        private void OnSetPlayerTurretShooter(int id)
         {
-            _hasShooter = true;
-            _shooterIsPlayer = true;
+            if (id == transform.GetInstanceID())
+            {
+                _hasShooter = true;
+                _shooterIsPlayer = true;
+            }
         }
 
         private void OnOpenTurretWorker()

@@ -102,7 +102,7 @@ namespace AI.Subscribers
         public void DeliverAmmo(int index)
         {
             StackSignals.Instance.onTransferBetweenStacks?.
-                Invoke(transform.GetInstanceID(),stackManager,_turretAmmoTransforms[index].GetComponent<StackManager>());
+                Invoke(_turretAmmoTransforms[index].GetComponent<StackManager>().GetInstanceID(),stackManager,_turretAmmoTransforms[index].GetComponent<StackManager>());
             StackSignals.Instance.onDeliverAmmoBox?.
                 Invoke(_turretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
         }

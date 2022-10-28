@@ -68,10 +68,9 @@ namespace Managers
             InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged += OnSetIdleInputValues;
             CoreGameSignals.Instance.onReset += OnReset;
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
+            StackSignals.Instance.onGetMaxPlayerStackCount += OnGetMaxPlayerStackCount;
         }
 
         private void UnsubscribeEvents()
@@ -80,10 +79,10 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged -= OnSetIdleInputValues;
             CoreGameSignals.Instance.onReset -= OnReset;
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret -= OnSetPlayerTransformAtTurret;
+            StackSignals.Instance.onGetMaxPlayerStackCount -= OnGetMaxPlayerStackCount;
+
         }
 
         private void OnDisable()
@@ -186,7 +185,17 @@ namespace Managers
                 playerPhysicsController.gameObject.layer = playerLayer;
             }
         }
+
+        private int OnGetMaxPlayerStackCount()
+        {
+            return Data.MaxStackCount;
+        }
         
         #endregion
+
+        public int SendDataToControllers()
+        {
+            return Data.MaxStackCount;
+        }
     }
 }
