@@ -1843,13 +1843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b35727053394d7ea5da2eacb8e10f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mineTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gem: {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06, type: 3}
-  gemStock: {fileID: 0}
   fakeGem: {fileID: 294990017457930943}
   animator: {fileID: 6670891874536653967}
   pickAxe: {fileID: 4598221176897067869}
@@ -1872,7 +1866,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!208 &5911814678468513080

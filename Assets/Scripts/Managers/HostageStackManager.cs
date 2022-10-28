@@ -27,7 +27,7 @@ namespace Managers
         private List<GameObject> hostageGameObjects = new List<GameObject>();
         private HostageStackData _hostageStackData;
         private GameObject _playerGameObject;
-        private float _maxDistance = 1f;
+        private float _maxDistance = 2f;
         private float _speed = 2f;
 
         #endregion
@@ -36,7 +36,6 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-            //ItemAddOnStackCommand = new ItemAddOnStackCommand(ref hostageGameObjects,transform,_hostageStackData);
         }
 
         private void GetReferences()
@@ -74,7 +73,6 @@ namespace Managers
 
         private void OnAddHostageToStack(GameObject arg0)
         {
-            //ItemAddOnStackCommand.Execute(arg0);
             hostageGameObjects.Add(arg0);
         }
 
@@ -82,16 +80,11 @@ namespace Managers
         {
             Move();
         }
-
-        private void StackMove()
-        {
-            
-        }
+        
         private void OnSetPlayer(GameObject arg0)
         {
             _playerGameObject = arg0;
         }
-
 
         private void Move()
         {

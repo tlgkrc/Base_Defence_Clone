@@ -3,7 +3,9 @@
     public enum PoolTypes
     {
         Diamond,
-        Enemy,
+        WeakZombie,
+        MidZombie,
+        ProZombie,
         Bullet,
         Money,
         Hostage,

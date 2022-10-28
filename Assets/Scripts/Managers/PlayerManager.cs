@@ -102,6 +102,7 @@ namespace Managers
             SetStackPosition();
             movementController.EnableMovement();
             animationController.SetAnimState(PlayerAnimStates.Walk);
+            StackSignals.Instance.onActivateMoveHostageStack?.Invoke(true);
         }
 
         private void OnDeactivateMovement()
@@ -109,6 +110,7 @@ namespace Managers
             movementController.DisableMovement();
             animationController.SetAnimState(PlayerAnimStates.Idle); 
             animationController.ResetAnimSpeed();
+            StackSignals.Instance.onActivateMoveHostageStack?.Invoke(false);
         }
 
         private void OnSetIdleInputValues(IdleInputParams inputParams)
@@ -124,11 +126,7 @@ namespace Managers
 
         private void OnSetPlayerTransformAtTurret(TurretTransformParams turretTransformParams)
         {
-            if (turretTransformParams.Position != Vector3.zero)
-            {
-                movementController.UpdateTurretTransformParams(turretTransformParams);
-            }
-            
+            movementController.UpdateTurretTransformParams(turretTransformParams);
         }
 
         #endregion

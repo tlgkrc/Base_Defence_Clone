@@ -166,7 +166,7 @@ namespace Managers
         {
             foreach (var gO in _stackList) 
             {
-                    ClearStackAnimation(gO, pTransform);
+                ClearStackAnimation(gO, pTransform);
             } 
             _stackList.Clear();
         }

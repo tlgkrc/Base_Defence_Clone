@@ -28,7 +28,8 @@ namespace Controllers.Player
             }
             else if (other.CompareTag("Hostage"))
             {
-                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID(),gO);
+                StackSignals.Instance.onAddHostageToStack?.Invoke(other.transform.parent.gameObject);
+                BaseSignals.Instance.onPlaceNewHostage?.Invoke(other.transform);
             }
             else if(other.CompareTag("Money"))
             {

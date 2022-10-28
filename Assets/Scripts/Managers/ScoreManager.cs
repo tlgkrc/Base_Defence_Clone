@@ -1,5 +1,4 @@
 ﻿using Commands;
-using Enums;
 using Signals;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -13,9 +12,7 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject stackGO;
-        [SerializeField] private TextMeshPro scoreTMP, spriteTMP;
-        [SerializeField] private GameObject textPlane;
+        [SerializeField] private TextMeshPro moneyTMP, gemTMP;
 
         #endregion
 
@@ -53,7 +50,6 @@ namespace Managers
         private void SubscribeEvents()
         {
             ScoreSignals.Instance.onSetScore += OnUpdateScore;
-            CoreGameSignals.Instance.onPlay += OnPlay;
             ScoreSignals.Instance.onSetLeadPosition += OnSetLead;
             LevelSignals.Instance.onRestartLevel += OnReset;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
@@ -64,7 +60,6 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             ScoreSignals.Instance.onSetScore -= OnUpdateScore; 
-            CoreGameSignals.Instance.onPlay -= OnPlay;
             ScoreSignals.Instance.onSetLeadPosition -= OnSetLead;
             LevelSignals.Instance.onRestartLevel -= OnReset;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
@@ -82,19 +77,6 @@ namespace Managers
         
         #region Event Methods
 
-        private void OnPlay()
-        {
-            FindPlayerGameObject();
-        }
-
-        private void OnChangeGameState()
-        {
-            var transform1 = transform;
-            transform1.parent = _playerGO.transform;
-            transform1.localPosition = new Vector3(0, 2f, 0);
-            ScoreSignals.Instance.onSetScore?.Invoke(_savedScore);
-        }
-        
         private void OnSetLead(GameObject gO)
         {
             _parentGO = gO;
@@ -151,12 +133,6 @@ namespace Managers
             transform.rotation = Quaternion.Euler(0, 0, transform.rotation.z * -1f);
         }
 
-        private void FindPlayerGameObject()
-        {
-            _playerGO = GameObject.FindGameObjectWithTag("Player");
-            _isActive = true;
-        }
-        
         #endregion
     }
 }

@@ -5,6 +5,7 @@ using AI.States.Enemy;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,7 +25,7 @@ namespace AI.Subscribers
         #region Serialized Variables
 
         [SerializeField] private EnemyTypes enemyType;
-        [SerializeField] private List<Transform> baseTargetTransforms = new List<Transform>();
+        
         [SerializeField] private Animator animator;
 
         #endregion
@@ -34,6 +35,8 @@ namespace AI.Subscribers
         [ShowInInspector] private EnemyGOData _enemyGoData;
         private AIStateMachine _aiStateMachine;
         private bool _playerInRange = false;
+        [ShowInInspector] private List<Transform> _baseTargetTransforms = new List<Transform>();
+        
         #endregion
 
         #endregion
@@ -44,7 +47,7 @@ namespace AI.Subscribers
             _aiStateMachine = new AIStateMachine();
             var navMeshAgent = GetComponent<NavMeshAgent>();
 
-            var searchBaseTarget = new SearchForBaseTarget(this, baseTargetTransforms,animator);
+            var searchBaseTarget = new SearchForBaseTarget(this, _baseTargetTransforms,animator);
             var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData,animator);
             var attackToWall = new AttackToWall(this,animator);
             var moveToPlayer = new MoveToPlayer(this,navMeshAgent,_enemyGoData,animator);
@@ -61,6 +64,15 @@ namespace AI.Subscribers
             Func<bool> ReachedBaseTarget() => () => 
                 Target != null && Vector3.Distance(transform.position, Target.position) <= 1f;
             Func<bool> EnemyInRange() => () => _playerInRange;
+        }
+
+        private void Start()
+        {
+            var transforms = BaseSignals.Instance.onSetBaseTargetTransforms?.Invoke();
+            foreach (var value in transforms)
+            {
+                _baseTargetTransforms.Add(value);
+            }
         }
 
         private void At(IAIStates to, IAIStates from, Func<bool> condition)

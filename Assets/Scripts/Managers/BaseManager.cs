@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Controllers.AreaController;
+using Data.ValueObject.Base;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -14,11 +14,12 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private TextMeshPro baseText;
-        [SerializeField] private List<Transform> mineTransforms = new List<Transform>();
-        [SerializeField] private Transform gemStockTransform;
+        [SerializeField] private List<Transform> mineTransforms;
+        [SerializeField] private List<Transform> baseTurretTransforms;
         [SerializeField] private List<Transform> ammoStockTransforms;
+        [SerializeField] private Transform gemStockTransform;
         [SerializeField] private Transform ammoDepotTransform;
-
+        
         #endregion
 
         #region Private Variables
@@ -44,6 +45,7 @@ namespace Managers
             BaseSignals.Instance.onSetGemStock += OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoStockTransforms += OnSetAmmoStockTransforms;
             BaseSignals.Instance.onSetAmmoDepotTransform += OnSetAmmoDepotTransforms;
+            BaseSignals.Instance.onSetBaseTargetTransforms += OnSetBaseTargetTransforms;
         }
 
         private void UnsubscribeEvents()
@@ -53,8 +55,7 @@ namespace Managers
             BaseSignals.Instance.onSetGemStock -= OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoStockTransforms -= OnSetAmmoStockTransforms;
             BaseSignals.Instance.onSetAmmoDepotTransform -= OnSetAmmoDepotTransforms;
-
-
+            BaseSignals.Instance.onSetBaseTargetTransforms -= OnSetBaseTargetTransforms;
         }
 
         private void OnDisable()
@@ -87,6 +88,11 @@ namespace Managers
         private Transform OnSetAmmoDepotTransforms()
         {
             return ammoDepotTransform;
+        }
+
+        private List<Transform> OnSetBaseTargetTransforms()
+        {
+            return baseTurretTransforms;
         }
     }
 }

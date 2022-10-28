@@ -1,5 +1,5 @@
-﻿using System;
-using AI.Controllers;
+﻿using AI.Controllers;
+using Enums.Animations;
 using Signals;
 using UnityEngine;
 
@@ -15,10 +15,14 @@ namespace AI.Subscribers
 
         #region Serialized Variables
 
+        [SerializeField] private HostageAnimController animController;
+        [SerializeField] private GameObject helpGameObject;
 
         #endregion
 
         #region Private Variables
+
+        private bool _isCollected;
 
         #endregion
 
@@ -26,7 +30,7 @@ namespace AI.Subscribers
 
         private void Awake()
         {
-
+            SetAnim(HostageAnimState.Sit);
         }
         #region Subscription Events
 
@@ -37,11 +41,15 @@ namespace AI.Subscribers
 
         private void SubscribeEvents()
         {
+            StackSignals.Instance.onAddHostageToStack += OnAddHostageToStack;
+            StackSignals.Instance.onActivateMoveHostageStack += OnActivateMoveHostageStack;
 
         }
 
         private void UnsubscribeEvents()
         {
+            StackSignals.Instance.onAddHostageToStack -= OnAddHostageToStack;
+            StackSignals.Instance.onActivateMoveHostageStack -= OnActivateMoveHostageStack;
         }
 
         private void OnDisable()
@@ -51,5 +59,44 @@ namespace AI.Subscribers
 
         #endregion
 
+        public void SetAnim(HostageAnimState animState)
+        {
+            animController.SetAnim(animState);
+        }
+
+        public void SetState(bool isCollected)
+        {
+            _isCollected = true;
+            helpGameObject.SetActive(false);
+        }
+        
+        private void OnAddHostageToStack(GameObject arg0)
+        {
+            SetAnim(HostageAnimState.Idle);
+        }
+        
+        private void OnActivateMoveHostageStack(bool arg0)
+        {
+            if (_isCollected == false)
+            {
+                return;
+            }
+            if (arg0)
+            {
+                SetAnim(HostageAnimState.Walk);
+            }
+            else
+            {
+                SetAnim(HostageAnimState.Idle);
+            }
+        }
+
+        public void ResetHostage()
+        {
+            helpGameObject.SetActive(true);
+            _isCollected = false;
+            SetAnim(HostageAnimState.Sit);
+        }
+        
     }
 }
