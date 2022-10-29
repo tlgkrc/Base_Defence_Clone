@@ -56,12 +56,14 @@ namespace Managers
         {
             StackSignals.Instance.onAddHostageToStack += OnAddHostageToStack;
             StackSignals.Instance.onPlayerGameObject += OnSetPlayer;
+            StackSignals.Instance.onRemoveHostageFromStack += OnRemoveHostageFromStack;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onAddHostageToStack -= OnAddHostageToStack;
             StackSignals.Instance.onPlayerGameObject -= OnSetPlayer;
+            StackSignals.Instance.onRemoveHostageFromStack -= OnRemoveHostageFromStack;
         }
 
         private void OnDisable()
@@ -121,6 +123,12 @@ namespace Managers
                     hostageGameObjects[i].transform.LookAt(hostageGameObjects[i-1].transform);
                 }
             }
+        }
+
+        private void OnRemoveHostageFromStack(GameObject hostage)
+        {
+            hostageGameObjects.Remove(hostage);
+            hostageGameObjects.TrimExcess();
         }
 
     }

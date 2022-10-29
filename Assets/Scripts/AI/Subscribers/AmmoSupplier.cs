@@ -7,8 +7,6 @@ using Data.ValueObject;
 using Enums;
 using Managers;
 using Signals;
-using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +20,7 @@ namespace AI.Subscribers
 
         public Transform Target { get; set; }
         public int TargetIndex { get; set; }
-        public List<Transform> TurretAmmoTransforms => new List<Transform>();
+        public List<Transform> TurretAmmoTransforms = new List<Transform>();
 
         #endregion
 
@@ -106,7 +104,7 @@ namespace AI.Subscribers
             Func<bool> StackIsFull() => () => _ammoSupplierData.MaxStackCount == stackManager.transform.childCount;
 
             Func<bool> ReachedAmmoStock() =>
-                () => Vector3.Distance(transform.position, Target.transform.position) <= 2f;
+                () => Vector3.Distance(transform.position, Target.position) <= 2f;
 
             Func<bool> AmmoHasDelivered() => () => stackManager.transform.childCount <= 0;
         }
@@ -124,17 +122,17 @@ namespace AI.Subscribers
         {
             for (int i = 0; i < _ammoSupplierData.MaxStackCount; i++)
             {
-                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.BulletBox.ToString(), this.transform);;
+                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.BulletBox.ToString(), this.transform);
                 StackSignals.Instance.onAddStack?.Invoke(transform.GetInstanceID(),gO);
             }
         }
 
         public void DeliverAmmo(int index)
         {
-            StackSignals.Instance.onTransferBetweenStacks?.
-                Invoke(TurretAmmoTransforms[index].GetComponent<StackManager>().GetInstanceID(),stackManager,TurretAmmoTransforms[index].GetComponent<StackManager>());
+            var manager = TurretAmmoTransforms[index].GetComponent<StackManager>();
+            StackSignals.Instance.onTransferBetweenStacks?.Invoke(manager.GetInstanceID(),stackManager,manager);
             StackSignals.Instance.onDeliverAmmoBox?.
-                Invoke(TurretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
+                Invoke(manager.transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
         }
     }
 }

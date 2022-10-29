@@ -22,6 +22,7 @@ namespace Signals
         public UnityAction<bool> onActivateMoveHostageStack = delegate(bool arg0) {  };
         public UnityAction<int> onAddAmmoBoxToPlayer = delegate {  };
         public Func<int> onGetMaxPlayerStackCount = delegate { return 0; };
+        public UnityAction<GameObject> onRemoveHostageFromStack = delegate {  };
         public UnityAction<bool> onLastCollectableAddedToPlayer = delegate {  };
         public Func<int> onGetCurrentScore = delegate { return 1; };
 

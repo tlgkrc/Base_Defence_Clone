@@ -24,7 +24,6 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject stackGameObject;
-        [SerializeField] private Transform stackMesh;
         [SerializeField] private StackTypes stackType;
 
         #endregion
@@ -46,15 +45,11 @@ namespace Managers
             GetReferences();
         }
 
-        private void Start()
-        {
-            _gridSystem = new GridSystem(transform, _stackGoData.MaxCount, _stackGoData.Offset, _stackGoData.Grid_1,
-                _stackGoData.Grid_2, _stackGoData.BaseAxis);
-        }
-
         private void GetReferences()
         {
             _stackGoData = GetStackData();
+            _gridSystem = new GridSystem(transform, _stackGoData.MaxCount, _stackGoData.Offset, _stackGoData.Grid_1,
+                _stackGoData.Grid_2, _stackGoData.BaseAxis);
         }
 
         private StackGOData GetStackData()
@@ -223,11 +218,11 @@ namespace Managers
         {
             for (var i = from._stackList.Count-1 ; i >= 0; i--)
             {
-                from._stackList[i].transform.SetParent(to.transform);
-                to._stackList.Add(_stackList[i]);
-                _stackList[i].transform.DOLocalMove(to._gridSystem.NextPoint(to._stackList.Count), .5f);
-                _stackList[i].transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
-                 
+                var gO = from._stackList[i];
+                gO.transform.SetParent(to.transform);
+                to._stackList.Add(gO);
+                gO.transform.DOLocalMove(to._gridSystem.NextPoint(to._stackList.Count), .5f);
+                gO.transform.DOLocalRotate(Vector3.zero, .5f).SetEase(Ease.InBack);
             }
             from._stackList.Clear();
         }

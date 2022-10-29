@@ -18,9 +18,7 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
-        [SerializeField] private BuyAmmoWorkerPhysicController buyAmmoWorkerPhysicController;
-        [SerializeField] private BuyMoneyWorkerPhysicController buyMoneyWorkerPhysicController;
+        
         [SerializeField] private TextMeshPro ammoWorkerCostTMP;
         [SerializeField] private TextMeshPro moneyWorkerCostTMP;
         [SerializeField] private GameObject ammoWorker;
@@ -106,13 +104,13 @@ namespace Managers
             {
                 _moneyToPayForMoneyWorker = _buyWorkerData.CostOfMoneyWorker - _buyWorkerData.PaidAmountForMoneyWorker;
                 SetMoneyWorkerCostText(_moneyToPayForMoneyWorker);
-                _buyWorkerData.PaidAmountForMoneyWorker++;
-                yield return new WaitForSeconds(_buyWorkerData.DelayTime);
                 if (_moneyToPayForMoneyWorker==0)
                 {
                     HireMoneyWorker();
                     yield break;
                 }
+                _buyWorkerData.PaidAmountForMoneyWorker++;
+                yield return new WaitForSeconds(_buyWorkerData.DelayTime);
             }
             
         }
@@ -123,6 +121,7 @@ namespace Managers
             hireMoneyWorkerTMP.SetActive(false);
             upgradeMWorkerTMP.SetActive(true);
             _isHiredMWorker = true;
+            moneyWorkerCostTMP.enabled = false;
         }
 
         IEnumerator BuyAWorker()
@@ -131,13 +130,13 @@ namespace Managers
             {
                 _moneyToPayForAmmoWorker = _buyWorkerData.CostOfAmmoWorker - _buyWorkerData.PaidAmountForAmmoWorker;
                 SetAmmoWorkerCostText(_moneyToPayForAmmoWorker);
-                _buyWorkerData.PaidAmountForAmmoWorker++;
-                yield return new WaitForSeconds(_buyWorkerData.DelayTime);
                 if (_moneyToPayForAmmoWorker==0)
                 {
                     HireAmmoWorker();
                     yield break;
                 }
+                _buyWorkerData.PaidAmountForAmmoWorker++;
+                yield return new WaitForSeconds(_buyWorkerData.DelayTime);
             }
         }
 
@@ -147,6 +146,7 @@ namespace Managers
             hireAmmoWorkerTMP.SetActive(false);
             upgradeAWorkerTMP.SetActive(true);
             _isHiredAWorker = true;
+            ammoWorkerCostTMP.enabled = false;
         }
     }
 }
