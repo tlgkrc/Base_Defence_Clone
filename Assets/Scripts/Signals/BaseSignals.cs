@@ -17,7 +17,7 @@ namespace Signals
         public UnityAction<int> onSetBaseLevelText =delegate{  };
         public Func<List<Transform>> onSetMineTransforms = () => null;
         public Func<List<Transform>> onSetBaseTargetTransforms = () => null;
-        public Func<List<Transform>> onSetAmmoStockTransforms = () => null;
+        public Func<Transform> onSetAmmoStockTransform = () => null;
         public UnityAction<Transform> onPlaceNewHostage = delegate{  };
         public Func<Transform> onSetGemStock = () => null;
         public Func<Transform> onSetAmmoDepotTransform = () => null;

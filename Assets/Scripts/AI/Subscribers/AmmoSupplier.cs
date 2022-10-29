@@ -7,6 +7,7 @@ using Data.ValueObject;
 using Enums;
 using Managers;
 using Signals;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +22,7 @@ namespace AI.Subscribers
 
         public Transform Target { get; set; }
         public int TargetIndex { get; set; }
+        public List<Transform> TurretAmmoTransforms => new List<Transform>();
 
         #endregion
 
@@ -35,61 +37,89 @@ namespace AI.Subscribers
 
         private AIStateMachine _aiStateMachine;
         private AmmoSupplierData _ammoSupplierData;
-        private List<Transform> _turretAmmoTransforms;
         private Transform _ammoDepot;
+        private Transform _target;
 
         #endregion
 
         #endregion
 
-        private void Awake()
+        #region Subscription Events
+
+        private void OnEnable()
+        {
+            GetReferences();
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+        }
+
+        private void UnsubscribeEvents()
+        {
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+
+        private void Start()
+        {
+            Init();
+        }
+        private void Update()
+        {
+            _aiStateMachine.Tick();
+        }
+        
+        private void GetReferences()
+        {
+            _ammoDepot = BaseSignals.Instance.onSetAmmoDepotTransform?.Invoke();
+        }
+
+        private void Init()
         {
             _aiStateMachine = new AIStateMachine();
             _ammoSupplierData = GetAmmoSupplierData();
             var navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshAgent.speed = _ammoSupplierData.SupplierSpeed;
-            
-            var moveAmmoDepot = new MoveToAmmoDepot(this,navMeshAgent,_ammoDepot,animator);
-            var searchForEmptyTurret = new SearchForEmptyTurret(this,_turretAmmoTransforms,animator);
-            var moveToTurret = new MoveToTurret(this,navMeshAgent,animator);
+
+            var moveAmmoDepot = new MoveToAmmoDepot(this, navMeshAgent, _ammoDepot, animator);
+            var searchForEmptyTurret = new SearchForEmptyTurret(this, animator);
+            var moveToTurret = new MoveToTurret(this, navMeshAgent, animator);
             var deliverAmmo = new DeliverAmmoBoxes(this);
 
             At(moveAmmoDepot, searchForEmptyTurret, StackIsEmpty());
-            At(searchForEmptyTurret,moveToTurret,StackIsFull());
-            At(moveToTurret,deliverAmmo,ReachedAmmoStock());
-            At(deliverAmmo,moveAmmoDepot,AmmoHasDelivered());
+            At(searchForEmptyTurret, moveToTurret, StackIsFull());
+            At(moveToTurret, deliverAmmo, ReachedAmmoStock());
+            At(deliverAmmo, moveAmmoDepot, AmmoHasDelivered());
 
             _aiStateMachine.SetState(moveAmmoDepot);
 
             Func<bool> StackIsEmpty() => () => stackManager.transform.childCount <= 0
-                                               && Vector3.Distance(transform.position,_ammoDepot.position)<=2f;
+                                               && Vector3.Distance(transform.position, _ammoDepot.position) <= 2f;
+
             Func<bool> StackIsFull() => () => _ammoSupplierData.MaxStackCount == stackManager.transform.childCount;
+
             Func<bool> ReachedAmmoStock() =>
                 () => Vector3.Distance(transform.position, Target.transform.position) <= 2f;
+
             Func<bool> AmmoHasDelivered() => () => stackManager.transform.childCount <= 0;
         }
-
         private void At(IAIStates to, IAIStates from, Func<bool> condition)
         {
             _aiStateMachine.AddTransition(to, from, condition);
-        }
-
-        private void Start()
-        {
-            _turretAmmoTransforms = BaseSignals.Instance.onSetAmmoStockTransforms?.Invoke();
-            _ammoDepot = BaseSignals.Instance.onSetAmmoDepotTransform?.Invoke();
         }
 
         private AmmoSupplierData GetAmmoSupplierData()
         {
             return Resources.Load<CD_AmmoSupplier>("Data/CD_AmmoSupplier").AmmoSupplierData;
         }
-
-        private void Update()
-        {
-            _aiStateMachine.Tick();
-        }
-
+        
         public void TakeAmmoBoxes()
         {
             for (int i = 0; i < _ammoSupplierData.MaxStackCount; i++)
@@ -102,9 +132,9 @@ namespace AI.Subscribers
         public void DeliverAmmo(int index)
         {
             StackSignals.Instance.onTransferBetweenStacks?.
-                Invoke(_turretAmmoTransforms[index].GetComponent<StackManager>().GetInstanceID(),stackManager,_turretAmmoTransforms[index].GetComponent<StackManager>());
+                Invoke(TurretAmmoTransforms[index].GetComponent<StackManager>().GetInstanceID(),stackManager,TurretAmmoTransforms[index].GetComponent<StackManager>());
             StackSignals.Instance.onDeliverAmmoBox?.
-                Invoke(_turretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
+                Invoke(TurretAmmoTransforms[index].GetComponent<StackManager>().transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
         }
     }
 }

@@ -23,6 +23,12 @@ MonoBehaviour:
     SerializationNodes: []
   BaseData:
     BaseGoData:
+      BuyWorkerData:
+        CostOfMoneyWorker: 200
+        PaidAmountForMoneyWorker: 0
+        CostOfAmmoWorker: 200
+        PaidAmountForAmmoWorker: 180
+        DelayTime: 0.05
       MineData:
         Cost: 500
         MaxMiner: 8

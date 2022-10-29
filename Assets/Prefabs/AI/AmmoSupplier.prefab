@@ -1351,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3722278622528733188
 Transform:
   m_ObjectHideFlags: 0
@@ -1382,9 +1382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ea877282fc4dfc999cb7f1248b0fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretAmmoTransforms:
-  - {fileID: 0}
-  ammoDepot: {fileID: 0}
   stackManager: {fileID: 6639456391707047951}
   animator: {fileID: 9196947939171236636}
 --- !u!195 &3722278622528733187

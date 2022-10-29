@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Keys;
 using Signals;
@@ -77,6 +78,7 @@ namespace Managers
             BaseSignals.Instance.onSetPlayerToTurretShooter += OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer += OnReleasePlayer;
             BaseSignals.Instance.onOpenTurretWorker += OnOpenTurretWorker;
+            BaseSignals.Instance.onSetAmmoStockTransform += OnAddAmmoStockTransform;
             StackSignals.Instance.onDeliverAmmoBox += OnCountAmmo;
         }
 
@@ -85,6 +87,7 @@ namespace Managers
             BaseSignals.Instance.onSetPlayerToTurretShooter -= OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer -= OnReleasePlayer;
             BaseSignals.Instance.onOpenTurretWorker -= OnOpenTurretWorker;
+            BaseSignals.Instance.onSetAmmoStockTransform += OnAddAmmoStockTransform;
             StackSignals.Instance.onDeliverAmmoBox -= OnCountAmmo;
         }
 
@@ -235,6 +238,11 @@ namespace Managers
         private void SetRoomMoney(int money)
         {
             costTurretAI.text = money.ToString();
+        }
+
+        private Transform OnAddAmmoStockTransform()
+        {
+            return stackManager.transform;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace AI.States.AmmoSupplier
         public void OnEnter()
         {
             _timeStuck = 0f;
-            _navMeshAgent.SetDestination(_ammoSupplier.Target.transform.position);
+            _navMeshAgent.SetDestination(_ammoSupplier.Target.position);
             _animator.SetTrigger(AmmoWorkerAnimStates.Walk.ToString());
         }
 

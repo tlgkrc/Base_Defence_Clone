@@ -155,6 +155,8 @@ MonoBehaviour:
   - {fileID: 3101099950827400156}
   gemStockTransform: {fileID: 5989278609259718269}
   ammoDepotTransform: {fileID: 6101425255496656460}
+  buyAmmoWorkerPhysicController: {fileID: 0}
+  buyMoneyWorkerPhysicController: {fileID: 0}
 --- !u!1 &6565753669643814200
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,25 +200,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6565753669643814207}
     m_Modifications:
-    - target: {fileID: 576477267168531983, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_text
-      value: 'Ammo
-
-        Worker'
-      objectReference: {fileID: 0}
-    - target: {fileID: 576477267200359659, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_text
-      value: 'Money
-
-        Worker'
-      objectReference: {fileID: 0}
-    - target: {fileID: 576477267200359659, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 26.65
-      objectReference: {fileID: 0}
     - target: {fileID: 576477267360722020, guid: 432560c230ff32347a9a518f4bb3db3a,
         type: 3}
       propertyPath: m_RootOrder
@@ -277,25 +260,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
-    - target: {fileID: 576477267514417814, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_TagString
-      value: BuyMWorker
-      objectReference: {fileID: 0}
-    - target: {fileID: 576477267637477424, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_TagString
-      value: BuyAWorker
-      objectReference: {fileID: 0}
-    - target: {fileID: 4343286347092105670, guid: 432560c230ff32347a9a518f4bb3db3a,
-        type: 3}
-      propertyPath: m_TagString
-      value: AmmoDepot
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630695077749547074, guid: 432560c230ff32347a9a518f4bb3db3a,
+    - target: {fileID: 670353133584809003, guid: 432560c230ff32347a9a518f4bb3db3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.02
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021553269906647816, guid: 432560c230ff32347a9a518f4bb3db3a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}

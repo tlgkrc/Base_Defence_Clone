@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Controllers.AreaController;
 using Data.ValueObject.Base;
 using Signals;
 using TMPro;
@@ -19,6 +20,8 @@ namespace Managers
         [SerializeField] private List<Transform> ammoStockTransforms;
         [SerializeField] private Transform gemStockTransform;
         [SerializeField] private Transform ammoDepotTransform;
+        [SerializeField] private BuyAmmoWorkerPhysicController buyAmmoWorkerPhysicController;
+        [SerializeField] private BuyMoneyWorkerPhysicController buyMoneyWorkerPhysicController;
         
         #endregion
 
@@ -42,7 +45,6 @@ namespace Managers
             BaseSignals.Instance.onSetBaseLevelText += OnSetBaseLevelText;
             BaseSignals.Instance.onSetMineTransforms += OnSetMineTransforms;
             BaseSignals.Instance.onSetGemStock += OnSetGemStockTransform;
-            BaseSignals.Instance.onSetAmmoStockTransforms += OnSetAmmoStockTransforms;
             BaseSignals.Instance.onSetAmmoDepotTransform += OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms += OnSetBaseTargetTransforms;
         }
@@ -52,7 +54,6 @@ namespace Managers
             BaseSignals.Instance.onSetBaseLevelText -= OnSetBaseLevelText;
             BaseSignals.Instance.onSetMineTransforms -= OnSetMineTransforms;
             BaseSignals.Instance.onSetGemStock -= OnSetGemStockTransform;
-            BaseSignals.Instance.onSetAmmoStockTransforms -= OnSetAmmoStockTransforms;
             BaseSignals.Instance.onSetAmmoDepotTransform -= OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms -= OnSetBaseTargetTransforms;
         }
@@ -77,11 +78,6 @@ namespace Managers
         private Transform OnSetGemStockTransform()
         {
             return gemStockTransform;
-        }
-        
-        private List<Transform> OnSetAmmoStockTransforms()
-        {
-            return ammoStockTransforms;
         }
 
         private Transform OnSetAmmoDepotTransforms()
