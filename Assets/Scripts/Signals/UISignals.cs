@@ -14,6 +14,7 @@ namespace Signals
         public UnityAction onOpenShopPanel = delegate {  };
         public UnityAction onCloseShopPanel = delegate {  };
         public UnityAction<WeaponTypes> onUpgradeWeapon = delegate{  };
+        public UnityAction<WeaponTypes> onHoldWeapon = delegate(WeaponTypes arg0) {  };
 
     }
 }

@@ -50,7 +50,7 @@ namespace Controllers.Player
             _currentWeaponIndex = 0;
         }
 
-        private void TakeHandWeapon(WeaponTypes weaponTypes)
+        public void TakeHandWeapon(WeaponTypes weaponTypes)
         {
             weaponList[_currentWeaponIndex].SetActive(false);
             if (weaponTypes == WeaponTypes.Pistol)
@@ -73,6 +73,11 @@ namespace Controllers.Player
                 weaponList[3].SetActive(true);
                 _currentWeaponIndex = 3;
             }
+        }
+
+        public void SetWeaponVisual(bool isOpen)
+        {
+            weaponList[_currentWeaponIndex].SetActive(isOpen);
         }
 
     }

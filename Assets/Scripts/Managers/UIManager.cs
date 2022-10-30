@@ -121,5 +121,25 @@ namespace Managers
             UISignals.Instance.onUpgradeWeapon?.Invoke(WeaponTypes.Rifle);
         }
 
+        public void SelectPistol()
+        {
+            UISignals.Instance.onHoldWeapon?.Invoke(WeaponTypes.Pistol);
+        }
+        
+        public void SelectShotgun()
+        {
+            UISignals.Instance.onHoldWeapon?.Invoke(WeaponTypes.Shotgun);
+        }
+        
+        public void SelectSubmachine()
+        {
+            UISignals.Instance.onHoldWeapon?.Invoke(WeaponTypes.SubMachine);
+        }
+        
+        public void SelectRifle()
+        {
+            UISignals.Instance.onHoldWeapon?.Invoke(WeaponTypes.Rifle);
+        }
+
     }
 }

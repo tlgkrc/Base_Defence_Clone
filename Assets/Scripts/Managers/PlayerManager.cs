@@ -6,6 +6,7 @@ using Enums;
 using Enums.Animations;
 using Keys;
 using Signals;
+using Sirenix.OdinInspector;
 
 namespace Managers
 {
@@ -25,15 +26,15 @@ namespace Managers
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private PlayerGunController playerGunController;
-        [SerializeField] private Vector3 offset;
-
+        [SerializeField] private PlayerAttackController playerAttackController;
+        
         #endregion
 
         #region Private Variables
         
         private Rigidbody _rb;
         private WeaponData _weaponData;
-        private WeaponTypes _weaponTypes;
+        [ShowInInspector]private WeaponTypes _weaponTypes;
         
         #endregion
         #endregion
@@ -76,6 +77,7 @@ namespace Managers
             BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
             StackSignals.Instance.onGetMaxPlayerStackCount += OnGetMaxPlayerStackCount;
+            UISignals.Instance.onHoldWeapon += OnHoldWeapon;
         }
 
         private void UnsubscribeEvents()
@@ -87,7 +89,7 @@ namespace Managers
             BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret -= OnSetPlayerTransformAtTurret;
             StackSignals.Instance.onGetMaxPlayerStackCount -= OnGetMaxPlayerStackCount;
-
+            UISignals.Instance.onHoldWeapon += OnHoldWeapon;
         }
 
         private void OnDisable()
@@ -96,10 +98,6 @@ namespace Managers
         }
 
         #endregion
-
-        #region Event Methods
-
-        #region Movement Controller
 
         private void OnActivateMovement()
         {
@@ -132,15 +130,6 @@ namespace Managers
         {
             movementController.UpdateTurretTransformParams(turretTransformParams);
         }
-
-        #endregion
-
-        #region Others
-
-        private void OnLevelSuccessful()
-        {
-            
-        }
         
         private void OnLevelFailed()
         {
@@ -151,12 +140,8 @@ namespace Managers
             gameObject.SetActive(true);
             movementController.OnReset();
         }
-
-        #endregion
-
-        #endregion
-
-        #region Methods
+        
+        
 
         private void SetStackPosition()
         {
@@ -183,11 +168,15 @@ namespace Managers
             {
                 var playerLayer = LayerMask.NameToLayer("Player");
                 playerPhysicsController.gameObject.layer = playerLayer;
+                playerAttackController.enabled = false;
+                playerGunController.SetWeaponVisual(false);
             }
             else
             {
                 var playerLayer = LayerMask.NameToLayer("DangerZone");
                 playerPhysicsController.gameObject.layer = playerLayer;
+                playerAttackController.enabled = true;
+                playerGunController.SetWeaponVisual(true);
             }
         }
 
@@ -195,12 +184,15 @@ namespace Managers
         {
             return Data.MaxStackCount;
         }
-        
-        #endregion
 
         public int SendDataToControllers()
         {
             return Data.MaxStackCount;
+        }
+
+        private void OnHoldWeapon(WeaponTypes weaponType)
+        {
+            playerGunController.TakeHandWeapon(weaponType);
         }
     }
 }

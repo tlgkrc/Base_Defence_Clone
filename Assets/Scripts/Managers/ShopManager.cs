@@ -78,34 +78,42 @@ namespace Managers
             _shopData.ShopGoDatas[WeaponTypes.Pistol].Level++;
             if (weaponTypes == WeaponTypes.Pistol)
             {
+                var value = _shopData.ShopGoDatas[WeaponTypes.Pistol].Cost +
+                            _shopData.ShopGoDatas[WeaponTypes.Pistol].Level *
+                            _shopData.ShopGoDatas[WeaponTypes.Pistol].IncreasingFactor;
                 buyOrUpgradeText[(int)WeaponTypes.Pistol].text = "UPGRADE";
-                pistolText.text = (_shopData.ShopGoDatas[WeaponTypes.Pistol].Cost +
-                                  _shopData.ShopGoDatas[WeaponTypes.Pistol].Level *
-                                  _shopData.ShopGoDatas[WeaponTypes.Pistol].IncreasingFactor).ToString();
+                pistolText.text = value.ToString();
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
             }
             else if (weaponTypes == WeaponTypes.Shotgun)
             {
+                var value = _shopData.ShopGoDatas[WeaponTypes.Shotgun].Cost +
+                            _shopData.ShopGoDatas[WeaponTypes.Shotgun].Level *
+                            _shopData.ShopGoDatas[WeaponTypes.Shotgun].IncreasingFactor;
                 _shopData.ShopGoDatas[WeaponTypes.Shotgun].Level++;
                 buyOrUpgradeText[(int)WeaponTypes.Shotgun].text = "UPGRADE";
-                shotgunText.text = (_shopData.ShopGoDatas[WeaponTypes.Shotgun].Cost +
-                                   _shopData.ShopGoDatas[WeaponTypes.Shotgun].Level *
-                                   _shopData.ShopGoDatas[WeaponTypes.Shotgun].IncreasingFactor).ToString();
+                shotgunText.text = value.ToString();
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
             }
             else if (weaponTypes == WeaponTypes.SubMachine)
             {
+                var value = _shopData.ShopGoDatas[WeaponTypes.SubMachine].Cost +
+                            _shopData.ShopGoDatas[WeaponTypes.SubMachine].Level *
+                            _shopData.ShopGoDatas[WeaponTypes.SubMachine].IncreasingFactor;
                 _shopData.ShopGoDatas[WeaponTypes.SubMachine].Level++;
                 buyOrUpgradeText[(int)WeaponTypes.SubMachine].text = "UPGRADE";
-                subMachineText.text = (_shopData.ShopGoDatas[WeaponTypes.SubMachine].Cost +
-                                    _shopData.ShopGoDatas[WeaponTypes.SubMachine].Level *
-                                    _shopData.ShopGoDatas[WeaponTypes.SubMachine].IncreasingFactor).ToString();
+                subMachineText.text = value.ToString();
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
             }
             else if (weaponTypes == WeaponTypes.Rifle)
             {
+                var value = _shopData.ShopGoDatas[WeaponTypes.Rifle].Cost +
+                            _shopData.ShopGoDatas[WeaponTypes.Rifle].Level *
+                            _shopData.ShopGoDatas[WeaponTypes.Rifle].IncreasingFactor;
                 _shopData.ShopGoDatas[WeaponTypes.Rifle].Level++;
                 buyOrUpgradeText[(int)WeaponTypes.Rifle].text = "UPGRADE";
-                riffleText.text = (_shopData.ShopGoDatas[WeaponTypes.Rifle].Cost +
-                                    _shopData.ShopGoDatas[WeaponTypes.Rifle].Level *
-                                    _shopData.ShopGoDatas[WeaponTypes.Rifle].IncreasingFactor).ToString();
+                riffleText.text = value.ToString();
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
             }
         }
     }
