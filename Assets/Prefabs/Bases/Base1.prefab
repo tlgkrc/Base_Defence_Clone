@@ -6427,8 +6427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1f07ce2624e2d84570771c2129434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyAmmoWorkerPhysicController: {fileID: 7895027719642032122}
-  buyMoneyWorkerPhysicController: {fileID: 2389498363355589101}
   ammoWorkerCostTMP: {fileID: 8265356904684734490}
   moneyWorkerCostTMP: {fileID: 2275995915437410188}
   ammoWorker: {fileID: 670353133584809002}
@@ -9320,7 +9318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackGameObject: {fileID: 379725593890370474, guid: 5af2ad45c65c392438653a29acef5c06,
     type: 3}
-  stackMesh: {fileID: 576477268326649832}
   stackType: 1
 --- !u!1 &7818262769012668927
 GameObject:
@@ -11676,6 +11673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GunShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361106640891595980, guid: 1fb1bec7d2d84af40b3024dbef0ccdb9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 7527229278352950058, guid: 1fb1bec7d2d84af40b3024dbef0ccdb9,
         type: 3}

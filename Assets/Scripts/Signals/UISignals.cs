@@ -11,6 +11,9 @@ namespace Signals
         //
         public UnityAction<int> onSetMoneyText = delegate { };
         public UnityAction<int> onSetDiamondText = delegate { };
-            
+        public UnityAction onOpenShopPanel = delegate {  };
+        public UnityAction onCloseShopPanel = delegate {  };
+        public UnityAction<WeaponTypes> onUpgradeWeapon = delegate{  };
+
     }
 }

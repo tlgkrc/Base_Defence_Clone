@@ -71,6 +71,10 @@ namespace Controllers.Player
                 CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.TurretCam);
                 CoreGameSignals.Instance.onSetCameraAtTurret?.Invoke(transform);
             }
+            else if (other.CompareTag("Shop"))
+            {
+                UISignals.Instance.onOpenShopPanel?.Invoke();
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -80,6 +84,10 @@ namespace Controllers.Player
                 BaseSignals.Instance.onReleasePlayer?.Invoke();
                 CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.LevelCam);
                 manager.ReleaseFromTurret();
+            }
+            else if (other.CompareTag("Shop"))
+            {
+                UISignals.Instance.onCloseShopPanel?.Invoke();
             }
         }
     }

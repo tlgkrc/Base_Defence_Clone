@@ -14,6 +14,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private GameObject shopPanel;
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TextMeshProUGUI diamondText;
 
@@ -43,12 +44,16 @@ namespace Managers
         {
             UISignals.Instance.onSetMoneyText += OnSetMoneyText;
             UISignals.Instance.onSetDiamondText += OnSetDiamondText;
+            UISignals.Instance.onOpenShopPanel += OnOpenShopPanel;
+            UISignals.Instance.onCloseShopPanel += OnCloseShopPanel;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onSetMoneyText -= OnSetMoneyText;
             UISignals.Instance.onSetDiamondText -= OnSetDiamondText;
+            UISignals.Instance.onOpenShopPanel -= OnOpenShopPanel;
+            UISignals.Instance.onCloseShopPanel -= OnCloseShopPanel;
         }
 
         private void OnDisable()
@@ -79,6 +84,41 @@ namespace Managers
         private void OnSetDiamondText(int totalDiamond)
         {
             diamondText.text = totalDiamond.ToString();
+        }
+
+        private void OnOpenShopPanel()
+        {
+            shopPanel.SetActive(true);
+        }
+
+        private void OnCloseShopPanel()
+        {
+            CloseShopPanel();
+        }
+
+        public void CloseShopPanel()
+        {
+            shopPanel.SetActive(false);
+        }
+
+        public void UpgradePistol()
+        {
+            UISignals.Instance.onUpgradeWeapon?.Invoke(WeaponTypes.Pistol);
+        }
+        
+        public void UpgradeShotgun()
+        {
+            UISignals.Instance.onUpgradeWeapon?.Invoke(WeaponTypes.Shotgun);
+        }
+        
+        public void UpgradeSubmachine()
+        {
+            UISignals.Instance.onUpgradeWeapon?.Invoke(WeaponTypes.SubMachine);
+        }
+        
+        public void UpgradeRifle()
+        {
+            UISignals.Instance.onUpgradeWeapon?.Invoke(WeaponTypes.Rifle);
         }
 
     }

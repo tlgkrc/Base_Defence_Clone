@@ -21,6 +21,7 @@ TagManager:
   - AmmoStack
   - BuyMWorker
   - BuyAWorker
+  - Shop
   layers:
   - Default
   - TransparentFX

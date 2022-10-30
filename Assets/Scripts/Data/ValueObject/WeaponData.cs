@@ -5,8 +5,8 @@ using UnityEngine.Rendering;
 namespace Data.ValueObject
 {
     [Serializable]
-    public class GunData
+    public class WeaponData
     {
-        public SerializedDictionary<GunTypes, GunGOData> GunDatas;
+        public SerializedDictionary<WeaponTypes, WeaponGOData> WeaponDatas;
     }
 }

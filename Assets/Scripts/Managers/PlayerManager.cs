@@ -1,5 +1,4 @@
 using UnityEngine;
-using Controllers;
 using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -25,6 +24,7 @@ namespace Managers
         [Space] [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] private PlayerGunController playerGunController;
         [SerializeField] private Vector3 offset;
 
         #endregion
@@ -32,6 +32,8 @@ namespace Managers
         #region Private Variables
         
         private Rigidbody _rb;
+        private WeaponData _weaponData;
+        private WeaponTypes _weaponTypes;
         
         #endregion
         #endregion
@@ -43,15 +45,18 @@ namespace Managers
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+        private WeaponData GetGunData() => Resources.Load<CD_Gun>("Data/CD_Gun").weaponData;
 
         private void GetReferences()
         {
             Data = GetPlayerData();
+            _weaponData = GetGunData();
         }
 
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(Data.MovementData);
+            playerGunController.SetGunData(_weaponData);
         }
 
         #region Event Subscription

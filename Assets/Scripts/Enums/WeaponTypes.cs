@@ -1,10 +1,10 @@
 ﻿namespace Enums
 {
-    public enum GunTypes
+    public enum WeaponTypes
     {
         Pistol,
         Shotgun,
-        Rifle,
         SubMachine,
+        Rifle
     }
 }

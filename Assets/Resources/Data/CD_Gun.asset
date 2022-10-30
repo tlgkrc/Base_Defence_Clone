@@ -23,7 +23,7 @@ MonoBehaviour:
         BulletSpeed: 5
       - Gun: {fileID: 7627351992653666579, guid: aca9d7b3d03374b44a5dbac12dbacf0c,
           type: 3}
-        Damage: 0
+        Damage: 2
         BulletLifeTime: 0
         BulletSpeed: 0
       - Gun: {fileID: 7742643625144672335, guid: 2f5374abd9838ff4eb5cb14a6e313ed8,
