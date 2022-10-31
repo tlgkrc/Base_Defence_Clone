@@ -32,14 +32,14 @@ MonoBehaviour:
           m_Keys: 00000000010000000200000003000000
           m_Values:
           - LifeTime: 2
-            ForceFactor: 8
+            ForceFactor: 2
             Damage: 1
           - LifeTime: 3
-            ForceFactor: 10
+            ForceFactor: 2
             Damage: 2
           - LifeTime: 3
-            ForceFactor: 12
+            ForceFactor: 3
             Damage: 2
           - LifeTime: 4
-            ForceFactor: 14
+            ForceFactor: 3
             Damage: 3

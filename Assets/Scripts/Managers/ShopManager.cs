@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
+using Interfaces;
 using Signals;
 using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
-    public class ShopManager : MonoBehaviour
+    public class ShopManager : MonoBehaviour ,ISaveLoad
     {
         #region Self Variables
 
@@ -23,7 +24,7 @@ namespace Managers
         #region Private Variables
 
         private ShopData _shopData;
-
+        private int _pistolLevel,_shotgunLevel,_subMachineLevel,_rifleLevel;
 
         #endregion
 
@@ -33,6 +34,8 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
+            LoadKeys();
+            SetShopText();
         }
 
         private ShopData GetShopData()
@@ -43,10 +46,6 @@ namespace Managers
         private void GetReferences()
         {
             _shopData = GetShopData();
-            pistolText.text = _shopData.ShopGoDatas[WeaponTypes.Pistol].Cost.ToString();
-            shotgunText.text = _shopData.ShopGoDatas[WeaponTypes.Shotgun].Cost.ToString();
-            subMachineText.text = _shopData.ShopGoDatas[WeaponTypes.SubMachine].Cost.ToString();
-            riffleText.text = _shopData.ShopGoDatas[WeaponTypes.Rifle].Cost.ToString();
         }
 
         #region Event Subscription
@@ -68,6 +67,7 @@ namespace Managers
 
         private void OnDisable()
         {
+            SaveKeys();
             UnsubscribeEvents();
         }
 
@@ -116,5 +116,46 @@ namespace Managers
                 ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
             }
         }
+
+        private void SetShopText()
+        {
+            foreach (var item in _shopData.ShopGoDatas)
+            {
+                var value = item.Value.Cost + item.Value.Level * item.Value.IncreasingFactor;
+                if (item.Key == WeaponTypes.Pistol)
+                {
+                    pistolText.text = value.ToString();
+                }
+                else if (item.Key == WeaponTypes.Shotgun)
+                {
+                    shotgunText.text = value.ToString();
+                }
+                else if (item.Key == WeaponTypes.SubMachine)
+                {
+                    subMachineText.text = value.ToString();
+                }
+                else if(item.Key == WeaponTypes.Rifle)
+                {
+                    riffleText.text = value.ToString();
+                }
+                
+            }
+        }
+
+        public void LoadKeys()
+        {
+            _shopData.ShopGoDatas[WeaponTypes.Pistol] = SaveManager.LoadValue(WeaponTypes.Pistol.ToString(), _shopData.ShopGoDatas[WeaponTypes.Pistol]);
+            _shopData.ShopGoDatas[WeaponTypes.Shotgun] = SaveManager.LoadValue(WeaponTypes.Shotgun.ToString(), _shopData.ShopGoDatas[WeaponTypes.Shotgun]);
+            _shopData.ShopGoDatas[WeaponTypes.SubMachine] = SaveManager.LoadValue(WeaponTypes.SubMachine.ToString(), _shopData.ShopGoDatas[WeaponTypes.SubMachine]);
+            _shopData.ShopGoDatas[WeaponTypes.Rifle] = SaveManager.LoadValue(WeaponTypes.Rifle.ToString(), _shopData.ShopGoDatas[WeaponTypes.Rifle]);
+        }
+
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue(WeaponTypes.Pistol.ToString(), _shopData.ShopGoDatas[WeaponTypes.Pistol]);
+            SaveManager.SaveValue(WeaponTypes.Shotgun.ToString(), _shopData.ShopGoDatas[WeaponTypes.Shotgun]);
+            SaveManager.SaveValue(WeaponTypes.SubMachine.ToString(), _shopData.ShopGoDatas[WeaponTypes.SubMachine]);
+            SaveManager.SaveValue(WeaponTypes.Rifle.ToString(), _shopData.ShopGoDatas[WeaponTypes.Rifle]);
+        } 
     }
 }

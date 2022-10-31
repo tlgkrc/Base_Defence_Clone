@@ -17,3 +17,4 @@ MonoBehaviour:
       SpawnDelayWeakEnemy: 5
       SpawnDelayMidEnemy: 9
       SpawnDelayProEnemy: 16
+      SpawnDelayHostage: 2

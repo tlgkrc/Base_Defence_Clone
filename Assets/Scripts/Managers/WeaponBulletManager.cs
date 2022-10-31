@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Managers
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class WeaponBulletManager : MonoBehaviour
     {
         #region Self Variables

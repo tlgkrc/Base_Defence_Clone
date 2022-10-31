@@ -36,8 +36,8 @@ MonoBehaviour:
         m_Keys: 0000000001000000
         m_Values:
         - Cost: 100
-          PaidAmount: 100
+          PaidAmount: 0
           BuyDelay: 0.05
         - Cost: 50
-          PaidAmount: 50
+          PaidAmount: 0
           BuyDelay: 0.05

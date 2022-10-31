@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Commands;
+using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -7,7 +9,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class ScoreManager : MonoBehaviour
+    public class ScoreManager : MonoBehaviour,ISaveLoad
     {
         #region Self Variables
 
@@ -25,6 +27,11 @@ namespace Managers
         #endregion
 
         #region Event Subscriptions
+
+        private void Awake()
+        {
+            LoadKeys();
+        }
 
         private void OnEnable()
         {
@@ -46,6 +53,7 @@ namespace Managers
         private void OnDisable()
         {
             UnsubscribeEvents();
+            SaveKeys();
         }
 
         #endregion
@@ -68,6 +76,17 @@ namespace Managers
             _money += increase;
             UISignals.Instance.onSetMoneyText?.Invoke(_money);
         }
+        
+        public void LoadKeys()
+        {
+            _money=SaveManager.LoadValue("Money",_money);
+            _diamond=SaveManager.LoadValue("Diamond", _diamond);
+        }
 
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue("Money",_money);
+            SaveManager.SaveValue("Diamond",_diamond);
+        }
     }
 }

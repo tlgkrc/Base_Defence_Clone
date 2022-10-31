@@ -15,10 +15,10 @@ namespace Signals
         public UnityAction<bool> onVisibleScore = delegate {  };
         public UnityAction<GameObject> onSetLeadPosition = delegate {  };
         public Func<int> onGetClaimFactor = delegate { return 0; };
-        
-        
-        
-        
+
+
+
+
         public Func<int> onGetIdleScore= delegate { return 0; };
     }
 }

@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Controllers.AreaController;
 using Data.UnityObject;
 using Data.ValueObject.Base;
+using Interfaces;
 using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
-    public class BuyWorkersManager : MonoBehaviour
+    public class BuyWorkersManager : MonoBehaviour,ISaveLoad
     {
         #region Self Variables
 
@@ -47,6 +49,45 @@ namespace Managers
             _buyWorkerData = GetCostData();
             SetAmmoWorkerCostText(_buyWorkerData.CostOfAmmoWorker);
             SetMoneyWorkerCostText(_buyWorkerData.CostOfMoneyWorker);
+        }
+
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            LoadKeys();
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            
+        }
+        
+        private void UnSubscribeEvents()
+        {
+            
+        }
+
+        private void OnDisable()
+        {
+            SaveKeys();
+            UnSubscribeEvents();
+        }
+
+        #endregion
+
+        private void Start()
+        {
+            if (_isHiredAWorker)
+            {
+                HireAmmoWorker();
+            }
+
+            if (_isHiredMWorker)
+            {
+                HireMoneyWorker();
+            }
         }
 
         private BuyWorkerData GetCostData()
@@ -147,6 +188,18 @@ namespace Managers
             upgradeAWorkerTMP.SetActive(true);
             _isHiredAWorker = true;
             ammoWorkerCostTMP.enabled = false;
+        }
+
+        public void LoadKeys()
+        {
+            _isHiredAWorker = SaveManager.LoadValue("_isHiredAWorker",_isHiredAWorker);
+            _isHiredMWorker = SaveManager.LoadValue("_isHiredMWorker",_isHiredMWorker);
+        }
+
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue("_isHiredAWorker",_isHiredAWorker);
+            SaveManager.SaveValue("_isHiredMWorker",_isHiredMWorker);
         }
     }
 }

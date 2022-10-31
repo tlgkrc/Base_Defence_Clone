@@ -35,7 +35,7 @@ namespace Controllers.Player
         #endregion
         
 
-        public void SetGunData(WeaponData weaponData)
+        public void SetWeaponData(WeaponData weaponData)
         {
             _weaponData = weaponData;
             SetDefaultProperties();

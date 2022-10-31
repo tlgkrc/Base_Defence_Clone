@@ -58,7 +58,8 @@ namespace Managers
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(Data.MovementData);
-            playerGunController.SetGunData(_weaponData);
+            playerGunController.SetWeaponData(_weaponData);
+            playerAttackController.SetWeaponData(_weaponData);
         }
 
         #region Event Subscription
@@ -141,8 +142,6 @@ namespace Managers
             gameObject.SetActive(true);
             movementController.OnReset();
         }
-        
-        
 
         private void SetStackPosition()
         {
@@ -196,6 +195,7 @@ namespace Managers
         private void OnHoldWeapon(WeaponTypes weaponType)
         {
             playerGunController.TakeHandWeapon(weaponType);
+            playerAttackController.SetHoldWeapon(weaponType);
             animationController.SetWeaponAnimState(weaponType);
         }
     }

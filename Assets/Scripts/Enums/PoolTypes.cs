@@ -12,9 +12,9 @@
         Miner,
         MoneyWorker,
         BulletBox,
-        PistolBullet,
-        ShotgunBullet,
-        SubmachineBullet,
-        RifleBullet
+        Pistol,
+        Shotgun,
+        SubMachine,
+        Rifle
     }
 }

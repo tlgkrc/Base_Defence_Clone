@@ -4,7 +4,7 @@ namespace Commands
 {
     public class LoadGameCommand
     {
-        public T Execute<T>(string key, int uniqueId) where T : ISaveableEntity
+        public T Execute<T>(string key, int uniqueId) where T : ISaveLoad
         {
             string _path = key + uniqueId.ToString() + ".es3";
             

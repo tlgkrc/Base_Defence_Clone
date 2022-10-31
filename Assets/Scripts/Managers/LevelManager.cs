@@ -4,10 +4,11 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Commands;
 using Commands.Level;
+using Interfaces;
 
 namespace Managers
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : MonoBehaviour,ISaveLoad
     {
         #region Self Variables
 
@@ -35,15 +36,9 @@ namespace Managers
 
         private void Awake()
         {
-            _levelID = GetActiveLevel();
+            LoadKeys();
             _levelClearer = new ClearActiveLevelCommand();
             _levelLoader = new LevelLoaderCommand();
-        }
-
-        private int GetActiveLevel()
-        {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
         }
 
         private int GetLevelCount()
@@ -72,6 +67,7 @@ namespace Managers
 
         private void OnDisable()
         {
+            SaveKeys();
             UnsubscribeEvents();
         }
 
@@ -117,6 +113,16 @@ namespace Managers
         private void OnClearActiveLevel()
         {
             _levelClearer.ClearActiveLevel(levelHolder.transform);
+        }
+
+        public void LoadKeys()
+        {
+            _levelID = SaveManager.LoadValue("LevelID", _levelID);
+        }
+
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue("LevelID",_levelID);
         }
     }
 }
