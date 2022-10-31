@@ -121,5 +121,9 @@ namespace AI.Subscribers
         {
             StackSignals.Instance.onClearDynamicStack?.Invoke(transform.GetInstanceID());
         }
+
+        public void ResetGrid()
+        {
+        }
     }
 }

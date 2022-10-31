@@ -2,6 +2,7 @@
 using Data.UnityObject;
 using Data.ValueObject.Weapon;
 using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -43,12 +44,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onSetWeaponBulletDamage += OnSetWeaponBulletDamage;
         }
 
         private void UnsubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onSetWeaponBulletDamage -= OnSetWeaponBulletDamage;
+
         }
 
         private void OnDisable()
@@ -62,6 +64,11 @@ namespace Managers
         private WeaponBulletGOData GetBulletData()
         {
             return Resources.Load<CD_BulletData>("Data/CD_BulletData").BulletData.BulletGoData.WeaponBulletData.WeaponBulletGODatas[weaponTypes];
+        }
+
+        private int OnSetWeaponBulletDamage()
+        {
+            return _weaponBulletGoData.Damage;
         }
         
         private void BulletMove()
@@ -78,7 +85,6 @@ namespace Managers
                 if (_lifeTime>= _weaponBulletGoData.LifeTime)
                 {
                     ResetBullet();
-                    //PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Bullet.ToString(),gameObject);
                 }
             }
         }
@@ -89,6 +95,7 @@ namespace Managers
             _lifeTime = 0f;
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.Euler(Vector3.zero);
+            PoolSignals.Instance.onReleasePoolObject?.Invoke(weaponTypes.ToString(),gameObject);
         }
     }
 }

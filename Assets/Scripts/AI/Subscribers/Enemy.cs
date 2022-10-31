@@ -5,6 +5,7 @@ using AI.States.Enemy;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Enums.Animations;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace AI.Subscribers
         private AIStateMachine _aiStateMachine;
         private bool _playerInRange = false;
         [ShowInInspector] private List<Transform> _baseTargetTransforms = new List<Transform>();
+        private int _health;
         
         #endregion
 
@@ -44,6 +46,7 @@ namespace AI.Subscribers
         private void Awake()
         {
             _enemyGoData = GetEnemyData();
+            _health = _enemyGoData.Health;
             _aiStateMachine = new AIStateMachine();
             var navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -94,6 +97,37 @@ namespace AI.Subscribers
         public void SetPlayerRange(bool playerInRange)
         {
             _playerInRange = playerInRange;
+        }
+
+        public void Hit(bool isPlayer)
+        {
+            animator.SetTrigger(EnemyAnimTypes.Hit.ToString());
+            int? damage = 0;
+            if (isPlayer)
+            {
+                damage = CoreGameSignals.Instance.onSetWeaponBulletDamage?.Invoke();
+            }
+            else
+            {
+                 damage = CoreGameSignals.Instance.onSetTurretBulletDamage?.Invoke();
+            }
+            _health = (int)(_health - damage);
+            
+            if (_health<= 0)
+            {
+                animator.SetTrigger(EnemyAnimTypes.Die.ToString());
+                for (int i = 0; i < 3; i++)
+                {
+                    var money =PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Money.ToString(), transform);
+                    money.transform.position = this.transform.position;
+                }
+                Invoke(nameof(Dead), 3f);
+            }
+        }
+
+        private void Dead()
+        {
+            PoolSignals.Instance.onReleasePoolObject?.Invoke(enemyType.ToString(), gameObject);
         }
     }
 }

@@ -67,7 +67,6 @@ namespace Managers
         {
             _money += increase;
             UISignals.Instance.onSetMoneyText?.Invoke(_money);
-            Debug.Log(_money);
         }
 
     }

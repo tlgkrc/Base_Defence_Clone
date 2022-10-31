@@ -29,6 +29,7 @@ namespace AI.States.MoneyCollector
 
         public void OnExit()
         {
+            _moneyCollector.ResetGrid();
         }
     }
 }

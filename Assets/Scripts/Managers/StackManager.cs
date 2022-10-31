@@ -180,7 +180,7 @@ namespace Managers
         
         private void ClearDynamicStack()
         {
-           
+            ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(10*_stackList.Count);
             for (int i = _stackList.Count-1; i >= 0; i--)
             {
                 var i1 = i;
@@ -200,6 +200,7 @@ namespace Managers
                                 OnComplete(() => PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,_stackList[i1])));
                 }
             }
+            _stackList.Clear();
             _stackList.TrimExcess();
         }
 

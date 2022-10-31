@@ -11,6 +11,8 @@ namespace Signals
         public UnityAction onReset = delegate { };
         public UnityAction<CameraStates> onSetCameraState = delegate {  };
         public UnityAction<Transform> onSetCameraAtTurret = delegate {  };
-        public UnityAction<WeaponTypes> onSetHoldingGun = delegate(WeaponTypes arg0) {  };//Will be added to shopManager
+        public UnityAction<WeaponTypes> onSetHoldingGun = delegate(WeaponTypes arg0) {  };
+        public Func<int> onSetWeaponBulletDamage = delegate { return 0; };
+        public Func<int> onSetTurretBulletDamage = delegate { return 0; };
     }
 }

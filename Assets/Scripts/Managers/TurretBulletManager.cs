@@ -69,12 +69,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onSetTurretBulletDamage += OnSetTurretBulletDamage;
         }
 
         private void UnsubscribeEvents()
         {
-            
+            CoreGameSignals.Instance.onSetTurretBulletDamage -= OnSetTurretBulletDamage;
+
         }
 
         private void OnDisable()
@@ -84,6 +85,11 @@ namespace Managers
         }
 
         #endregion
+
+        private int OnSetTurretBulletDamage()
+        {
+            return _turretBulletData.Damage;
+        }
         
         public void ResetBullet()
         {

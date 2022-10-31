@@ -200,6 +200,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6565753669643814207}
     m_Modifications:
+    - target: {fileID: 821358535, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: d764aa7e51abaae418a960205fb589f9,
+        type: 2}
     - target: {fileID: 576477267360722020, guid: 432560c230ff32347a9a518f4bb3db3a,
         type: 3}
       propertyPath: m_RootOrder
@@ -270,6 +275,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 1021553269906647819, guid: 432560c230ff32347a9a518f4bb3db3a,
+        type: 3}
+      propertyPath: baseTransform
+      value: 
+      objectReference: {fileID: 3592717944151139702}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 432560c230ff32347a9a518f4bb3db3a, type: 3}
 --- !u!4 &2197341306612327294 stripped
@@ -287,6 +297,12 @@ Transform:
 --- !u!4 &3474234375143092041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7721645780820097103, guid: 432560c230ff32347a9a518f4bb3db3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6565753669545236230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3592717944151139702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7693797171492745840, guid: 432560c230ff32347a9a518f4bb3db3a,
     type: 3}
   m_PrefabInstance: {fileID: 6565753669545236230}
   m_PrefabAsset: {fileID: 0}
@@ -432,6 +448,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8898826747849649464, guid: ce0489ec216f2374d8d647c62f2c8511,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 812d719b1748ba44db57255a09401bf8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce0489ec216f2374d8d647c62f2c8511, type: 3}
 --- !u!4 &608001798824688879 stripped

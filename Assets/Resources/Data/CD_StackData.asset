@@ -57,7 +57,7 @@ MonoBehaviour:
         StartHeight: 0
         Grid_1: 2
         Grid_2: 2
-        MaxCount: 27
+        MaxCount: 100
         BaseAxis: 0
         StackGameObject: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9,
           type: 3}

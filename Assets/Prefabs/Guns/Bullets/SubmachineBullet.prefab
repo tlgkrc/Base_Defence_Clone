@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7220270588663809053}
   - component: {fileID: 7220270588663809043}
   - component: {fileID: 7220270588663809042}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7220270588976237543}
   - component: {fileID: 7220270588976237541}
   - component: {fileID: 7220270588976237540}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SubmachineBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,9 +196,9 @@ GameObject:
   - component: {fileID: 7220270590323314341}
   - component: {fileID: 7220270590323314340}
   - component: {fileID: 7978851288434512290}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Physic
-  m_TagString: Untagged
+  m_TagString: WeaponBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

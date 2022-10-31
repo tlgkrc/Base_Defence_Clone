@@ -590,7 +590,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackGameObject: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9,
     type: 3}
-  stackMesh: {fileID: 3662957162160553410}
   stackType: 3
 --- !u!1 &4263087366998813441
 GameObject:
@@ -802,6 +801,11 @@ PrefabInstance:
       propertyPath: physicController
       value: 
       objectReference: {fileID: 2564181233667726766}
+    - target: {fileID: 7474583090533264822, guid: 0e6a4454ed3a491408957a2dd4baf0a8,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e6a4454ed3a491408957a2dd4baf0a8, type: 3}
 --- !u!4 &2238749164663585713 stripped

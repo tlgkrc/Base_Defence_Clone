@@ -6,6 +6,6 @@
         Run,
         Attack,
         Hit,
-        Dead
+        Die
     }
 }

@@ -16,6 +16,16 @@ namespace AI.Controllers
 
         #endregion
 
-        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("TurretBullet"))
+            {
+                manager.Hit(false);
+            }
+            else if (other.CompareTag("WeaponBullet"))
+            {
+                manager.Hit(true);
+            }
+        }
     }
 }
