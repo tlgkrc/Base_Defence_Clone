@@ -5,6 +5,6 @@
         Idle,
         Walk,
         Hold,
-        Die
+        Die,
     }
 }

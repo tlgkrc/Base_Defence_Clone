@@ -6,11 +6,15 @@
         WeakZombie,
         MidZombie,
         ProZombie,
-        Bullet,
+        TurretBullet,
         Money,
         Hostage,
         Miner,
         MoneyWorker,
-        BulletBox
+        BulletBox,
+        PistolBullet,
+        ShotgunBullet,
+        SubmachineBullet,
+        RifleBullet
     }
 }

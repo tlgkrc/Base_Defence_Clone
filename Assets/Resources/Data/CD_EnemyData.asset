@@ -19,9 +19,12 @@ MonoBehaviour:
       - Damage: 1
         Speed: 1
         IncreasedSpeed: 1.5
+        Health: 1
       - Damage: 2
         Speed: 1.25
         IncreasedSpeed: 1.75
+        Health: 2
       - Damage: 3
         Speed: 1.5
         IncreasedSpeed: 2
+        Health: 3

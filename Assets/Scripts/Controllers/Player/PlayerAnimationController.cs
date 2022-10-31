@@ -42,5 +42,22 @@ namespace Controllers.Player
         {
             animator.speed = 1;
         }
+
+        public void SetWeaponAnimState(WeaponTypes weaponType)
+        {
+            animator.SetTrigger(weaponType.ToString());
+        }
+
+        public void SetWeaponAnimVisual(bool inBase)
+        {
+            if (inBase)
+            {
+                animator.SetLayerWeight(1, 0);
+            }
+            else
+            {
+                animator.SetLayerWeight(1, 1);
+            }
+        }
     }
 }

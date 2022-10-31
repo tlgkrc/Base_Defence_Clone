@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3648456129810097538
 Transform:
   m_ObjectHideFlags: 0
@@ -2393,6 +2393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4954816529673863457}
   - component: {fileID: 84196260244710981}
+  - component: {fileID: 5794759044772845876}
   m_Layer: 7
   m_Name: Physic
   m_TagString: Untagged
@@ -2429,3 +2430,16 @@ CapsuleCollider:
   m_Height: 2.012361
   m_Direction: 1
   m_Center: {x: -0.011122853, y: 1.0251219, z: 0.025238648}
+--- !u!114 &5794759044772845876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753318283920156151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7945b2afed64278973f38e17486df3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 3648456129810097536}

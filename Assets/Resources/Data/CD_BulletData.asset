@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6edfdb1341a045fca091bb641eef57ee, type: 3}
+  m_Name: CD_BulletData
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  BulletData:
+    BulletGoData:
+      TurretBulletData:
+        LifeTime: 4
+        ForceFactor: 8
+        Damage: 2
+      WeaponBulletData:
+        WeaponBulletGODatas:
+          m_Keys: 00000000010000000200000003000000
+          m_Values:
+          - LifeTime: 2
+            ForceFactor: 8
+            Damage: 1
+          - LifeTime: 3
+            ForceFactor: 10
+            Damage: 2
+          - LifeTime: 3
+            ForceFactor: 12
+            Damage: 2
+          - LifeTime: 4
+            ForceFactor: 14
+            Damage: 3

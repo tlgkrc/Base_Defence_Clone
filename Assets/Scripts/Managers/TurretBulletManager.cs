@@ -1,5 +1,7 @@
 ﻿using System;
 using Controllers.Turret;
+using Data.UnityObject;
+using Data.ValueObject.Weapon;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -21,14 +23,25 @@ namespace Managers
 
         private float _lifeTime;
         private bool _isActive;
+        private TurretBulletData _turretBulletData;
 
         #endregion
 
         #endregion
+
+        private void Awake()
+        {
+            _turretBulletData = GetBulletData();
+        }
+
+        private TurretBulletData GetBulletData()
+        {
+            return Resources.Load<CD_BulletData>("Data/CD_BulletData").BulletData.BulletGoData.TurretBulletData;
+        }
 
         private void BulletMove()
         {
-            rigidbody.AddRelativeForce(Vector3.forward*8,ForceMode.VelocityChange);
+            rigidbody.AddRelativeForce(Vector3.forward*_turretBulletData.ForceFactor,ForceMode.VelocityChange);
         }
 
         private void FixedUpdate()
@@ -37,10 +50,10 @@ namespace Managers
             {
                 BulletMove();
                 _lifeTime += Time.fixedDeltaTime;
-                if (_lifeTime>= 4f)
+                if (_lifeTime>= _turretBulletData.LifeTime)
                 {
                     ResetBullet();
-                    PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Bullet.ToString(),gameObject);
+                    PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.TurretBullet.ToString(),gameObject);
                 }
             }
             

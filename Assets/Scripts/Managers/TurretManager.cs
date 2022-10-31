@@ -191,7 +191,7 @@ namespace Managers
                 _shootTime = 0;
                 _shootingCount += 1;
                 _bulletCount--;
-                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.Bullet.ToString(), muzzle);
+                var gO = PoolSignals.Instance.onGetPoolObject(PoolTypes.TurretBullet.ToString(), muzzle);
                 gO.transform.localRotation = transform.rotation;
                 if (_shootingCount == 4)
                 {

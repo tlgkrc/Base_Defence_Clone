@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace Data.ValueObject
+namespace Data.ValueObject.Weapon
 {
     [Serializable]
     public class WeaponGOData

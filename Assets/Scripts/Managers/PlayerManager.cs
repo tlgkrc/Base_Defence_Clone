@@ -2,6 +2,7 @@ using UnityEngine;
 using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject;
+using Data.ValueObject.Weapon;
 using Enums;
 using Enums.Animations;
 using Keys;
@@ -170,6 +171,7 @@ namespace Managers
                 playerPhysicsController.gameObject.layer = playerLayer;
                 playerAttackController.enabled = false;
                 playerGunController.SetWeaponVisual(false);
+                animationController.SetWeaponAnimVisual(true);
             }
             else
             {
@@ -177,6 +179,7 @@ namespace Managers
                 playerPhysicsController.gameObject.layer = playerLayer;
                 playerAttackController.enabled = true;
                 playerGunController.SetWeaponVisual(true);
+                animationController.SetWeaponAnimVisual(false);
             }
         }
 
@@ -193,6 +196,7 @@ namespace Managers
         private void OnHoldWeapon(WeaponTypes weaponType)
         {
             playerGunController.TakeHandWeapon(weaponType);
+            animationController.SetWeaponAnimState(weaponType);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.ValueObject;
+using Data.ValueObject.Weapon;
 using UnityEngine;
 
 namespace Data.UnityObject

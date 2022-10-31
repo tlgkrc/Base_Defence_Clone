@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.ValueObject;
+using Data.ValueObject.Weapon;
 using Enums;
 using Managers;
 using UnityEngine;
@@ -46,33 +47,13 @@ namespace Controllers.Player
             {
                 value.SetActive(false);
             }
-            weaponList[0].SetActive(true);
+            weaponList[0].SetActive(false);
             _currentWeaponIndex = 0;
         }
 
         public void TakeHandWeapon(WeaponTypes weaponTypes)
         {
-            weaponList[_currentWeaponIndex].SetActive(false);
-            if (weaponTypes == WeaponTypes.Pistol)
-            {
-                weaponList[0].SetActive(true);
-                _currentWeaponIndex = 0;
-            }
-            else if (weaponTypes == WeaponTypes.Shotgun)
-            {
-                weaponList[1].SetActive(true);
-                _currentWeaponIndex = 1;
-            }
-            else if (weaponTypes == WeaponTypes.SubMachine)
-            {
-                weaponList[2].SetActive(true);
-                _currentWeaponIndex = 2;
-            }
-            else if (weaponTypes == WeaponTypes.Rifle)
-            {
-                weaponList[3].SetActive(true);
-                _currentWeaponIndex = 3;
-            }
+            _currentWeaponIndex = (int)weaponTypes;
         }
 
         public void SetWeaponVisual(bool isOpen)

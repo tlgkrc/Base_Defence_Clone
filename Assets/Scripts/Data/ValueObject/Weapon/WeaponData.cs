@@ -2,7 +2,7 @@
 using Enums;
 using UnityEngine.Rendering;
 
-namespace Data.ValueObject
+namespace Data.ValueObject.Weapon
 {
     [Serializable]
     public class WeaponData
