@@ -115,7 +115,7 @@ namespace Controllers.Player
 
             if (velocity != Vector3.zero)
             {
-                if (_inDangerZone && _target != null)
+                if (_inDangerZone && _target != null && Vector3.Distance(_target.transform.position,transform.position)>1f)
                 {
                     transform.LookAt(_target.transform);
                     if (CheckFootAnim())

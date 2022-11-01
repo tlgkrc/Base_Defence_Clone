@@ -47,6 +47,7 @@ namespace Managers
             BaseSignals.Instance.onSetGemStock += OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoDepotTransform += OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms += OnSetBaseTargetTransforms;
+            BaseSignals.Instance.onSetBaseTransform += OnSetBaseTransform;
         }
 
         private void UnsubscribeEvents()
@@ -56,6 +57,8 @@ namespace Managers
             BaseSignals.Instance.onSetGemStock -= OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoDepotTransform -= OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms -= OnSetBaseTargetTransforms;
+            BaseSignals.Instance.onSetBaseTransform -= OnSetBaseTransform;
+
         }
 
         private void OnDisable()
@@ -88,6 +91,11 @@ namespace Managers
         private List<Transform> OnSetBaseTargetTransforms()
         {
             return baseTurretTransforms;
+        }
+
+        private Transform OnSetBaseTransform()
+        {
+            return transform;
         }
     }
 }

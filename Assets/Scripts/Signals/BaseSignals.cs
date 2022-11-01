@@ -23,6 +23,10 @@ namespace Signals
         public Func<Transform> onSetAmmoDepotTransform = () => null;
         public Func<int> onSetMaxMiner = delegate { return 0; };
         public UnityAction onAddMiner = delegate {  };
+        public UnityAction<Vector3> onSetThrowingStar = delegate {  };//sprite affect animation
+        public UnityAction<Vector3> onSetThrowForce = delegate {  };
+        public Func<Transform> onSetBaseTransform = delegate { return null; };
+        public UnityAction onSetEnemyTarget = delegate {  };
         public UnityAction onOpenTurretWorker = delegate {  };
     }
 }

@@ -24,6 +24,7 @@ TagManager:
   - Shop
   - TurretBullet
   - WeaponBullet
+  - Ground
   layers:
   - Default
   - TransparentFX

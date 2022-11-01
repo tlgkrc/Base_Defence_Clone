@@ -33,6 +33,9 @@ MonoBehaviour:
     - Assembly-CSharp
     - Cinemachine
     - Sirenix.OdinInspector.CompatibilityLayer
+    - AllIn1VfxDemoScriptAssemblies
+    - AllIn1VfxAssmebly
+    - AllIn1VfxTexDemoAssembly
     - PPv2URPConverters
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics

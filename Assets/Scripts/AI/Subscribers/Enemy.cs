@@ -53,7 +53,7 @@ namespace AI.Subscribers
 
             var searchBaseTarget = new SearchForBaseTarget(this, _baseTargetTransforms,animator);
             var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData,animator);
-            var attackToWall = new AttackToWall(this,animator);
+            var attackToWall = new AttackToWall(this,navMeshAgent,animator);
             var moveToPlayer = new MoveToPlayer(this,navMeshAgent,_enemyGoData,animator);
             var die = new Die(this, animator, navMeshAgent);
 
@@ -61,21 +61,46 @@ namespace AI.Subscribers
             At(moveToBaseTarget,attackToWall,ReachedBaseTarget());
             
             _aiStateMachine.AddAnyTransition(moveToPlayer,EnemyInRange());
-            At(moveToPlayer,searchBaseTarget, () => _playerInRange == false || _health<=0);
-            
+            At(moveToPlayer,attackToWall, () => _playerInRange == true && _health>=0);
+            At(moveToPlayer, searchBaseTarget, () => _playerInRange == false && _health >= 0);
+
             _aiStateMachine.AddAnyTransition(die,IsDead());
             At(die,searchBaseTarget,() => _health>0);
             
-            
-
             _aiStateMachine.SetState(searchBaseTarget);
 
             Func<bool> HasTarget() => () => Target != null;
             Func<bool> ReachedBaseTarget() => () => 
                 Target != null && Vector3.Distance(transform.position, Target.position) <= 1f;
-            Func<bool> EnemyInRange() => () => _playerInRange && _health>0;
+            Func<bool> EnemyInRange() => () =>
+                _playerInRange && _health > 0 && Vector3.Distance(Target.position, transform.position) > 1f;
             Func<bool> IsDead() => () => _health <= 0;
         }
+
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            BaseSignals.Instance.onSetEnemyTarget += OnSetEnemyTarget;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            BaseSignals.Instance.onSetEnemyTarget -= OnSetEnemyTarget;
+
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
 
         private void Start()
         {
@@ -90,7 +115,7 @@ namespace AI.Subscribers
         {
             _aiStateMachine.AddTransition(to, from, condition);
         }
-            
+
 
         private EnemyGOData GetEnemyData()
         {
@@ -155,6 +180,11 @@ namespace AI.Subscribers
         public void AttackPlayer()
         {
             CoreGameSignals.Instance.onUpdatePlayerHealth?.Invoke(_enemyGoData.Damage);
+        }
+
+        private void OnSetEnemyTarget()
+        {
+            Target = null;
         }
     }
 }

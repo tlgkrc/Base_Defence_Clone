@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using Controllers.Player;
 using Data.UnityObject;
@@ -36,7 +37,8 @@ namespace Managers
         private WeaponData _weaponData;
         [ShowInInspector]private WeaponTypes _weaponTypes;
         private int _health;
-        
+        private bool _inBase;
+
         #endregion
         #endregion
 
@@ -172,6 +174,7 @@ namespace Managers
 
         private void SetPlayerLayer(bool inBase)
         {
+            _inBase = inBase;
             if (inBase)
             {
                 var playerLayer = LayerMask.NameToLayer("Player");
@@ -220,11 +223,26 @@ namespace Managers
 
         private void OnUpdatePlayerHealth(int damage)
         {
-            _health -= damage;
             Debug.Log(_health);
+            _health -= damage;
             if (_health<=0)
             {
+                movementController.DisableMovement();
                 animationController.SetAnimState(PlayerAnimStates.Die);
+                ResetPlayer();
+                BaseSignals.Instance.onSetEnemyTarget?.Invoke();
+            }
+        }
+
+        async void ResetPlayer()
+        {
+            while (_inBase ==false)
+            {
+                await Task.Delay(3000);
+                animationController.SetFootAnim(true);
+                SetPlayerLayer(true);
+                gameObject.transform.position = new Vector3(0,0,10);
+                _inBase = true;
             }
         }
     }

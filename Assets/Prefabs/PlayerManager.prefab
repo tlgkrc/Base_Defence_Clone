@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec2d0498d954cb7b46efd598ff1ca8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 1930304049258728002}
   weaponList:
   - {fileID: 9035133985293049274}
   - {fileID: 1159877420173617896}
@@ -1788,8 +1789,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9965212, y: 2.1997094, z: 0.6714355}
-  m_Center: {x: -0.001275003, y: 1.1923203, z: 0.0059930086}
+  m_Size: {x: 1.140353, y: 2.1997094, z: 0.6714355}
+  m_Center: {x: -0.046385974, y: 1.1923203, z: 0.0059930086}
 --- !u!1 &4340664015040208822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,10 +1896,11 @@ MonoBehaviour:
       Speed: 0
       IdleRotateSpeed: 0
     MaxStackCount: 0
+    Health: 0
   movementController: {fileID: 8416739440041911429}
   animationController: {fileID: 5051939765897779403}
   playerPhysicsController: {fileID: 5051939766209999947}
-  playerWeaponController: {fileID: 0}
+  playerWeaponController: {fileID: 5897660447984927026}
 --- !u!114 &8416739440041911429
 MonoBehaviour:
   m_ObjectHideFlags: 0

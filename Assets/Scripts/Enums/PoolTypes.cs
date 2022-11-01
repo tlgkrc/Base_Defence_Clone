@@ -15,6 +15,7 @@
         Pistol,
         Shotgun,
         SubMachine,
-        Rifle
+        Rifle,
+        Grenade
     }
 }
