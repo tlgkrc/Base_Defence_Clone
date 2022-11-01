@@ -1,5 +1,8 @@
 ﻿using System;
 using AI.Subscribers;
+using Enums;
+using Managers;
+using Signals;
 using UnityEngine;
 
 namespace AI.Controllers
@@ -20,11 +23,16 @@ namespace AI.Controllers
         {
             if (other.CompareTag("TurretBullet"))
             {
-                manager.Hit(false);
+                manager.Hit(false,0);
             }
             else if (other.CompareTag("WeaponBullet"))
             {
-                manager.Hit(true);
+                
+                manager.Hit(true,other.transform.parent.GetComponent<WeaponBulletManager>().GetWeaponDamage());
+            }
+            else if (other.CompareTag("Player"))
+            {
+                manager.AttackPlayer();
             }
         }
     }

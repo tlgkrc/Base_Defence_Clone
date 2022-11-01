@@ -26,8 +26,7 @@ namespace Managers
         [Space] [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
-        [SerializeField] private PlayerGunController playerGunController;
-        [SerializeField] private PlayerAttackController playerAttackController;
+        [SerializeField] private PlayerWeaponController playerWeaponController;
         
         #endregion
 
@@ -36,6 +35,7 @@ namespace Managers
         private Rigidbody _rb;
         private WeaponData _weaponData;
         [ShowInInspector]private WeaponTypes _weaponTypes;
+        private int _health;
         
         #endregion
         #endregion
@@ -53,13 +53,14 @@ namespace Managers
         {
             Data = GetPlayerData();
             _weaponData = GetGunData();
+            _health = Data.Health;
         }
 
         private void SendPlayerDataToControllers()
         {
             movementController.SetMovementData(Data.MovementData);
-            playerGunController.SetWeaponData(_weaponData);
-            playerAttackController.SetWeaponData(_weaponData);
+            playerWeaponController.SetWeaponData(_weaponData);
+            playerPhysicsController.SetPhysicData(Data.MaxStackCount);
         }
 
         #region Event Subscription
@@ -80,6 +81,9 @@ namespace Managers
             BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
             StackSignals.Instance.onGetMaxPlayerStackCount += OnGetMaxPlayerStackCount;
             UISignals.Instance.onHoldWeapon += OnHoldWeapon;
+            CoreGameSignals.Instance.onCheckCloseEnemy += OnCheckCloseEnemy;
+            CoreGameSignals.Instance.onDieEnemy += OnDieEnemy;
+            CoreGameSignals.Instance.onUpdatePlayerHealth += OnUpdatePlayerHealth;
         }
 
         private void UnsubscribeEvents()
@@ -91,7 +95,11 @@ namespace Managers
             BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret -= OnSetPlayerTransformAtTurret;
             StackSignals.Instance.onGetMaxPlayerStackCount -= OnGetMaxPlayerStackCount;
-            UISignals.Instance.onHoldWeapon += OnHoldWeapon;
+            UISignals.Instance.onHoldWeapon -= OnHoldWeapon;
+            CoreGameSignals.Instance.onCheckCloseEnemy -= OnCheckCloseEnemy;
+            CoreGameSignals.Instance.onDieEnemy -= OnDieEnemy;
+            CoreGameSignals.Instance.onUpdatePlayerHealth -= OnUpdatePlayerHealth;
+
         }
 
         private void OnDisable()
@@ -168,17 +176,19 @@ namespace Managers
             {
                 var playerLayer = LayerMask.NameToLayer("Player");
                 playerPhysicsController.gameObject.layer = playerLayer;
-                playerAttackController.enabled = false;
-                playerGunController.SetWeaponVisual(false);
+                playerWeaponController.enabled = false;
+                playerWeaponController.SetWeaponVisual(false);
                 animationController.SetWeaponAnimVisual(true);
+                movementController.SetDangerZoneRotation(false);
             }
             else
             {
                 var playerLayer = LayerMask.NameToLayer("DangerZone");
                 playerPhysicsController.gameObject.layer = playerLayer;
-                playerAttackController.enabled = true;
-                playerGunController.SetWeaponVisual(true);
+                 playerWeaponController.enabled = true;
+                playerWeaponController.SetWeaponVisual(true);
                 animationController.SetWeaponAnimVisual(false);
+                movementController.SetDangerZoneRotation(true);
             }
         }
 
@@ -187,16 +197,35 @@ namespace Managers
             return Data.MaxStackCount;
         }
 
-        public int SendDataToControllers()
-        {
-            return Data.MaxStackCount;
-        }
-
         private void OnHoldWeapon(WeaponTypes weaponType)
         {
-            playerGunController.TakeHandWeapon(weaponType);
-            playerAttackController.SetHoldWeapon(weaponType);
+            playerWeaponController.TakeHandWeapon(weaponType);
             animationController.SetWeaponAnimState(weaponType);
+        }
+
+        private void OnCheckCloseEnemy()
+        {
+            movementController.UpdateDangerZoneTarget(playerWeaponController.CheckTarget());
+        }
+
+        private void OnDieEnemy(GameObject gO)
+        {
+            playerWeaponController.EnemyDie(gO);
+        }
+
+        public void CheckFootAnim(bool isForward)
+        {
+            animationController.SetFootAnim(isForward);
+        }
+
+        private void OnUpdatePlayerHealth(int damage)
+        {
+            _health -= damage;
+            Debug.Log(_health);
+            if (_health<=0)
+            {
+                animationController.SetAnimState(PlayerAnimStates.Die);
+            }
         }
     }
 }

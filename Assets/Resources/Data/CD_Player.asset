@@ -17,3 +17,4 @@ MonoBehaviour:
       Speed: 4.5
       IdleRotateSpeed: 720
     MaxStackCount: 8
+    Health: 20

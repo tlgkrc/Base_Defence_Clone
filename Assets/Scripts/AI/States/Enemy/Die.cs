@@ -1,36 +1,39 @@
-﻿using Enums;
-using Enums.Animations;
+﻿using Enums.Animations;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace AI.States.Enemy
 {
-    public class AttackToWall: IAIStates
+    public class Die: IAIStates
     {
         #region Self Variables
 
         #region Private Variables
 
-        private readonly Subscribers.Enemy _enemy;
-        private readonly Animator _animator;
+        private Subscribers.Enemy _enemy;
+        private NavMeshAgent _agent;
+        private Animator _animator;
 
         #endregion
 
         #endregion
 
-        public AttackToWall(Subscribers.Enemy enemy,Animator animator)
+        public Die(Subscribers.Enemy enemy,Animator animator,NavMeshAgent agent)
         {
             _enemy = enemy;
             _animator = animator;
+            _agent = agent;
         }
-        
+
         public void Tick()
         {
-            //this gameobject is defined as obstacle
+            
         }
 
         public void OnEnter()
         {
-            _animator.SetTrigger(EnemyAnimTypes.Attack.ToString());
+            _enemy.Target = null;
+            _agent.enabled = false;
         }
 
         public void OnExit()

@@ -1,6 +1,7 @@
 using Data.ValueObject;
 using Keys;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -24,6 +25,9 @@ namespace Controllers.Player
         private float _inputValueZ;
         private Vector3 _turretPos;
         private Quaternion _turretRotation;
+        private bool _inDangerZone;
+        private GameObject _target;
+        private bool _isChangedFoot = false;
 
         #endregion
         
@@ -32,6 +36,11 @@ namespace Controllers.Player
         public void SetMovementData(PlayerMovementData dataMovementData)
         {
             _movementData = dataMovementData;
+        }
+
+        public void SetDangerZoneRotation(bool inDangerZone)
+        {
+            _inDangerZone = inDangerZone;
         }
 
         public void EnableMovement()
@@ -61,6 +70,11 @@ namespace Controllers.Player
             _turretRotation = transformParams.Quaternion;
         }
 
+        public void UpdateDangerZoneTarget(GameObject enemyTarget)
+        {
+            _target = enemyTarget;
+        }
+
         public void IsReadyToPlay(bool state)
         {
             _isReadyToPlay = state;
@@ -84,7 +98,6 @@ namespace Controllers.Player
                 {
                     Stop();
                 }
-               
             }
         }
 
@@ -102,9 +115,25 @@ namespace Controllers.Player
 
             if (velocity != Vector3.zero)
             {
-                Quaternion toRotation = Quaternion.LookRotation(velocity, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation,
-                                _movementData.IdleRotateSpeed*Time.fixedDeltaTime);
+                if (_inDangerZone && _target != null)
+                {
+                    transform.LookAt(_target.transform);
+                    if (CheckFootAnim())
+                    {
+                        manager.CheckFootAnim(true);
+                    }
+                    else
+                    {
+                        manager.CheckFootAnim(false);
+                    }
+                }
+                else
+                {
+                    Quaternion toRotation = Quaternion.LookRotation(velocity, Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation,
+                        _movementData.IdleRotateSpeed*Time.fixedDeltaTime);
+                }
+                
             }
         }
 
@@ -126,6 +155,24 @@ namespace Controllers.Player
             Stop();
             _isReadyToPlay = false;
             _isReadyToMove = false;
+        }
+
+        private bool CheckFootAnim()
+        {
+            var inputValue = _inputValueX * _inputValueZ;
+            var position = transform.position;
+            var position1 = _target.transform.position;
+            var lookValue = (position - position1).x *
+                            (position - position1).z;
+
+            if (inputValue/lookValue < 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

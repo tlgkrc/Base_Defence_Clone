@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 
 namespace Data.ValueObject
 {
@@ -8,6 +7,7 @@ namespace Data.ValueObject
     {
         public PlayerMovementData MovementData;
         public int MaxStackCount;
+        public int Health;
     }
 
     [Serializable]
@@ -16,5 +16,6 @@ namespace Data.ValueObject
         public float Speed;
         public float IdleRotateSpeed;
         
+
     }
 }

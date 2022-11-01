@@ -1,5 +1,7 @@
 ﻿using System;
+using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -14,13 +16,25 @@ namespace Controllers
 
         #endregion
 
+        #region Private Variables
+
+        private WeaponTypes _weaponTypes;
+
         #endregion
+
+        #endregion
+
+        public void SetWeaponType(WeaponTypes weaponTypes)
+        {
+            _weaponTypes = weaponTypes;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
             {
                 manager.ResetBullet();
+                PoolSignals.Instance.onReleasePoolObject?.Invoke(_weaponTypes.ToString(),manager.gameObject);
             }
         }
     }

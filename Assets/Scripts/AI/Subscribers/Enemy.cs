@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AI.Controllers;
 using AI.States;
 using AI.States.Enemy;
 using Data.UnityObject;
@@ -26,17 +27,17 @@ namespace AI.Subscribers
         #region Serialized Variables
 
         [SerializeField] private EnemyTypes enemyType;
-        
+        [SerializeField] private EnemyPhysicController physicController;
         [SerializeField] private Animator animator;
 
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector] private EnemyGOData _enemyGoData;
+        private EnemyGOData _enemyGoData;
         private AIStateMachine _aiStateMachine;
         private bool _playerInRange = false;
-        [ShowInInspector] private List<Transform> _baseTargetTransforms = new List<Transform>();
+        private List<Transform> _baseTargetTransforms = new List<Transform>();
         private int _health;
         
         #endregion
@@ -54,19 +55,26 @@ namespace AI.Subscribers
             var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData,animator);
             var attackToWall = new AttackToWall(this,animator);
             var moveToPlayer = new MoveToPlayer(this,navMeshAgent,_enemyGoData,animator);
-            
+            var die = new Die(this, animator, navMeshAgent);
+
             At(searchBaseTarget,moveToBaseTarget,HasTarget());
             At(moveToBaseTarget,attackToWall,ReachedBaseTarget());
             
             _aiStateMachine.AddAnyTransition(moveToPlayer,EnemyInRange());
-            At(moveToPlayer,searchBaseTarget, () => _playerInRange == false);
+            At(moveToPlayer,searchBaseTarget, () => _playerInRange == false || _health<=0);
+            
+            _aiStateMachine.AddAnyTransition(die,IsDead());
+            At(die,searchBaseTarget,() => _health>0);
+            
+            
 
             _aiStateMachine.SetState(searchBaseTarget);
 
             Func<bool> HasTarget() => () => Target != null;
             Func<bool> ReachedBaseTarget() => () => 
                 Target != null && Vector3.Distance(transform.position, Target.position) <= 1f;
-            Func<bool> EnemyInRange() => () => _playerInRange;
+            Func<bool> EnemyInRange() => () => _playerInRange && _health>0;
+            Func<bool> IsDead() => () => _health <= 0;
         }
 
         private void Start()
@@ -99,35 +107,54 @@ namespace AI.Subscribers
             _playerInRange = playerInRange;
         }
 
-        public void Hit(bool isPlayer)
+        public void Hit(bool isPlayer,int weaponDamage)
         {
-            animator.SetTrigger(EnemyAnimTypes.Hit.ToString());
             int? damage = 0;
             if (isPlayer)
             {
-                damage = CoreGameSignals.Instance.onSetWeaponBulletDamage?.Invoke();
+                damage = weaponDamage;
             }
             else
             {
                  damage = CoreGameSignals.Instance.onSetTurretBulletDamage?.Invoke();
             }
+            
             _health = (int)(_health - damage);
             
             if (_health<= 0)
             {
+                CoreGameSignals.Instance.onDieEnemy?.Invoke(this.gameObject);
+                physicController.gameObject.SetActive(false);
                 animator.SetTrigger(EnemyAnimTypes.Die.ToString());
+                
+                Die();
                 for (int i = 0; i < 3; i++)
                 {
                     var money =PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Money.ToString(), transform);
                     money.transform.position = this.transform.position;
                 }
-                Invoke(nameof(Dead), 3f);
             }
+            else
+            {
+                animator.SetTrigger(EnemyAnimTypes.Hit.ToString());
+            }
+        }
+
+        private void Die()
+        {
+            Invoke(nameof(Dead), 3f);
         }
 
         private void Dead()
         {
             PoolSignals.Instance.onReleasePoolObject?.Invoke(enemyType.ToString(), gameObject);
+            _health = _enemyGoData.Health;
+            physicController.gameObject.SetActive(true);
+        }
+
+        public void AttackPlayer()
+        {
+            CoreGameSignals.Instance.onUpdatePlayerHealth?.Invoke(_enemyGoData.Damage);
         }
     }
 }

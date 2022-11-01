@@ -40,6 +40,7 @@ namespace Managers
         private void OnEnable()
         {
             _isActive = true;
+            physicController.SetWeaponType(weaponTypes);
             SubscribeEvents();
         }
 
@@ -56,8 +57,8 @@ namespace Managers
 
         private void OnDisable()
         {
-            _isActive = false;
             UnsubscribeEvents();
+            _isActive = false;
         }
 
         #endregion
@@ -67,8 +68,9 @@ namespace Managers
             return Resources.Load<CD_BulletData>("Data/CD_BulletData").BulletData.BulletGoData.WeaponBulletData.WeaponBulletGODatas[weaponTypes];
         }
 
-        private int OnSetWeaponBulletDamage()
+        private int OnSetWeaponBulletDamage(WeaponTypes weaponType)
         {
+            Debug.Log(_weaponBulletGoData.Damage);
             return _weaponBulletGoData.Damage;
         }
         
@@ -86,6 +88,7 @@ namespace Managers
                 if (_lifeTime>= _weaponBulletGoData.LifeTime)
                 {
                     ResetBullet();
+                    PoolSignals.Instance.onReleasePoolObject?.Invoke(weaponTypes.ToString(),gameObject);
                 }
             }
         }
@@ -96,7 +99,12 @@ namespace Managers
             _lifeTime = 0f;
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.Euler(Vector3.zero);
-            PoolSignals.Instance.onReleasePoolObject?.Invoke(weaponTypes.ToString(),gameObject);
+            
+        }
+
+        public int GetWeaponDamage()
+        {
+            return _weaponBulletGoData.Damage;
         }
     }
 }

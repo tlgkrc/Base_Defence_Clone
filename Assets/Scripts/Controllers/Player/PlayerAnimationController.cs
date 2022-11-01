@@ -59,5 +59,17 @@ namespace Controllers.Player
                 animator.SetLayerWeight(1, 1);
             }
         }
+
+        public void SetFootAnim(bool isForward)
+        {
+            if (isForward)
+            {
+                animator.SetLayerWeight(2,0);
+            }
+            else
+            {
+                animator.SetLayerWeight(2, 1);
+            }
+        }
     }
 }

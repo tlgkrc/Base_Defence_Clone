@@ -1,4 +1,5 @@
 using System;
+using AI.Subscribers;
 using Enums;
 using Managers;
 using Signals;
@@ -26,9 +27,9 @@ namespace Controllers.Player
 
         #endregion
 
-        private void Start()
+        public void SetPhysicData(int maxStackCount)
         {
-            _maxStackCount = manager.SendDataToControllers();
+            _maxStackCount = maxStackCount;
         }
 
         private void OnTriggerEnter(Collider other)

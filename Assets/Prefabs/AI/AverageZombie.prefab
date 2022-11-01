@@ -1457,6 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
+  physicController: {fileID: 3445334284868213844}
   animator: {fileID: 1281993130498338913}
 --- !u!195 &8230342125897092598
 NavMeshAgent:
@@ -2455,10 +2456,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.40663072
-  m_Height: 1.5083438
+  m_Radius: 0.65690625
+  m_Height: 2.6310503
   m_Direction: 1
-  m_Center: {x: 0, y: 0.72101825, z: 0.062246174}
+  m_Center: {x: 0, y: 1.2823714, z: 0.062246203}
 --- !u!114 &3445334284868213844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2803,7 +2804,7 @@ Transform:
   m_GameObject: {fileID: 9130322037745872970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5128088289871784475}

@@ -3,7 +3,7 @@
     public enum EnemyTypes
     {
         WeakZombie,
-        AverageZombie,
+        MidZombie,
         ProZombie
     }
 }
