@@ -4,6 +4,7 @@ using Controllers.AreaController;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Interfaces;
+using Signals;
 using TMPro;
 using UnityEngine;
 
@@ -47,8 +48,6 @@ namespace Managers
         private void Awake()
         {
             _buyWorkerData = GetCostData();
-            SetAmmoWorkerCostText(_buyWorkerData.CostOfAmmoWorker);
-            SetMoneyWorkerCostText(_buyWorkerData.CostOfMoneyWorker);
         }
 
         #region Event Subscription
@@ -83,10 +82,18 @@ namespace Managers
             {
                 HireAmmoWorker();
             }
+            else
+            {
+                SetAmmoWorkerCostText(_buyWorkerData.CostOfAmmoWorker);
+            }
 
             if (_isHiredMWorker)
             {
                 HireMoneyWorker();
+            }
+            else
+            {
+                SetMoneyWorkerCostText(_buyWorkerData.CostOfMoneyWorker);
             }
         }
 
@@ -151,6 +158,7 @@ namespace Managers
                     yield break;
                 }
                 _buyWorkerData.PaidAmountForMoneyWorker++;
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
                 yield return new WaitForSeconds(_buyWorkerData.DelayTime);
             }
             
@@ -177,6 +185,7 @@ namespace Managers
                     yield break;
                 }
                 _buyWorkerData.PaidAmountForAmmoWorker++;
+                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
                 yield return new WaitForSeconds(_buyWorkerData.DelayTime);
             }
         }
@@ -194,12 +203,18 @@ namespace Managers
         {
             _isHiredAWorker = SaveManager.LoadValue("_isHiredAWorker",_isHiredAWorker);
             _isHiredMWorker = SaveManager.LoadValue("_isHiredMWorker",_isHiredMWorker);
+            _moneyToPayForAmmoWorker =
+                SaveManager.LoadValue("_paidAmountForAmmoWorker", _buyWorkerData.PaidAmountForAmmoWorker);
+            _moneyToPayForMoneyWorker =
+                SaveManager.LoadValue("_paidAmountForMoneyWorker", _buyWorkerData.PaidAmountForMoneyWorker);
         }
 
         public void SaveKeys()
         {
             SaveManager.SaveValue("_isHiredAWorker",_isHiredAWorker);
             SaveManager.SaveValue("_isHiredMWorker",_isHiredMWorker);
+            SaveManager.SaveValue("_paidAmountForAmmoWorker",_buyWorkerData.PaidAmountForAmmoWorker);
+            SaveManager.SaveValue("_paidAmountForMoneyWorker",_buyWorkerData.PaidAmountForMoneyWorker);
         }
     }
 }

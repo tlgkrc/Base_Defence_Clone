@@ -137,7 +137,7 @@ MonoBehaviour:
   _fillWaveFrequency: 6.3
   _fillWaveSpeed: 1
   _backgroundColor: {r: 0.047169805, g: 0.045122813, b: 0.045122813, a: 0.5882353}
-  _borderWidth: 0
+  _borderWidth: 0.028
   _borderColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
 --- !u!1 &1979903814885533724
 GameObject:

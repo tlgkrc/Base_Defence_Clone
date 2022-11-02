@@ -25,6 +25,7 @@ TagManager:
   - TurretBullet
   - WeaponBullet
   - Ground
+  - Portal
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CD_HostageStackData
   m_EditorClassIdentifier: 
   HostageStackData:
-    HostageOffsetInStack: 1
+    HostageOffsetInStack: 0.6
     LerpX: 3
     LerpZ: 3
