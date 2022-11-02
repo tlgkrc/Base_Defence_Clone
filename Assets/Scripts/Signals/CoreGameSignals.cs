@@ -18,5 +18,6 @@ namespace Signals
         public UnityAction<GameObject> onDieEnemy = delegate {  };
         public UnityAction<bool> onChangedFootAnim =delegate {  };
         public UnityAction<int> onUpdatePlayerHealth = delegate {  };
+        public UnityAction<int> onSetGrenadeDamage = delegate {  };
     }
 }

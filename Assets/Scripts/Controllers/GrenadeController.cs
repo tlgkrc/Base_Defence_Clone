@@ -17,7 +17,16 @@ namespace Controllers
         [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private new Collider collider;
         [SerializeField] private GameObject explosion;
-        
+
+        #endregion
+
+        #region Private Variables
+
+        private GameObject _explosionEffect;
+        private float _radius = 2;
+        private float _explosionForce = 700;
+        private int _grenadeDamage = 4;
+
         #endregion
 
         #endregion
@@ -46,13 +55,11 @@ namespace Controllers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onSetThrowingStar += OnSetThrowingStar;
             BaseSignals.Instance.onSetThrowForce += OnSetThrowForce;
         }
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onSetThrowingStar -= OnSetThrowingStar;
             BaseSignals.Instance.onSetThrowForce -= OnSetThrowForce;
         }
 
@@ -69,12 +76,9 @@ namespace Controllers
             {
                 explosion.SetActive(true);
                 BaseSignals.Instance.onFinishExplosion?.Invoke();
+                Explode();
+                Invoke(nameof(StopExplosion),1.2f);
             }
-        }
-
-        private void OnSetThrowingStar(Vector3 position)
-        {
-            
         }
 
         private void OnSetThrowForce(Vector3 velocity,int id)
@@ -99,6 +103,19 @@ namespace Controllers
             explosion.SetActive(false);
             ResetGrenade();
             PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Grenade.ToString(), gameObject);
+        }
+
+        private void Explode()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+
+             foreach (var nearbyObject in colliders)
+             {
+                 if (nearbyObject.CompareTag("Player"))
+                 {
+                     CoreGameSignals.Instance.onUpdatePlayerHealth?.Invoke(_grenadeDamage);
+                 }
+             }
         }
     }
 }

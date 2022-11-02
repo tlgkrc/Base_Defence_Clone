@@ -59,7 +59,7 @@ namespace Controllers
         {
             transform.position = dangerZone;
             transform.DOScale(Vector3.one * 4, 0.2f);
-           // transform.DORotate
+            spriteRenderer.transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.WorldAxisAdd);
 
         }
 
