@@ -42,12 +42,16 @@ namespace Managers
         {
             ScoreSignals.Instance.onUpdateMoneyScore += OnUpdateMoneyScore;
             ScoreSignals.Instance.onUpdateDiamonScore += OnUpdateDiamondScore;
+            ScoreSignals.Instance.onGetMoneyScore += OnGetMoneyScore;
+            ScoreSignals.Instance.onGetDiamondScore += OnGetDiamondScore;
         }
 
         private void UnsubscribeEvents()
         {
             ScoreSignals.Instance.onUpdateMoneyScore -= OnUpdateMoneyScore;
             ScoreSignals.Instance.onUpdateDiamonScore -= OnUpdateDiamondScore;
+            ScoreSignals.Instance.onGetMoneyScore -= OnGetMoneyScore;
+            ScoreSignals.Instance.onGetDiamondScore -= OnGetDiamondScore;
         }
 
         private void OnDisable()
@@ -75,6 +79,15 @@ namespace Managers
         {
             _money += increase;
             UISignals.Instance.onSetMoneyText?.Invoke(_money);
+        }
+
+        private int OnGetMoneyScore()
+        {
+            return _money;
+        }
+        private int OnGetDiamondScore()
+        {
+            return _diamond;
         }
         
         public void LoadKeys()

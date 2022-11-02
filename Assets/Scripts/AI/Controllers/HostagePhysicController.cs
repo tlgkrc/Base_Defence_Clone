@@ -34,10 +34,10 @@ namespace AI.Controllers
             }
             else if (other.CompareTag("MineCounter"))
             {
+                BaseSignals.Instance.onAddMiner?.Invoke(manager.transform);
                 StackSignals.Instance.onRemoveHostageFromStack?.Invoke(manager.gameObject);
                 manager.ResetHostage();
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Hostage.ToString(),manager.gameObject);
-                BaseSignals.Instance.onAddMiner?.Invoke();
             }
         }
     }

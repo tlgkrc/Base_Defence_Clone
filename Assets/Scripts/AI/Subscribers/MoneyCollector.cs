@@ -119,7 +119,7 @@ namespace AI.Subscribers
 
         public void DeliverMoney()
         {
-            StackSignals.Instance.onClearDynamicStack?.Invoke(transform.GetInstanceID());
+            StackSignals.Instance.onClearDynamicStack?.Invoke(stackManager.GetInstanceID());
         }
 
         public void ResetGrid()

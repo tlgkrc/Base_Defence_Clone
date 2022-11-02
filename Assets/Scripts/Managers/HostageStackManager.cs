@@ -4,6 +4,7 @@ using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -24,11 +25,9 @@ namespace Managers
 
         #region Private Variables
         
-        private List<GameObject> hostageGameObjects = new List<GameObject>();
+        [ShowInInspector]private List<GameObject> hostageGameObjects;
         private HostageStackData _hostageStackData;
         private GameObject _playerGameObject;
-        private float _maxDistance = 2f;
-        private float _speed = 2f;
 
         #endregion
         #endregion
@@ -36,6 +35,7 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
+            hostageGameObjects = new List<GameObject>();
         }
 
         private void GetReferences()
@@ -100,11 +100,12 @@ namespace Managers
                 {
                     var actualDistance = Vector3.Distance(hostageGameObjects[i].transform.position,
                         _playerGameObject.transform.position);
-                    if (!(actualDistance > _maxDistance)) continue;
+                    if (!(actualDistance > _hostageStackData.HostageOffsetInStack)) continue;
                     var position = _playerGameObject.transform.position;
                     var followToCurrent =
                         (hostageGameObjects[i].transform.position - position).normalized;
-                    followToCurrent.Scale(new Vector3(_maxDistance, _maxDistance, _maxDistance));
+                    followToCurrent.Scale(new Vector3(_hostageStackData.HostageOffsetInStack,
+                        _hostageStackData.HostageOffsetInStack, _hostageStackData.HostageOffsetInStack));
                     hostageGameObjects[i].transform.position = position + followToCurrent;
                     
                     hostageGameObjects[i].transform.LookAt(_playerGameObject.transform);
@@ -113,11 +114,12 @@ namespace Managers
                 {
                     var actualDistance = Vector3.Distance(hostageGameObjects[i].transform.position,
                         hostageGameObjects[i-1].transform.position);
-                    if (actualDistance > _maxDistance)
+                    if (actualDistance > _hostageStackData.HostageOffsetInStack)
                     {
                         var followToCurrent =
                             (hostageGameObjects[i].transform.position -hostageGameObjects[i-1].transform.position ).normalized;
-                        followToCurrent.Scale(new Vector3(_maxDistance, _maxDistance, _maxDistance));
+                        followToCurrent.Scale(new Vector3(_hostageStackData.HostageOffsetInStack,
+                            _hostageStackData.HostageOffsetInStack, _hostageStackData.HostageOffsetInStack));
                         hostageGameObjects[i].transform.position = hostageGameObjects[i-1].transform.position + followToCurrent;
                     }
                     hostageGameObjects[i].transform.LookAt(hostageGameObjects[i-1].transform);
@@ -130,6 +132,5 @@ namespace Managers
             hostageGameObjects.Remove(hostage);
             hostageGameObjects.TrimExcess();
         }
-
     }
 }

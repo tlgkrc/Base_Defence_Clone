@@ -170,23 +170,32 @@ namespace Managers
             hireMoneyWorkerTMP.SetActive(false);
             upgradeMWorkerTMP.SetActive(true);
             _isHiredMWorker = true;
-            moneyWorkerCostTMP.enabled = false;
+            moneyWorkerCostTMP.transform.parent.gameObject.SetActive(false);
         }
 
         IEnumerator BuyAWorker()
         {
             while (_playerInAmmoArea && !_isHiredAWorker)
             {
-                _moneyToPayForAmmoWorker = _buyWorkerData.CostOfAmmoWorker - _buyWorkerData.PaidAmountForAmmoWorker;
-                SetAmmoWorkerCostText(_moneyToPayForAmmoWorker);
-                if (_moneyToPayForAmmoWorker==0)
+                int? currentMoney = ScoreSignals.Instance.onGetMoneyScore?.Invoke();
+                if (currentMoney>0)
                 {
-                    HireAmmoWorker();
+                    _moneyToPayForAmmoWorker = _buyWorkerData.CostOfAmmoWorker - _buyWorkerData.PaidAmountForAmmoWorker;
+                    SetAmmoWorkerCostText(_moneyToPayForAmmoWorker);
+                    if (_moneyToPayForAmmoWorker==0)
+                    {
+                        HireAmmoWorker();
+                        yield break;
+                    }
+                    _buyWorkerData.PaidAmountForAmmoWorker++;
+                    ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
+                    yield return new WaitForSeconds(_buyWorkerData.DelayTime);
+                }
+                else
+                {
                     yield break;
                 }
-                _buyWorkerData.PaidAmountForAmmoWorker++;
-                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
-                yield return new WaitForSeconds(_buyWorkerData.DelayTime);
+                
             }
         }
 
@@ -196,7 +205,7 @@ namespace Managers
             hireAmmoWorkerTMP.SetActive(false);
             upgradeAWorkerTMP.SetActive(true);
             _isHiredAWorker = true;
-            ammoWorkerCostTMP.enabled = false;
+            ammoWorkerCostTMP.transform.parent.gameObject.SetActive(false);
         }
 
         public void LoadKeys()

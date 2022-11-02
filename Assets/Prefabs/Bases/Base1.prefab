@@ -10394,6 +10394,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CostPlane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2982350078083317454, guid: e42516b930ca5e74c8203073c27d2841,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3562468262067091879, guid: e42516b930ca5e74c8203073c27d2841,
         type: 3}
       propertyPath: m_RootOrder

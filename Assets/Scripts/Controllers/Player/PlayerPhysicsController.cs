@@ -63,7 +63,7 @@ namespace Controllers.Player
             }
             else if (other.CompareTag("Gate") && moneyStackManager.transform.childCount > 0)
             {
-                StackSignals.Instance.onClearDynamicStack?.Invoke(manager.transform.GetInstanceID());
+                StackSignals.Instance.onClearDynamicStack?.Invoke(moneyStackManager.GetInstanceID());
             }
             else if(other.CompareTag("Turret"))
             {

@@ -16,7 +16,7 @@ MonoBehaviour:
     WeaponDatas:
       m_Keys: 00000000010000000200000003000000
       m_Values:
+      - ShootingDelay: 1.8
       - ShootingDelay: 2
       - ShootingDelay: 2
-      - ShootingDelay: 2
-      - ShootingDelay: 2
+      - ShootingDelay: 0.8

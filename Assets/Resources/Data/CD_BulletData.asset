@@ -40,6 +40,6 @@ MonoBehaviour:
           - LifeTime: 3
             ForceFactor: 3
             Damage: 2
-          - LifeTime: 4
+          - LifeTime: 2
             ForceFactor: 3
             Damage: 3

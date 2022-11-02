@@ -106,7 +106,7 @@ namespace Managers
 
         private void OnClearDynamicStack(int managerId)
         {
-            if (transform.parent.GetInstanceID() == managerId)
+            if (GetInstanceID() == managerId)
             {
                  ClearDynamicStack();
             }
@@ -171,11 +171,11 @@ namespace Managers
         private void ClearStackAnimation(GameObject gO,Transform playerTransform)
         {
             var position = transform.position;
-            var newVec = new Vector3(position.x + Random.Range(2, 4),
-                position.y + Random.Range(2, 4), position.z + Random.Range(2, 4));
-            gO.transform.DOMove(newVec, 1f).SetEase(Ease.InOutBack).OnComplete(() =>
-                gO.transform.DOMove(playerTransform.position + new Vector3(0,2,0), 1f));
-            gO.transform.DOScale(Vector3.zero, 2f).SetEase(Ease.InElastic).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
+            var newVec = new Vector3(position.x + Random.Range(-1, 1),
+                position.y + Random.Range(2, 5), position.z + Random.Range(-1, 1));
+            gO.transform.DOMove(newVec, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                gO.transform.DOMove(playerTransform.position + new Vector3(0,1.5f,0), .2f));
+            gO.transform.DOShakeScale(1.2f,2).SetEase(Ease.OutBounce).OnComplete(()=> PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
         }
         
         private void ClearDynamicStack()
@@ -183,22 +183,13 @@ namespace Managers
             ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(10*_stackList.Count);
             for (int i = _stackList.Count-1; i >= 0; i--)
             {
-                var i1 = i;
-                var increaseVec3 = new Vector3(Random.Range(-2, 2), Random.Range(1, 3), Random.Range(-2, 2));
-                if (i >=5)
-                {
-                    _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .5f)
-                        .SetEase(Ease.InSine).OnComplete(() =>
-                            _stackList[i1].transform.DOLocalMove(Vector3.zero, .5f).SetEase(Ease.InOutSine)).
-                        OnComplete(() => PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,_stackList[i1]));
-                }
-                else
-                {
-                    _stackList[i].transform.DOLocalMove(_stackList[^1].transform.localPosition + increaseVec3, .2f)
-                        .SetEase(Ease.InSine).OnComplete(() =>
-                            _stackList[i1].transform.DOLocalMove(Vector3.zero, .2f).SetEase(Ease.InOutSine).
-                                OnComplete(() => PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,_stackList[i1])));
-                }
+                var gO = _stackList[i];
+                var firstVec3 = new Vector3(Random.Range(-2,2), Random.Range(1, 3), Random.Range(-2, 2)) +transform.position;
+                var secondVec3 = new Vector3(Random.Range(-2, 2), Random.Range(1, 3), Random.Range(-2, 2))+transform.position;
+                var thirdVec3 = Random.Range(-1, 1) * transform.position;
+
+                gO.transform.DOPath(new Vector3[3] { firstVec3, secondVec3, thirdVec3 }, 3f).
+                    OnComplete(() =>PoolSignals.Instance.onReleasePoolObject(stackGameObject.name,gO));
             }
             _stackList.Clear();
             _stackList.TrimExcess();

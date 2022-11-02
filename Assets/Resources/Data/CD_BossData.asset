@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CD_BossData
   m_EditorClassIdentifier: 
   BossData:
-    Health: 1500
+    Health: 100
     ThrowTime: 0.5

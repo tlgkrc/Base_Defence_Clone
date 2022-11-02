@@ -2,13 +2,14 @@
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
+using Interfaces;
 using Signals;
 using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
-    public class MineManager : MonoBehaviour
+    public class MineManager : MonoBehaviour, ISaveLoad
     {
         #region Self Variables
 
@@ -47,7 +48,18 @@ namespace Managers
         }
         private void OnEnable()
         {
+            LoadKeys();
             SubscribeEvents();
+        }
+
+        private void Start()
+        {
+            SetText();
+            for (int i = 0; i < _mineCount; i++)
+            {
+                PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(),mineSpawnTransform );
+            }
+
         }
 
         private void SubscribeEvents()
@@ -62,18 +74,22 @@ namespace Managers
 
         private void OnDisable()
         {
+            SaveKeys();
             UnsubscribeEvents();
         }
 
         #endregion
 
-        private void OnAddMiner()
+        private void OnAddMiner(Transform newTransform)
         {
             if (_mineCount>=_mineData.MaxMiner)
             {
                 return;
             }
-            PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(), mineSpawnTransform);
+
+            GameObject newMiner;
+            newMiner = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(),mineSpawnTransform );
+            if (newMiner != null) newMiner.transform.position = newTransform.position;
             _mineCount++;
             SetText();
         }
@@ -81,6 +97,17 @@ namespace Managers
         private void SetText()
         {
             mineCountText.text = _mineCount.ToString() + "/" +_mineData.MaxMiner;
+        }
+
+
+        public void LoadKeys()
+        {
+           _mineCount =  SaveManager.LoadValue("totalMiner", _mineCount);
+        }
+
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue("totalMiner" ,_mineCount);
         }
     }
 }

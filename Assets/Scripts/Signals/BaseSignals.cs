@@ -10,7 +10,7 @@ namespace Signals
     public class BaseSignals : MonoSingleton<BaseSignals>
     {
         public UnityAction<bool> onPlayerInBase = delegate{  };
-        public  UnityAction<int> onSetPlayerToTurretShooter = delegate {  };
+        public UnityAction<int> onSetPlayerToTurretShooter = delegate {  };
         public UnityAction onReleasePlayer = delegate {  };
         public Func<float> onSetTurretRotation = () => 0;
         public UnityAction<TurretTransformParams> onSetPlayerTransformAtTurret = delegate {  };
@@ -22,7 +22,7 @@ namespace Signals
         public Func<Transform> onSetGemStock = () => null;
         public Func<Transform> onSetAmmoDepotTransform = () => null;
         public Func<int> onSetMaxMiner = delegate { return 0; };
-        public UnityAction onAddMiner = delegate {  };
+        public UnityAction<Transform> onAddMiner = delegate {  };
         public UnityAction<Vector3> onSetThrowingStar = delegate {  };//sprite affect animation
         public UnityAction<Vector3,int> onSetThrowForce = delegate {  };
         public Func<Transform> onSetBaseTransform = delegate { return null; };

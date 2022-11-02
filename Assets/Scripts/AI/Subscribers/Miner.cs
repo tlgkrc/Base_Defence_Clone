@@ -66,7 +66,7 @@ namespace AI.Subscribers
             Func<bool> HasTarget() => () => Target != null;
 
             Func<bool> ReachedResource() => () =>
-                Target != null && Vector3.Distance(transform.position, Target.transform.position) < 1.1f;
+                Target != null && Vector3.Distance(transform.position, Target.transform.position) < 1.01f;
 
             Func<bool> TimeIsPassed() => () =>
             {

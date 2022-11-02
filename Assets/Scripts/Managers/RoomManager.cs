@@ -3,12 +3,14 @@ using Controllers.AreaController;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums.Animations;
+using Interfaces;
+using Signals;
 using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
-    public class RoomManager : MonoBehaviour
+    public class RoomManager : MonoBehaviour ,ISaveLoad
     {
         #region Self Variables
 
@@ -44,7 +46,14 @@ namespace Managers
         {
             _roomData = GetRoomData();
             GetReferences();
-            SetRoomMoney(_roomData.Cost);
+            if (_roomData.PaidAmount >= _roomData.Cost)
+            {
+                OpenRoom();
+            }
+            else 
+            {
+                SetRoomMoney(_roomData.Cost-_roomData.PaidAmount);
+            }
         }
 
         private RoomData GetRoomData()
@@ -95,16 +104,26 @@ namespace Managers
         {
             while (_isOnArea)
             {
-                _moneyToPay = _roomData.Cost - _roomData.PaidAmount;
-                if(_moneyToPay == 0)
+                int? currentMoney = ScoreSignals.Instance.onGetMoneyScore?.Invoke();
+                
+                if (currentMoney >0)
                 {
-                    OpenRoom();
+                    _moneyToPay = _roomData.Cost - _roomData.PaidAmount;
+                    if(_moneyToPay == 0)
+                    {
+                        OpenRoom();
+                        yield break;
+                    }
+                    _roomData.PaidAmount++;
+                    SetRoomMoney(_moneyToPay);
+                    roomPhysicsController.SetRadialVisual(_roomData.PaidAmount, _roomData.Cost);
+                    yield return new WaitForSeconds(_roomData.BuyDelay);
+                }
+                else
+                {
                     yield break;
                 }
-                _roomData.PaidAmount++;
-                SetRoomMoney(_moneyToPay);
-                roomPhysicsController.SetRadialVisual(_roomData.PaidAmount, _roomData.Cost);
-                yield return new WaitForSeconds(_roomData.BuyDelay);
+                
             }
             
         }
@@ -118,6 +137,16 @@ namespace Managers
         private void SetRoomMoney(int money)
         {
             roomCostTMP.text = money.ToString();
+        }
+
+        public void LoadKeys()
+        {
+            _roomData.PaidAmount = SaveManager.LoadValue("paidAmount" + GetInstanceID().ToString(),_roomData.PaidAmount);
+        }
+
+        public void SaveKeys()
+        {
+            SaveManager.SaveValue("paidAmount" + GetInstanceID().ToString(),_roomData.PaidAmount);
         }
     }
 }

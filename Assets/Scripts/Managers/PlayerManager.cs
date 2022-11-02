@@ -86,6 +86,7 @@ namespace Managers
             CoreGameSignals.Instance.onCheckCloseEnemy += OnCheckCloseEnemy;
             CoreGameSignals.Instance.onDieEnemy += OnDieEnemy;
             CoreGameSignals.Instance.onUpdatePlayerHealth += OnUpdatePlayerHealth;
+            CoreGameSignals.Instance.onGetPlayerTransform += OnGetPlayerTransform;
         }
 
         private void UnsubscribeEvents()
@@ -101,6 +102,7 @@ namespace Managers
             CoreGameSignals.Instance.onCheckCloseEnemy -= OnCheckCloseEnemy;
             CoreGameSignals.Instance.onDieEnemy -= OnDieEnemy;
             CoreGameSignals.Instance.onUpdatePlayerHealth -= OnUpdatePlayerHealth;
+            CoreGameSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
 
         }
 
@@ -143,10 +145,6 @@ namespace Managers
             movementController.UpdateTurretTransformParams(turretTransformParams);
         }
         
-        private void OnLevelFailed()
-        {
-            movementController.IsReadyToPlay(false);
-        }
         private void OnReset()
         {
             gameObject.SetActive(true);
@@ -224,11 +222,12 @@ namespace Managers
         private void OnUpdatePlayerHealth(int damage)
         {
             CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health/Data.Health);
-            Debug.Log(_health);
             _health -= damage;
+            Debug.Log(_health);
             if (_health<=0)
             {
                 movementController.DisableMovement();
+                animationController.SetFootAnim(true);
                 animationController.SetAnimState(PlayerAnimStates.Die);
                 ResetPlayer();
                 BaseSignals.Instance.onSetEnemyTarget?.Invoke();
@@ -237,14 +236,21 @@ namespace Managers
 
         async void ResetPlayer()
         {
-            while (_inBase ==false)
+            while (_inBase ==false && _health<Data.Health)
             {
+                _health += 5;
+                Debug.Log(_health);
                 await Task.Delay(3000);
                 animationController.SetFootAnim(true);
                 SetPlayerLayer(true);
                 gameObject.transform.position = new Vector3(0,0,10);
                 _inBase = true;
             }
+        }
+
+        private Transform OnGetPlayerTransform()
+        {
+            return transform;
         }
     }
 }
