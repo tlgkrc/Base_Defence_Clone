@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using AI.Subscribers;
 using DG.Tweening;
 using Enums;
@@ -15,9 +16,9 @@ namespace AI.Controllers
         #region Serialized Variables
 
         [SerializeField] private Boss manager;
-        [SerializeField] private Transform grenadeTransform;
-        [SerializeField] private float throwTime = 1.5f;
-
+        [SerializeField] private GameObject fakeGrenade;
+        [SerializeField] private float throwTime = .5f;
+        
         #endregion
 
         #region Private Variables
@@ -35,26 +36,24 @@ namespace AI.Controllers
 
         #endregion
 
+        private void Awake()
+        {
+            fakeGrenade.SetActive(true);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            manager.SetTarget(other.gameObject);
-            StartCoroutine(Attack());
+            if (other.CompareTag("Player"))
+            {
+                manager.SetTarget(other.gameObject);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            manager.SetTarget(null);
-            StopCoroutine(Attack());
-        }
-        
-        public void PrepareBomb()
-        {
-            if (_grenade ==null)
+            if (other.CompareTag("Player"))
             {
-                _grenade = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Grenade.ToString(), grenadeTransform);
-                _grenade.transform.parent = grenadeTransform;
-                _grenade.transform.localPosition = Vector3.zero;
-                _grenade.transform.DOLocalRotate(Vector3.zero, 0);
+                manager.SetTarget(null);
             }
         }
 
@@ -75,20 +74,16 @@ namespace AI.Controllers
 
         public void ThrowBomb()
         {
-            _grenade.transform.parent = BaseSignals.Instance.onSetBaseTransform?.Invoke();
+            _grenade = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Grenade.ToString(),
+                fakeGrenade.transform);
             BaseSignals.Instance.onSetThrowingStar?.Invoke(manager.GetTarget().transform.position);
-            BaseSignals.Instance.onSetThrowForce?.Invoke(VelocityCalculate());
-            _grenade = null;
+            BaseSignals.Instance.onSetThrowForce?.Invoke(VelocityCalculate(),_grenade.GetInstanceID());
+            fakeGrenade.SetActive(false);
         }
 
-        IEnumerator Attack()
+        public void PrepareThrow()
         {
-            while (manager.GetTarget() != null)
-            {
-                PrepareBomb();
-                yield return new WaitForSeconds(3f);
-                ThrowBomb();
-            }
+            fakeGrenade.SetActive(true);
         }
     }
 }

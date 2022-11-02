@@ -1,6 +1,7 @@
 ﻿using System;
 using AI.Controllers;
 using Enums.Animations;
+using Signals;
 using UnityEngine;
 
 namespace AI.Subscribers
@@ -14,6 +15,7 @@ namespace AI.Subscribers
         [SerializeField] private BossPhysicController physicController;
         [SerializeField] private BossAnimController animController;
         [SerializeField] private BossHealthController healthController;
+        [SerializeField] private BossAttackController attackController;
        
 
         #endregion
@@ -34,6 +36,32 @@ namespace AI.Subscribers
             SetDataToControllers();
         }
 
+        #region Event Subscriptions
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            BaseSignals.Instance.onTriggerThrowEvent += OnTriggerThrowEvent;
+            BaseSignals.Instance.onTriggerFakeHoldEvent += OnTriggerFakeHoldEvent;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            BaseSignals.Instance.onTriggerThrowEvent -= OnTriggerThrowEvent;
+            BaseSignals.Instance.onTriggerFakeHoldEvent += OnTriggerFakeHoldEvent;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+        
         private void SetDataToControllers()
         {
             healthController.SetHealthData(_health);
@@ -60,6 +88,19 @@ namespace AI.Subscribers
         public GameObject GetTarget()
         {
             return _target;
+        }
+
+        private void OnTriggerThrowEvent()
+        {
+            if (_target != null)
+            {
+                attackController.ThrowBomb();
+            }
+        }
+
+        private void OnTriggerFakeHoldEvent()
+        {
+            attackController.PrepareThrow();
         }
     }
 }

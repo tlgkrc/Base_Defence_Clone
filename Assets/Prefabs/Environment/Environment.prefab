@@ -25,12 +25,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188310919}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.6998, y: -0, z: 86.9966}
+  m_LocalPosition: {x: 0.54, y: 0.01, z: 86.9966}
   m_LocalScale: {x: 0.7946581, y: 18.007809, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 563670067371912645}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &188310921
 SpriteRenderer:
@@ -24248,6 +24248,11 @@ PrefabInstance:
       propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4140640848430095177, guid: e2a76a4a93099394d84d8755d965e923,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 4140640848430095180, guid: e2a76a4a93099394d84d8755d965e923,
         type: 3}
       propertyPath: m_DynamicOccludee
@@ -24465,7 +24470,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 1
-  m_NavMeshData: {fileID: 23800000, guid: 3cc4e396eabccd3428cba33a6927bdf1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 812d719b1748ba44db57255a09401bf8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &4588502007054396052
 PrefabInstance:

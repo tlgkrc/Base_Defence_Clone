@@ -3,7 +3,6 @@ using System.Collections;
 using DG.Tweening;
 using Enums;
 using Signals;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controllers
@@ -13,25 +12,12 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private new Collider collider;
-        [SerializeField] private new ParticleSystem particleSystem;
-        [SerializeField] private SpriteRenderer spriteRenderer;
-
-        #endregion
-
-        #region Private Variables
-
-
-
+        [SerializeField] private GameObject explosion;
+        
         #endregion
 
         #endregion
@@ -48,6 +34,7 @@ namespace Controllers
             rigidbody.isKinematic = true;
             rigidbody.freezeRotation = true;
             collider.enabled = false;
+            explosion.SetActive(false);
         }
 
         #region Event Supscriptions
@@ -78,10 +65,10 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (CompareTag("Ground"))
+            if (other.CompareTag("Ground"))
             {
-                Explosion();
-                //StartCoroutine(StopExplosion());
+                explosion.SetActive(true);
+                BaseSignals.Instance.onFinishExplosion?.Invoke();
             }
         }
 
@@ -90,29 +77,26 @@ namespace Controllers
             
         }
 
-        private void OnSetThrowForce(Vector3 velocity)
+        private void OnSetThrowForce(Vector3 velocity,int id)
         {
-            Throw(velocity);
+            if (gameObject.GetInstanceID() == id)
+            {
+                Throw(velocity);
+            }
         }
 
         private void Throw(Vector3 velocity)
         {
+
             rigidbody.isKinematic = false;
             rigidbody.freezeRotation = false;
             collider.enabled = true;
             rigidbody.AddForce(velocity,ForceMode.VelocityChange);
         }
-        
-        private void Explosion()
-        {
-            particleSystem.Play(true);
 
-        }
-
-        private IEnumerator StopExplosion()
+        private void StopExplosion()
         {
-            yield return new WaitForSeconds(3f);
-            particleSystem.Stop(true);
+            explosion.SetActive(false);
             ResetGrenade();
             PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.Grenade.ToString(), gameObject);
         }
