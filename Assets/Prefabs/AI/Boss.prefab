@@ -1578,7 +1578,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 8982898700111854834}
   fakeGrenade: {fileID: 7967646844706110522}
-  throwTime: 1.5
 --- !u!135 &725340821
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2923,7 +2922,7 @@ GameObject:
   - component: {fileID: 8982898700111854834}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,5 +1,7 @@
 ﻿using System;
 using AI.Controllers;
+using Data.UnityObject;
+using Data.ValueObject;
 using Enums.Animations;
 using Signals;
 using UnityEngine;
@@ -26,6 +28,7 @@ namespace AI.Subscribers
 
         //Data//
         private int _health = 70;
+        private BossData _bossData;
         
         #endregion
 
@@ -33,7 +36,13 @@ namespace AI.Subscribers
 
         private void Awake()
         {
+            _bossData = GetBossData();
             SetDataToControllers();
+        }
+
+        private BossData GetBossData()
+        {
+            return Resources.Load<CD_BossData>("Data/CD_BossData").BossData;
         }
 
         #region Event Subscriptions
@@ -64,7 +73,8 @@ namespace AI.Subscribers
         
         private void SetDataToControllers()
         {
-            healthController.SetHealthData(_health);
+            healthController.SetHealthData(_bossData);
+            attackController.SetThrowTime(_bossData.ThrowTime);
         }
 
         public void SetTarget(GameObject target)
@@ -83,6 +93,7 @@ namespace AI.Subscribers
         public void Hit(int damage)
         {
             healthController.Hit(damage);
+            
         }
 
         public GameObject GetTarget()

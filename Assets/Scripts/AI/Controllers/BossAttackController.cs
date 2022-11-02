@@ -17,7 +17,7 @@ namespace AI.Controllers
 
         [SerializeField] private Boss manager;
         [SerializeField] private GameObject fakeGrenade;
-        [SerializeField] private float throwTime = .5f;
+        //[SerializeField] private float throwTime = .5f;
         
         #endregion
 
@@ -28,6 +28,7 @@ namespace AI.Controllers
         private float _currentXZ;
         private float _velocityXZ;
         private float _velocityY;
+        private float _throwTime;
         private Vector3 _differenceXZ;
         private Vector3 _difference;
         private Vector3 _result;
@@ -39,6 +40,11 @@ namespace AI.Controllers
         private void Awake()
         {
             fakeGrenade.SetActive(true);
+        }
+
+        public void SetThrowTime(float time)
+        {
+            _throwTime = time;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -65,8 +71,8 @@ namespace AI.Controllers
             _differenceXZ.y = 0f;
             _currentY = _difference.y;
             _currentXZ = _difference.magnitude;
-            _velocityXZ = _currentXZ / throwTime;
-            _velocityY = _currentY / throwTime + 0.5f * Mathf.Abs(Physics.gravity.y) * throwTime;
+            _velocityXZ = _currentXZ / _throwTime;
+            _velocityY = _currentY / _throwTime + 0.5f * Mathf.Abs(Physics.gravity.y) * _throwTime;
             _result = _differenceXZ * _velocityXZ;
             _result.y = _velocityY;
             return _result;

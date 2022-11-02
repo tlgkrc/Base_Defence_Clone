@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using Data.UnityObject;
+using Data.ValueObject.Weapon;
 using DG.Tweening;
 using Enums;
 using Signals;
@@ -23,9 +25,7 @@ namespace Controllers
         #region Private Variables
 
         private GameObject _explosionEffect;
-        private float _radius = 2;
-        private float _explosionForce = 700;
-        private int _grenadeDamage = 4;
+        private GrenadeData _grenadeData;
 
         #endregion
 
@@ -34,6 +34,12 @@ namespace Controllers
         private void Awake()
         {
             ResetGrenade();
+            _grenadeData = GetGrenadeData();
+        }
+
+        private GrenadeData GetGrenadeData()
+        {
+            return Resources.Load<CD_GrenadeData>("Data/CD_GrenadeData").GrenadeData;
         }
 
         private void ResetGrenade()
@@ -77,7 +83,7 @@ namespace Controllers
                 explosion.SetActive(true);
                 BaseSignals.Instance.onFinishExplosion?.Invoke();
                 Explode();
-                Invoke(nameof(StopExplosion),1.2f);
+                Invoke(nameof(StopExplosion),_grenadeData.StopExplosionTime);
             }
         }
 
@@ -107,13 +113,13 @@ namespace Controllers
 
         private void Explode()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _grenadeData.ExplosionRadius);
 
              foreach (var nearbyObject in colliders)
              {
                  if (nearbyObject.CompareTag("Player"))
                  {
-                     CoreGameSignals.Instance.onUpdatePlayerHealth?.Invoke(_grenadeDamage);
+                     CoreGameSignals.Instance.onUpdatePlayerHealth?.Invoke(_grenadeData.Damage);
                  }
              }
         }

@@ -223,6 +223,7 @@ namespace Managers
 
         private void OnUpdatePlayerHealth(int damage)
         {
+            CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health/Data.Health);
             Debug.Log(_health);
             _health -= damage;
             if (_health<=0)

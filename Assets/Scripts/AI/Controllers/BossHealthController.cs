@@ -1,4 +1,6 @@
 ﻿using AI.Subscribers;
+using Data.ValueObject;
+using Signals;
 using UnityEngine;
 
 namespace AI.Controllers
@@ -22,19 +24,25 @@ namespace AI.Controllers
         #region Private Variables
 
         private int _health;
+        private BossData _bossData;
 
         #endregion
 
         #endregion
 
-        public void SetHealthData(int health)
+        public void SetHealthData(BossData bossData)
         {
-            _health = health;
+            _bossData = bossData;
+            _health = _bossData.Health;
         }
 
         public void Hit(int damage)
         {
             _health -= damage;
+            CoreGameSignals.Instance.onSetBossHealthRatio?.Invoke((float)_health/_bossData.Health);
+            
         }
+        
+        
     }
 }
