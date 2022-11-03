@@ -46,12 +46,12 @@ namespace Controllers.Player
             }
             else if(other.CompareTag("Money"))
             {
-                StackSignals.Instance.onAddStack?.Invoke(transform.parent.GetInstanceID(),gO);
+                StackSignals.Instance.onAddToPlayer?.Invoke(moneyStackManager.GetInstanceID());
                 ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(10);
             }
             else if (other.CompareTag("AmmoDepot"))
             {
-                StackSignals.Instance.onAddAmmoBoxToPlayer?.Invoke(transform.parent.GetInstanceID());
+                StackSignals.Instance.onAddToPlayer?.Invoke(transform.parent.GetInstanceID());
             }
             else if (other.CompareTag("AmmoStack"))
             {

@@ -71,7 +71,7 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks += OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement += OnRemoveLastElement;
-            StackSignals.Instance.onAddAmmoBoxToPlayer += OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddToPlayer += OnAddAmmoBoxToPlayer;
         }
 
         private void UnsubscribeEvents()
@@ -81,7 +81,7 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks -= OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement -= OnRemoveLastElement;
-            StackSignals.Instance.onAddAmmoBoxToPlayer -= OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddToPlayer -= OnAddAmmoBoxToPlayer;
         }
 
         private void OnDisable()

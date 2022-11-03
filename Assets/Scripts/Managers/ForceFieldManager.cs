@@ -76,6 +76,7 @@ namespace Managers
         {
             if (other.CompareTag("Player"))
             {
+                Debug.Log("inZone");
                 _playerInArea = true;
                 StartCoroutine(BuyForceFieldRoutine());
             }
@@ -100,7 +101,7 @@ namespace Managers
         {
             while (_playerInArea)
             {
-                var diamond = ScoreSignals.Instance.onGetDiamondScore?.Invoke();
+                int? diamond = ScoreSignals.Instance.onGetDiamondScore?.Invoke();
                 _diamondToPayForField = _totalCost - _paidCost;
                 SetDiamondToText();
                 if (_diamondToPayForField==0)

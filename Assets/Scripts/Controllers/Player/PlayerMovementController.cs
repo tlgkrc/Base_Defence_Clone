@@ -27,7 +27,6 @@ namespace Controllers.Player
         private Quaternion _turretRotation;
         private bool _inDangerZone;
         private GameObject _target;
-        private bool _isChangedFoot = false;
 
         #endregion
         

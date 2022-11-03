@@ -27,10 +27,8 @@ Material:
   - _MK_BLEND_PREMULTIPLY
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_IRIDESCENCE_DEFAULT
-  - _MK_LIGHT_CEL
   - _MK_RECEIVE_SHADOWS
   - _MK_RIM_SPLIT
-  - _MK_SURFACE_TYPE_TRANSPARENT
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
   - _RECEIVESHADOWS_ON
@@ -38,12 +36,11 @@ Material:
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    IGNOREPROJECTOR: true
-    RenderType: Transparent
-  disabledShaderPasses:
-  - SHADOWCASTER
+    IGNOREPROJECTOR: False
+    RenderType: Opaque
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -181,7 +178,7 @@ Material:
     - _ArtisticFrequency: 1
     - _ArtisticProjection: 1
     - _Blend: 1
-    - _BlendDst: 10
+    - _BlendDst: 0
     - _BlendSrc: 1
     - _Brightness: 1
     - _BumpScale: 1
@@ -216,7 +213,7 @@ Material:
     - _IridescenceSize: 0.57
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
-    - _Light: 1
+    - _Light: 0
     - _LightBands: 4
     - _LightBandsScale: 0.5
     - _LightThreshold: 0.305
@@ -256,7 +253,7 @@ Material:
     - _StencilWriteMask: 255
     - _StencilZFail: 0
     - _StylizeTab: 1
-    - _Surface: 1
+    - _Surface: 0
     - _ThresholdMapScale: 1
     - _VertexAnimation: 0
     - _VertexAnimationIntensity: 0.05
@@ -264,7 +261,7 @@ Material:
     - _WorkflowMode: 1
     - _WrappedLighting: 1
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _AlbedoColor: {r: 0.745283, g: 0.010546438, b: 0.72799534, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
