@@ -1,7 +1,5 @@
 using Data.ValueObject;
 using Keys;
-using Managers;
-using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -13,14 +11,13 @@ namespace Controllers.Player
         #region Serialized Variables
         
         [SerializeField] private new Rigidbody rigidbody;
-        [SerializeField] private PlayerManager manager;
         
         #endregion
         
         #region Private Variables
         
         private PlayerMovementData _movementData;
-        private bool _isReadyToMove, _isReadyToPlay, _isAtTurret = false;
+        private bool _isReadyToMove, _isReadyToPlay, _isAtTurret;
         private float _inputValueX;
         private float _inputValueZ;
         private Vector3 _turretPos;
@@ -78,8 +75,7 @@ namespace Controllers.Player
         {
             _isReadyToPlay = state;
         }
-        
-        
+
         private void FixedUpdate()
         {
             if (!_isReadyToPlay) return;
@@ -111,28 +107,20 @@ namespace Controllers.Player
             var position = new Vector3(position1.x, position1.y, position1.z);
             position1 = position;
             rigidbody.position = position1;
-
-            if (velocity != Vector3.zero)
+            
+            if (_inDangerZone && _target != null && Vector3.Distance(_target.transform.position,transform.position)>.5f)
             {
-                if (_inDangerZone && _target != null && Vector3.Distance(_target.transform.position,transform.position)>1f)
-                {
-                    transform.LookAt(_target.transform);
-                    if (CheckFootAnim())
-                    {
-                        manager.CheckFootAnim(true);
-                    }
-                    else
-                    {
-                        manager.CheckFootAnim(false);
-                    }
-                }
-                else
-                {
-                    Quaternion toRotation = Quaternion.LookRotation(velocity, Vector3.up);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation,
-                        _movementData.IdleRotateSpeed*Time.fixedDeltaTime);
-                }
-                
+                var transform1 = transform;
+                Vector3 dif = _target.transform.position - transform1.position;
+                dif.y = 0.0f;
+                transform.rotation = Quaternion.RotateTowards(transform1.rotation, Quaternion.LookRotation(dif), 
+                    Time.fixedTime * 4f);
+            }
+            else
+            {
+                Quaternion toRotation = Quaternion.LookRotation(velocity, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation,
+                    _movementData.IdleRotateSpeed*Time.fixedDeltaTime);
             }
         }
 
@@ -154,24 +142,6 @@ namespace Controllers.Player
             Stop();
             _isReadyToPlay = false;
             _isReadyToMove = false;
-        }
-
-        private bool CheckFootAnim()
-        {
-            var inputValue = _inputValueX * _inputValueZ;
-            var position = transform.position;
-            var position1 = _target.transform.position;
-            var lookValue = (position - position1).x *
-                            (position - position1).z;
-
-            if (inputValue/lookValue < 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Managers
         {
             GetReferences();
             SendPlayerDataToControllers();
+            playerWeaponController.enabled = false;
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -209,20 +210,11 @@ namespace Managers
         private void OnCheckCloseEnemy()
         {
             movementController.UpdateDangerZoneTarget(playerWeaponController.CheckTarget());
-            animationController.SetFootAnim(playerWeaponController.CheckTarget());
         }
 
         private void OnDieEnemy(GameObject gO)
         {
             playerWeaponController.EnemyDie(gO);
-        }
-
-        public void CheckFootAnim(bool isForward)
-        {
-            if (playerWeaponController.CheckTarget()==null)
-            {
-                animationController.SetFootAnim(isForward);
-            }
         }
 
         private void OnUpdatePlayerHealth(int damage)
@@ -231,8 +223,8 @@ namespace Managers
             _health -= damage;
             if (_health<=0)
             {
-                movementController.DisableMovement();
-                animationController.SetFootAnim(true);
+                playerWeaponController.enabled = false;
+                // movementController.DisableMovement();
                 animationController.SetAnimState(PlayerAnimStates.Die);
                 ResetPlayer();
                 BaseSignals.Instance.onSetEnemyTarget?.Invoke();
@@ -241,16 +233,15 @@ namespace Managers
 
         async void ResetPlayer()
         {
+            SetPlayerLayer(true);
+            animationController.SetAnimState(PlayerAnimStates.Die);
+            await Task.Delay(3000);
+            _inBase = true;
+            StartCoroutine(FixedHealth());
             transform.rotation = Quaternion.Euler(Vector3.zero);
-            while (_inBase ==false)
-            {
-                await Task.Delay(3000);
-                animationController.SetFootAnim(true);
-                SetPlayerLayer(true);
-                gameObject.transform.position = new Vector3(0,0,10);
-                _inBase = true;
-                StartCoroutine(FixedHealth());
-            }
+            gameObject.transform.position = new Vector3(0,0,10);
+            animationController.SetAnimState(PlayerAnimStates.Idle);
+            
         }
 
         private Transform OnGetPlayerTransform()

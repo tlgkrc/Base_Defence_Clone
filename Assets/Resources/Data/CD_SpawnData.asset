@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnData:
     SpawnGoData:
-      SpawnDelayWeakEnemy: 5
-      SpawnDelayMidEnemy: 9
-      SpawnDelayProEnemy: 16
+      SpawnDelayWeakEnemy: 10
+      SpawnDelayMidEnemy: 15
+      SpawnDelayProEnemy: 20
       SpawnDelayHostage: 2

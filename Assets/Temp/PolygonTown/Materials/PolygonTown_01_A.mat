@@ -8,22 +8,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PolygonTown_01_A
-  m_Shader: {fileID: 4800000, guid: 317e3d3b84bf0a741a3e867e27dfa7bb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 733fefdcde0d35f4b822d2935d5a22f4, type: 3}
   m_ValidKeywords:
   - _MK_ALBEDO_MAP
-  - _MK_OUTLINE_HULL_CLIP
-  m_InvalidKeywords:
-  - _DETAIL_MULX2
-  - _METALLICGLOSSMAP
   - _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
   - _MK_EMISSION
   - _MK_EMISSION_MAP
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-  - _MK_LIGHT_CEL
-  - _MK_PBS_MAP_0
   - _MK_RECEIVE_SHADOWS
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
+  m_InvalidKeywords:
+  - _DETAIL_MULX2
+  - _METALLICGLOSSMAP
+  - _MK_OUTLINE_HULL_CLIP
+  - _MK_PBS_MAP_0
   - _NORMALMAP
   - _RECEIVESHADOWS_ON
   - _WRAPPEDLIGHTING_ON
@@ -193,7 +192,7 @@ Material:
     - _IridescenceSize: 1
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
-    - _Light: 1
+    - _Light: 0
     - _LightBands: 4
     - _LightBandsScale: 0.5
     - _LightThreshold: 0.284
@@ -246,7 +245,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.1448469, g: 0.8773585, b: 0.3150705, a: 1}
+    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

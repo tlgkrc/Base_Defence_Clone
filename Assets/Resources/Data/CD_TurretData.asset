@@ -25,18 +25,18 @@ MonoBehaviour:
     TurretsData:
       m_Keys: 000000000100000002000000
       m_Values:
-      - TurretSoldierCost: 250
+      - TurretSoldierCost: 80
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0.5
+        ShootingDelay: 0.2
         BuyDelay: 0.05
-      - TurretSoldierCost: 200
+      - TurretSoldierCost: 80
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0.5
+        ShootingDelay: 0.2
         BuyDelay: 0.05
-      - TurretSoldierCost: 250
+      - TurretSoldierCost: 70
         TurretSoldierCostPaid: 0
         RotationBorderOffset: {x: 0, y: 45, z: 0}
-        ShootingDelay: 0.5
+        ShootingDelay: 0.2
         BuyDelay: 0.05

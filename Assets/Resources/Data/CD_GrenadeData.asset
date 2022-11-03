@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CD_GrenadeData
   m_EditorClassIdentifier: 
   GrenadeData:
-    Damage: 4
+    Damage: 3
     ExplosionForce: 700
     StopExplosionTime: 1.2
     ExplosionRadius: 2

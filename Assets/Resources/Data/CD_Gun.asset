@@ -19,4 +19,4 @@ MonoBehaviour:
       - ShootingDelay: 1.8
       - ShootingDelay: 2
       - ShootingDelay: 2
-      - ShootingDelay: 0.8
+      - ShootingDelay: 1.2

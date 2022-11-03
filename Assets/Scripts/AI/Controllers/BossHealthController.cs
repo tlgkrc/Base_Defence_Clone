@@ -42,6 +42,7 @@ namespace AI.Controllers
             if (_health<=0)
             {
                 manager.OpenPortal();
+                
             }
             CoreGameSignals.Instance.onSetBossHealthRatio?.Invoke((float)_health/_bossData.Health);
             

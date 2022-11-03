@@ -25,9 +25,9 @@ MonoBehaviour:
     BaseGoData:
       BuyWorkerData:
         CostOfMoneyWorker: 50
-        PaidAmountForMoneyWorker: 0
+        PaidAmountForMoneyWorker: 50
         CostOfAmmoWorker: 20
-        PaidAmountForAmmoWorker: 0
+        PaidAmountForAmmoWorker: 20
         DelayTime: 0.05
       MineData:
         Cost: 500
@@ -36,8 +36,8 @@ MonoBehaviour:
         m_Keys: 0000000001000000
         m_Values:
         - Cost: 100
-          PaidAmount: 0
+          PaidAmount: 100
           BuyDelay: 0.05
         - Cost: 50
-          PaidAmount: 0
+          PaidAmount: 50
           BuyDelay: 0.05

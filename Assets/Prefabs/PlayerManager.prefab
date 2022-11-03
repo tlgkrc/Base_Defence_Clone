@@ -1285,8 +1285,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2635904134128358907}
   - component: {fileID: 8247410386123984769}
-  - component: {fileID: 440660261118580540}
-  - component: {fileID: 1494638556906577005}
   m_Layer: 3
   m_Name: Character_18
   m_TagString: Untagged
@@ -1331,111 +1329,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &440660261118580540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3449559903675617089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneShape: 1
-  drawBones: 1
-  drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
-  m_Transforms:
-  - {fileID: 7623393459785349653}
-  - {fileID: 5849060084194034429}
-  - {fileID: 1718306476323053939}
-  - {fileID: 5218439392654388138}
-  - {fileID: 1262344747557070700}
-  - {fileID: 4487676232189696376}
-  - {fileID: 8554357392707384805}
-  - {fileID: 1172774659277610991}
-  - {fileID: 3122509252289407662}
-  - {fileID: 3552547256090716923}
-  - {fileID: 5472742793084489534}
-  - {fileID: 2366541421544517037}
-  - {fileID: 3035586090580361963}
-  - {fileID: 7914469548227202339}
-  - {fileID: 158502120831781791}
-  - {fileID: 1967462385365982413}
-  - {fileID: 1179994016222072434}
-  - {fileID: 4860152103410782739}
-  - {fileID: 1356644405991829641}
-  - {fileID: 5256862420062292153}
-  - {fileID: 296974176290974878}
-  - {fileID: 7870197964867145737}
-  - {fileID: 5163238540201436303}
-  - {fileID: 1543647263977333189}
-  - {fileID: 4549818071695915927}
-  - {fileID: 5039376443565216356}
-  - {fileID: 5385059366152636136}
-  - {fileID: 2693763105018768878}
-  - {fileID: 8351628533199381870}
-  - {fileID: 830300746351627729}
-  - {fileID: 7140624396963919085}
-  - {fileID: 3316526321087794473}
-  - {fileID: 6592677368018055380}
-  - {fileID: 9032458700532758984}
-  - {fileID: 8803160518873562443}
-  - {fileID: 8638398624680995230}
-  - {fileID: 8973370484514323091}
-  - {fileID: 7355278635746840378}
-  - {fileID: 4815303602133297077}
-  - {fileID: 4073732652194493512}
-  - {fileID: 9197563224621078505}
-  - {fileID: 8296538922541391617}
-  - {fileID: 7151914584169481185}
-  - {fileID: 171725495385122415}
-  - {fileID: 6968309243432989722}
-  - {fileID: 1023352107468077082}
-  - {fileID: 8556241896349295871}
-  - {fileID: 2814950610928327557}
-  - {fileID: 9211443836410517515}
-  - {fileID: 6187289851510960405}
-  - {fileID: 1136504442665295801}
-  - {fileID: 6273010513505029051}
-  - {fileID: 3471383924560369783}
-  - {fileID: 7600299473937128169}
-  - {fileID: 4424332472824435750}
-  - {fileID: 6521380229584693232}
-  - {fileID: 2242518515254480738}
-  - {fileID: 1104790632840181730}
-  - {fileID: 3042751835683480543}
-  - {fileID: 4908131083298767519}
-  - {fileID: 1251718313310030806}
-  - {fileID: 7343966407773295395}
-  - {fileID: 975400822791531164}
-  - {fileID: 4674300826478740056}
-  - {fileID: 776232532397424556}
-  - {fileID: 1982529488141085178}
-  - {fileID: 480810066985917576}
-  - {fileID: 6887949910824417034}
-  - {fileID: 1150851197749303115}
-  - {fileID: 3630891971391215293}
---- !u!114 &1494638556906577005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3449559903675617089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - m_Rig: {fileID: 0}
-    m_Active: 1
-  m_Effectors: []
 --- !u!1 &3584083778049081774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,7 +1807,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 2396904452677223459}
-  manager: {fileID: 1930304049258728002}
 --- !u!1 &4442834956666772117
 GameObject:
   m_ObjectHideFlags: 0

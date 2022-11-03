@@ -57,6 +57,10 @@ namespace Managers
 
         private void OnSetHealthRatio(float ratio)
         {
+            if (ratio <= 0.1f)
+            {
+                healthBar.gameObject.SetActive(false);
+            }
             healthBar.HealthNormalized = ratio;
         }
     }

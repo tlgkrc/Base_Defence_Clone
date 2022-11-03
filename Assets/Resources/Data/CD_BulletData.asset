@@ -24,7 +24,7 @@ MonoBehaviour:
   BulletData:
     BulletGoData:
       TurretBulletData:
-        LifeTime: 3
+        LifeTime: 1
         ForceFactor: 8
         Damage: 2
       WeaponBulletData:

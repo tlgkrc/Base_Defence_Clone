@@ -115,6 +115,7 @@ namespace Managers
                         yield break;
                     }
                     _roomData.PaidAmount++;
+                    ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
                     SetRoomMoney(_moneyToPay);
                     roomPhysicsController.SetRadialVisual(_roomData.PaidAmount, _roomData.Cost);
                     yield return new WaitForSeconds(_roomData.BuyDelay);

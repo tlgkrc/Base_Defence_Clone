@@ -2,6 +2,7 @@
 using System.Collections;
 using Data.UnityObject;
 using Data.ValueObject.Base;
+using DG.Tweening;
 using Interfaces;
 using Signals;
 using TMPro;
@@ -28,7 +29,7 @@ namespace Managers
 
         #region Private Variables
         
-        private int _totalCost = 100;
+        private int _totalCost = 50;
         private int _paidCost = 0;
         private bool _playerInArea = false;
         private int _diamondToPayForField;
@@ -45,6 +46,15 @@ namespace Managers
         private void SetDiamondToText()
         {
             forceFieldTMP.text = (_totalCost - _paidCost).ToString();
+        }
+
+        private void Start()
+        {
+            SetDiamondToText();
+            if (_paidCost>=_totalCost)
+            {
+                BuyForceField();
+            }
         }
 
         #region Event Subscription
@@ -106,12 +116,12 @@ namespace Managers
                 SetDiamondToText();
                 if (_diamondToPayForField==0)
                 {
-                    BuyForceField();
+                    forceField.transform.DOScale(Vector3.zero, .4f).SetEase(Ease.InCirc).OnComplete(() => BuyForceField());
                     yield break;
                 }
 
                 _paidCost++;
-                ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
+                ScoreSignals.Instance.onUpdateDiamonScore?.Invoke(-1);
                 yield return new WaitForSeconds(.1f);
             }
         }

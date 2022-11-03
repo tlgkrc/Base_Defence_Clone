@@ -71,7 +71,8 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack += OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks += OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement += OnRemoveLastElement;
-            StackSignals.Instance.onAddToPlayer += OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddAmmoBoxToPlayer += OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddMoneyToPlayer += OnAddMoneyToPlayer;
         }
 
         private void UnsubscribeEvents()
@@ -81,7 +82,9 @@ namespace Managers
             StackSignals.Instance.onClearDynamicStack -= OnClearDynamicStack;
             StackSignals.Instance.onTransferBetweenStacks -= OnTransferBetweenStacks;
             StackSignals.Instance.onRemoveLastElement -= OnRemoveLastElement;
-            StackSignals.Instance.onAddToPlayer -= OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddAmmoBoxToPlayer -= OnAddAmmoBoxToPlayer;
+            StackSignals.Instance.onAddMoneyToPlayer -= OnAddMoneyToPlayer;
+
         }
 
         private void OnDisable()
@@ -126,6 +129,14 @@ namespace Managers
             if (transform.GetInstanceID() == id)
             {
                 Remove(nameOfGameObject);
+            }
+        }
+
+        private void OnAddMoneyToPlayer(int id,GameObject gO)
+        {
+            if (id == GetInstanceID())
+            {
+                Add(gO);
             }
         }
 
@@ -236,5 +247,6 @@ namespace Managers
                 }
             }
         }
+        
     }
 }

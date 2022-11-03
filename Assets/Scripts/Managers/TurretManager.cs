@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Keys;
 using Signals;
@@ -9,6 +8,7 @@ using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
 using Interfaces;
+using Sirenix.OdinInspector;
 using TMPro;
 
 namespace Managers
@@ -39,13 +39,14 @@ namespace Managers
 
         private bool _hasShooter;
         private bool _shooterIsPlayer;
-        private List<GameObject> _hitList = new List<GameObject>();
+        [ShowInInspector]private List<GameObject> _hitList = new List<GameObject>();
         private int _bulletCount = 0;
         private float _shootTime;
         private int _shootingCount;
         private TurretGOData _turretGOData;
         private bool _isOnArea;
         private int _moneyToPay;
+        private int _paidAmount;
 
         #endregion
         #endregion
@@ -53,20 +54,6 @@ namespace Managers
         private void Awake()
         {
             _turretGOData = GetTurretData();
-            SetDefaultSettings();
-        }
-
-        private void SetDefaultSettings()
-        {
-            if (_turretGOData.TurretSoldierCost > _turretGOData.TurretSoldierCostPaid)
-            {
-                SetTurretCostText(_turretGOData.TurretSoldierCost - _turretGOData.TurretSoldierCostPaid);
-                _hasShooter = false;
-            }
-            else
-            {
-                OnOpenTurretWorker();
-            }
         }
 
         private TurretGOData GetTurretData()
@@ -78,6 +65,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            LoadKeys();
             SubscribeEvents();
         }
 
@@ -95,7 +83,7 @@ namespace Managers
             BaseSignals.Instance.onSetPlayerToTurretShooter -= OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer -= OnReleasePlayer;
             BaseSignals.Instance.onOpenTurretWorker -= OnOpenTurretWorker;
-            BaseSignals.Instance.onSetAmmoStockTransform += OnAddAmmoStockTransform;
+            BaseSignals.Instance.onSetAmmoStockTransform -= OnAddAmmoStockTransform;
             StackSignals.Instance.onDeliverAmmoBox -= OnCountAmmo;
         }
 
@@ -106,6 +94,25 @@ namespace Managers
         }
 
         #endregion
+
+        private void Start()
+        {
+            SetDefaultSettings();
+        }
+        
+        private void SetDefaultSettings()
+        {
+            if (_turretGOData.TurretSoldierCost > _paidAmount)
+            {
+                SetTurretCostText(_turretGOData.TurretSoldierCost - _turretGOData.TurretSoldierCostPaid);
+                _hasShooter = false;
+            }
+            else
+            {
+                OnOpenTurretWorker();
+                CoreGameSignals.Instance.onSetOpenedTurret?.Invoke(transform);
+            }
+        }
 
         private void Update()
         {
@@ -159,6 +166,7 @@ namespace Managers
 
         private void SetTurretRotate()
         {
+            
             if (_shooterIsPlayer)
             {
                 var rotationX = BaseSignals.Instance.onSetTurretRotation?.Invoke();
@@ -174,10 +182,11 @@ namespace Managers
             }
             else
             {
-                if (_hitList.Count != 0)
+                if (_hitList.Count<=0)
                 {
-                    transform.LookAt(_hitList[0].transform.position);
+                    return;
                 }
+                transform.LookAt(_hitList[0].transform.position);
             }
         }
 
@@ -234,7 +243,7 @@ namespace Managers
                 int? currentScore = ScoreSignals.Instance.onGetMoneyScore?.Invoke();
                 if (currentScore>0)
                 {
-                    _moneyToPay = _turretGOData.TurretSoldierCost - _turretGOData.TurretSoldierCostPaid;
+                    _moneyToPay = _turretGOData.TurretSoldierCost - _paidAmount;
                     physicController.SetRadialVisual(_turretGOData.TurretSoldierCostPaid,_turretGOData.TurretSoldierCost);
                     SetRoomMoney(_moneyToPay);
                     if(_moneyToPay == 0)
@@ -242,8 +251,9 @@ namespace Managers
                         OnOpenTurretWorker();
                         yield break;
                     }
-                    _turretGOData.TurretSoldierCostPaid++;
-                    ScoreSignals.Instance.onSetScore?.Invoke(-1);
+
+                    _paidAmount++;
+                    ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
                     yield return new WaitForSeconds(_turretGOData.BuyDelay);
                 }
                 else
@@ -265,12 +275,12 @@ namespace Managers
 
         public void LoadKeys()
         {
-            _turretGOData.TurretSoldierCostPaid = SaveManager.LoadValue("paidAmount_" +id.ToString(), _turretGOData.TurretSoldierCostPaid) ;
+            _paidAmount = SaveManager.LoadValue("TurretSoldierPaidAmount_" +GetInstanceID().ToString(), _turretGOData.TurretSoldierCostPaid) ;
         }
 
         public void SaveKeys()
         {
-            SaveManager.SaveValue("paidAmount_" +id.ToString(), _turretGOData.TurretSoldierCostPaid) ;
+            SaveManager.SaveValue("TurretSoldierPaidAmount_" +GetInstanceID().ToString(), _paidAmount) ;
         }
     }
 }

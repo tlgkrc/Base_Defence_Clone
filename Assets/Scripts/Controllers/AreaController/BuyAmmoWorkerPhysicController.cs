@@ -32,10 +32,15 @@ namespace Controllers.AreaController
             {
                 buyWorkersManager.BuyAmmoWorker();
             }
-            else
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
             {
                 buyWorkersManager.StopAmmoWorkerBuying();
             }
+            
         }
     }
 }

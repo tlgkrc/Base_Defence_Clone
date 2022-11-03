@@ -52,10 +52,12 @@ namespace AI.Subscribers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onSetOpenedTurret += OnSetOpenedTurret;
         }
 
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onSetOpenedTurret -= OnSetOpenedTurret;
         }
 
         private void OnDisable()
@@ -117,7 +119,7 @@ namespace AI.Subscribers
         {
             return Resources.Load<CD_AmmoSupplier>("Data/CD_AmmoSupplier").AmmoSupplierData;
         }
-        
+
         public void TakeAmmoBoxes()
         {
             for (int i = 0; i < _ammoSupplierData.MaxStackCount; i++)
@@ -133,6 +135,11 @@ namespace AI.Subscribers
             StackSignals.Instance.onTransferBetweenStacks?.Invoke(manager.GetInstanceID(),stackManager,manager);
             StackSignals.Instance.onDeliverAmmoBox?.
                 Invoke(manager.transform.GetInstanceID(),_ammoSupplierData.MaxStackCount);
+        }
+
+        private void OnSetOpenedTurret(Transform newTurret)
+        {
+            TurretAmmoTransforms.Add(newTurret);
         }
     }
 }

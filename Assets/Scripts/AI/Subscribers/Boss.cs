@@ -27,6 +27,7 @@ namespace AI.Subscribers
 
         private GameObject _target;
         private BossData _bossData;
+        private bool _isDead;
         
         #endregion
 
@@ -36,6 +37,7 @@ namespace AI.Subscribers
         {
             _bossData = GetBossData();
             SetDataToControllers();
+            _isDead = false;
         }
 
         private BossData GetBossData()
@@ -59,7 +61,7 @@ namespace AI.Subscribers
         private void UnsubscribeEvents()
         {
             BaseSignals.Instance.onTriggerThrowEvent -= OnTriggerThrowEvent;
-            BaseSignals.Instance.onTriggerFakeHoldEvent += OnTriggerFakeHoldEvent;
+            BaseSignals.Instance.onTriggerFakeHoldEvent -= OnTriggerFakeHoldEvent;
         }
 
         private void OnDisable()
@@ -78,13 +80,14 @@ namespace AI.Subscribers
         public void SetTarget(GameObject target)
         {
             _target = target;
-            if (target == null)
-            {
-                animController.SetBossAnim(BossAnimTypes.Idle);
-            }
-            else
+            if (target != null && !_isDead)
             {
                 animController.SetBossAnim(BossAnimTypes.Throw);
+            }
+
+            if (target ==null)
+            {
+                animController.SetBossAnim(BossAnimTypes.Idle);
             }
         }
 
@@ -114,7 +117,19 @@ namespace AI.Subscribers
 
         public void OpenPortal()
         {
+            _isDead = true;
+            animController.SetBossAnim(BossAnimTypes.Die);
             portalCollider.enabled = true;
+            attackController.gameObject.SetActive(false); 
+            physicController.gameObject.SetActive(false);
+            CoreGameSignals.Instance.onDieEnemy?.Invoke(gameObject);
+            Invoke(nameof(Die), 1.5f);
+
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Enums.Animations;
 using Keys;
 using Managers;
@@ -21,7 +22,6 @@ namespace Controllers.Player
         #region Private Variables
 
         private static readonly int Speed = Animator.StringToHash("Speed");
-
         #endregion
 
         #endregion
@@ -29,6 +29,11 @@ namespace Controllers.Player
         public void SetAnimState(PlayerAnimStates animState)
         {
             animator.SetTrigger(animState.ToString());
+        }
+        
+        public void SetWeaponAnimState(WeaponTypes weaponType)
+        {
+            animator.SetTrigger(weaponType.ToString());
         }
 
         public void SetSpeedVariable(IdleInputParams inputParams)
@@ -43,11 +48,6 @@ namespace Controllers.Player
             animator.speed = 1;
         }
 
-        public void SetWeaponAnimState(WeaponTypes weaponType)
-        {
-            animator.SetTrigger(weaponType.ToString());
-        }
-
         public void SetWeaponAnimVisual(bool inBase)
         {
             if (inBase)
@@ -57,18 +57,6 @@ namespace Controllers.Player
             else
             {
                 animator.SetLayerWeight(1, 1);
-            }
-        }
-
-        public void SetFootAnim(bool isForward)
-        {
-            if (isForward)
-            {
-                animator.SetLayerWeight(2,0);
-            }
-            else
-            {
-                animator.SetLayerWeight(2, 1);
             }
         }
     }
