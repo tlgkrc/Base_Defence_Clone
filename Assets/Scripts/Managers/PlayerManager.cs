@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using Controllers.Player;
@@ -181,6 +182,7 @@ namespace Managers
                 playerWeaponController.SetWeaponVisual(false);
                 animationController.SetWeaponAnimVisual(true);
                 movementController.SetDangerZoneRotation(false);
+                StartCoroutine(FixedHealth());
             }
             else
             {
@@ -207,6 +209,7 @@ namespace Managers
         private void OnCheckCloseEnemy()
         {
             movementController.UpdateDangerZoneTarget(playerWeaponController.CheckTarget());
+            animationController.SetFootAnim(playerWeaponController.CheckTarget());
         }
 
         private void OnDieEnemy(GameObject gO)
@@ -216,14 +219,16 @@ namespace Managers
 
         public void CheckFootAnim(bool isForward)
         {
-            animationController.SetFootAnim(isForward);
+            if (playerWeaponController.CheckTarget()==null)
+            {
+                animationController.SetFootAnim(isForward);
+            }
         }
 
         private void OnUpdatePlayerHealth(int damage)
         {
             CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health/Data.Health);
             _health -= damage;
-            Debug.Log(_health);
             if (_health<=0)
             {
                 movementController.DisableMovement();
@@ -236,21 +241,36 @@ namespace Managers
 
         async void ResetPlayer()
         {
-            while (_inBase ==false && _health<Data.Health)
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+            while (_inBase ==false)
             {
-                _health += 5;
-                Debug.Log(_health);
                 await Task.Delay(3000);
                 animationController.SetFootAnim(true);
                 SetPlayerLayer(true);
                 gameObject.transform.position = new Vector3(0,0,10);
                 _inBase = true;
+                StartCoroutine(FixedHealth());
             }
         }
 
         private Transform OnGetPlayerTransform()
         {
             return transform;
+        }
+
+        IEnumerator FixedHealth()
+        {
+            if (_inBase && _health < Data.Health) 
+            {
+                _health += 1;
+                CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health / Data.Health);
+                yield return new WaitForSeconds(.1f);
+                StartCoroutine(FixedHealth());
+            }
+            else
+            {
+                yield break;
+            }
         }
     }
 }

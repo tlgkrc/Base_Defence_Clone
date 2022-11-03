@@ -17,6 +17,7 @@ namespace Managers
         
         [SerializeField]private CinemachineVirtualCamera levelCamera;
         [SerializeField] private CinemachineVirtualCamera turretCamera;
+        [SerializeField] private CinemachineVirtualCamera finishCamera;
 
         #endregion
 
@@ -82,6 +83,10 @@ namespace Managers
             else if (_cameraState == CameraStates.TurretCam)
             {
                 _camAnimator.Play(CameraStates.TurretCam.ToString());
+            }
+            else if (_cameraState == CameraStates.FinishCam)
+            {
+                _camAnimator.Play(CameraStates.FinishCam.ToString());
             }
         }
 

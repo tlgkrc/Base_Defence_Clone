@@ -3,6 +3,7 @@
     public enum CameraStates
     {
         LevelCam,
-        TurretCam
+        TurretCam,
+        FinishCam
     }
 }

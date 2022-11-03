@@ -39,6 +39,10 @@ namespace AI.Controllers
         public void Hit(int damage)
         {
             _health -= damage;
+            if (_health<=0)
+            {
+                manager.OpenPortal();
+            }
             CoreGameSignals.Instance.onSetBossHealthRatio?.Invoke((float)_health/_bossData.Health);
             
         }

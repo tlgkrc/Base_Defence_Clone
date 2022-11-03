@@ -41,7 +41,7 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onSetPlayerHealthRatio += OnSetHealthRatio;
+            CoreGameSignals.Instance.onSetPlayerHealthRatio -= OnSetHealthRatio;
         }
 
         private void OnDisable()

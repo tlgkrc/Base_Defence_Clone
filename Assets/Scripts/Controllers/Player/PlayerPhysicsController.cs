@@ -76,6 +76,10 @@ namespace Controllers.Player
             {
                 UISignals.Instance.onOpenShopPanel?.Invoke();
             }
+            else if (other.CompareTag("Portal"))
+            {
+                CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.FinishCam);
+            }
         }
 
         private void OnTriggerExit(Collider other)

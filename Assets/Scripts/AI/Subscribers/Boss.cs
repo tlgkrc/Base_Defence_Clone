@@ -18,6 +18,7 @@ namespace AI.Subscribers
         [SerializeField] private BossAnimController animController;
         [SerializeField] private BossHealthController healthController;
         [SerializeField] private BossAttackController attackController;
+        [SerializeField] private Collider portalCollider;
        
 
         #endregion
@@ -25,9 +26,6 @@ namespace AI.Subscribers
         #region Private Variables
 
         private GameObject _target;
-
-        //Data//
-        private int _health = 70;
         private BossData _bossData;
         
         #endregion
@@ -112,6 +110,11 @@ namespace AI.Subscribers
         private void OnTriggerFakeHoldEvent()
         {
             attackController.PrepareThrow();
+        }
+
+        public void OpenPortal()
+        {
+            portalCollider.enabled = true;
         }
     }
 }
