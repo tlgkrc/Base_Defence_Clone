@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1092113692960166331}
   - component: {fileID: 1092113692960166329}
   - component: {fileID: 1092113692960166330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4911,7 +4911,7 @@ GameObject:
   - component: {fileID: 1092113693357471585}
   - component: {fileID: 1092113693357471598}
   - component: {fileID: 1092113693357471599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GlowSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9793,7 +9793,7 @@ GameObject:
   - component: {fileID: 1092113693900073070}
   - component: {fileID: 1092113693900073066}
   - component: {fileID: 1092113693900073067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: xShapeImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14676,7 +14676,7 @@ GameObject:
   - component: {fileID: 1092113693931473203}
   - component: {fileID: 1092113693931473204}
   - component: {fileID: 1092113693931473205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14755,7 +14755,7 @@ GameObject:
   - component: {fileID: 1092113694101384464}
   - component: {fileID: 1092113694101384462}
   - component: {fileID: 1092113694101384463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14838,7 +14838,7 @@ GameObject:
   - component: {fileID: 1092113694169393395}
   - component: {fileID: 1092113694169393393}
   - component: {fileID: 1092113694169393394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LateEmbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19747,7 +19747,7 @@ GameObject:
   - component: {fileID: 1092113694577808926}
   - component: {fileID: 1092113694577808924}
   - component: {fileID: 1092113694577808925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightRays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24628,7 +24628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092113694646276253}
   - component: {fileID: 4126962413813835074}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24675,7 +24675,7 @@ GameObject:
   - component: {fileID: 7694780625563531401}
   - component: {fileID: 6453678438250120654}
   - component: {fileID: 2175249379775750569}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LateSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29566,7 +29566,7 @@ GameObject:
   - component: {fileID: 6350104944586913855}
   - component: {fileID: 6350104944586913850}
   - component: {fileID: 6350104944586913853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Burnmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34457,7 +34457,7 @@ GameObject:
   - component: {fileID: 6350104945540423346}
   - component: {fileID: 6350104945540423349}
   - component: {fileID: 6350104945540423348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Explosion Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39293,7 +39293,7 @@ GameObject:
   - component: {fileID: 6350104945820729900}
   - component: {fileID: 6350104945820729899}
   - component: {fileID: 6350104945820729898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44184,7 +44184,7 @@ GameObject:
   - component: {fileID: 6350104946125962157}
   - component: {fileID: 6350104946125962152}
   - component: {fileID: 6350104946125962155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49066,7 +49066,7 @@ GameObject:
   - component: {fileID: 6350104946264517981}
   - component: {fileID: 6350104946264517976}
   - component: {fileID: 6350104946264517979}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmokeTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53957,7 +53957,7 @@ GameObject:
   - component: {fileID: 6350104946378163565}
   - component: {fileID: 6350104946378163560}
   - component: {fileID: 6350104946378163563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmokeSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58848,7 +58848,7 @@ GameObject:
   - component: {fileID: 6350104946474525851}
   - component: {fileID: 6350104946474525846}
   - component: {fileID: 6350104946474525849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63730,7 +63730,7 @@ GameObject:
   - component: {fileID: 6350104946545807427}
   - component: {fileID: 6350104946545807486}
   - component: {fileID: 6350104946545807425}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmokeFlame
   m_TagString: Untagged
   m_Icon: {fileID: 0}

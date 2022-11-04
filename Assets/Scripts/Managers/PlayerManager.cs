@@ -29,6 +29,7 @@ namespace Managers
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private PlayerWeaponController playerWeaponController;
+        [SerializeField] private PlayerHealthController healthController;
         
         #endregion
 
@@ -37,7 +38,6 @@ namespace Managers
         private Rigidbody _rb;
         private WeaponData _weaponData;
         [ShowInInspector]private WeaponTypes _weaponTypes;
-        private int _health;
         private bool _inBase;
 
         #endregion
@@ -48,6 +48,7 @@ namespace Managers
             GetReferences();
             SendPlayerDataToControllers();
             playerWeaponController.enabled = false;
+            _inBase = true;
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -57,7 +58,6 @@ namespace Managers
         {
             Data = GetPlayerData();
             _weaponData = GetGunData();
-            _health = Data.Health;
         }
 
         private void SendPlayerDataToControllers()
@@ -65,6 +65,7 @@ namespace Managers
             movementController.SetMovementData(Data.MovementData);
             playerWeaponController.SetWeaponData(_weaponData);
             playerPhysicsController.SetPhysicData(Data.MaxStackCount);
+            healthController.SetHealthData(Data);
         }
 
         #region Event Subscription
@@ -175,7 +176,7 @@ namespace Managers
         private void SetPlayerLayer(bool inBase)
         {
             _inBase = inBase;
-            if (inBase)
+            if (_inBase)
             {
                 var playerLayer = LayerMask.NameToLayer("Player");
                 playerPhysicsController.gameObject.layer = playerLayer;
@@ -183,7 +184,7 @@ namespace Managers
                 playerWeaponController.SetWeaponVisual(false);
                 animationController.SetWeaponAnimVisual(true);
                 movementController.SetDangerZoneRotation(false);
-                StartCoroutine(FixedHealth());
+                StartCoroutine(healthController.FixedHealth());
             }
             else
             {
@@ -193,6 +194,8 @@ namespace Managers
                 playerWeaponController.SetWeaponVisual(true);
                 animationController.SetWeaponAnimVisual(false);
                 movementController.SetDangerZoneRotation(true);
+                UISignals.Instance.onSetPlayerHealthPanel?.Invoke(true);
+                StopAllCoroutines();
             }
         }
 
@@ -219,13 +222,12 @@ namespace Managers
 
         private void OnUpdatePlayerHealth(int damage)
         {
-            CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health/Data.Health);
-            _health -= damage;
-            if (_health<=0)
+            healthController.UpdatePlayerHealth(damage);
+            if (healthController.CheckHealth()<=0)
             {
+                animationController.SetWeaponAnimVisual(true);
+                playerWeaponController.SetWeaponVisual(false);
                 playerWeaponController.enabled = false;
-                // movementController.DisableMovement();
-                animationController.SetAnimState(PlayerAnimStates.Die);
                 ResetPlayer();
                 BaseSignals.Instance.onSetEnemyTarget?.Invoke();
             }
@@ -233,15 +235,11 @@ namespace Managers
 
         async void ResetPlayer()
         {
-            SetPlayerLayer(true);
             animationController.SetAnimState(PlayerAnimStates.Die);
             await Task.Delay(3000);
-            _inBase = true;
-            StartCoroutine(FixedHealth());
             transform.rotation = Quaternion.Euler(Vector3.zero);
             gameObject.transform.position = new Vector3(0,0,10);
-            animationController.SetAnimState(PlayerAnimStates.Idle);
-            
+            SetPlayerLayer(true);
         }
 
         private Transform OnGetPlayerTransform()
@@ -249,19 +247,6 @@ namespace Managers
             return transform;
         }
 
-        IEnumerator FixedHealth()
-        {
-            if (_inBase && _health < Data.Health) 
-            {
-                _health += 1;
-                CoreGameSignals.Instance.onSetPlayerHealthRatio?.Invoke((float)_health / Data.Health);
-                yield return new WaitForSeconds(.1f);
-                StartCoroutine(FixedHealth());
-            }
-            else
-            {
-                yield break;
-            }
-        }
+        
     }
 }

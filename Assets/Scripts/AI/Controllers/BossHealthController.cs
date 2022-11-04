@@ -1,7 +1,10 @@
-﻿using AI.Subscribers;
+﻿using System;
+using AI.Subscribers;
 using Data.ValueObject;
 using Signals;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AI.Controllers
 {
@@ -18,6 +21,8 @@ namespace AI.Controllers
         #region Serialized Variables
 
         [SerializeField] private Boss manager;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private Image healthImage;
 
         #endregion
 
@@ -30,6 +35,12 @@ namespace AI.Controllers
 
         #endregion
 
+        private void Start()
+        {
+            SetHealthText();
+            healthImage.fillAmount = 1;
+        }
+
         public void SetHealthData(BossData bossData)
         {
             _bossData = bossData;
@@ -39,15 +50,19 @@ namespace AI.Controllers
         public void Hit(int damage)
         {
             _health -= damage;
+            healthImage.fillAmount = (float)_health / _bossData.Health;
+            SetHealthText();
             if (_health<=0)
             {
                 manager.OpenPortal();
                 
             }
-            CoreGameSignals.Instance.onSetBossHealthRatio?.Invoke((float)_health/_bossData.Health);
-            
         }
-        
+
+        private void SetHealthText()
+        {
+            healthText.text = (_health * 10).ToString();
+        }
         
     }
 }

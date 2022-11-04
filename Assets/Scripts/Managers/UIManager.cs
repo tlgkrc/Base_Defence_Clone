@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Controllers;
 using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
+using Image = UnityEngine.UI.Image;
 
 namespace Managers
 {
@@ -16,8 +15,10 @@ namespace Managers
 
         [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject shopPanel;
+        [SerializeField] private GameObject playerHealthPanel;
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TextMeshProUGUI diamondText;
+        [SerializeField] private Image playerHealthBar;
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace Managers
         private void Awake()
         {
             _uiPanelController = new UIPanelController();
+            playerHealthBar.fillAmount = 1;
         }
         
 
@@ -47,6 +49,8 @@ namespace Managers
             UISignals.Instance.onSetDiamondText += OnSetDiamondText;
             UISignals.Instance.onOpenShopPanel += OnOpenShopPanel;
             UISignals.Instance.onCloseShopPanel += OnCloseShopPanel;
+            UISignals.Instance.onUpdatePlayerHealthBar += OnUpdatePlayerHealthBar;
+            UISignals.Instance.onSetPlayerHealthPanel += OnSetPlayerHealthPanel;
         }
 
         private void UnsubscribeEvents()
@@ -55,6 +59,8 @@ namespace Managers
             UISignals.Instance.onSetDiamondText -= OnSetDiamondText;
             UISignals.Instance.onOpenShopPanel -= OnOpenShopPanel;
             UISignals.Instance.onCloseShopPanel -= OnCloseShopPanel;
+            UISignals.Instance.onUpdatePlayerHealthBar -= OnUpdatePlayerHealthBar;
+            UISignals.Instance.onSetPlayerHealthPanel -= OnSetPlayerHealthPanel;
         }
 
         private void OnDisable()
@@ -140,6 +146,16 @@ namespace Managers
         public void SelectRifle()
         {
             UISignals.Instance.onHoldWeapon?.Invoke(WeaponTypes.Rifle);
+        }
+
+        private void OnUpdatePlayerHealthBar(float healthRatio)
+        {
+            playerHealthBar.fillAmount = healthRatio;
+        }
+
+        private void OnSetPlayerHealthPanel(bool isOpen)
+        {
+            playerHealthPanel.SetActive(isOpen);
         }
 
     }

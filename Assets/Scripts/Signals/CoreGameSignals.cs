@@ -19,8 +19,6 @@ namespace Signals
         public UnityAction<bool> onChangedFootAnim =delegate {  };
         public UnityAction<int> onUpdatePlayerHealth = delegate {  };
         public UnityAction<int> onSetGrenadeDamage = delegate {  };
-        public UnityAction<float> onSetPlayerHealthRatio= delegate {  };
-        public UnityAction<float> onSetBossHealthRatio = delegate {  };
         public Func<Transform> onGetPlayerTransform = delegate { return null; };
         public UnityAction<Transform> onSetOpenedTurret = delegate {  };
     }

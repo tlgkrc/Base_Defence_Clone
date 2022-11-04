@@ -115,7 +115,7 @@ namespace AI.Subscribers
             attackController.PrepareThrow();
         }
 
-        public void OpenPortal()
+        public void OpenPortal()    
         {
             _isDead = true;
             animController.SetBossAnim(BossAnimTypes.Die);
