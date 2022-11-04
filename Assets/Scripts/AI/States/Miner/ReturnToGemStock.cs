@@ -1,5 +1,4 @@
-﻿using Enums;
-using Enums.Animations;
+﻿using Enums.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +10,10 @@ namespace AI.States.Miner
 
         #region PrivateVariables
 
-        private readonly Subscribers.Miner _miner;
-        private readonly NavMeshAgent _agent;
         private readonly Transform _gemStockTransform;
         private readonly Animator _animator;
+        private readonly NavMeshAgent _agent;
+        private readonly Subscribers.Miner _miner;
 
         #endregion
 

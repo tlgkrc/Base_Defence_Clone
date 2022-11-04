@@ -17,19 +17,16 @@ namespace Controllers.Player
         #endregion
 
         private int _health;
-
         private PlayerData _playerData;
 
         #endregion
-
 
         public void SetHealthData(PlayerData playerData)
         {
             _playerData = playerData;
             _health = playerData.Health;
         }
-        
-        
+
         public IEnumerator FixedHealth()
         {
             if (_health>= _playerData.Health)

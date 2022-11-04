@@ -10,9 +10,9 @@ namespace AI.Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private Boss manager;
         [SerializeField] private Animator animator;
-
+        [SerializeField] private Boss manager;
+        
         #endregion
 
         #region Private Variables
@@ -32,6 +32,5 @@ namespace AI.Controllers
         {
             animator.SetTrigger(animType.ToString());
         }
-        
     }
 }

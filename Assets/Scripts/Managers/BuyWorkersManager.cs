@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Controllers.AreaController;
+﻿using System.Collections;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Interfaces;
@@ -14,20 +12,16 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
         
         [SerializeField] private TextMeshPro ammoWorkerCostTMP;
         [SerializeField] private TextMeshPro moneyWorkerCostTMP;
         [SerializeField] private GameObject ammoWorker;
         [SerializeField] private GameObject moneyWorker;
-        [SerializeField] private GameObject hireAmmoWorkerTMP,hireMoneyWorkerTMP;
-        [SerializeField] private GameObject upgradeAWorkerTMP, upgradeMWorkerTMP;
+        [SerializeField] private GameObject hireAmmoWorkerTMP;
+        [SerializeField] private GameObject hireMoneyWorkerTMP;
+        [SerializeField] private GameObject upgradeAWorkerTMP;
+        [SerializeField] private GameObject upgradeMWorkerTMP;
 
         #endregion
 
@@ -161,7 +155,6 @@ namespace Managers
                 ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-1);
                 yield return new WaitForSeconds(_buyWorkerData.DelayTime);
             }
-            
         }
 
         private void HireMoneyWorker()
@@ -195,7 +188,6 @@ namespace Managers
                 {
                     yield break;
                 }
-                
             }
         }
 

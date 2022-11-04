@@ -1,8 +1,5 @@
-using System;
 using Commands;
-using Data.UnityObject;
 using Data.ValueObject;
-using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -42,20 +39,15 @@ namespace Managers
         {
             Init();
         }
-        
-        private void Init()
-        {
-            _queryPointerOverUIElementCommand = new QueryPointerOverUIElementCommand();
-        }
 
         #region Event Subscriptions
 
         private void OnEnable()
         {
-            isReadyForTouch = true;
+            InitSettings();
             SubscribeEvents();
         }
-
+        
         private void SubscribeEvents()
         {
             InputSignals.Instance.onEnableInput += OnEnableInput;
@@ -79,6 +71,16 @@ namespace Managers
         }
 
         #endregion
+        
+        private void Init()
+        {
+            _queryPointerOverUIElementCommand = new QueryPointerOverUIElementCommand();
+        }
+        
+        private void InitSettings()
+        {
+            isReadyForTouch = true;
+        }
 
         private void Update()
         {
@@ -121,8 +123,6 @@ namespace Managers
         }
 
         #endregion
-        
-        #region InputUpdateMethods
 
         private void MouseButtonUp()
         {
@@ -132,7 +132,6 @@ namespace Managers
 
         private void MouseButtonDown()
         {
-            //InputSignals.Instance.onInputTaken?.Invoke();
             if (!isFirstTimeTouchTaken)
             {
                 isFirstTimeTouchTaken = true;
@@ -158,7 +157,5 @@ namespace Managers
         {
             return floatingJoystick.Horizontal;
         }
-
-        #endregion
     }
 }

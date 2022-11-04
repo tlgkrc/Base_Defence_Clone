@@ -18,25 +18,25 @@ namespace AI.Subscribers
 
         #region Public Variables
 
-        public Transform Target { get; set; }
         public int TargetIndex { get; set; }
+        public Transform Target { get; set; }
         public List<Transform> TurretAmmoTransforms = new List<Transform>();
 
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private StackManager stackManager;
         [SerializeField] private Animator animator;
-
+        [SerializeField] private StackManager stackManager;
+        
         #endregion
 
         #region Private Variables
 
-        private AIStateMachine _aiStateMachine;
-        private AmmoSupplierData _ammoSupplierData;
         private Transform _ammoDepot;
         private Transform _target;
+        private AIStateMachine _aiStateMachine;
+        private AmmoSupplierData _ammoSupplierData;
 
         #endregion
 
@@ -52,12 +52,12 @@ namespace AI.Subscribers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onSetOpenedTurret += OnSetOpenedTurret;
+            AISignals.Instance.onSetOpenedTurret += OnSetOpenedTurret;
         }
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onSetOpenedTurret -= OnSetOpenedTurret;
+            AISignals.Instance.onSetOpenedTurret -= OnSetOpenedTurret;
         }
 
         private void OnDisable()
@@ -85,9 +85,8 @@ namespace AI.Subscribers
         {
             _aiStateMachine = new AIStateMachine();
             _ammoSupplierData = GetAmmoSupplierData();
+            
             var navMeshAgent = GetComponent<NavMeshAgent>();
-            navMeshAgent.speed = _ammoSupplierData.SupplierSpeed;
-
             var moveAmmoDepot = new MoveToAmmoDepot(this, navMeshAgent, _ammoDepot, animator);
             var searchForEmptyTurret = new SearchForEmptyTurret(this, animator);
             var moveToTurret = new MoveToTurret(this, navMeshAgent, animator);
@@ -102,13 +101,12 @@ namespace AI.Subscribers
 
             Func<bool> StackIsEmpty() => () => stackManager.transform.childCount <= 0
                                                && Vector3.Distance(transform.position, _ammoDepot.position) <= 2f;
-
             Func<bool> StackIsFull() => () => _ammoSupplierData.MaxStackCount == stackManager.transform.childCount;
-
             Func<bool> ReachedAmmoStock() =>
                 () => Vector3.Distance(transform.position, Target.position) <= 2f;
-
             Func<bool> AmmoHasDelivered() => () => stackManager.transform.childCount <= 0;
+            
+            navMeshAgent.speed = _ammoSupplierData.SupplierSpeed;
         }
         private void At(IAIStates to, IAIStates from, Func<bool> condition)
         {

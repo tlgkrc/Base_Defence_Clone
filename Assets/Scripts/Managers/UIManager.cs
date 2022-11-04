@@ -23,8 +23,9 @@ namespace Managers
         #endregion
 
         #region Private Variables
+        
         private UIPanelController _uiPanelController;
-        private bool _isReadyForIdleGame = false;
+
         #endregion
 
         #endregion

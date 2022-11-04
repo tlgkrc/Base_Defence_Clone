@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using Controllers.Player;
@@ -25,7 +24,7 @@ namespace Managers
 
         #region Serialized Variables
 
-        [Space] [SerializeField] private PlayerMovementController movementController;
+        [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private PlayerWeaponController playerWeaponController;
@@ -47,8 +46,7 @@ namespace Managers
         {
             GetReferences();
             SendPlayerDataToControllers();
-            playerWeaponController.enabled = false;
-            _inBase = true;
+            InitSettings();
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -58,6 +56,12 @@ namespace Managers
         {
             Data = GetPlayerData();
             _weaponData = GetGunData();
+        }
+        
+        private void InitSettings()
+        {
+            playerWeaponController.enabled = false;
+            _inBase = true;
         }
 
         private void SendPlayerDataToControllers()
@@ -82,14 +86,14 @@ namespace Managers
             InputSignals.Instance.onInputReleased += OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged += OnSetIdleInputValues;
             CoreGameSignals.Instance.onReset += OnReset;
-            BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
-            BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
-            StackSignals.Instance.onGetMaxPlayerStackCount += OnGetMaxPlayerStackCount;
-            UISignals.Instance.onHoldWeapon += OnHoldWeapon;
             CoreGameSignals.Instance.onCheckCloseEnemy += OnCheckCloseEnemy;
             CoreGameSignals.Instance.onDieEnemy += OnDieEnemy;
             CoreGameSignals.Instance.onUpdatePlayerHealth += OnUpdatePlayerHealth;
             CoreGameSignals.Instance.onGetPlayerTransform += OnGetPlayerTransform;
+            BaseSignals.Instance.onPlayerInBase += OnPlayerInBase;
+            BaseSignals.Instance.onSetPlayerTransformAtTurret += OnSetPlayerTransformAtTurret;
+            StackSignals.Instance.onGetMaxPlayerStackCount += OnGetMaxPlayerStackCount;
+            UISignals.Instance.onHoldWeapon += OnHoldWeapon;
         }
 
         private void UnsubscribeEvents()
@@ -97,16 +101,15 @@ namespace Managers
             InputSignals.Instance.onInputTaken -= OnActivateMovement;
             InputSignals.Instance.onInputReleased -= OnDeactivateMovement;
             InputSignals.Instance.onJoystickDragged -= OnSetIdleInputValues;
+            CoreGameSignals.Instance.onCheckCloseEnemy -= OnCheckCloseEnemy;
+            CoreGameSignals.Instance.onDieEnemy -= OnDieEnemy;
+            CoreGameSignals.Instance.onUpdatePlayerHealth -= OnUpdatePlayerHealth;
+            CoreGameSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
             CoreGameSignals.Instance.onReset -= OnReset;
             BaseSignals.Instance.onPlayerInBase -= OnPlayerInBase;
             BaseSignals.Instance.onSetPlayerTransformAtTurret -= OnSetPlayerTransformAtTurret;
             StackSignals.Instance.onGetMaxPlayerStackCount -= OnGetMaxPlayerStackCount;
             UISignals.Instance.onHoldWeapon -= OnHoldWeapon;
-            CoreGameSignals.Instance.onCheckCloseEnemy -= OnCheckCloseEnemy;
-            CoreGameSignals.Instance.onDieEnemy -= OnDieEnemy;
-            CoreGameSignals.Instance.onUpdatePlayerHealth -= OnUpdatePlayerHealth;
-            CoreGameSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
-
         }
 
         private void OnDisable()
@@ -223,17 +226,15 @@ namespace Managers
         private void OnUpdatePlayerHealth(int damage)
         {
             healthController.UpdatePlayerHealth(damage);
-            if (healthController.CheckHealth()<=0)
-            {
-                animationController.SetWeaponAnimVisual(true);
-                playerWeaponController.SetWeaponVisual(false);
-                playerWeaponController.enabled = false;
-                ResetPlayer();
-                BaseSignals.Instance.onSetEnemyTarget?.Invoke();
-            }
+            if (healthController.CheckHealth() > 0) return;
+            animationController.SetWeaponAnimVisual(true);
+            playerWeaponController.SetWeaponVisual(false);
+            playerWeaponController.enabled = false;
+            ResetPlayer();
+            AISignals.Instance.onSetEnemyTarget?.Invoke();
         }
 
-        async void ResetPlayer()
+        private async void ResetPlayer()
         {
             animationController.SetAnimState(PlayerAnimStates.Die);
             await Task.Delay(3000);
@@ -246,7 +247,5 @@ namespace Managers
         {
             return transform;
         }
-
-        
     }
 }

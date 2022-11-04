@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Threading.Tasks;
-using AI.Subscribers;
-using DG.Tweening;
+﻿using AI.Subscribers;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -17,13 +13,11 @@ namespace AI.Controllers
 
         [SerializeField] private Boss manager;
         [SerializeField] private GameObject fakeGrenade;
-        //[SerializeField] private float throwTime = .5f;
-        
+
         #endregion
 
         #region Private Variables
 
-        private GameObject _grenade;
         private float _currentY;
         private float _currentXZ;
         private float _velocityXZ;
@@ -32,6 +26,7 @@ namespace AI.Controllers
         private Vector3 _differenceXZ;
         private Vector3 _difference;
         private Vector3 _result;
+        private GameObject _grenade;
 
         #endregion
 

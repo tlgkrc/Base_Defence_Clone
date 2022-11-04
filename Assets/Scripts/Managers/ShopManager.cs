@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
@@ -16,7 +15,10 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private TextMeshProUGUI pistolText, shotgunText, subMachineText, riffleText;
+        [SerializeField] private TextMeshProUGUI pistolText;
+        [SerializeField] private TextMeshProUGUI shotgunText;
+        [SerializeField] private TextMeshProUGUI subMachineText;
+        [SerializeField] private TextMeshProUGUI riffleText;
         [SerializeField] private List<TextMeshProUGUI> buyOrUpgradeText;
 
         #endregion
@@ -24,12 +26,14 @@ namespace Managers
         #region Private Variables
 
         private ShopData _shopData;
-        private int _pistolLevel,_shotgunLevel,_subMachineLevel,_rifleLevel;
+        private int _pistolLevel;
+        private int _shotgunLevel;
+        private int _subMachineLevel;
+        private int _rifleLevel;
 
         #endregion
 
         #endregion
-
 
         private void Awake()
         {
@@ -119,7 +123,6 @@ namespace Managers
                     ScoreSignals.Instance.onUpdateMoneyScore?.Invoke(-value);
                 }
             }
-            
         }
 
         private void SetShopText()
@@ -143,7 +146,6 @@ namespace Managers
                 {
                     riffleText.text = value.ToString();
                 }
-                
             }
         }
 

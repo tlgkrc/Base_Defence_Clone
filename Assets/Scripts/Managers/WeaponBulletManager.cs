@@ -70,7 +70,6 @@ namespace Managers
 
         private int OnSetWeaponBulletDamage(WeaponTypes weaponType)
         {
-            Debug.Log(_weaponBulletGoData.Damage);
             return _weaponBulletGoData.Damage;
         }
         
@@ -99,7 +98,6 @@ namespace Managers
             _lifeTime = 0f;
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.Euler(Vector3.zero);
-            
         }
 
         public int GetWeaponDamage()

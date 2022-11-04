@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AI.Subscribers;
+﻿using AI.Subscribers;
 using Enums;
 using UnityEngine;
 
@@ -11,20 +9,10 @@ namespace AI.Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private MoneyCollector moneyCollector;
         [SerializeField] private CapsuleCollider capsuleCollider;
-
-        #endregion
-
-        #region Private Variables
-
 
         #endregion
 
@@ -54,6 +42,5 @@ namespace AI.Controllers
         {
             capsuleCollider.radius = .5f;
         }
-        
     }
 }

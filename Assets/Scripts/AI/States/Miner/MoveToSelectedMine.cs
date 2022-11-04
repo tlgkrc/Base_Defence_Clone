@@ -8,19 +8,13 @@ namespace AI.States.Miner
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Private Variables
 
+        private float _timeStuck;
+        private Vector3 _lastPosition;
         private readonly Subscribers.Miner _miner;
         private readonly NavMeshAgent _agent;
         private readonly NavMeshObstacle _navMeshObstacle;
-        private Vector3 _lastPosition;
-        private float _timeStuck;
         private readonly Animator _animator;
 
         #endregion

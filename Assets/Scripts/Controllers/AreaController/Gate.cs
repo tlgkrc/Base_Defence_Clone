@@ -13,7 +13,8 @@ namespace Controllers.AreaController
 
         #endregion
 
-        private Vector3 _endValue = new Vector3(0, 0, -60);
+        private readonly Vector3 _endValue = new Vector3(0, 0, -60);
+        
         #endregion
         private void OnTriggerEnter(Collider other)
         {

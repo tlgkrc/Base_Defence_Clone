@@ -10,7 +10,7 @@ namespace AI.States.MoneyCollector
         #region Private Variables
 
         private readonly Subscribers.MoneyCollector _moneyCollector;
-        private Animator _animator;
+        private readonly Animator _animator;
 
         #endregion
 

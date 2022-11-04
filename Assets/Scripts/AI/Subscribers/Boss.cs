@@ -1,5 +1,4 @@
-﻿using System;
-using AI.Controllers;
+﻿using AI.Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums.Animations;
@@ -14,21 +13,20 @@ namespace AI.Subscribers
 
         #region Serialized Variables
 
+        [SerializeField] private Collider portalCollider;
         [SerializeField] private BossPhysicController physicController;
         [SerializeField] private BossAnimController animController;
         [SerializeField] private BossHealthController healthController;
         [SerializeField] private BossAttackController attackController;
-        [SerializeField] private Collider portalCollider;
-       
 
         #endregion
 
         #region Private Variables
 
+        private bool _isDead;
         private GameObject _target;
         private BossData _bossData;
-        private bool _isDead;
-        
+
         #endregion
 
         #endregion
@@ -36,8 +34,8 @@ namespace AI.Subscribers
         private void Awake()
         {
             _bossData = GetBossData();
-            SetDataToControllers();
             _isDead = false;
+            SetDataToControllers();
         }
 
         private BossData GetBossData()
@@ -54,14 +52,14 @@ namespace AI.Subscribers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onTriggerThrowEvent += OnTriggerThrowEvent;
-            BaseSignals.Instance.onTriggerFakeHoldEvent += OnTriggerFakeHoldEvent;
+            AISignals.Instance.onTriggerThrowEvent += OnTriggerThrowEvent;
+            AISignals.Instance.onTriggerFakeHoldEvent += OnTriggerFakeHoldEvent;
         }
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onTriggerThrowEvent -= OnTriggerThrowEvent;
-            BaseSignals.Instance.onTriggerFakeHoldEvent -= OnTriggerFakeHoldEvent;
+            AISignals.Instance.onTriggerThrowEvent -= OnTriggerThrowEvent;
+            AISignals.Instance.onTriggerFakeHoldEvent -= OnTriggerFakeHoldEvent;
         }
 
         private void OnDisable()
@@ -94,7 +92,6 @@ namespace AI.Subscribers
         public void Hit(int damage)
         {
             healthController.Hit(damage);
-            
         }
 
         public GameObject GetTarget()
@@ -124,7 +121,6 @@ namespace AI.Subscribers
             physicController.gameObject.SetActive(false);
             CoreGameSignals.Instance.onDieEnemy?.Invoke(gameObject);
             Invoke(nameof(Die), 1.5f);
-
         }
 
         private void Die()

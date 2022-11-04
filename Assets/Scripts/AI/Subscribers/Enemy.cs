@@ -8,7 +8,6 @@ using Data.ValueObject;
 using Enums;
 using Enums.Animations;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,19 +25,19 @@ namespace AI.Subscribers
 
         #region Serialized Variables
 
-        [SerializeField] private EnemyTypes enemyType;
-        [SerializeField] private EnemyPhysicController physicController;
         [SerializeField] private Animator animator;
+        [SerializeField] private EnemyPhysicController physicController;
+        [SerializeField] private EnemyTypes enemyType;
 
         #endregion
 
         #region Private Variables
 
+        private bool _playerInRange = false;
+        private int _health;
+        private List<Transform> _baseTargetTransforms = new List<Transform>();
         private EnemyGOData _enemyGoData;
         private AIStateMachine _aiStateMachine;
-        private bool _playerInRange = false;
-        private List<Transform> _baseTargetTransforms = new List<Transform>();
-        private int _health;
         
         #endregion
 
@@ -49,8 +48,8 @@ namespace AI.Subscribers
             _enemyGoData = GetEnemyData();
             _health = _enemyGoData.Health;
             _aiStateMachine = new AIStateMachine();
+            
             var navMeshAgent = GetComponent<NavMeshAgent>();
-
             var searchBaseTarget = new SearchForBaseTarget(this, _baseTargetTransforms,animator);
             var moveToBaseTarget = new MoveToBaseTarget(this, navMeshAgent,_enemyGoData,animator);
             var attackToWall = new AttackToWall(this,navMeshAgent,animator);
@@ -61,10 +60,12 @@ namespace AI.Subscribers
             At(moveToBaseTarget,attackToWall,ReachedBaseTarget());
             
             _aiStateMachine.AddAnyTransition(moveToPlayer,EnemyInRange());
+           
             At(moveToPlayer,attackToWall, () => _playerInRange == true && _health>=0);
             At(moveToPlayer, searchBaseTarget, () => _playerInRange == false && _health >= 0);
 
             _aiStateMachine.AddAnyTransition(die,IsDead());
+           
             At(die,searchBaseTarget,() => _health>0);
             
             _aiStateMachine.SetState(searchBaseTarget);
@@ -86,13 +87,12 @@ namespace AI.Subscribers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onSetEnemyTarget += OnSetEnemyTarget;
+            AISignals.Instance.onSetEnemyTarget += OnSetEnemyTarget;
         }
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onSetEnemyTarget -= OnSetEnemyTarget;
-
+            AISignals.Instance.onSetEnemyTarget -= OnSetEnemyTarget;
         }
 
         private void OnDisable()
@@ -115,7 +115,6 @@ namespace AI.Subscribers
         {
             _aiStateMachine.AddTransition(to, from, condition);
         }
-
 
         private EnemyGOData GetEnemyData()
         {

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 namespace AI.States.MoneyCollector
 {
     public class DeliverMoney: IAIStates

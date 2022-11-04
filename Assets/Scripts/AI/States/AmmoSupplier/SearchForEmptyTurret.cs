@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Enums.Animations;
+﻿using Enums.Animations;
 using Signals;
 using UnityEngine;
 
@@ -11,9 +10,9 @@ namespace AI.States.AmmoSupplier
 
         #region Private Variables
 
-        private readonly Subscribers.AmmoSupplier _ammoSupplier;
-        private readonly Animator _animator;
         private Transform _target;
+        private readonly Animator _animator;
+        private readonly Subscribers.AmmoSupplier _ammoSupplier;
 
         #endregion
 
@@ -38,7 +37,6 @@ namespace AI.States.AmmoSupplier
 
         public void OnExit()
         {
-            
         }
 
         private Transform GetSuitableTurret()

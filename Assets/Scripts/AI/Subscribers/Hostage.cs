@@ -9,14 +9,10 @@ namespace AI.Subscribers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
-
-        [SerializeField] private HostageAnimController animController;
+        
         [SerializeField] private GameObject helpGameObject;
+        [SerializeField] private HostageAnimController animController;
 
         #endregion
 
@@ -43,7 +39,6 @@ namespace AI.Subscribers
         {
             StackSignals.Instance.onAddHostageToStack += OnAddHostageToStack;
             StackSignals.Instance.onActivateMoveHostageStack += OnActivateMoveHostageStack;
-
         }
 
         private void UnsubscribeEvents()
@@ -97,6 +92,5 @@ namespace AI.Subscribers
             _isCollected = false;
             SetAnim(HostageAnimState.Sit);
         }
-        
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using Enums.Animations;
 using Keys;
 using Managers;
@@ -22,6 +21,7 @@ namespace Controllers.Player
         #region Private Variables
 
         private static readonly int Speed = Animator.StringToHash("Speed");
+        
         #endregion
 
         #endregion

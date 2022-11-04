@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Managers
 {
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        Application.targetFrameRate = 60;
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
     }
 }

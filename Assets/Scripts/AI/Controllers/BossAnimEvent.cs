@@ -7,12 +7,12 @@ namespace AI.Controllers
     {
         public void OnTriggerThrowEvent()
         {
-            BaseSignals.Instance.onTriggerThrowEvent?.Invoke();
+            AISignals.Instance.onTriggerThrowEvent?.Invoke();
         }
 
         public void OnTriggerFakeHoldEvent()
         {
-            BaseSignals.Instance.onTriggerFakeHoldEvent?.Invoke();
+            AISignals.Instance.onTriggerFakeHoldEvent?.Invoke();
         }
     }
 }

@@ -14,12 +14,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private TextMeshPro roomCostTMP;
@@ -45,14 +39,19 @@ namespace Managers
         private void Awake()
         {
             _roomData = GetRoomData();
-            GetReferences();
+            SetReferences();
+            InitSettings();
+        }
+
+        private void InitSettings()
+        {
             if (_roomData.PaidAmount >= _roomData.Cost)
             {
                 OpenRoom();
             }
-            else 
+            else
             {
-                SetRoomMoney(_roomData.Cost-_roomData.PaidAmount);
+                SetRoomMoney(_roomData.Cost - _roomData.PaidAmount);
             }
         }
 
@@ -61,7 +60,7 @@ namespace Managers
             return Resources.Load<CD_BaseData>("Data/CD_BaseData").BaseData.BaseGoData.RoomsData[roomName];
         }
 
-        private void GetReferences()
+        private void SetReferences()
         {
             roomCostTMP.text = _roomData.Cost.ToString();
         }
@@ -124,9 +123,7 @@ namespace Managers
                 {
                     yield break;
                 }
-                
             }
-            
         }
 
         private void OpenRoom()

@@ -42,6 +42,11 @@ namespace Managers
 
         private void Start()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             PlaceHostageToTransforms();
             StartCoroutine(InstantiateWeakEnemies());
             StartCoroutine(InstantiateMidEnemies());
@@ -57,13 +62,10 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onPlaceNewHostage += OnPlaceNewHostage;
         }
 
         private void UnSubscribeEvents()
         {
-            BaseSignals.Instance.onPlaceNewHostage -= OnPlaceNewHostage;
-
         }
 
         private void OnDisable()
@@ -79,11 +81,6 @@ namespace Managers
             {
                 PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Hostage.ToString(), hostageTransform);
             }
-        }
-
-        private void OnPlaceNewHostage(Transform hostageTransform)
-        {
-            //PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Hostage.ToString(), hostageTransform);
         }
 
         private IEnumerator InstantiateProEnemies()

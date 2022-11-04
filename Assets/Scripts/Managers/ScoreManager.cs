@@ -13,14 +13,11 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
         
         private SetScoreCommand _setScoreCommand;
-        private int _money, _diamond;
+        private int _money;
+        private int _diamond;
 
         #endregion
 

@@ -1,5 +1,4 @@
-﻿using Signals;
-
+﻿
 namespace AI.States.MoneyCollector
 {
     public class TakeMoney: IAIStates

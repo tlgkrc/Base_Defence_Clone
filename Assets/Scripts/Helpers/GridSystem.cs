@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Helpers
@@ -10,18 +9,18 @@ namespace Helpers
 
         #region Private Variables
         
-        /*if BaseAxis is equal to XY ,_grid1 is X axis ,_grid2 is Y axis
+        /*
+         if BaseAxis is equal to XY ,_grid1 is X axis ,_grid2 is Y axis
          if BaseAxis is equal to XZ ,_grid1 is X axis ,_grid2 is Z axis
          if BaseAxis is equal to YZ ,_grid1 is Y axis ,_grid2 is Z axis
          */
         private readonly int _grid1;
         private readonly int _grid2;
-        private readonly BaseAxis _baseAxis;
         private readonly int _maxStackCount;
         private readonly Vector3 _offset;
-
-        private readonly Transform _initializeTransform;
         private Vector3 _nextPoint;
+        private readonly Transform _initializeTransform;
+        private readonly BaseAxis _baseAxis;
         private readonly List<Vector3> gridPoints = new List<Vector3>();
 
         #endregion

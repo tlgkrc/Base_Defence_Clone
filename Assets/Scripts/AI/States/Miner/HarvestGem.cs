@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 namespace AI.States.Miner
 {
     public class HarvestGem: IAIStates
@@ -20,7 +19,6 @@ namespace AI.States.Miner
         }
         public void Tick()
         {
-            
         }
 
         public void OnEnter()
@@ -30,7 +28,6 @@ namespace AI.States.Miner
 
         public void OnExit()
         {
-            
         }
     }
 }

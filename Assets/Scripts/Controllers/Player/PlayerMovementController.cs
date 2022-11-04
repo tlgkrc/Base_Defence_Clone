@@ -16,15 +16,15 @@ namespace Controllers.Player
         
         #region Private Variables
         
-        private PlayerMovementData _movementData;
+        private bool _inDangerZone;
         private bool _isReadyToMove, _isReadyToPlay, _isAtTurret;
         private float _inputValueX;
         private float _inputValueZ;
         private Vector3 _turretPos;
         private Quaternion _turretRotation;
-        private bool _inDangerZone;
         private GameObject _target;
-
+        private PlayerMovementData _movementData;
+        
         #endregion
         
         #endregion

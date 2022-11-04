@@ -1,5 +1,4 @@
-﻿using Enums;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AI.States.Enemy
 {
@@ -7,17 +6,11 @@ namespace AI.States.Enemy
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        
-
-        #endregion
-
         #region Private Variables
 
-        private Subscribers.Enemy _enemy;
-        private readonly Animator _animator;
         private static readonly int Stop = Animator.StringToHash("Stop");
+        private readonly Animator _animator;
+        private Subscribers.Enemy _enemy;
 
         #endregion
 
@@ -31,17 +24,14 @@ namespace AI.States.Enemy
 
         public void Tick()
         {
-            
         }
 
         public void OnEnter()
         {
-            
         }
 
         public void OnExit()
         {
-
         }
     }
 }

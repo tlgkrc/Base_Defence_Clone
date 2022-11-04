@@ -1,5 +1,4 @@
-﻿using System;
-using Controllers.Turret;
+﻿using Controllers.Turret;
 using Data.UnityObject;
 using Data.ValueObject.Weapon;
 using Enums;
@@ -98,6 +97,5 @@ namespace Managers
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.Euler(Vector3.zero);
         }
-        
     }
 }

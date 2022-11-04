@@ -9,9 +9,9 @@ namespace AI.States.Enemy
 
         #region Private Variables
 
-        private readonly Subscribers.Enemy _enemy;
-        private readonly List<Transform> _targetTransforms;
         private readonly Animator _animator;
+        private readonly List<Transform> _targetTransforms;
+        private readonly Subscribers.Enemy _enemy;
 
         #endregion
 
@@ -35,10 +35,9 @@ namespace AI.States.Enemy
 
         public void OnExit()
         {
-            
         }
 
-        private Transform ChooseBaseTarget(List<Transform> transforms)
+        private Transform ChooseBaseTarget(IReadOnlyList<Transform> transforms)
         {
             var index = Random.Range(0, transforms.Count);
             var target = transforms[index];

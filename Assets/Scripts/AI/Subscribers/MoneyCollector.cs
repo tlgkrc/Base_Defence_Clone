@@ -34,9 +34,9 @@ namespace AI.Subscribers
 
         #region Private Variables
 
+        private bool _targetInCollider;
         private AIStateMachine _aiStateMachine;
         [ShowInInspector] private MoneyCollectorData _moneyCollectorData;
-        private bool _targetInCollider;
 
         #endregion
 
@@ -46,9 +46,8 @@ namespace AI.Subscribers
         {
             _aiStateMachine = new AIStateMachine();
             _moneyCollectorData = GetMoneyCollectorData();
-            var navMeshAgent = GetComponent<NavMeshAgent>();
-            navMeshAgent.speed = _moneyCollectorData.Speed;
             
+            var navMeshAgent = GetComponent<NavMeshAgent>();
             var searchMoney = new SearchClosestMoney(this,animator);
             var moveToMoney = new MoveToTargetMoney(this,navMeshAgent,animator);
             var takeMoney = new TakeMoney(this);
@@ -58,9 +57,12 @@ namespace AI.Subscribers
             At(searchMoney, moveToMoney, HasTarget());
             At(moveToMoney,takeMoney,ArrivePosition());
             At(takeMoney,searchMoney,HasMoney());
+            
             _aiStateMachine.AddAnyTransition(moveBase,StackIsFull());
+            
             At(moveBase,deliverMoney,IsInBase());
             At(deliverMoney,searchMoney,StackIsEmpty());
+            
             _aiStateMachine.SetState(searchMoney);
 
             Func<bool> HasTarget() => () => Target != null;
@@ -69,6 +71,8 @@ namespace AI.Subscribers
             Func<bool> StackIsFull() => () => _moneyCollectorData.MaxStackCount == stackManager.transform.childCount && !CollectorInBase;
             Func<bool> IsInBase() => () => CollectorInBase && Vector3.Distance(transform.position, baseTransform.position) <= 2f ;
             Func<bool> StackIsEmpty() => () => stackManager.transform.childCount == 0;
+            
+            navMeshAgent.speed = _moneyCollectorData.Speed;
         }
         
         private void At(IAIStates to, IAIStates from, Func<bool> condition)

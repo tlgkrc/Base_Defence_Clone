@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using Data.UnityObject;
+﻿using Data.UnityObject;
 using Data.ValueObject.Weapon;
-using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -42,16 +39,6 @@ namespace Controllers
             return Resources.Load<CD_GrenadeData>("Data/CD_GrenadeData").GrenadeData;
         }
 
-        private void ResetGrenade()
-        {
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-            rigidbody.isKinematic = true;
-            rigidbody.freezeRotation = true;
-            collider.enabled = false;
-            explosion.SetActive(false);
-        }
-
         #region Event Supscriptions
 
         private void OnEnable()
@@ -75,18 +62,29 @@ namespace Controllers
         }
 
         #endregion
+        
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Ground"))
             {
                 explosion.SetActive(true);
-                BaseSignals.Instance.onFinishExplosion?.Invoke();
+                AISignals.Instance.onFinishExplosion?.Invoke();
                 Explode();
                 Invoke(nameof(StopExplosion),_grenadeData.StopExplosionTime);
             }
         }
 
+        private void ResetGrenade()
+        {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            rigidbody.isKinematic = true;
+            rigidbody.freezeRotation = true;
+            collider.enabled = false;
+            explosion.SetActive(false);
+        }
+        
         private void OnSetThrowForce(Vector3 velocity,int id)
         {
             if (gameObject.GetInstanceID() == id)

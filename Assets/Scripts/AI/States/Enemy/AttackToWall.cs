@@ -1,5 +1,4 @@
-﻿using Enums;
-using Enums.Animations;
+﻿using Enums.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +10,10 @@ namespace AI.States.Enemy
 
         #region Private Variables
 
-        private readonly Subscribers.Enemy _enemy;
-        private readonly NavMeshAgent _agent;
         private readonly Animator _animator;
-
+        private readonly NavMeshAgent _agent;
+        private readonly Subscribers.Enemy _enemy;
+        
         #endregion
 
         #endregion
@@ -28,7 +27,6 @@ namespace AI.States.Enemy
         
         public void Tick()
         {
-            
         }
 
         public void OnEnter()

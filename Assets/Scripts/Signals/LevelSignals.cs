@@ -1,6 +1,5 @@
 ﻿using System;
 using Extentions;
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace Signals
@@ -9,6 +8,7 @@ namespace Signals
     {
         public UnityAction onLevelInitialize = delegate { };
         public UnityAction onClearActiveLevel = delegate { }; 
+        
         public Func<int> onGetLevelID = delegate { return 0; };
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Controllers.AreaController;
-using Data.ValueObject.Base;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -43,22 +41,21 @@ namespace Managers
         private void SubscribeEvents()
         {
             BaseSignals.Instance.onSetBaseLevelText += OnSetBaseLevelText;
-            BaseSignals.Instance.onSetMineTransforms += OnSetMineTransforms;
             BaseSignals.Instance.onSetGemStock += OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoDepotTransform += OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms += OnSetBaseTargetTransforms;
             BaseSignals.Instance.onSetBaseTransform += OnSetBaseTransform;
+            AISignals.Instance.onSetMineTransforms += OnSetMineTransforms;
         }
 
         private void UnsubscribeEvents()
         {
             BaseSignals.Instance.onSetBaseLevelText -= OnSetBaseLevelText;
-            BaseSignals.Instance.onSetMineTransforms -= OnSetMineTransforms;
             BaseSignals.Instance.onSetGemStock -= OnSetGemStockTransform;
             BaseSignals.Instance.onSetAmmoDepotTransform -= OnSetAmmoDepotTransforms;
             BaseSignals.Instance.onSetBaseTargetTransforms -= OnSetBaseTargetTransforms;
             BaseSignals.Instance.onSetBaseTransform -= OnSetBaseTransform;
-
+            AISignals.Instance.onSetMineTransforms -= OnSetMineTransforms;
         }
 
         private void OnDisable()

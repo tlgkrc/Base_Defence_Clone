@@ -10,11 +10,11 @@ namespace AI.States.AmmoSupplier
 
         #region Private Variables
 
-        private readonly Subscribers.AmmoSupplier _ammoSupplier;
-        private readonly NavMeshAgent _navMeshAgent;
-        private Vector3 _lastPosition;
         private float _timeStuck;
+        private Vector3 _lastPosition;
         private readonly Animator _animator;
+        private readonly NavMeshAgent _navMeshAgent;
+        private readonly Subscribers.AmmoSupplier _ammoSupplier;
 
         #endregion
 
@@ -45,7 +45,6 @@ namespace AI.States.AmmoSupplier
 
         public void OnExit()
         {
-            
         }
     }
 }

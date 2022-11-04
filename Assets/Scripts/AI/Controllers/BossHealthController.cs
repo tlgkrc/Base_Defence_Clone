@@ -1,7 +1,5 @@
-﻿using System;
-using AI.Subscribers;
+﻿using AI.Subscribers;
 using Data.ValueObject;
-using Signals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +9,6 @@ namespace AI.Controllers
     public class BossHealthController : MonoBehaviour
     {
         #region Self Variables
-
-        #region Public Variables
-
-        
-
-        #endregion
 
         #region Serialized Variables
 
@@ -55,7 +47,6 @@ namespace AI.Controllers
             if (_health<=0)
             {
                 manager.OpenPortal();
-                
             }
         }
 
@@ -63,6 +54,5 @@ namespace AI.Controllers
         {
             healthText.text = (_health * 10).ToString();
         }
-        
     }
 }

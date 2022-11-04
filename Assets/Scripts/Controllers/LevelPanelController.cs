@@ -12,7 +12,8 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private TextMeshProUGUI levelTextLeft, levelTextRight;
+        [SerializeField] private TextMeshProUGUI levelTextLeft;
+        [SerializeField] private TextMeshProUGUI levelTextRight;
         [SerializeField] private List<Image> stageImages;
 
         #endregion

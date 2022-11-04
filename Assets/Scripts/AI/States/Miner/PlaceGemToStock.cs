@@ -1,5 +1,4 @@
-﻿using Signals;
-
+﻿
 namespace AI.States.Miner
 {
     public class PlaceGemToStock: IAIStates
@@ -8,7 +7,7 @@ namespace AI.States.Miner
 
         #region Private Variables
 
-        private Subscribers.Miner _miner;
+        private readonly Subscribers.Miner _miner;
 
         #endregion
 
@@ -25,12 +24,10 @@ namespace AI.States.Miner
 
         public void OnEnter()
         {
-            
         }
 
         public void OnExit()
         {
-            
         }
     }
 }

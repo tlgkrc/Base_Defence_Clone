@@ -11,11 +11,9 @@ namespace AI
         #region Private Variables
 
         private IAIStates _currentState;
-
         private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
         private List<Transition> _currentTransitions = new List<Transition>();
         private List<Transition> _anyTransitions = new List<Transition>();
-
         private static List<Transition> _emptyTransitions = new List<Transition>();
 
         #endregion

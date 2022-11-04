@@ -1,5 +1,3 @@
-using System;
-using AI.Subscribers;
 using Enums;
 using Managers;
 using Signals;
@@ -42,7 +40,7 @@ namespace Controllers.Player
             else if (other.CompareTag("Hostage"))
             {
                 StackSignals.Instance.onAddHostageToStack?.Invoke(gO);
-                BaseSignals.Instance.onPlaceNewHostage?.Invoke(other.transform);
+                AISignals.Instance.onPlaceNewHostage?.Invoke(other.transform);
             }
             else if(other.CompareTag("Money"))
             {
@@ -68,7 +66,7 @@ namespace Controllers.Player
             else if(other.CompareTag("Turret"))
             {
                 manager.PlayerAtTurret(other.transform);
-                BaseSignals.Instance.onSetPlayerToTurretShooter?.Invoke(other.transform.parent.GetInstanceID());
+                AISignals.Instance.onSetPlayerToTurretShooter?.Invoke(other.transform.parent.GetInstanceID());
                 CoreGameSignals.Instance.onSetCameraState?.Invoke(CameraStates.TurretCam);
                 CoreGameSignals.Instance.onSetCameraAtTurret?.Invoke(transform);
             }

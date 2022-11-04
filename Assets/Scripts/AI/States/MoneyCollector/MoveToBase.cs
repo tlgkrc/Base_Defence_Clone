@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine.AI;
 
 namespace AI.States.MoneyCollector
 {

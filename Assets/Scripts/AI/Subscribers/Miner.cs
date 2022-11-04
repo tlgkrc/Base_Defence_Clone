@@ -23,18 +23,19 @@ namespace AI.Subscribers
         
         [SerializeField] private GameObject gem;
         [SerializeField] private GameObject fakeGem;
-        [SerializeField] private Animator animator;
         [SerializeField] private GameObject pickAxe;
+        [SerializeField] private Animator animator;
 
         #endregion
 
         #region Private Variables
 
-        private AIStateMachine _aiStateMachine;
+        
         private float _harvestTime = 3.5f;
         private float _passedTime;
-        [ShowInInspector]private List<Transform> _mineTransforms = new List<Transform>();
         [ShowInInspector]private Transform _gemStock;
+        [ShowInInspector]private List<Transform> _mineTransforms = new List<Transform>();
+        private AIStateMachine _aiStateMachine;
 
         #endregion
 
@@ -42,11 +43,10 @@ namespace AI.Subscribers
 
         private void Init()
         {
+            _aiStateMachine = new AIStateMachine();
+            
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var navMeshObstacle = GetComponent<NavMeshObstacle>();
-
-            _aiStateMachine = new AIStateMachine();
-
             var search = new SearchForGem(this, _mineTransforms);
             var moveToSelected = new MoveToSelectedMine(this, navMeshAgent, animator, navMeshObstacle);
             var dig = new DigForGem(this, animator, navMeshAgent, navMeshObstacle);
@@ -64,27 +64,23 @@ namespace AI.Subscribers
             _aiStateMachine.SetState(search);
 
             Func<bool> HasTarget() => () => Target != null;
-
             Func<bool> ReachedResource() => () =>
                 Target != null && Vector3.Distance(transform.position, Target.transform.position) < 1.01f;
-
             Func<bool> TimeIsPassed() => () =>
             {
                 _passedTime += Time.deltaTime;
+                
                 if (_passedTime >= _harvestTime)
                 {
                     _passedTime = 0;
                     return true;
                 }
-
+                
                 return false;
             };
-
             Func<bool> StockIsFull() => () => true;
-
             Func<bool> ReachedStockPile() => () =>
                 _gemStock != null && Vector3.Distance(transform.position, _gemStock.transform.position) < 1f;
-
             Func<bool> DeliveredGem() => () => true;
         }
 
@@ -124,7 +120,7 @@ namespace AI.Subscribers
         private void GetReferences()
         {
             _gemStock = BaseSignals.Instance.onSetGemStock?.Invoke();
-            var transforms = BaseSignals.Instance.onSetMineTransforms?.Invoke();
+            var transforms = AISignals.Instance.onSetMineTransforms?.Invoke();
             foreach (var value in transforms)
             {
                 _mineTransforms.Add(value);

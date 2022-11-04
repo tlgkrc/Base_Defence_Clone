@@ -1,5 +1,4 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -26,8 +25,5 @@ namespace Controllers.Turret
                 PoolSignals.Instance.onReleasePoolObject?.Invoke(PoolTypes.TurretBullet.ToString(),manager.gameObject);
             }
         }
-
-        
-        
     }
 }

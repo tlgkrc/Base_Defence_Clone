@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 namespace AI.States.Miner
 {
@@ -29,15 +28,13 @@ namespace AI.States.Miner
 
         public void OnEnter()
         {
-            
         }
 
         public void OnExit()
         {
-            
         }
 
-        private Transform ChooseOfSuitMine(List<Transform> mineTransforms)
+        private Transform ChooseOfSuitMine(IReadOnlyList<Transform> mineTransforms)
         {
             var index = Random.Range(0, mineTransforms.Count);
             var target = mineTransforms[index];

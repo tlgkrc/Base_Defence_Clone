@@ -9,21 +9,15 @@ namespace AI.States.Enemy
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        
-
-        #endregion
-
         #region Private Variables
 
-        private readonly Subscribers.Enemy _enemy;
-        private readonly NavMeshAgent _agent;
-        private readonly EnemyGOData _enemyGoData;
         private float _timeStuck;
         private Vector3 _lastPosition;
         private readonly Animator _animator;
-
+        private readonly NavMeshAgent _agent;
+        private readonly Subscribers.Enemy _enemy;
+        private readonly EnemyGOData _enemyGoData;
+        
         #endregion
 
         #endregion

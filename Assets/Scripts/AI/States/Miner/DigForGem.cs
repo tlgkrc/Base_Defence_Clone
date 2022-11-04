@@ -10,8 +10,8 @@ namespace AI.States.Miner
 
         #region Private Variables
 
-        private readonly Subscribers.Miner _miner;
         private float _nextTakeResourcesTime;
+        private readonly Subscribers.Miner _miner;
         private readonly Animator _animator;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly NavMeshObstacle _navMeshObstacle;

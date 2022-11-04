@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Controllers.AreaController
@@ -17,10 +16,9 @@ namespace Controllers.AreaController
 
         #region Private Variables
         
-        private Material _material;
-        private static readonly int Arc2 = Shader.PropertyToID("_Arc2");
         private int _currenValue;
-        private float _value = 0;
+        private static readonly int Arc2 = Shader.PropertyToID("_Arc2");
+        private Material _material;
 
         #endregion
 

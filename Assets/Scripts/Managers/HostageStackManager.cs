@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Commands;
-using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Signals;
@@ -25,7 +24,7 @@ namespace Managers
 
         #region Private Variables
         
-        [ShowInInspector]private List<GameObject> hostageGameObjects;
+        [ShowInInspector]private List<GameObject> hostageGameObjects =new List<GameObject>();
         private HostageStackData _hostageStackData;
         private GameObject _playerGameObject;
 
@@ -35,7 +34,6 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-            hostageGameObjects = new List<GameObject>();
         }
 
         private void GetReferences()

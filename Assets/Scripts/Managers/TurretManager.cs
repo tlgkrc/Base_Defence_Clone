@@ -17,12 +17,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private Transform muzzle;
@@ -39,7 +33,7 @@ namespace Managers
 
         private bool _hasShooter;
         private bool _shooterIsPlayer;
-        [ShowInInspector]private List<GameObject> _hitList = new List<GameObject>();
+        private List<GameObject> _hitList = new List<GameObject>();
         private int _bulletCount = 0;
         private float _shootTime;
         private int _shootingCount;
@@ -71,7 +65,7 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onSetPlayerToTurretShooter += OnSetPlayerTurretShooter;
+            AISignals.Instance.onSetPlayerToTurretShooter += OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer += OnReleasePlayer;
             BaseSignals.Instance.onOpenTurretWorker += OnOpenTurretWorker;
             BaseSignals.Instance.onSetAmmoStockTransform += OnAddAmmoStockTransform;
@@ -80,7 +74,7 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-            BaseSignals.Instance.onSetPlayerToTurretShooter -= OnSetPlayerTurretShooter;
+            AISignals.Instance.onSetPlayerToTurretShooter -= OnSetPlayerTurretShooter;
             BaseSignals.Instance.onReleasePlayer -= OnReleasePlayer;
             BaseSignals.Instance.onOpenTurretWorker -= OnOpenTurretWorker;
             BaseSignals.Instance.onSetAmmoStockTransform -= OnAddAmmoStockTransform;
@@ -89,8 +83,8 @@ namespace Managers
 
         private void OnDisable()
         {
-            SaveKeys();
             UnsubscribeEvents();
+            SaveKeys();
         }
 
         #endregion
@@ -110,7 +104,7 @@ namespace Managers
             else
             {
                 OnOpenTurretWorker();
-                CoreGameSignals.Instance.onSetOpenedTurret?.Invoke(transform);
+                AISignals.Instance.onSetOpenedTurret?.Invoke(transform);
             }
         }
 

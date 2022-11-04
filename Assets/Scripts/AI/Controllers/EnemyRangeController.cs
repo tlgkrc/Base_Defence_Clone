@@ -15,6 +15,7 @@ namespace AI.Controllers
         #endregion
 
         #endregion
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

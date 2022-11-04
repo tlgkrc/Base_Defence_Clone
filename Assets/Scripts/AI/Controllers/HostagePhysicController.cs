@@ -10,12 +10,6 @@ namespace AI.Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private Hostage manager;

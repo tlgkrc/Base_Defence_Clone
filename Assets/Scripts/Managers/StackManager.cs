@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -16,10 +15,6 @@ namespace Managers
     public class StackManager : MonoBehaviour,IStack
     {
         #region Self Variables
-
-        #region Public Variables
-
-        #endregion
 
         #region Serialized Variables
 
@@ -84,7 +79,6 @@ namespace Managers
             StackSignals.Instance.onRemoveLastElement -= OnRemoveLastElement;
             StackSignals.Instance.onAddAmmoBoxToPlayer -= OnAddAmmoBoxToPlayer;
             StackSignals.Instance.onAddMoneyToPlayer -= OnAddMoneyToPlayer;
-
         }
 
         private void OnDisable()
@@ -121,7 +115,6 @@ namespace Managers
             {
                  TransferBetweenStacks(from ,to);
             }
-           
         }
 
         private void OnRemoveLastElement(int id,string nameOfGameObject)
@@ -247,6 +240,5 @@ namespace Managers
                 }
             }
         }
-        
     }
 }

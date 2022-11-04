@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using Data.UnityObject;
-using Data.ValueObject.Base;
+﻿using System.Collections;
 using DG.Tweening;
 using Interfaces;
 using Signals;
@@ -13,12 +10,6 @@ namespace Managers
     public class ForceFieldManager : MonoBehaviour,ISaveLoad
     {
         #region Self Variables
-
-        #region Public Variables
-
-        
-
-        #endregion
 
         #region Serialized Variables
         
@@ -105,8 +96,7 @@ namespace Managers
         {
             forceField.SetActive(false);
         }
-
-
+        
         IEnumerator BuyForceFieldRoutine()
         {
             while (_playerInArea)
@@ -125,7 +115,6 @@ namespace Managers
                 yield return new WaitForSeconds(.1f);
             }
         }
-
 
         public void LoadKeys()
         {

@@ -9,10 +9,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        
-        #endregion
         #region Serialized Variables
         
         [SerializeField]private CinemachineVirtualCamera levelCamera;
@@ -64,7 +60,6 @@ namespace Managers
         {
             CoreGameSignals.Instance.onSetCameraState -= OnSetCameraState;
             CoreGameSignals.Instance.onSetCameraAtTurret -= OnSetCameraAtTurret;
-
         }
 
         private void OnDisable()

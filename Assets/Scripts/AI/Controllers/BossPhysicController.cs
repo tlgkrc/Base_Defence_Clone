@@ -1,7 +1,5 @@
-﻿using System;
-using AI.Subscribers;
+﻿using AI.Subscribers;
 using Managers;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AI.Controllers
@@ -13,12 +11,6 @@ namespace AI.Controllers
         #region Serialized Variables
 
         [SerializeField] private Boss manager;
-
-        #endregion
-
-        #region Private Variables
-
-
 
         #endregion
 

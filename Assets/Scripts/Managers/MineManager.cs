@@ -1,5 +1,4 @@
-﻿using System;
-using Data.UnityObject;
+﻿using Data.UnityObject;
 using Data.ValueObject.Base;
 using Enums;
 using Interfaces;
@@ -12,13 +11,7 @@ namespace Managers
     public class MineManager : MonoBehaviour, ISaveLoad
     {
         #region Self Variables
-
-        #region Public Variables
-
-
-
-        #endregion
-
+        
         #region Serialized Variables
 
         [SerializeField] private Transform mineSpawnTransform;
@@ -55,11 +48,7 @@ namespace Managers
         private void Start()
         {
             SetText();
-            for (int i = 0; i < _mineCount; i++)
-            {
-                PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(),mineSpawnTransform );
-            }
-
+            Init();
         }
 
         private void SubscribeEvents()
@@ -79,6 +68,14 @@ namespace Managers
         }
 
         #endregion
+        
+        private void Init()
+        {
+            for (int i = 0; i < _mineCount; i++)
+            {
+                PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(), mineSpawnTransform);
+            }
+        }
 
         private void OnAddMiner(Transform newTransform)
         {
@@ -86,7 +83,7 @@ namespace Managers
             {
                 return;
             }
-
+            
             GameObject newMiner;
             newMiner = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolTypes.Miner.ToString(),mineSpawnTransform );
             if (newMiner != null) newMiner.transform.position = newTransform.position;
@@ -98,7 +95,6 @@ namespace Managers
         {
             mineCountText.text = _mineCount.ToString() + "/" +_mineData.MaxMiner;
         }
-
 
         public void LoadKeys()
         {

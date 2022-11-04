@@ -28,7 +28,7 @@ namespace Managers
 
         private LevelLoaderCommand _levelLoader;
         private ClearActiveLevelCommand _levelClearer;
-        [ShowInInspector] private int _levelID;
+        private int _levelID;
 
         #endregion
 
@@ -37,13 +37,7 @@ namespace Managers
         private void Awake()
         {
             LoadKeys();
-            _levelClearer = new ClearActiveLevelCommand();
-            _levelLoader = new LevelLoaderCommand();
-        }
-
-        private int GetLevelCount()
-        {
-            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            Init();
         }
 
         #region Event Subscription
@@ -78,22 +72,18 @@ namespace Managers
             OnInitializeLevel();
             SetLevelText();
         }
-
-        private void OnNextLevel()
+        
+        private void Init()
         {
-            _levelID++;
-            LevelSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            LevelSignals.Instance.onLevelInitialize?.Invoke();
-            SetLevelText();
+            _levelClearer = new ClearActiveLevelCommand();
+            _levelLoader = new LevelLoaderCommand();
         }
 
-        private void OnRestartLevel()
+        private int GetLevelCount()
         {
-            LevelSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            LevelSignals.Instance.onLevelInitialize?.Invoke();
+            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
+        
         private int OnGetLevelID()
         {
             return _levelID;
@@ -101,9 +91,7 @@ namespace Managers
 
         private void SetLevelText()
         {
-
             BaseSignals.Instance.onSetBaseLevelText?.Invoke(_levelID);
-
         }
         private void OnInitializeLevel()
         {
